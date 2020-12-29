@@ -1,0 +1,16 @@
+version: appveyor-{build}
+configuration: Release
+platform:
+ - x86
+ - x64
+only_commits:
+ message: /AppVeyorBuild/
+before_build:
+ - cmd: nuget restore
+build:
+  project: Korot-Win32/Korot-Win32.csproj
+artifacts:
+- path: /Korot-Win32\bin\Release\x64/
+  name: AppveyorLatestBuild-Desktop-x64
+- path: /Korot-Win32\bin\Release\x86/
+  name: AppveyorLatestBuild-Desktop-x86
