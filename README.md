@@ -5,9 +5,7 @@
 # [Yorot](https://haltroy.com/Yorot.html "Yorot's Page")
 A Chromium web browser made by [Haltroy](https://haltroy.com "Haltroy's Website").
 
-Latest Available Version: [`0.8.4.0`](https://github.com/Haltroy/Yorot/tree/0.8.4.0).
-
-Developing Version: `Project Reset`
+Latest Available Version: `None`
 
 
 ### Screenshot(s)
@@ -16,11 +14,14 @@ Developing Version: `Project Reset`
 </p>
 
 ## Features:
- - HTML5, CSS3, JS, HTML5 Video, WebGL 3D, etc. supported. (Except `H.264` and many non-free codecs. See [#12](https://github.com/Haltroy/Yorot/issues/12))
+currently there are none sorry ;(
+
+### Features that I'm aiming to add:
+ - HTML5, CSS3, JS, HTML5 Video, WebGL 3D, etc. supported. (Except `H.264` and many non-free codecs. See [#12](https://github.com/Haltroy/Korot/issues/12))
  - Tabbed, built-in search bar that auto-detects URLs.
  - Celebrates your birthday.
  - Developer tools, View Source, Page screnshot, Print, Keyboard Shortcuts, Save page & Zoom in page
- - UI language, theme and extension system (supports proxies).
+ - UI language, apps, theme and extension system (supports proxies).
  - Profiles
  - Notifications
  - Download manager
