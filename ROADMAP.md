@@ -1,6 +1,6 @@
 ﻿# Roadmap
-This roadmap shows plans for Korot. Keep in mind that this roadmap can be changed at any time.
+This roadmap shows plans for Yorot. Keep in mind that this roadmap can be changed at any time.
 
-| Reset   | Status   | Description                    | Appr. Date |
+| 0.0.0.1 | Status   | Description                    | Appr. Date |
 |---------|----------|--------------------------------|------------|
-| Reset   | Started  | New UI design, New systems     | 2021 Q2    |
+| 0       | Started  | First version                  | 2021       |
