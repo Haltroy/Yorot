@@ -1,19 +1,16 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
+using System.IO.Compression;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using System.Management;
-using System.Diagnostics;
-using System.IO.Compression;
-using Microsoft.Win32;
 
 namespace YorotInstaller
 {
@@ -22,51 +19,55 @@ namespace YorotInstaller
         /// <summary>
         /// General purpose WebClient
         /// </summary>
-        WebClient GPWC = new WebClient();
-        Settings Settings;
-        private VersionManager VersionManager;
-        StringEventhHybrid workOn;
-        List<StringEventhHybrid> downloadStrings = new List<StringEventhHybrid>();
-        bool allowClose = true;
-        bool allowSwitch = false;
-        YorotVersion versionToInstall;
-        static string YorotPath => Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\Haltroy\\Yorot\\Yorot.exe";
-        static string YorotFolderPath => Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\Haltroy\\Yorot\\";
-        static string YorotBetaPath => Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\Haltroy\\Yorot\\Yorot Beta.exe";
-        bool YorotExists = File.Exists(YorotPath);
-        bool betaExists = File.Exists(YorotBetaPath);
+        private readonly WebClient GPWC = new WebClient();
+        private readonly Settings Settings;
+        private readonly VersionManager VersionManager;
+        private StringEventhHybrid workOn;
+        private readonly List<StringEventhHybrid> downloadStrings = new List<StringEventhHybrid>();
+        private bool allowClose = true;
+        private bool allowSwitch = false;
+        private YorotVersion versionToInstall;
+
+        private static string YorotPath => Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\Haltroy\\Yorot\\Yorot.exe";
+
+        private static string YorotFolderPath => Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\Haltroy\\Yorot\\";
+
+        private static string YorotBetaPath => Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\Haltroy\\Yorot\\Yorot Beta.exe";
+
+        private readonly bool YorotExists = File.Exists(YorotPath);
+        private readonly bool betaExists = File.Exists(YorotBetaPath);
         #region "Translations"
-        string UIChangeVerMissing = "We couldn't find this version at our archives.";
-        string UIChangeVerArchNotSupported = "Your platform is not supported in this version.";
-        string DownloadProgress = "Downloading [NAME]... [CURRENT]/[TOTAL]";
-        string DownloadYorotDesktop = "Yorot Desktop";
-        string DownloadsComplete = "All downloads are finished.";
-        string InstallComplete = "All installations are finished.";
-        string RegistryComplete = "All registries are registered.";
-        string RegistryStart = "Registering...";
-        string UIYes = "Yes";
-        string UINo = "No";
-        string UIOK = "OK";
-        string UICancel = "Cancel";
-        string UIRepairButton = "Repair";
-        string UIUpdateButton = "Update";
-        string UIInstallVer = "Install [VER]";
-        string UIGatherInfo = "Gathering Information...";
-        string UICheckUpdate = "Checking for updates...";
-        string UIReadyDesc = "Your Yorot is ready to be installed.";
-        string UINotReadyDesc = "You don't meet the requirements for installing Yorot.";
-        string UIChangeVerO1 = "Latest PreOut Version ([PREOUT])";
-        string UIChangeVerO2 = "Latest Stable Version ([LATEST])";
-        string UICreateRecovery = "Creating a restore point...";
-        string UIDoneUninstall = "Yorot successfully uninstalled." + Environment.NewLine + "" + Environment.NewLine + "It's improtant for us to listen to your reason why you decided to uninstall Yorot so please open an issue in GitHub by clickng &quot;Send Feedback&quot; button below." + Environment.NewLine + "" + Environment.NewLine + "Farewell, old firend." + Environment.NewLine + "" + Environment.NewLine + "";
-        string UIDoneInstall = "Yorot installed successfully." + Environment.NewLine + "" + Environment.NewLine + "Closing this program will start the application.";
-        string UIDoneUpdate = "Yorot updated successfully.";
-        string UIDoneRepair = "Yorot repaired successfully.";
-        string UIDoneError = "An error occured while doing your request. Don't worry, we restored your Yorot installation. Please create an issue on GitHub by clicking &quot;Send Feedback&quot; and copy-paste this information below:";
-        string UIPreOutAvailable = "You meet the requirements.";
-        string UIPreOutDisable = "You don't meet the requirements. Update or Repair your Yorot first.";
-        string UICreateShortcut = "Creating shortcuts...";
-        string UIUpdating = "Updating Installer... Please wait..." + Environment.NewLine + "[PERC]% | [CURRENT] KiB downloaded out of [TOTAL] KiB.";
+        private string UIChangeVerMissing = "We couldn't find this version at our archives.";
+        private string UIChangeVerArchNotSupported = "Your platform is not supported in this version.";
+        private string DownloadProgress = "Downloading [NAME]... [CURRENT]/[TOTAL]";
+        private string DownloadYorotDesktop = "Yorot Desktop";
+        private string DownloadsComplete = "All downloads are finished.";
+        private string InstallComplete = "All installations are finished.";
+        private string RegistryComplete = "All registries are registered.";
+        private string RegistryStart = "Registering...";
+        private string UIYes = "Yes";
+        private string UINo = "No";
+        private string UIOK = "OK";
+        private string UICancel = "Cancel";
+        private string UIRepairButton = "Repair";
+        private string UIUpdateButton = "Update";
+        private string UIInstallVer = "Install [VER]";
+        private string UIGatherInfo = "Gathering Information...";
+        private string UICheckUpdate = "Checking for updates...";
+        private string UIReadyDesc = "Your Yorot is ready to be installed.";
+        private string UINotReadyDesc = "You don't meet the requirements for installing Yorot.";
+        private string UIChangeVerO1 = "Latest PreOut Version ([PREOUT])";
+        private string UIChangeVerO2 = "Latest Stable Version ([LATEST])";
+        private string UICreateRecovery = "Creating a restore point...";
+        private string UIDoneUninstall = "Yorot successfully uninstalled." + Environment.NewLine + "" + Environment.NewLine + "It's improtant for us to listen to your reason why you decided to uninstall Yorot so please open an issue in GitHub by clickng &quot;Send Feedback&quot; button below." + Environment.NewLine + "" + Environment.NewLine + "Farewell, old firend." + Environment.NewLine + "" + Environment.NewLine + "";
+        private string UIDoneInstall = "Yorot installed successfully." + Environment.NewLine + "" + Environment.NewLine + "Closing this program will start the application.";
+        private string UIDoneUpdate = "Yorot updated successfully.";
+        private string UIDoneRepair = "Yorot repaired successfully.";
+        private string UIDoneError = "An error occured while doing your request. Don't worry, we restored your Yorot installation. Please create an issue on GitHub by clicking &quot;Send Feedback&quot; and copy-paste this information below:";
+        private string UIPreOutAvailable = "You meet the requirements.";
+        private string UIPreOutDisable = "You don't meet the requirements. Update or Repair your Yorot first.";
+        private string UICreateShortcut = "Creating shortcuts...";
+        private string UIUpdating = "Updating Installer... Please wait..." + Environment.NewLine + "[PERC]% | [CURRENT] KiB downloaded out of [TOTAL] KiB.";
 
         public void LoadLang()
         {
@@ -129,7 +130,7 @@ namespace YorotInstaller
             }
             if (VersionManager.Versions.Count > 0 && YorotExists)
             {
-                var current = VersionManager.GetVersionFromVersionName(FileVersionInfo.GetVersionInfo(YorotExists ? YorotPath : YorotBetaPath).ProductVersion);
+                YorotVersion current = VersionManager.GetVersionFromVersionName(FileVersionInfo.GetVersionInfo(YorotExists ? YorotPath : YorotBetaPath).ProductVersion);
                 btRepair.Text = current != null
                     ? VersionManager.LatestVersionNumber != current.VersionNo || VersionManager.PreOutVerNumber != current.VersionNo
                         ? UIUpdateButton
@@ -184,10 +185,10 @@ namespace YorotInstaller
             updateTheme();
         }
 
-        bool isUpdatingInstaller;
-        int updatePerc;
-        string updateCurrent;
-        string updateTotal;
+        private bool isUpdatingInstaller;
+        private int updatePerc;
+        private string updateCurrent;
+        private string updateTotal;
 
         private void GPWC_DownloadStringComplete(object sender, DownloadStringCompletedEventArgs e)
         {
@@ -200,24 +201,25 @@ namespace YorotInstaller
                 if (workOn != null)
                 {
                     GPWC.DownloadStringAsync(new Uri(workOn.String));
-                }else
+                }
+                else
                 {
-                    GPWC_AllJobsDone(); 
+                    GPWC_AllJobsDone();
                 }
             }
         }
 
-        int installJobCount = 0;
-        int installDoneCount = 0;
-        bool isPreparing = true;
-        int doneCount = 0;
+        private int installJobCount = 0;
+        private int installDoneCount = 0;
+        private bool isPreparing = true;
+        private int doneCount = 0;
         private void GPWC_ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             if (workOn.Type == StringEventhHybrid.StringType.File && !isPreparing)
             {
                 Invoke(new Action(() =>
                 {
-                    lbDownloadInfo.Text = DownloadProgress.Replace("[NAME]", workOn.String3).Replace("[PERC]","" + e.ProgressPercentage).Replace("[CURRENT]", (e.BytesReceived / 1024) + " KiB").Replace("[TOTAL]", (e.TotalBytesToReceive / 1024) + " KiB");
+                    lbDownloadInfo.Text = DownloadProgress.Replace("[NAME]", workOn.String3).Replace("[PERC]", "" + e.ProgressPercentage).Replace("[CURRENT]", (e.BytesReceived / 1024) + " KiB").Replace("[TOTAL]", (e.TotalBytesToReceive / 1024) + " KiB");
                     int downloadTotoalJobs = downloadStrings.FindAll(i => i.Type == StringEventhHybrid.StringType.File).Count;
                     lbDownloadCount.Text = (doneCount == downloadTotoalJobs ? doneCount : doneCount + 1) + "/" + downloadTotoalJobs;
                     pbDownload.Width = e.ProgressPercentage * (pDownload.Width / 100);
@@ -249,11 +251,11 @@ namespace YorotInstaller
                 doneCount++;
                 if (workOn != null)
                 {
-                    GPWC.DownloadFileAsync(new Uri(workOn.String),workOn.String2);
+                    GPWC.DownloadFileAsync(new Uri(workOn.String), workOn.String2);
                 }
                 else
                 {
-                    GPWC_AllJobsDone(); 
+                    GPWC_AllJobsDone();
                     if (!isPreparing)
                     {
                         lbDownloadInfo.Text = DownloadsComplete;
@@ -261,11 +263,11 @@ namespace YorotInstaller
                 }
             }
         }
-        private void updateInstaller(object sender,EventArgs E)
+        private void updateInstaller(object sender, EventArgs E)
         {
             if (E is AsyncCompletedEventArgs)
             {
-                var e = E as AsyncCompletedEventArgs;
+                AsyncCompletedEventArgs e = E as AsyncCompletedEventArgs;
                 if (e.Error != null)
                 {
                     Error(new Exception("Error while updating Installer. Error: " + e.ToString()));
@@ -281,23 +283,24 @@ namespace YorotInstaller
                     Process.Start(new ProcessStartInfo(Settings.WorkFolder + "YorotInstaller.exe") { UseShellExecute = true, Verb = "runas" });
                     Application.Exit();
                 }
-            }else
+            }
+            else
             {
                 Error(new Exception("\"E\" is not an AsyncCompletedEventArgs [in void \"updateInstaller\"]."));
             }
         }
 
-
-        bool canInstall;
+        private bool canInstall;
 
         private void GPWC_AllJobsDone()
         {
             if (downloadStrings.Count > 0 && !GPWC.IsBusy && workOn == null)
             {
-                if(downloadStrings[0].Type == StringEventhHybrid.StringType.File)
+                if (downloadStrings[0].Type == StringEventhHybrid.StringType.File)
                 {
                     DoFileWork(downloadStrings[0]);
-                }else
+                }
+                else
                 {
                     DoStringWork(downloadStrings[0]);
                 }
@@ -326,13 +329,14 @@ namespace YorotInstaller
                 {
                     allowSwitch = true;
                     tabControl1.SelectedTab = tpFirst;
-                    if(supportsThisVer(VersionManager.GetVersionFromVersionNo(VersionManager.LatestVersionNumber)))
+                    if (supportsThisVer(VersionManager.GetVersionFromVersionNo(VersionManager.LatestVersionNumber)))
                     {
                         canInstall = true;
                         lbReady.Text = UIReadyDesc;
                         btInstall.Enabled = true;
                         btInstall.Visible = true;
-                    }else
+                    }
+                    else
                     {
                         canInstall = false;
                         lbReady.Text = UINotReadyDesc;
@@ -346,7 +350,7 @@ namespace YorotInstaller
                     tabControl1.SelectedTab = tpModify;
                     if (VersionManager.Versions.Count > 0)
                     {
-                        var current = VersionManager.GetVersionFromVersionName(FileVersionInfo.GetVersionInfo(YorotExists ? YorotPath : YorotBetaPath).ProductVersion);
+                        YorotVersion current = VersionManager.GetVersionFromVersionName(FileVersionInfo.GetVersionInfo(YorotExists ? YorotPath : YorotBetaPath).ProductVersion);
                         btRepair.Text = current != null
                             ? VersionManager.LatestVersionNumber != current.VersionNo || VersionManager.PreOutVerNumber != current.VersionNo
                                 ? UIUpdateButton
@@ -354,14 +358,15 @@ namespace YorotInstaller
                             : UIRepairButton;
                     }
                 }
-            }else
+            }
+            else
             {
                 lbDownloadInfo.Text = DownloadsComplete;
                 pbDownload.Width = pDownload.Width;
             }
         }
 
-        
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             StringEventhHybrid htupdate = new StringEventhHybrid() { String = "https://raw.githubusercontent.com/Haltroy/Yorot/master/Yorot.htupdate", Type = StringEventhHybrid.StringType.String, };
@@ -384,7 +389,7 @@ namespace YorotInstaller
             {
                 downloadStrings.Add(seh);
             }
-            if (!GPWC.IsBusy) { workOn = seh; GPWC.DownloadFileAsync(new Uri(seh.String),seh.String2); }
+            if (!GPWC.IsBusy) { workOn = seh; GPWC.DownloadFileAsync(new Uri(seh.String), seh.String2); }
         }
 
         private DoneType DoneType;
@@ -395,7 +400,7 @@ namespace YorotInstaller
             allowClose = true;
             allowSwitch = true;
             tabControl1.SelectedTab = tpDone;
-            switch(DoneType)
+            switch (DoneType)
             {
                 case DoneType.Install:
                     lbDoneDesc.Text = UIDoneInstall;
@@ -416,9 +421,9 @@ namespace YorotInstaller
 
         private void htupdateDownloaded(object sender, EventArgs E)
         {
-            if(E is DownloadStringCompletedEventArgs)
+            if (E is DownloadStringCompletedEventArgs)
             {
-                var e = E as DownloadStringCompletedEventArgs;
+                DownloadStringCompletedEventArgs e = E as DownloadStringCompletedEventArgs;
                 if (e.Error == null && !e.Cancelled)
                 {
                     XmlDocument doc = new XmlDocument();
@@ -464,7 +469,7 @@ namespace YorotInstaller
                         }
                         else if (node.Name == "Versions")
                         {
-                            foreach(XmlNode subnode in node.ChildNodes)
+                            foreach (XmlNode subnode in node.ChildNodes)
                             {
                                 if (subnode.Name == "Version")
                                 {
@@ -472,11 +477,12 @@ namespace YorotInstaller
                                     {
                                         if (subnode.Attributes["Flags"].Value.Contains("missing"))
                                         {
-                                            YorotVersion ver = new YorotVersion(subnode.Attributes["Text"].Value, Convert.ToInt32(subnode.Attributes["VersionNo"].Value),subnode.Attributes["Flags"].Value);
+                                            YorotVersion ver = new YorotVersion(subnode.Attributes["Text"].Value, Convert.ToInt32(subnode.Attributes["VersionNo"].Value), subnode.Attributes["Flags"].Value);
                                             VersionManager.Versions.Add(ver);
-                                        }else
+                                        }
+                                        else
                                         {
-                                            YorotVersion ver = new YorotVersion(subnode.Attributes["Text"].Value, Convert.ToInt32(subnode.Attributes["VersionNo"].Value), subnode.Attributes["ZipPath"].Value, subnode.Attributes["Flags"].Value,subnode.Attributes["Reg"].Value);
+                                            YorotVersion ver = new YorotVersion(subnode.Attributes["Text"].Value, Convert.ToInt32(subnode.Attributes["VersionNo"].Value), subnode.Attributes["ZipPath"].Value, subnode.Attributes["Flags"].Value, subnode.Attributes["Reg"].Value);
                                             VersionManager.Versions.Add(ver);
                                         }
                                     }
@@ -491,7 +497,8 @@ namespace YorotInstaller
                     StringEventhHybrid htupdate = new StringEventhHybrid() { String = "https://raw.githubusercontent.com/Haltroy/Yorot/master/Yorot.htupdate", Type = StringEventhHybrid.StringType.String, };
                     htupdate.Event += htupdateDownloaded;
                 }
-            }else
+            }
+            else
             {
                 Console.WriteLine(" [HTUPDATE] Error: EventArgs is not suitable.");
             }
@@ -558,9 +565,10 @@ namespace YorotInstaller
             Settings.isDarkMode = !Settings.isDarkMode;
             updateTheme();
         }
-        bool isBusy = false;
-        List<PreResqs.PreResq> reqs;
-        PreResqs.PreResq workingReq;
+
+        private bool isBusy = false;
+        private readonly List<PreResqs.PreResq> reqs;
+        private PreResqs.PreResq workingReq;
         private async Task<bool> InstallPreResq(PreResqs.PreResq req)
         {
             await Task.Run(() =>
@@ -573,8 +581,10 @@ namespace YorotInstaller
                 isBusy = true;
                 workingReq = req;
                 ProcessStartInfo info = new ProcessStartInfo(Settings.WorkFolder + req.FileName, req.SilentArgs) { UseShellExecute = true, Verb = "runas" };
-                Process process = new Process();
-                process.StartInfo = info;
+                Process process = new Process
+                {
+                    StartInfo = info
+                };
                 process.Start();
                 process.WaitForExit();
                 if (process.ExitCode == 0)
@@ -585,7 +595,8 @@ namespace YorotInstaller
                     {
                         workingReq = reqs[0];
                         Task.Run(() => InstallPreResq(workingReq));
-                    }else
+                    }
+                    else
                     {
                         workingReq = null;
                     }
@@ -626,9 +637,9 @@ namespace YorotInstaller
             {
                 return false;
             }
-            var vPreOut = VersionManager.GetVersionFromVersionNo(VersionManager.PreOutVerNumber);
+            YorotVersion vPreOut = VersionManager.GetVersionFromVersionNo(VersionManager.PreOutVerNumber);
             if (vPreOut.isOnlyx64 & !PreResqs.is64BitMachine) { return false; }
-            var currentVer = VersionManager.GetVersionFromVersionName(FileVersionInfo.GetVersionInfo(YorotExists ? YorotPath : YorotBetaPath).ProductVersion);
+            YorotVersion currentVer = VersionManager.GetVersionFromVersionName(FileVersionInfo.GetVersionInfo(YorotExists ? YorotPath : YorotBetaPath).ProductVersion);
             if (currentVer == null) { rbPreOut.Checked = true; return true; }
             if (currentVer.VersionNo < VersionManager.LatestVersionNumber || currentVer.VersionNo < VersionManager.PreOutMinVer) { return false; }
             return true;
@@ -676,7 +687,7 @@ namespace YorotInstaller
             allowSwitch = true;
             allowClose = false;
             tabControl1.SelectedTab = tpProgress;
-            if(versionToInstall.isMissing) { Error(new Exception("This version \"" + versionToInstall.ToString() + "\" is missing.")); }
+            if (versionToInstall.isMissing) { Error(new Exception("This version \"" + versionToInstall.ToString() + "\" is missing.")); }
             if (versionToInstall.RequiresNet452 && !PreResqs.SystemSupportsNet452) { Error(new Exception("This version \"" + versionToInstall.ToString() + "\" requires .NEt Framework 4.5.2 but your computer does not supports it.")); }
             if (versionToInstall.RequiresNet461 && !PreResqs.SystemSupportsNet461) { Error(new Exception("This version \"" + versionToInstall.ToString() + "\" requires .NEt Framework 4.6.1 but your computer does not supports it.")); }
             if (versionToInstall.RequiresNet48 && !PreResqs.SystemSupportsNet48) { Error(new Exception("This version \"" + versionToInstall.ToString() + "\" requires .NEt Framework 4.8 but your computer does not supports it.")); }
@@ -692,7 +703,7 @@ namespace YorotInstaller
                     String3 = PreResqs.NetFramework452.Name,
                     Type = StringEventhHybrid.StringType.File,
                 };
-                seh.Event += new StringEventhHybrid.EventDelegate((sender,e) => { Task.Run(() => InstallPreResq(PreResqs.NetFramework452)); });
+                seh.Event += new StringEventhHybrid.EventDelegate((sender, e) => { Task.Run(() => InstallPreResq(PreResqs.NetFramework452)); });
                 installJobCount++;
                 downloadStrings.Add(seh);
             }
@@ -724,7 +735,7 @@ namespace YorotInstaller
             }
             if (versionToInstall.RequiresVisualC2015 && (!PreResqs.isInstalled(PreResqs.VisualC2015x86) || forceReqs))
             {
-                
+
                 StringEventhHybrid seh = new StringEventhHybrid()
                 {
                     String = PreResqs.VisualC2015x86.Url,
@@ -752,7 +763,7 @@ namespace YorotInstaller
             }
             StringEventhHybrid sehK = new StringEventhHybrid()
             {
-                String = versionToInstall.ZipPath.Replace("[VERSION]",versionToInstall.VersionText).Replace("[ARCH]", PreResqs.is64BitMachine ? "x64" : "x86").Replace("[U]","F"),
+                String = versionToInstall.ZipPath.Replace("[VERSION]", versionToInstall.VersionText).Replace("[ARCH]", PreResqs.is64BitMachine ? "x64" : "x86").Replace("[U]", "F"),
                 String2 = Settings.WorkFolder + versionToInstall.VersionText + ".htpackage",
                 String3 = DownloadYorotDesktop,
                 Type = StringEventhHybrid.StringType.File,
@@ -776,7 +787,7 @@ namespace YorotInstaller
             await Task.Run(() =>
             {
                 string backupLocation = Settings.WorkFolder + "backup.htpackage";
-                
+
                 if (!retrieve)
                 {
                     if (YorotExists)
@@ -785,7 +796,8 @@ namespace YorotInstaller
                         ZipFile.CreateFromDirectory(YorotFolderPath, backupLocation, CompressionLevel.NoCompression, false, Encoding.UTF8);
                     }
                     installDoneCount++;
-                }else
+                }
+                else
                 {
                     if (File.Exists(backupLocation))
                     {
@@ -805,22 +817,25 @@ namespace YorotInstaller
         {
             if (E is AsyncCompletedEventArgs)
             {
-                var e = E as AsyncCompletedEventArgs;
+                AsyncCompletedEventArgs e = E as AsyncCompletedEventArgs;
                 if (e.Error != null)
                 {
                     Error(new Exception("Error while downloading Yorot Desktop files [\"" + versionToInstall.ZipPath.Replace("[VERSION]", versionToInstall.VersionText).Replace("[ARCH]", PreResqs.is64BitMachine ? "x64" : "x86").Replace("[U]", "F") + "\"]. Error: " + e.Error.ToString()));
-                }else if (e.Cancelled)
+                }
+                else if (e.Cancelled)
                 {
                     Error(new Exception("Error while downloading Yorot Desktop files [\"" + versionToInstall.ZipPath.Replace("[VERSION]", versionToInstall.VersionText).Replace("[ARCH]", PreResqs.is64BitMachine ? "x64" : "x86").Replace("[U]", "F") + "\"]. Error: Cancelled."));
-                }else
+                }
+                else
                 {
                     Task.Run(() => InstallYorotFoReal());
                 }
-            }else
+            }
+            else
             {
                 Error(new Exception("\"E\" is not an AsyncCompletedEventArgs (in void \"installYorot\")."));
             }
-        } 
+        }
 
         /// <summary>
         /// use this dog this one wont lag - ryder
@@ -837,7 +852,7 @@ namespace YorotInstaller
                         Directory.Delete(YorotFolderPath, true);
                     }
                     Directory.CreateDirectory(YorotFolderPath);
-                    ZipFile.ExtractToDirectory(Settings.WorkFolder + versionToInstall.VersionText + ".htpackage", YorotFolderPath,Encoding.UTF8);
+                    ZipFile.ExtractToDirectory(Settings.WorkFolder + versionToInstall.VersionText + ".htpackage", YorotFolderPath, Encoding.UTF8);
                     installDoneCount++;
                 }
                 catch (Exception ex)
@@ -883,7 +898,7 @@ namespace YorotInstaller
                 // FILE ASSOCIATIONS
 
                 // extensions
-                using (RegistryKey key = Registry.ClassesRoot.CreateSubKey(@".html\OpenWithProgids")) 
+                using (RegistryKey key = Registry.ClassesRoot.CreateSubKey(@".html\OpenWithProgids"))
                 {
                     if (key == null) { Registry.ClassesRoot.CreateSubKey(@".html\OpenWithProgids"); }
                     key.SetValue("YorotHTML", "", RegistryValueKind.String);
@@ -934,11 +949,11 @@ namespace YorotInstaller
                     key.SetValue("", "Yorot Addon", RegistryValueKind.String);
                     key.SetValue("AppUserModelID", "Yorot", RegistryValueKind.String);
                     RegistryKey appKey = key.CreateSubKey("Application");
-                    appKey.SetValue("AppUserModelID","Yorot");
-                    appKey.SetValue("ApplicationIcon",YorotExists ? YorotPath : YorotBetaPath);
-                    appKey.SetValue("ApplicationName","Yorot");
-                    appKey.SetValue("ApplicationDecription","Surf the universe.");
-                    appKey.SetValue("ApplicationCompany","haltroy");
+                    appKey.SetValue("AppUserModelID", "Yorot");
+                    appKey.SetValue("ApplicationIcon", YorotExists ? YorotPath : YorotBetaPath);
+                    appKey.SetValue("ApplicationName", "Yorot");
+                    appKey.SetValue("ApplicationDecription", "Surf the universe.");
+                    appKey.SetValue("ApplicationCompany", "haltroy");
                     key.CreateSubKey("DefaultIcon").SetValue("", YorotExists ? YorotPath : YorotBetaPath, RegistryValueKind.String);
                     RegistryKey shellKey = key.CreateSubKey("shell");
                     RegistryKey openKey = shellKey.CreateSubKey("open");
@@ -995,15 +1010,15 @@ namespace YorotInstaller
 
                 // PROTOCOL
 
-                if(versionToInstall.Reg == RegType.StandartWithProtocol || versionToInstall.Reg == RegType.StandartWithCommandProtocol)
+                if (versionToInstall.Reg == RegType.StandartWithProtocol || versionToInstall.Reg == RegType.StandartWithCommandProtocol)
                 {
                     using (RegistryKey key = Registry.ClassesRoot.CreateSubKey(@"Yorot"))
                     {
                         key.CreateSubKey("DefaultIcon").SetValue("", YorotExists ? YorotPath : YorotBetaPath);
                         RegistryKey shellKey = key.CreateSubKey("shell");
                         RegistryKey openKey = shellKey.CreateSubKey("open");
-                        openKey.CreateSubKey("command").SetValue("","\"" + (YorotExists ? YorotPath : YorotBetaPath) + "\" " + (versionToInstall.Reg == RegType.StandartWithCommandProtocol ? "Yorot://command/?c=" : "") + "%1",RegistryValueKind.String);
-                        key.SetValue("", "URL:Yorot protocol",RegistryValueKind.String);
+                        openKey.CreateSubKey("command").SetValue("", "\"" + (YorotExists ? YorotPath : YorotBetaPath) + "\" " + (versionToInstall.Reg == RegType.StandartWithCommandProtocol ? "Yorot://command/?c=" : "") + "%1", RegistryValueKind.String);
+                        key.SetValue("", "URL:Yorot protocol", RegistryValueKind.String);
                     }
                 }
                 installDoneCount++;
@@ -1080,11 +1095,12 @@ namespace YorotInstaller
             rbPerOut_CheckedChanged(this, new EventArgs());
             rbStable_CheckedChanged(this, new EventArgs());
             rbStable.Text = UIChangeVerO2.Replace("[LATEST]", VersionManager.GetVersionFromVersionNo(VersionManager.LatestVersionNumber).VersionText);
-            if(supportsLatestPreOut())
+            if (supportsLatestPreOut())
             {
                 lbPerOutReq.Text = UIPreOutAvailable;
                 rbPreOut.Enabled = true;
-            }else
+            }
+            else
             {
                 lbPerOutReq.Text = UIPreOutDisable;
                 rbPreOut.Enabled = false;
@@ -1103,13 +1119,13 @@ namespace YorotInstaller
 
         private void rbPerOut_CheckedChanged(object sender, EventArgs e)
         {
-            if(rbPreOut.Checked)
+            if (rbPreOut.Checked)
             {
                 rbStable.Checked = false;
                 rbOld.Checked = false;
                 cbOld.Enabled = false;
                 lbVersionToInstall.Enabled = false;
-                var ver = VersionManager.GetVersionFromVersionNo(VersionManager.PreOutVerNumber);
+                YorotVersion ver = VersionManager.GetVersionFromVersionNo(VersionManager.PreOutVerNumber);
                 versionToInstall = ver;
                 btInstall1.Text = UIInstallVer.Replace("[VER]", ver.VersionText);
             }
@@ -1123,7 +1139,7 @@ namespace YorotInstaller
                 rbOld.Checked = false;
                 cbOld.Enabled = false;
                 lbVersionToInstall.Enabled = false;
-                var ver = VersionManager.GetVersionFromVersionNo(VersionManager.LatestVersionNumber);
+                YorotVersion ver = VersionManager.GetVersionFromVersionNo(VersionManager.LatestVersionNumber);
                 versionToInstall = ver;
                 btInstall1.Text = UIInstallVer.Replace("[VER]", ver.VersionText);
             }
@@ -1138,11 +1154,11 @@ namespace YorotInstaller
                 cbOld.Enabled = true;
                 lbVersionToInstall.Enabled = true;
                 cbOld.Items.Clear();
-                for(int i = VersionManager.PreOutVersions.Count + 1;i < VersionManager.Versions.Count; i++)
+                for (int i = VersionManager.PreOutVersions.Count + 1; i < VersionManager.Versions.Count; i++)
                 {
                     if (i != VersionManager.LatestVersionNumber && i != VersionManager.PreOutVerNumber)
                     {
-                        var ver = VersionManager.Versions[i];
+                        YorotVersion ver = VersionManager.Versions[i];
                         cbOld.Items.Add(ver.VersionText + " (" + ver.VersionNo + ")");
                     }
                 }
@@ -1156,7 +1172,7 @@ namespace YorotInstaller
             int indexOfC = cbOld.Text.IndexOf(")");
             int getVerNoLenght = indexOfC - indexOfO;
             int verNo = Convert.ToInt32(cbOld.Text.Substring(indexOfO, getVerNoLenght));
-            var ver = VersionManager.GetVersionFromVersionNo(verNo);
+            YorotVersion ver = VersionManager.GetVersionFromVersionNo(verNo);
             btInstall1.Text = UIInstallVer.Replace("[VER]", ver.VersionText);
             if (ver.isMissing)
             {
@@ -1180,15 +1196,16 @@ namespace YorotInstaller
             string YorotPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\Haltroy\\Yorot\\Yorot.exe";
             string YorotBetaPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\Haltroy\\Yorot\\Yorot Beta.exe";
             bool YorotExists = File.Exists(YorotPath);
-            var current = VersionManager.GetVersionFromVersionName(FileVersionInfo.GetVersionInfo(YorotExists ? YorotPath : YorotBetaPath).ProductVersion);
+            YorotVersion current = VersionManager.GetVersionFromVersionName(FileVersionInfo.GetVersionInfo(YorotExists ? YorotPath : YorotBetaPath).ProductVersion);
             if (current is null) //PreOut
             {
                 versionToInstall = VersionManager.GetVersionFromVersionNo(VersionManager.PreOutVerNumber);
-            }else
+            }
+            else
             {
                 versionToInstall = VersionManager.GetVersionFromVersionNo(VersionManager.LatestVersionNumber);
             }
-            if(btRepair.Text == UIUpdateButton) { DoneType = DoneType.Update; }else { DoneType = DoneType.Repair; }
+            if (btRepair.Text == UIUpdateButton) { DoneType = DoneType.Update; } else { DoneType = DoneType.Repair; }
             StartInstallation(isShiftPressed);
         }
 
@@ -1208,7 +1225,7 @@ namespace YorotInstaller
                 int indexOfC = cbOld.Text.IndexOf(")");
                 int getVerNoLenght = indexOfC - indexOfO;
                 int verNo = Convert.ToInt32(cbOld.Text.Substring(indexOfO, getVerNoLenght));
-                var ver = VersionManager.GetVersionFromVersionNo(verNo);
+                YorotVersion ver = VersionManager.GetVersionFromVersionNo(verNo);
                 versionToInstall = ver;
             }
             DoneType = DoneType.Install;
@@ -1249,10 +1266,11 @@ namespace YorotInstaller
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            lbInstallCount.Text = (installDoneCount == installJobCount ? installDoneCount :   installDoneCount + 1) + "/" + installJobCount;
+            lbInstallCount.Text = (installDoneCount == installJobCount ? installDoneCount : installDoneCount + 1) + "/" + installJobCount;
             if (installDoneCount == 0) { lbInstallInfo.Text = UICreateRecovery; }
             else if (installDoneCount == installJobCount - 2) { lbInstallInfo.Text = UICreateShortcut; }
-            else if (installDoneCount == installJobCount - 1) { lbInstallInfo.Text = RegistryStart; }else
+            else if (installDoneCount == installJobCount - 1) { lbInstallInfo.Text = RegistryStart; }
+            else
             {
                 lbInstallInfo.Text = workingReq != null ? workingReq.Name : DownloadYorotDesktop;
             }
@@ -1268,7 +1286,8 @@ namespace YorotInstaller
             DoneType = DoneType.Uninstall;
             Successful();
         }
-        bool isShiftPressed;
+
+        private bool isShiftPressed;
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
         {
             isShiftPressed = e.Shift;
@@ -1297,7 +1316,7 @@ namespace YorotInstaller
 
         public override string ToString()
         {
-            return Type == StringType.String ? " [STRING]" + String : " [FILE]" +  String + "-" + String2 + "-" + String3;
+            return Type == StringType.String ? " [STRING]" + String : " [FILE]" + String + "-" + String2 + "-" + String3;
         }
 
         public enum StringType

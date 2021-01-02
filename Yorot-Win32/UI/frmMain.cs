@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using HTAlt;
+using System;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using HTAlt;
 
 namespace Yorot
 {
@@ -86,6 +79,7 @@ namespace Yorot
 
         private void AnimateTo(AnimateDirection animate)
         {
+            if (animate == AnimateDirection.Nothing) { return; }
             AnimationContinue = true;
             Direction = animate;
             timer1.Start();
@@ -93,9 +87,9 @@ namespace Yorot
 
         private AnimateDirection Direction = AnimateDirection.Nothing;
         private AnimateDirection PrevDirection = AnimateDirection.Left;
-        private int AnimationSpeed = 60;
-        private int panelMinSize = 60;
-        private int panelMaxSize = 420;
+        private readonly int AnimationSpeed = 60;
+        private readonly int panelMinSize = 60;
+        private readonly int panelMaxSize = 420;
         private bool AnimationContinue = false;
         private bool isAnimating => Direction != AnimateDirection.Nothing;
 
@@ -104,7 +98,7 @@ namespace Yorot
             switch (AnimationContinue)
             {
                 case true:
-                    if(pAppDrawer.Dock != DockStyle.Left)
+                    if (pAppDrawer.Dock != DockStyle.Left)
                     {
                         pAppDrawer.Dock = DockStyle.Left;
                     }
@@ -133,7 +127,7 @@ namespace Yorot
                             AnimationContinue = pAppDrawer.Width > 10;
                             break;
                         case AnimateDirection.Right:
-                            switch(PrevDirection)
+                            switch (PrevDirection)
                             {
                                 case AnimateDirection.LeftFullScreen:
                                 case AnimateDirection.Left:
@@ -151,8 +145,8 @@ namespace Yorot
                             }
                             break;
                         case AnimateDirection.RightMost:
-                            pAppDrawer.Width = pAppDrawer.Width < (Width - 15) ? pAppDrawer.Width + AnimationSpeed : (Width - 15);
-                            AnimationContinue = pAppDrawer.Width < (Width - 15);
+                            pAppDrawer.Width = pAppDrawer.Width < (Width - 10) ? pAppDrawer.Width + AnimationSpeed : (Width - 10);
+                            AnimationContinue = pAppDrawer.Width < (Width - 10);
                             break;
                     }
                     break;
@@ -182,6 +176,24 @@ namespace Yorot
                     Direction = AnimateDirection.Nothing;
                     timer1.Stop();
                     break;
+            }
+        }
+        private void pbYorot_Click(object sender, EventArgs e)
+        {
+            if (tcAppMan.SelectedTab == tabPage1)
+            {
+                if (pAppDrawer.Width == panelMaxSize)
+                {
+                    AnimateTo(PrevDirection == AnimateDirection.Right ? AnimateDirection.Left : AnimateDirection.RightMost);
+                }
+                else
+                {
+                    AnimateTo(PrevDirection == AnimateDirection.Right ? AnimateDirection.Left : AnimateDirection.Right);
+                }
+            }
+            else
+            {
+                tcAppMan.SelectedTab = tabPage1;
             }
         }
 
@@ -231,6 +243,10 @@ namespace Yorot
                 {
                     AnimateTo(PrevDirection == AnimateDirection.Right ? AnimateDirection.Left : AnimateDirection.Right);
                 }
+                else if (pAppDrawer.Width == panelMaxSize)
+                {
+                    AnimateTo(PrevDirection == AnimateDirection.RightMost ? AnimateDirection.Left : AnimateDirection.RightMost);
+                }
             }
             allowResize = false;
         }
@@ -255,18 +271,48 @@ namespace Yorot
         {
             if (lvApps.SelectedItems.Count > 0)
             {
-                var appItem = lvApps.SelectedItems[0];
-                var app = appItem.Tag as YorotApp;
-                var appcn = appItem.ToolTipText;
-                if(app.isSystemApp)
+                ListViewItem appItem = lvApps.SelectedItems[0];
+                YorotApp app = appItem.Tag as YorotApp;
+                string appcn = appItem.ToolTipText;
+                if (app.AssocTab == null)
                 {
-
+                    UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(app) { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+                    showApp(fapp);
+                }
+                else
+                {
+                    TabControl tabc = app.AssocTab.Parent as TabControl;
+                    if (tabc.InvokeRequired)
+                    {
+                        Invoke(new Action(() => tabc.SelectedTab = app.AssocTab));
+                    }
+                    else
+                    {
+                        tabc.SelectedTab = app.AssocTab;
+                    }
                 }
             }
         }
-        private void showApp(Form app)
+        private void showApp(UI.frmApp app)
         {
-
+            TabPage tp = new TabPage() { Text = app.assocApp.AppName };
+            app.assocApp.AssocTab = tp;
+            tp.Controls.Add(app);
+            tcAppMan.TabPages.Add(tp);
+            tcAppMan.SelectedTab = tp;
+            PictureBox pbIcon = new PictureBox() { SizeMode = PictureBoxSizeMode.Zoom, Image = app.assocApp.GetAppIcon(), Size = new Size(32, 32), Margin = new Padding(5), Visible = true, Tag = tp };
+            pbIcon.Click += pbIcon_Click;
+            app.assocApp.AssocPB = pbIcon;
+            flpFavApps.Controls.Add(pbIcon);
+        }
+        private void pbIcon_Click(object sender, EventArgs e)
+        {
+            if (pAppDrawer.Width < panelMaxSize)
+            {
+                AnimateTo(AnimateDirection.Right);
+            }
+            PictureBox pbIcon = sender as PictureBox;
+            tcAppMan.SelectedTab = pbIcon.Tag as TabPage;
         }
     }
 }

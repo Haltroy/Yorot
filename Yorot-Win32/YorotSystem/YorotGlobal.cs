@@ -98,10 +98,58 @@ namespace Yorot
             using (Graphics g = Graphics.FromImage(bm))
             {
                 g.FillRectangle(new SolidBrush(BackColor.Value), 0, 0, squareSize, squareSize);
-                Image iconimg = HTAlt.Tools.ResizeImage(baseIcon, sqHalfSize,sqHalfSize);
+                Image iconimg = HTAlt.Tools.ResizeImage(baseIcon, sqHalfSize, sqHalfSize);
                 g.DrawImage(iconimg, new Rectangle(sqQuartSize, sqQuartSize, sqHalfSize, sqHalfSize));
             }
             return bm;
+        }
+        /// <summary>
+        /// Converts <paramref name="img"/> to an <see cref="Icon"/>
+        /// Thanks to Hans Passant from StackOverflow.
+        /// https://stackoverflow.com/a/21389253
+        /// </summary>
+        /// <param name="img">Convertion <see cref="Image"/></param>
+        /// <returns><seealso cref="Icon"/></returns>
+        public static Icon IconFromImage(Image img)
+        {
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            System.IO.BinaryWriter bw = new System.IO.BinaryWriter(ms);
+            // Header
+            bw.Write((short)0);   // 0 : reserved
+            bw.Write((short)1);   // 2 : 1=ico, 2=cur
+            bw.Write((short)1);   // 4 : number of images
+                                  // Image directory
+            int w = img.Width;
+            if (w >= 256)
+            {
+                w = 0;
+            }
+
+            bw.Write((byte)w);    // 0 : width of image
+            int h = img.Height;
+            if (h >= 256)
+            {
+                h = 0;
+            }
+
+            bw.Write((byte)h);    // 1 : height of image
+            bw.Write((byte)0);    // 2 : number of colors in palette
+            bw.Write((byte)0);    // 3 : reserved
+            bw.Write((short)0);   // 4 : number of color planes
+            bw.Write((short)0);   // 6 : bits per pixel
+            long sizeHere = ms.Position;
+            bw.Write(0);     // 8 : image size
+            int start = (int)ms.Position + 4;
+            bw.Write(start);      // 12: offset of image data
+                                  // Image data
+            img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            int imageSize = (int)ms.Position - start;
+            ms.Seek(sizeHere, System.IO.SeekOrigin.Begin);
+            bw.Write(imageSize);
+            ms.Seek(0, System.IO.SeekOrigin.Begin);
+
+            // And load it
+            return new Icon(ms);
         }
     }
 }

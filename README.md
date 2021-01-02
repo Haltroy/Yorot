@@ -1,5 +1,5 @@
 <p align="center" style="text-align: center;">
-  <img width="128" height="128" src="https://haltroy.com/assets/images/Yorot-1000x1000.png" />
+  <img width="128" height="128" src="https://github.com/Haltroy/Yorot/raw/main/Yorot-Win32/Resources/Yorot.png" />
 </p>
 
 # [Yorot](https://haltroy.com/Yorot.html "Yorot's Page")
@@ -9,9 +9,7 @@ Latest Available Version: `None`
 
 
 ### Screenshot(s)
-<p align="center" style="text-align: center;">
-  <img width="641" height="523" src="https://haltroy.com/assets/images/Yorot0820-1076x685.png" />
-</p>
+No images are available.
 
 ## Features:
 currently there are none sorry ;(

@@ -8,9 +8,9 @@ assignees: Haltroy
 ---
 
 **Environment (please complete the following information):**
- - OS: [ e.g. Windows 10 20H1 ]
- - Korot Version: [ e.g. 0.8.4.0 [Interstellar] ]
- - Device: [ e.g. Xiaomi Redmi Note 7 ]
+ - OS: [ e.g. Windows 10 20H2 ]
+ - Yorot Version: [ e.g. 0.0.0.1 [Hamantha] ]
+ - Device: [ e.g. Intel Processor & NVidia Graphics Card PC ]
 
 
 **Describe the bug**

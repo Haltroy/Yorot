@@ -106,6 +106,7 @@ namespace Yorot
             this.pbYorot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbYorot.TabIndex = 0;
             this.pbYorot.TabStop = false;
+            this.pbYorot.Click += new System.EventHandler(this.pbYorot_Click);
             // 
             // tcAppMan
             // 
@@ -144,9 +145,9 @@ namespace Yorot
             // 
             // ilAppMan
             // 
-            this.ilAppMan.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilAppMan.ImageStream")));
+            this.ilAppMan.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.ilAppMan.ImageSize = new System.Drawing.Size(64, 64);
             this.ilAppMan.TransparentColor = System.Drawing.Color.Transparent;
-            this.ilAppMan.Images.SetKeyName(0, "Yorot");
             // 
             // label1
             // 

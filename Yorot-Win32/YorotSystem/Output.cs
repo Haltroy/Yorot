@@ -55,11 +55,11 @@ namespace Yorot
             switch (level)
             {
                 case LogLevel.Hidden: break;
-                case LogLevel.None: str = "[" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:FFFFFFF") + ") " + str;break;
-                case LogLevel.Info: str = " [I] (" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:FFFFFFF") + ") " + str;break;
-                case LogLevel.Warning: str = " [W] (" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:FFFFFFF") + ") " + str;break;
-                case LogLevel.Error: str = "[E] (" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:FFFFFFF") + ") " + str;break;
-                case LogLevel.Critical: str = "[C] (" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:FFFFFFF") + ") " + str;break;
+                case LogLevel.None: str = "[" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:FFFFFFF") + ") " + str; break;
+                case LogLevel.Info: str = " [I] (" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:FFFFFFF") + ") " + str; break;
+                case LogLevel.Warning: str = " [W] (" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:FFFFFFF") + ") " + str; break;
+                case LogLevel.Error: str = "[E] (" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:FFFFFFF") + ") " + str; break;
+                case LogLevel.Critical: str = "[C] (" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:FFFFFFF") + ") " + str; break;
             }
             OutputSingleton.SW.WriteLine(str);
         }

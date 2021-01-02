@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
-using Microsoft.Win32;
 
 namespace YorotInstaller
 {
@@ -27,7 +23,7 @@ namespace YorotInstaller
 
         public static void EnsureAssociationsSet()
         {
-            var filePath = Process.GetCurrentProcess().MainModule.FileName;
+            string filePath = Process.GetCurrentProcess().MainModule.FileName;
             EnsureAssociationsSet(
                 new FileAssociation
                 {
@@ -41,7 +37,7 @@ namespace YorotInstaller
         public static void EnsureAssociationsSet(params FileAssociation[] associations)
         {
             bool madeChanges = false;
-            foreach (var association in associations)
+            foreach (FileAssociation association in associations)
             {
                 madeChanges |= SetAssociation(
                     association.Extension,
@@ -67,7 +63,7 @@ namespace YorotInstaller
 
         private static bool SetKeyDefaultValue(string keyPath, string value)
         {
-            using (var key = Registry.CurrentUser.CreateSubKey(keyPath))
+            using (RegistryKey key = Registry.CurrentUser.CreateSubKey(keyPath))
             {
                 if (key.GetValue(null) as string != value)
                 {

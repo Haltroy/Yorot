@@ -1,8 +1,5 @@
 ﻿using Svg;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -42,13 +39,7 @@ namespace EasyTabs
             return SvgDocument.Open(xmlDocument).Draw(width, height);
         }
 
-        public int Width
-        {
-            get
-            {
-                return _minimizeButtonArea.Width + _maximizeRestoreButtonArea.Width + _closeButtonArea.Width;
-            }
-        }
+        public int Width => _minimizeButtonArea.Width + _maximizeRestoreButtonArea.Width + _closeButtonArea.Width;
 
         public bool Contains(Point cursor)
         {
@@ -59,7 +50,7 @@ namespace EasyTabs
         {
             int right = _parentWindow.ClientRectangle.Width;
             bool closeButtonHighlighted = false;
-            
+
             _minimizeButtonArea.X = right - 135;
             _maximizeRestoreButtonArea.X = right - 90;
             _closeButtonArea.X = right - 45;

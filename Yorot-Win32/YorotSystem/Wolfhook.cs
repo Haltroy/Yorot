@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using HTAlt;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using HTAlt;
 
 namespace Yorot
 {
@@ -33,7 +33,7 @@ namespace Yorot
         /// List of fetched wolves.
         /// </summary>
         public List<string> Wolves { get; set; } = new List<string>();
-        public void SendWolf(string message,string id = "")
+        public void SendWolf(string message, string id = "")
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -72,7 +72,7 @@ namespace Yorot
                     Output.WriteLine("<WOLFHOOK> Working...", LogLevel.Info);
                 }
                 string[] whFiles = Directory.GetFiles(WhFolder, "*.wh", SearchOption.TopDirectoryOnly);
-                for(int i = 0; i < whFiles.Length;i++)
+                for (int i = 0; i < whFiles.Length; i++)
                 {
                     string message = HTAlt.Tools.ReadFile(whFiles[i], DefaultEncoding);
                     string id = Path.GetFileNameWithoutExtension(whFiles[i]);

@@ -321,7 +321,7 @@ namespace Yorot
         {
             if (!IsWindows10 && !tab.Active && index == _parentWindow.Tabs.Count - 1)
             {
-              //  tabRightImage = Properties.Resources.InactiveRightNoDivider;
+                //  tabRightImage = Properties.Resources.InactiveRightNoDivider;
             }
 
             if (_suspendRendering)

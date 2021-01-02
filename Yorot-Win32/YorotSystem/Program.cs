@@ -4,19 +4,19 @@ using System.Windows.Forms;
 
 namespace Yorot
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            var exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
+            bool exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
             YorotGlobal.Wolfhook = new Wolfhook();
             if (exists)
             {
-                Output.WriteLine("<Yorot.Program> App already running. Passing arguments..." , LogLevel.Warning);
+                Output.WriteLine("<Yorot.Program> App already running. Passing arguments...", LogLevel.Warning);
                 YorotGlobal.Wolfhook.SendWolf(string.Join("§", args));
             }
             else

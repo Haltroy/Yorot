@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Yorot
 {
@@ -53,7 +49,7 @@ namespace Yorot
         /// <param name="n2"><see cref="int"/> representative of a divider number</param>
         /// <param name="balancePoint">Adds remainder of divison if <paramref name="n1"/> is smaller than this paramater. Otherwise, subtracts from <paramref name="n1"/>.</param>
         /// <returns><paramref name="n2"/> dividable close number of <paramref name="n1"/>.</returns>
-        public static int MakeItDividable(this int n1,int n2, int balancePoint = 300)
+        public static int MakeItDividable(this int n1, int n2, int balancePoint = 300)
         {
             int kalan = n1 % n2;
             return n1 < balancePoint ? n1 + (n2 - kalan) : n1 - kalan;
@@ -83,9 +79,14 @@ namespace Yorot
             while (n1 != n2)
             {
                 if (n1 > n2)
+                {
                     n1 = n1 - n2;
+                }
+
                 if (n2 > n1)
+                {
                     n2 = n2 - n1;
+                }
             }
             return n1;
         }

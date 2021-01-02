@@ -83,11 +83,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UI\tempSystemApp.cs">
+    <Compile Include="UI\frmApp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\tempSystemApp.Designer.cs">
-      <DependentUpon>tempSystemApp.cs</DependentUpon>
+    <Compile Include="UI\frmApp.Designer.cs">
+      <DependentUpon>frmApp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SystemApp\calc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SystemApp\calc.Designer.cs">
+      <DependentUpon>calc.cs</DependentUpon>
     </Compile>
     <Compile Include="YorotSystem\YorotGlobal.cs" />
     <Compile Include="UI\YorotTabRenderer.cs" />
@@ -109,6 +115,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Managers\Settings.cs" />
     <Compile Include="YorotSystem\Wolfhook.cs" />
+    <EmbeddedResource Include="UI\frmApp.resx">
+      <DependentUpon>frmApp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,8 +129,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\tempSystemApp.resx">
-      <DependentUpon>tempSystemApp.cs</DependentUpon>
+    <EmbeddedResource Include="UI\SystemApp\calc.resx">
+      <DependentUpon>calc.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
   </ItemGroup>
