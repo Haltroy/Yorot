@@ -13,20 +13,20 @@ namespace Yorot
     {
         public AppMan(string configFile)
         {
-            Apps.Add(DefaultApps.AppMaker);
-            Apps.Add(DefaultApps.Calculator);
-            Apps.Add(DefaultApps.Collections);
-            Apps.Add(DefaultApps.Console);
-            Apps.Add(DefaultApps.DumbBattlePassThing);
-            Apps.Add(DefaultApps.ExtMaker);
-            Apps.Add(DefaultApps.FileExplorer);
-            Apps.Add(DefaultApps.Yopad);
-            Apps.Add(DefaultApps.LangMaker);
-            Apps.Add(DefaultApps.Notepad);
-            Apps.Add(DefaultApps.Settings);
-            Apps.Add(DefaultApps.Store);
-            Apps.Add(DefaultApps.ThemeMaker);
-            Apps.Add(DefaultApps.WebBrowser);
+            Apps.Add(DefaultApps.AppMaker.CreateCarbonCopy());
+            Apps.Add(DefaultApps.Calculator.CreateCarbonCopy());
+            Apps.Add(DefaultApps.Collections.CreateCarbonCopy());
+            Apps.Add(DefaultApps.Console.CreateCarbonCopy());
+            Apps.Add(DefaultApps.DumbBattlePassThing.CreateCarbonCopy());
+            Apps.Add(DefaultApps.ExtMaker.CreateCarbonCopy());
+            Apps.Add(DefaultApps.FileExplorer.CreateCarbonCopy());
+            Apps.Add(DefaultApps.Yopad.CreateCarbonCopy());
+            Apps.Add(DefaultApps.LangMaker.CreateCarbonCopy());
+            Apps.Add(DefaultApps.Notepad.CreateCarbonCopy());
+            Apps.Add(DefaultApps.Settings.CreateCarbonCopy());
+            Apps.Add(DefaultApps.Store.CreateCarbonCopy());
+            Apps.Add(DefaultApps.ThemeMaker.CreateCarbonCopy());
+            Apps.Add(DefaultApps.WebBrowser.CreateCarbonCopy());
         }
         /// <summary>
         /// A <see cref="List{T}"/> of <see cref="YorotApp"/>(s).
@@ -49,6 +49,59 @@ namespace Yorot
         public List<YorotApp> FindMultipleByAppCN(string appcn)
         {
             return Apps.FindAll(i => string.Equals(i.AppCodeName, appcn));
+        }
+        public void SuspendLayouts()
+        {
+            for(int i = 0; i < Apps.Count;i++)
+            {
+                var app = Apps[i];
+                if (app.AssocForm != null)
+                {
+                    if (app.isLayoutSuspended)
+                    {
+                        Console.WriteLine(" [APPS] Cannot suspend app \"" + app.AppCodeName + "\" (" + app.AssocForm.Text + "). Layout already suspended. Skipped.");
+                    }
+                    else
+                    {
+                        if (app.AssocForm.InvokeRequired)
+                        {
+                            app.AssocForm.Invoke(new Action(() => app.AssocForm.SuspendLayout()));
+                        }
+                        else
+                        {
+                            app.AssocForm.SuspendLayout();
+                        }
+                        app.isLayoutSuspended = true;
+                        Console.WriteLine(" [APPS] Suspended layout for app \"" + app.AppCodeName + "\" (" + app.AssocForm.Text + ")");
+                    }
+                }
+            }
+        }
+        public void ResumeLayouts(bool perform = true)
+        {
+            for (int i = 0; i < Apps.Count; i++)
+            {
+                var app = Apps[i];
+                if (app.AssocForm != null)
+                {
+                    if (app.isLayoutSuspended)
+                    {
+                        if (app.AssocForm.InvokeRequired)
+                        {
+                            app.AssocForm.Invoke(new Action(() => app.AssocForm.ResumeLayout(perform)));
+                        }
+                        else
+                        {
+                            app.AssocForm.ResumeLayout(perform);
+                        }
+                        app.isLayoutSuspended = false;
+                        Console.WriteLine(" [APPS] Resumed layout for app \"" + app.AppCodeName + "\" (" + app.AssocForm.Text + ")");
+                    }else
+                    {
+                        Console.WriteLine(" [APPS] Cannot resume app \"" + app.AppCodeName + "\" (" + app.AssocForm.Text + "). Layout already resumed. Skipped.");
+                    }
+                }
+            }
         }
     }
     /// <summary>
@@ -346,6 +399,22 @@ namespace Yorot
         /// </summary>
         public string StartFile { get; set; }
         /// <summary>
+        /// Creates a copy of this <see cref="YorotApp"/> excluding <see cref="YorotApp.AssocForm"/>,<see cref="YorotApp.AssocTab"/> and <see cref="YorotApp.AssocPB"/>.
+        /// </summary>
+        /// <returns><see cref="YorotApp"/></returns>
+        public YorotApp CreateCarbonCopy()
+        {
+            return new YorotApp()
+            {
+                AppIcon = AppIcon,
+                isSystemApp = isSystemApp,
+                AppCodeName = AppCodeName,
+                isLocal = isLocal,
+                HTUPDATE = HTUPDATE,
+                AppName = AppName,
+            };
+        }
+        /// <summary>
         /// Display name of application.
         /// </summary>
         public string AppName { get; set; }
@@ -361,5 +430,9 @@ namespace Yorot
         /// Gets associated <see cref="System.Windows.Forms.PictureBox"/> of this <see cref="YorotApp"/>. <see cref="null"/> if no PBs are associated.
         /// </summary>
         public System.Windows.Forms.PictureBox AssocPB { get; set; }
+        /// <summary>
+        /// Determines if <see cref="AssocForm"/> is suspended.
+        /// </summary>
+        public bool isLayoutSuspended { get; set; } = false;
     }
 }

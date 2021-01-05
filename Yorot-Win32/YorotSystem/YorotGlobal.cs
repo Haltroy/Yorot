@@ -40,7 +40,7 @@ namespace Yorot
         /// <summary>
         /// Version Control (HTUPDATE) URL.
         /// </summary>
-        public static string HTULoc = "[HTUPDATE LOCATION HERE]"; // TODO
+        public static string HTULoc = "https://raw.githubusercontent.com/Haltroy/Yorot/main/Yorot.htupdate"; 
         /// <summary>
         /// User Files location.
         /// </summary>

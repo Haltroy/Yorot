@@ -289,6 +289,7 @@ namespace YorotInstaller
         public int PreOutMinVer { get; set; }
         public static int InstallerVer => 1;
         public int LatestInstallerVer { get; set; }
+        public string InstallerLoc { get; set; }
 
         public YorotVersion GetVersionFromVersionName(string name)
         {

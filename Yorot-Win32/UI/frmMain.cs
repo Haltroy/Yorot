@@ -23,7 +23,7 @@ namespace Yorot
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void RefreshAppList(bool clearCurrent = false)
@@ -80,6 +80,7 @@ namespace Yorot
         private void AnimateTo(AnimateDirection animate)
         {
             if (animate == AnimateDirection.Nothing) { return; }
+            YorotGlobal.Settings.AppMan.SuspendLayouts();
             AnimationContinue = true;
             Direction = animate;
             timer1.Start();
@@ -151,6 +152,7 @@ namespace Yorot
                     }
                     break;
                 case false:
+                    YorotGlobal.Settings.AppMan.ResumeLayouts();
                     switch (Direction)
                     {
                         case AnimateDirection.Nothing:
@@ -203,7 +205,7 @@ namespace Yorot
             {
                 pAppDrawer.Dock = DockStyle.Left;
             }
-
+            YorotGlobal.Settings.AppMan.SuspendLayouts();
             if (e.Clicks > 2)
             {
                 switch (PrevDirection)
@@ -249,6 +251,7 @@ namespace Yorot
                 }
             }
             allowResize = false;
+            YorotGlobal.Settings.AppMan.ResumeLayouts();
         }
 
         private void label1_MouseMove(object sender, MouseEventArgs e)
@@ -266,6 +269,15 @@ namespace Yorot
 
         #endregion Animator
 
+        public void loadMainTab()
+        {
+
+        }
+
+        public void loadSpecificTab(TabPage tp)
+        {
+
+        }
 
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
@@ -300,10 +312,13 @@ namespace Yorot
             tp.Controls.Add(app);
             tcAppMan.TabPages.Add(tp);
             tcAppMan.SelectedTab = tp;
-            PictureBox pbIcon = new PictureBox() { SizeMode = PictureBoxSizeMode.Zoom, Image = app.assocApp.GetAppIcon(), Size = new Size(32, 32), Margin = new Padding(5), Visible = true, Tag = tp };
-            pbIcon.Click += pbIcon_Click;
-            app.assocApp.AssocPB = pbIcon;
-            flpFavApps.Controls.Add(pbIcon);
+            if (app.assocApp.AppCodeName != "com.haltroy.settings")
+            {
+                PictureBox pbIcon = new PictureBox() { SizeMode = PictureBoxSizeMode.Zoom, Image = app.assocApp.GetAppIcon(), Size = new Size(32, 32), Margin = new Padding(5), Visible = true, Tag = tp };
+                pbIcon.Click += pbIcon_Click;
+                app.assocApp.AssocPB = pbIcon;
+                flpFavApps.Controls.Add(pbIcon);
+            }
         }
         private void pbIcon_Click(object sender, EventArgs e)
         {
@@ -313,6 +328,32 @@ namespace Yorot
             }
             PictureBox pbIcon = sender as PictureBox;
             tcAppMan.SelectedTab = pbIcon.Tag as TabPage;
+        }
+
+        private void pbSettings_Click(object sender, EventArgs e)
+        {
+            if (pAppDrawer.Width < panelMaxSize)
+            {
+                AnimateTo(AnimateDirection.Right);
+            }
+            var settingApp = YorotGlobal.Settings.AppMan.FindByAppCN("com.haltroy.settings");
+            if (settingApp.AssocTab == null)
+            {
+                UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(settingApp) { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+                showApp(fapp);
+            }
+            else
+            {
+                TabControl tabc = settingApp.AssocTab.Parent as TabControl;
+                if (tabc.InvokeRequired)
+                {
+                    Invoke(new Action(() => tabc.SelectedTab = settingApp.AssocTab));
+                }
+                else
+                {
+                    tabc.SelectedTab = settingApp.AssocTab;
+                }
+            }
         }
     }
 }

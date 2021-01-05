@@ -45,12 +45,28 @@ namespace Yorot.UI
             Icon = YorotGlobal.IconFromImage(pictureBox1.Image);
         }
 
+        bool freeMode { get; set; } = false;
+        private void p_mdown(object sender,MouseEventArgs e)
+        {
+            OnMouseDown(e); 
+        }
+
+        private void p_mdclick(object sender, MouseEventArgs e)
+        {
+            OnMouseDoubleClick(e);
+        }
+
         private void label3_Click(object sender, EventArgs e)
         {
-            /// TODO: Add popping window feature.
+
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void frmApp_FormClosing(object sender, FormClosingEventArgs e)
         {
             TabControl tcappman = assocApp.AssocTab.Parent as TabControl;
             if (tcappman.InvokeRequired)
@@ -66,19 +82,76 @@ namespace Yorot.UI
                 tcappman.SelectedIndex = 0;
                 tcappman.TabPages.Remove(assocApp.AssocTab);
             }
-            FlowLayoutPanel pappdrawer = assocApp.AssocPB.Parent as FlowLayoutPanel;
-            if (pappdrawer.InvokeRequired)
+            assocApp.AssocTab = null;
+            assocApp.AssocForm = null;
+            if (assocApp.AppCodeName != "com.haltroy.settings")
             {
-                pappdrawer.Invoke(new Action(() => pappdrawer.Controls.Remove(assocApp.AssocPB)));
+                FlowLayoutPanel pappdrawer = assocApp.AssocPB.Parent as FlowLayoutPanel;
+                if (pappdrawer.InvokeRequired)
+                {
+                    pappdrawer.Invoke(new Action(() => pappdrawer.Controls.Remove(assocApp.AssocPB)));
+                }
+                else
+                {
+                    pappdrawer.Controls.Remove(assocApp.AssocPB);
+                }
+                assocApp.AssocPB = null;
+            }
+        }
+
+        private void htButton4_Click(object sender, EventArgs e)
+        {
+            if (!freeMode)
+            {
+                Hide();
+                btPopOut.Text = "▌";
+                btMaximize.Visible = true;
+                btMaximize.Enabled = true;
+                btMinimize.Visible = true;
+                btMinimize.Enabled = true;
+                Parent = null;
+                assocApp.AssocTab.Controls.Remove(this);
+                Dock = DockStyle.None;
+                TopLevel = true;
+                FormBorderStyle = FormBorderStyle.Sizable;
+                pTitle.MouseDown += p_mdown;
+                pTitle.MouseDoubleClick += p_mdclick;
+                Show();
+                freeMode = true;
             }
             else
             {
-                pappdrawer.Controls.Remove(assocApp.AssocPB);
+                Hide();
+                TopLevel = false;
+                btPopOut.Text = "□";
+                btMaximize.Visible = false;
+                btMaximize.Enabled = false;
+                btMinimize.Visible = false;
+                btMinimize.Enabled = false;
+                Parent = assocApp.AssocTab;
+                FormBorderStyle = FormBorderStyle.None;
+                pTitle.MouseDown -= p_mdown;
+                pTitle.MouseDoubleClick -= p_mdclick;
+                Dock = DockStyle.Fill;
+                assocApp.AssocTab.Controls.Add(this);
+                Show();
+                freeMode = false;
             }
-            assocApp.AssocTab = null;
-            assocApp.AssocForm = null;
-            assocApp.AssocPB = null;
+        }
+
+        private void htButton1_Click(object sender, EventArgs e)
+        {
             Close();
+        }
+
+        private void htButton3_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void htButton2_Click(object sender, EventArgs e)
+        {
+            WindowState = WindowState == FormWindowState.Maximized ? FormWindowState.Normal : FormWindowState.Maximized;
         }
     }
 }

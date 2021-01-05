@@ -95,6 +95,7 @@ namespace Yorot
             this.pbSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbSettings.TabIndex = 0;
             this.pbSettings.TabStop = false;
+            this.pbSettings.Click += new System.EventHandler(this.pbSettings_Click);
             // 
             // pbYorot
             // 
@@ -114,10 +115,10 @@ namespace Yorot
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcAppMan.Controls.Add(this.tabPage1);
-            this.tcAppMan.Location = new System.Drawing.Point(-9, -29);
+            this.tcAppMan.Location = new System.Drawing.Point(-6, -26);
             this.tcAppMan.Name = "tcAppMan";
             this.tcAppMan.SelectedIndex = 0;
-            this.tcAppMan.Size = new System.Drawing.Size(556, 632);
+            this.tcAppMan.Size = new System.Drawing.Size(553, 625);
             this.tcAppMan.TabIndex = 2;
             // 
             // tabPage1
@@ -126,7 +127,7 @@ namespace Yorot
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(548, 606);
+            this.tabPage1.Size = new System.Drawing.Size(545, 599);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tpApps";
             // 
@@ -137,7 +138,7 @@ namespace Yorot
             this.lvApps.LargeImageList = this.ilAppMan;
             this.lvApps.Location = new System.Drawing.Point(3, 3);
             this.lvApps.Name = "lvApps";
-            this.lvApps.Size = new System.Drawing.Size(542, 600);
+            this.lvApps.Size = new System.Drawing.Size(539, 593);
             this.lvApps.SmallImageList = this.ilAppMan;
             this.lvApps.TabIndex = 0;
             this.lvApps.UseCompatibleStateImageBehavior = false;

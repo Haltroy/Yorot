@@ -306,7 +306,7 @@ namespace YorotInstaller
                 }
                 return;
             }
-            if (isPreparing) // TODO: Add Update checking & update Installer if available, then release it
+            if (isPreparing)
             {
                 if (VersionManager.InstallerVer < VersionManager.LatestInstallerVer)
                 {
@@ -314,7 +314,7 @@ namespace YorotInstaller
                     allowClose = false;
                     StringEventhHybrid seh = new StringEventhHybrid()
                     {
-                        String = "https://haltroy.com/YorotInstaller.html",
+                        String = VersionManager.InstallerLoc,
                         String2 = Settings.WorkFolder + "YorotInstaller.exe",
                         String3 = "Installer",
                         Type = StringEventhHybrid.StringType.File,
@@ -465,6 +465,11 @@ namespace YorotInstaller
                         else if (node.Name == "AppVersion")
                         {
                             VersionManager.LatesVersion = node.InnerXml;
+                            workCount++;
+                        }
+                        else if (node.Name == "InstallerUrl")
+                        {
+                            VersionManager.InstallerLoc = node.InnerXml;
                             workCount++;
                         }
                         else if (node.Name == "Versions")

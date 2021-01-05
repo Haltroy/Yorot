@@ -10,6 +10,10 @@ namespace Yorot.UI.SystemApp
         public calc()
         {
             InitializeComponent();
+            panel1.AutoScroll = false;
+            pbHamMenu.Location = new Point(panel1.Width - (pbHamMenu.Width + 7), pbHamMenu.Location.Y);
+            panel1.Invalidate();
+            tmrAnimate.Start();
         }
 
         /// <summary>

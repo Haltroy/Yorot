@@ -100,10 +100,10 @@ namespace Yorot.UI.SystemApp
             // lbTemel
             // 
             this.lbTemel.AutoSize = true;
-            this.lbTemel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbTemel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lbTemel.Location = new System.Drawing.Point(3, 38);
             this.lbTemel.Name = "lbTemel";
-            this.lbTemel.Size = new System.Drawing.Size(60, 25);
+            this.lbTemel.Size = new System.Drawing.Size(65, 25);
             this.lbTemel.TabIndex = 0;
             this.lbTemel.Text = "Basic";
             // 
@@ -331,7 +331,7 @@ namespace Yorot.UI.SystemApp
             this.tabControl1.Location = new System.Drawing.Point(176, -27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(407, 369);
+            this.tabControl1.Size = new System.Drawing.Size(323, 369);
             this.tabControl1.TabIndex = 2;
             // 
             // tpTemel
@@ -358,7 +358,7 @@ namespace Yorot.UI.SystemApp
             this.tpTemel.Controls.Add(this.htButton1);
             this.tpTemel.Location = new System.Drawing.Point(4, 22);
             this.tpTemel.Name = "tpTemel";
-            this.tpTemel.Size = new System.Drawing.Size(399, 343);
+            this.tpTemel.Size = new System.Drawing.Size(315, 343);
             this.tpTemel.TabIndex = 0;
             this.tpTemel.Text = "Basic";
             this.tpTemel.UseVisualStyleBackColor = true;
@@ -369,9 +369,9 @@ namespace Yorot.UI.SystemApp
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.htButton18);
             this.panel2.Controls.Add(this.htButton17);
-            this.panel2.Location = new System.Drawing.Point(267, 301);
+            this.panel2.Location = new System.Drawing.Point(225, 301);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(130, 40);
+            this.panel2.Size = new System.Drawing.Size(90, 40);
             this.panel2.TabIndex = 0;
             // 
             // htButton18
@@ -385,7 +385,7 @@ namespace Yorot.UI.SystemApp
             this.htButton18.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.htButton18.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton18.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton18.Location = new System.Drawing.Point(92, 4);
+            this.htButton18.Location = new System.Drawing.Point(52, 4);
             this.htButton18.Name = "htButton18";
             this.htButton18.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.htButton18.Size = new System.Drawing.Size(35, 33);
@@ -403,7 +403,7 @@ namespace Yorot.UI.SystemApp
             this.htButton17.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.htButton17.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton17.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton17.Location = new System.Drawing.Point(51, 4);
+            this.htButton17.Location = new System.Drawing.Point(11, 4);
             this.htButton17.Name = "htButton17";
             this.htButton17.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.htButton17.Size = new System.Drawing.Size(35, 32);
@@ -416,9 +416,9 @@ namespace Yorot.UI.SystemApp
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(267, 4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(225, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(132, 299);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(90, 299);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // label2
@@ -426,7 +426,7 @@ namespace Yorot.UI.SystemApp
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.label2.Location = new System.Drawing.Point(7, 62);
+            this.label2.Location = new System.Drawing.Point(7, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 39);
             this.label2.TabIndex = 1;
@@ -437,7 +437,7 @@ namespace Yorot.UI.SystemApp
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(11, 30);
+            this.label1.Location = new System.Drawing.Point(11, 44);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 17);
             this.label1.TabIndex = 1;
@@ -454,10 +454,10 @@ namespace Yorot.UI.SystemApp
             this.htButton16.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton16.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton16.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton16.Location = new System.Drawing.Point(194, 227);
+            this.htButton16.Location = new System.Drawing.Point(167, 237);
             this.htButton16.Name = "htButton16";
             this.htButton16.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton16.Size = new System.Drawing.Size(54, 49);
+            this.htButton16.Size = new System.Drawing.Size(45, 45);
             this.htButton16.TabIndex = 0;
             this.htButton16.Text = "*";
             // 
@@ -472,10 +472,10 @@ namespace Yorot.UI.SystemApp
             this.htButton15.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton15.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton15.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton15.Location = new System.Drawing.Point(194, 282);
+            this.htButton15.Location = new System.Drawing.Point(167, 289);
             this.htButton15.Name = "htButton15";
             this.htButton15.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton15.Size = new System.Drawing.Size(54, 49);
+            this.htButton15.Size = new System.Drawing.Size(45, 45);
             this.htButton15.TabIndex = 0;
             this.htButton15.Text = "/";
             // 
@@ -490,10 +490,10 @@ namespace Yorot.UI.SystemApp
             this.htButton14.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton14.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton14.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton14.Location = new System.Drawing.Point(194, 172);
+            this.htButton14.Location = new System.Drawing.Point(167, 186);
             this.htButton14.Name = "htButton14";
             this.htButton14.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton14.Size = new System.Drawing.Size(54, 49);
+            this.htButton14.Size = new System.Drawing.Size(45, 45);
             this.htButton14.TabIndex = 0;
             this.htButton14.Text = "-";
             // 
@@ -508,10 +508,10 @@ namespace Yorot.UI.SystemApp
             this.htButton13.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton13.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton13.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton13.Location = new System.Drawing.Point(194, 117);
+            this.htButton13.Location = new System.Drawing.Point(167, 135);
             this.htButton13.Name = "htButton13";
             this.htButton13.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton13.Size = new System.Drawing.Size(54, 49);
+            this.htButton13.Size = new System.Drawing.Size(45, 45);
             this.htButton13.TabIndex = 0;
             this.htButton13.Text = "+";
             // 
@@ -526,10 +526,10 @@ namespace Yorot.UI.SystemApp
             this.htButton12.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton12.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton12.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton12.Location = new System.Drawing.Point(134, 282);
+            this.htButton12.Location = new System.Drawing.Point(116, 289);
             this.htButton12.Name = "htButton12";
             this.htButton12.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton12.Size = new System.Drawing.Size(54, 49);
+            this.htButton12.Size = new System.Drawing.Size(45, 45);
             this.htButton12.TabIndex = 0;
             this.htButton12.Text = "C";
             // 
@@ -544,10 +544,10 @@ namespace Yorot.UI.SystemApp
             this.htButton11.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton11.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton11.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton11.Location = new System.Drawing.Point(74, 282);
+            this.htButton11.Location = new System.Drawing.Point(65, 289);
             this.htButton11.Name = "htButton11";
             this.htButton11.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton11.Size = new System.Drawing.Size(54, 49);
+            this.htButton11.Size = new System.Drawing.Size(45, 45);
             this.htButton11.TabIndex = 0;
             this.htButton11.Text = "CE";
             // 
@@ -562,10 +562,10 @@ namespace Yorot.UI.SystemApp
             this.htButton10.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton10.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton10.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton10.Location = new System.Drawing.Point(14, 281);
+            this.htButton10.Location = new System.Drawing.Point(14, 288);
             this.htButton10.Name = "htButton10";
             this.htButton10.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton10.Size = new System.Drawing.Size(54, 49);
+            this.htButton10.Size = new System.Drawing.Size(45, 45);
             this.htButton10.TabIndex = 0;
             this.htButton10.Text = "0";
             // 
@@ -580,10 +580,10 @@ namespace Yorot.UI.SystemApp
             this.htButton9.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton9.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton9.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton9.Location = new System.Drawing.Point(134, 227);
+            this.htButton9.Location = new System.Drawing.Point(116, 237);
             this.htButton9.Name = "htButton9";
             this.htButton9.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton9.Size = new System.Drawing.Size(54, 49);
+            this.htButton9.Size = new System.Drawing.Size(45, 45);
             this.htButton9.TabIndex = 0;
             this.htButton9.Text = "9";
             // 
@@ -598,10 +598,10 @@ namespace Yorot.UI.SystemApp
             this.htButton6.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton6.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton6.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton6.Location = new System.Drawing.Point(134, 172);
+            this.htButton6.Location = new System.Drawing.Point(116, 186);
             this.htButton6.Name = "htButton6";
             this.htButton6.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton6.Size = new System.Drawing.Size(54, 49);
+            this.htButton6.Size = new System.Drawing.Size(45, 45);
             this.htButton6.TabIndex = 0;
             this.htButton6.Text = "6";
             // 
@@ -616,10 +616,10 @@ namespace Yorot.UI.SystemApp
             this.htButton8.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton8.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton8.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton8.Location = new System.Drawing.Point(74, 227);
+            this.htButton8.Location = new System.Drawing.Point(65, 237);
             this.htButton8.Name = "htButton8";
             this.htButton8.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton8.Size = new System.Drawing.Size(54, 49);
+            this.htButton8.Size = new System.Drawing.Size(45, 45);
             this.htButton8.TabIndex = 0;
             this.htButton8.Text = "8";
             // 
@@ -634,10 +634,10 @@ namespace Yorot.UI.SystemApp
             this.htButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton3.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton3.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton3.Location = new System.Drawing.Point(134, 117);
+            this.htButton3.Location = new System.Drawing.Point(116, 135);
             this.htButton3.Name = "htButton3";
             this.htButton3.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton3.Size = new System.Drawing.Size(54, 49);
+            this.htButton3.Size = new System.Drawing.Size(45, 45);
             this.htButton3.TabIndex = 0;
             this.htButton3.Text = "3";
             // 
@@ -652,10 +652,10 @@ namespace Yorot.UI.SystemApp
             this.htButton5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton5.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton5.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton5.Location = new System.Drawing.Point(74, 172);
+            this.htButton5.Location = new System.Drawing.Point(65, 186);
             this.htButton5.Name = "htButton5";
             this.htButton5.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton5.Size = new System.Drawing.Size(54, 49);
+            this.htButton5.Size = new System.Drawing.Size(45, 45);
             this.htButton5.TabIndex = 0;
             this.htButton5.Text = "5";
             // 
@@ -670,10 +670,10 @@ namespace Yorot.UI.SystemApp
             this.htButton7.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton7.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton7.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton7.Location = new System.Drawing.Point(14, 227);
+            this.htButton7.Location = new System.Drawing.Point(14, 237);
             this.htButton7.Name = "htButton7";
             this.htButton7.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton7.Size = new System.Drawing.Size(54, 49);
+            this.htButton7.Size = new System.Drawing.Size(45, 45);
             this.htButton7.TabIndex = 0;
             this.htButton7.Text = "7";
             // 
@@ -688,10 +688,10 @@ namespace Yorot.UI.SystemApp
             this.htButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton2.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton2.Location = new System.Drawing.Point(74, 117);
+            this.htButton2.Location = new System.Drawing.Point(65, 135);
             this.htButton2.Name = "htButton2";
             this.htButton2.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton2.Size = new System.Drawing.Size(54, 49);
+            this.htButton2.Size = new System.Drawing.Size(45, 45);
             this.htButton2.TabIndex = 0;
             this.htButton2.Text = "2";
             // 
@@ -706,10 +706,10 @@ namespace Yorot.UI.SystemApp
             this.htButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton4.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton4.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton4.Location = new System.Drawing.Point(14, 172);
+            this.htButton4.Location = new System.Drawing.Point(14, 186);
             this.htButton4.Name = "htButton4";
             this.htButton4.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton4.Size = new System.Drawing.Size(54, 49);
+            this.htButton4.Size = new System.Drawing.Size(45, 45);
             this.htButton4.TabIndex = 0;
             this.htButton4.Text = "4";
             // 
@@ -724,10 +724,10 @@ namespace Yorot.UI.SystemApp
             this.htButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.htButton1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton1.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton1.Location = new System.Drawing.Point(14, 117);
+            this.htButton1.Location = new System.Drawing.Point(14, 135);
             this.htButton1.Name = "htButton1";
             this.htButton1.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton1.Size = new System.Drawing.Size(54, 49);
+            this.htButton1.Size = new System.Drawing.Size(45, 45);
             this.htButton1.TabIndex = 0;
             this.htButton1.Text = "1";
             // 
@@ -884,7 +884,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 338);
+            this.ClientSize = new System.Drawing.Size(495, 338);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
