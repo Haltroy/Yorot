@@ -120,6 +120,7 @@ namespace Yorot
             this.tcAppMan.SelectedIndex = 0;
             this.tcAppMan.Size = new System.Drawing.Size(553, 625);
             this.tcAppMan.TabIndex = 2;
+            this.tcAppMan.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcAppMan_Selecting);
             // 
             // tabPage1
             // 

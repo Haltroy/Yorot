@@ -7,6 +7,8 @@ namespace Yorot.UI
     public partial class frmApp : Form
     {
         public YorotApp assocApp;
+        public frmMain assocForm;
+        object appContainer = null;
         public frmApp(string appcn)
         {
             InitializeComponent();
@@ -25,12 +27,15 @@ namespace Yorot.UI
                 switch (app.AppCodeName)
                 {
                     case "com.haltroy.calc":
-                        pApp.Controls.Add(new SystemApp.calc() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, });
+                        SystemApp.calc calc = new SystemApp.calc() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appContainer = calc;
+                        pApp.Controls.Add(calc);
                         break;
                     default:
                         Label lbPlaceHolder = new Label() { Text = app.AppCodeName, AutoSize = true, Visible = true };
                         Form gaster = new Form() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
                         gaster.Controls.Add(lbPlaceHolder);
+                        appContainer = gaster;
                         pApp.Controls.Add(gaster);
                         break;
                 }
@@ -40,12 +45,12 @@ namespace Yorot.UI
                 assocApp.AssocForm = this;
             }
             Text = app.AppName;
-            label1.Text = app.AppName;
-            pictureBox1.Image = app.GetAppIcon();
-            Icon = YorotGlobal.IconFromImage(pictureBox1.Image);
+            lbTitle.Text = app.AppName;
+            pbIcon.Image = app.GetAppIcon();
+            Icon = YorotGlobal.IconFromImage(pbIcon.Image);
         }
 
-        bool freeMode { get; set; } = false;
+        public bool freeMode { get; set; } = false;
         private void p_mdown(object sender,MouseEventArgs e)
         {
             OnMouseDown(e); 
@@ -55,31 +60,19 @@ namespace Yorot.UI
         {
             OnMouseDoubleClick(e);
         }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void frmApp_FormClosing(object sender, FormClosingEventArgs e)
         {
             TabControl tcappman = assocApp.AssocTab.Parent as TabControl;
+            assocForm.loadMainTab();
             if (tcappman.InvokeRequired)
             {
                 tcappman.Invoke(new Action(() =>
                 {
-                    tcappman.SelectedIndex = 0;
                     tcappman.TabPages.Remove(assocApp.AssocTab);
                 }));
             }
             else
             {
-                tcappman.SelectedIndex = 0;
                 tcappman.TabPages.Remove(assocApp.AssocTab);
             }
             assocApp.AssocTab = null;
@@ -106,6 +99,7 @@ namespace Yorot.UI
                 Hide();
                 btPopOut.Text = "▌";
                 btMaximize.Visible = true;
+                assocForm.loadMainTab();
                 btMaximize.Enabled = true;
                 btMinimize.Visible = true;
                 btMinimize.Enabled = true;
@@ -116,6 +110,10 @@ namespace Yorot.UI
                 FormBorderStyle = FormBorderStyle.Sizable;
                 pTitle.MouseDown += p_mdown;
                 pTitle.MouseDoubleClick += p_mdclick;
+                pbIcon.MouseDown += p_mdown;
+                pbIcon.MouseDoubleClick += p_mdclick;
+                lbTitle.MouseDown += p_mdown;
+                lbTitle.MouseDoubleClick += p_mdclick;
                 Show();
                 freeMode = true;
             }
@@ -124,6 +122,7 @@ namespace Yorot.UI
                 Hide();
                 TopLevel = false;
                 btPopOut.Text = "□";
+                assocForm.loadSpecificTab(assocApp.AssocTab);
                 btMaximize.Visible = false;
                 btMaximize.Enabled = false;
                 btMinimize.Visible = false;
@@ -132,6 +131,10 @@ namespace Yorot.UI
                 FormBorderStyle = FormBorderStyle.None;
                 pTitle.MouseDown -= p_mdown;
                 pTitle.MouseDoubleClick -= p_mdclick;
+                pbIcon.MouseDown -= p_mdown;
+                pbIcon.MouseDoubleClick -= p_mdclick;
+                lbTitle.MouseDown -= p_mdown;
+                lbTitle.MouseDoubleClick -= p_mdclick;
                 Dock = DockStyle.Fill;
                 assocApp.AssocTab.Controls.Add(this);
                 Show();
@@ -152,6 +155,17 @@ namespace Yorot.UI
         private void htButton2_Click(object sender, EventArgs e)
         {
             WindowState = WindowState == FormWindowState.Maximized ? FormWindowState.Normal : FormWindowState.Maximized;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (assocApp.isSystemApp)
+            {
+                var frm = appContainer as Form;
+                Text = frm.Text;
+                lbTitle.Text = frm.Text;
+                Icon = frm.Icon;
+            }
         }
     }
 }

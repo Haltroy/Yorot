@@ -173,6 +173,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\hamburger.png" />
+    <None Include="Resources\hamburger-w.png" />
     <Content Include="Yorot.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

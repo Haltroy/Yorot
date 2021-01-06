@@ -13,19 +13,15 @@ namespace Yorot
     {
         public AppMan(string configFile)
         {
-            Apps.Add(DefaultApps.AppMaker.CreateCarbonCopy());
             Apps.Add(DefaultApps.Calculator.CreateCarbonCopy());
             Apps.Add(DefaultApps.Collections.CreateCarbonCopy());
             Apps.Add(DefaultApps.Console.CreateCarbonCopy());
             Apps.Add(DefaultApps.DumbBattlePassThing.CreateCarbonCopy());
-            Apps.Add(DefaultApps.ExtMaker.CreateCarbonCopy());
             Apps.Add(DefaultApps.FileExplorer.CreateCarbonCopy());
             Apps.Add(DefaultApps.Yopad.CreateCarbonCopy());
-            Apps.Add(DefaultApps.LangMaker.CreateCarbonCopy());
             Apps.Add(DefaultApps.Notepad.CreateCarbonCopy());
             Apps.Add(DefaultApps.Settings.CreateCarbonCopy());
             Apps.Add(DefaultApps.Store.CreateCarbonCopy());
-            Apps.Add(DefaultApps.ThemeMaker.CreateCarbonCopy());
             Apps.Add(DefaultApps.WebBrowser.CreateCarbonCopy());
         }
         /// <summary>
@@ -115,7 +111,7 @@ namespace Yorot
         public static YorotApp WebBrowser => new YorotApp()
         {
             AppName = "Yorot",
-            AppCodeName = "com.haltroy.Yorot",
+            AppCodeName = "com.haltroy.yorot",
             AppIcon = "Yorot.png",
             isLocal = true,
             HTUPDATE = null,
@@ -227,65 +223,13 @@ namespace Yorot
             isSystemApp = true,
         };
         /// <summary>
-        /// App that used to make themes.
-        /// </summary>
-        public static YorotApp ThemeMaker => new YorotApp()
-        {
-            AppName = "Theme Maker",
-            AppCodeName = "com.haltroy.mkth",
-            AppIcon = "mkth.png",
-            isLocal = true,
-            HTUPDATE = null,
-            isSystemApp = true,
-            StartFile = null,
-        };
-        /// <summary>
-        /// APp that used to make extensions.
-        /// </summary>
-        public static YorotApp ExtMaker => new YorotApp()
-        {
-            AppName = "Extension Maker",
-            AppCodeName = "com.haltroy.mkext",
-            AppIcon = "mkext.png",
-            isLocal = true,
-            HTUPDATE = null,
-            isSystemApp = true,
-            StartFile = null,
-        };
-        /// <summary>
-        /// App used to make app files.
-        /// </summary>
-        public static YorotApp AppMaker => new YorotApp()
-        {
-            AppName = "App Maker",
-            AppCodeName = "com.haltroy.mkapp",
-            AppIcon = "mkapp.png",
-            isLocal = true,
-            HTUPDATE = null,
-            isSystemApp = true,
-            StartFile = null,
-        };
-        /// <summary>
-        /// App used to make language files.
-        /// </summary>
-        public static YorotApp LangMaker => new YorotApp()
-        {
-            AppName = "Language Maker",
-            AppCodeName = "com.haltroy.mklng",
-            AppIcon = "mklng.png",
-            isLocal = true,
-            HTUPDATE = null,
-            isSystemApp = true,
-            StartFile = null,
-        };
-        /// <summary>
         /// Yorot Package Distrubiton system.
         /// </summary>
         public static YorotApp Yopad => new YorotApp()
         {
             AppName = "Yopad",
             AppCodeName = "com.haltroy.packdist",
-            AppIcon = "Yopad.png",
+            AppIcon = "yopad.png",
             isLocal = true,
             HTUPDATE = null,
             isSystemApp = true,
@@ -294,17 +238,16 @@ namespace Yorot
         /// <summary>
         /// App that handles Space Pass stuff.
         /// </summary>
-        public static YorotApp DumbBattlePassThing //Suggested by Pikehan, the drifto master
-=> new YorotApp()
-{
-    AppName = "Space Pass",
-    AppCodeName = "com.haltroy.spacepass",
-    AppIcon = "spacepass.png",
-    isLocal = true,
-    HTUPDATE = null,
-    isSystemApp = true,
-    StartFile = null,
-};
+        public static YorotApp DumbBattlePassThing  => new YorotApp() //Suggested by Pikehan, the drifto master
+        {
+            AppName = "Space Pass",
+            AppCodeName = "com.haltroy.spacepass",
+            AppIcon = "spacepass.png",
+            isLocal = true,
+            HTUPDATE = null,
+            isSystemApp = true,
+            StartFile = null,
+        };
     }
     /// <summary>
     /// A Yorot App.
@@ -359,15 +302,7 @@ namespace Yorot
                         return Properties.Resources.colman;
                     case "fileman.png":
                         return Properties.Resources.fileman;
-                    case "mkth.png":
-                        return Properties.Resources.yopad;
-                    case "mkext.png":
-                        return Properties.Resources.yopad;
-                    case "mkapp.png":
-                        return Properties.Resources.yopad;
-                    case "mklng.png":
-                        return Properties.Resources.yopad;
-                    case "Kopad.png":
+                    case "yopad.png":
                         return Properties.Resources.yopad;
                     case "spacepass.png":
                         return Properties.Resources.spacepass;

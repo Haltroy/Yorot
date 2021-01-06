@@ -132,17 +132,17 @@ namespace Yorot.UI
             this.components = new System.ComponentModel.Container();
             this.pApp = new System.Windows.Forms.Panel();
             this.pTitle = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btClose = new HTAlt.WinForms.HTButton();
             this.btMaximize = new HTAlt.WinForms.HTButton();
             this.btMinimize = new HTAlt.WinForms.HTButton();
             this.btPopOut = new HTAlt.WinForms.HTButton();
+            this.lbTitle = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pbIcon = new System.Windows.Forms.PictureBox();
             this.pTitle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // pApp
@@ -158,37 +158,13 @@ namespace Yorot.UI
             // pTitle
             // 
             this.pTitle.Controls.Add(this.flowLayoutPanel1);
-            this.pTitle.Controls.Add(this.label1);
-            this.pTitle.Controls.Add(this.pictureBox1);
+            this.pTitle.Controls.Add(this.lbTitle);
+            this.pTitle.Controls.Add(this.pbIcon);
             this.pTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.pTitle.Location = new System.Drawing.Point(0, 0);
             this.pTitle.Name = "pTitle";
             this.pTitle.Size = new System.Drawing.Size(400, 44);
             this.pTitle.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
-            this.label1.Location = new System.Drawing.Point(43, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "AppTitle";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Yorot.Properties.Resources.Yorot;
-            this.pictureBox1.Location = new System.Drawing.Point(9, 8);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 28);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
             // 
             // flowLayoutPanel1
             // 
@@ -283,6 +259,31 @@ namespace Yorot.UI
             this.btPopOut.Text = "□";
             this.btPopOut.Click += new System.EventHandler(this.htButton4_Click);
             // 
+            // lbTitle
+            // 
+            this.lbTitle.AutoSize = true;
+            this.lbTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            this.lbTitle.Location = new System.Drawing.Point(43, 13);
+            this.lbTitle.Name = "lbTitle";
+            this.lbTitle.Size = new System.Drawing.Size(70, 20);
+            this.lbTitle.TabIndex = 1;
+            this.lbTitle.Text = "AppTitle";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // pbIcon
+            // 
+            this.pbIcon.Image = global::Yorot.Properties.Resources.Yorot;
+            this.pbIcon.Location = new System.Drawing.Point(9, 8);
+            this.pbIcon.Name = "pbIcon";
+            this.pbIcon.Size = new System.Drawing.Size(28, 28);
+            this.pbIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbIcon.TabIndex = 0;
+            this.pbIcon.TabStop = false;
+            // 
             // frmApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -296,8 +297,8 @@ namespace Yorot.UI
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmApp_FormClosing);
             this.pTitle.ResumeLayout(false);
             this.pTitle.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -306,8 +307,8 @@ namespace Yorot.UI
 
         private System.Windows.Forms.Panel pApp;
         private System.Windows.Forms.Panel pTitle;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lbTitle;
+        private System.Windows.Forms.PictureBox pbIcon;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private HTAlt.WinForms.HTButton btClose;

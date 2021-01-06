@@ -26,9 +26,11 @@ namespace Yorot
             
         }
 
+
         private void RefreshAppList(bool clearCurrent = false)
         {
             if (clearCurrent) { lvApps.Items.Clear(); }
+            ListViewItem yorotApp = null;
             foreach (YorotApp kapp in YorotGlobal.Settings.AppMan.Apps)
             {
                 ilAppMan.Images.Add(YorotGlobal.GenerateAppIcon(kapp.GetAppIcon(), "#808080".HexToColor()));
@@ -39,9 +41,13 @@ namespace Yorot
                     ImageIndex = ilAppMan.Images.Count - 1,
                     Tag = kapp,
                 };
-                lvApps.Items.Add(item);
+                if (kapp.AppCodeName == "com.haltroy.yorot") { yorotApp = item; }
+                else
+                {
+                    lvApps.Items.Add(item);
+                }
             }
-
+            lvApps.Items.Insert(0, yorotApp);
         }
 
         #endregion Constructor
@@ -195,6 +201,7 @@ namespace Yorot
             }
             else
             {
+                allowSwitch = true;
                 tcAppMan.SelectedTab = tabPage1;
             }
         }
@@ -271,12 +278,33 @@ namespace Yorot
 
         public void loadMainTab()
         {
-
+            if(tcAppMan.InvokeRequired)
+            {
+                tcAppMan.Invoke(new Action(() => { allowSwitch = true; tcAppMan.SelectedTab = tabPage1; }));
+            }else
+            {
+                allowSwitch = true; 
+                tcAppMan.SelectedTab = tabPage1;
+            }
         }
 
         public void loadSpecificTab(TabPage tp)
         {
+            if (tcAppMan.InvokeRequired)
+            {
+                tcAppMan.Invoke(new Action(() => { allowSwitch = true; tcAppMan.SelectedTab = tp; }));
+            }
+            else
+            {
+                allowSwitch = true;
+                tcAppMan.SelectedTab = tp;
+            }
+        }
 
+        bool allowSwitch = false;
+        private void tcAppMan_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (allowSwitch) { allowSwitch = false; } else { e.Cancel = true; }
         }
 
         private void listView1_DoubleClick(object sender, EventArgs e)
@@ -286,21 +314,38 @@ namespace Yorot
                 ListViewItem appItem = lvApps.SelectedItems[0];
                 YorotApp app = appItem.Tag as YorotApp;
                 string appcn = appItem.ToolTipText;
-                if (app.AssocTab == null)
+                if (appcn == "com.haltroy.yorot") 
                 {
-                    UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(app) { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
-                    showApp(fapp);
-                }
+                    AnimateTo(AnimateDirection.Left);
+                } 
                 else
                 {
-                    TabControl tabc = app.AssocTab.Parent as TabControl;
-                    if (tabc.InvokeRequired)
+                    if (app.AssocTab == null)
                     {
-                        Invoke(new Action(() => tabc.SelectedTab = app.AssocTab));
+                        UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(app) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+                        app.AssocForm = fapp;
+                        showApp(fapp);
                     }
                     else
                     {
-                        tabc.SelectedTab = app.AssocTab;
+                        if (app.AssocForm.freeMode) 
+                        {
+                            app.AssocForm.Show();
+                            app.AssocForm.BringToFront();
+                        }
+                        else
+                        {
+                            TabControl tabc = app.AssocTab.Parent as TabControl;
+                            if (tabc.InvokeRequired)
+                            {
+                                Invoke(new Action(() => { allowSwitch = true; tabc.SelectedTab = app.AssocTab; }));
+                            }
+                            else
+                            {
+                                allowSwitch = true;
+                                tabc.SelectedTab = app.AssocTab;
+                            }
+                        }
                     }
                 }
             }
@@ -311,10 +356,11 @@ namespace Yorot
             app.assocApp.AssocTab = tp;
             tp.Controls.Add(app);
             tcAppMan.TabPages.Add(tp);
+            allowSwitch = true;
             tcAppMan.SelectedTab = tp;
             if (app.assocApp.AppCodeName != "com.haltroy.settings")
             {
-                PictureBox pbIcon = new PictureBox() { SizeMode = PictureBoxSizeMode.Zoom, Image = app.assocApp.GetAppIcon(), Size = new Size(32, 32), Margin = new Padding(5), Visible = true, Tag = tp };
+                PictureBox pbIcon = new PictureBox() { SizeMode = PictureBoxSizeMode.Zoom, Image = app.assocApp.GetAppIcon(), Size = new Size(32, 32), Margin = new Padding(5), Visible = true, Tag = app };
                 pbIcon.Click += pbIcon_Click;
                 app.assocApp.AssocPB = pbIcon;
                 flpFavApps.Controls.Add(pbIcon);
@@ -327,7 +373,17 @@ namespace Yorot
                 AnimateTo(AnimateDirection.Right);
             }
             PictureBox pbIcon = sender as PictureBox;
-            tcAppMan.SelectedTab = pbIcon.Tag as TabPage;
+            var fapp = pbIcon.Tag as UI.frmApp;
+            if (fapp.freeMode) 
+            {
+                fapp.Show();
+                fapp.BringToFront();
+            }
+            else
+            {
+                allowSwitch = true;
+                tcAppMan.SelectedTab = fapp.assocApp.AssocTab;
+            }
         }
 
         private void pbSettings_Click(object sender, EventArgs e)

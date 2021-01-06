@@ -288,10 +288,11 @@ namespace Yorot.UI.SystemApp
             // 
             // pbHamMenu
             // 
-            this.pbHamMenu.BackColor = System.Drawing.Color.Red;
+            this.pbHamMenu.Image = global::Yorot.Properties.Resources.hamburger;
             this.pbHamMenu.Location = new System.Drawing.Point(133, 12);
             this.pbHamMenu.Name = "pbHamMenu";
             this.pbHamMenu.Size = new System.Drawing.Size(25, 25);
+            this.pbHamMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbHamMenu.TabIndex = 1;
             this.pbHamMenu.TabStop = false;
             this.pbHamMenu.Click += new System.EventHandler(this.pbHamMenu_Click);
@@ -735,7 +736,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tbProgramlama.Location = new System.Drawing.Point(4, 22);
             this.tbProgramlama.Name = "tbProgramlama";
-            this.tbProgramlama.Size = new System.Drawing.Size(399, 343);
+            this.tbProgramlama.Size = new System.Drawing.Size(315, 343);
             this.tbProgramlama.TabIndex = 1;
             this.tbProgramlama.Text = "Programming";
             this.tbProgramlama.UseVisualStyleBackColor = true;
@@ -744,7 +745,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpBilimsel.Location = new System.Drawing.Point(4, 22);
             this.tpBilimsel.Name = "tpBilimsel";
-            this.tpBilimsel.Size = new System.Drawing.Size(399, 343);
+            this.tpBilimsel.Size = new System.Drawing.Size(315, 343);
             this.tpBilimsel.TabIndex = 2;
             this.tpBilimsel.Text = "Scientific";
             this.tpBilimsel.UseVisualStyleBackColor = true;
@@ -753,7 +754,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpVeri.Location = new System.Drawing.Point(4, 22);
             this.tpVeri.Name = "tpVeri";
-            this.tpVeri.Size = new System.Drawing.Size(399, 343);
+            this.tpVeri.Size = new System.Drawing.Size(315, 343);
             this.tpVeri.TabIndex = 3;
             this.tpVeri.Text = "Data";
             this.tpVeri.UseVisualStyleBackColor = true;
@@ -762,7 +763,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpBoyut.Location = new System.Drawing.Point(4, 22);
             this.tpBoyut.Name = "tpBoyut";
-            this.tpBoyut.Size = new System.Drawing.Size(399, 343);
+            this.tpBoyut.Size = new System.Drawing.Size(315, 343);
             this.tpBoyut.TabIndex = 4;
             this.tpBoyut.Text = "Size";
             this.tpBoyut.UseVisualStyleBackColor = true;
@@ -771,7 +772,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpUzunluk.Location = new System.Drawing.Point(4, 22);
             this.tpUzunluk.Name = "tpUzunluk";
-            this.tpUzunluk.Size = new System.Drawing.Size(399, 343);
+            this.tpUzunluk.Size = new System.Drawing.Size(315, 343);
             this.tpUzunluk.TabIndex = 5;
             this.tpUzunluk.Text = "Length";
             this.tpUzunluk.UseVisualStyleBackColor = true;
@@ -780,7 +781,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpKutle.Location = new System.Drawing.Point(4, 22);
             this.tpKutle.Name = "tpKutle";
-            this.tpKutle.Size = new System.Drawing.Size(399, 343);
+            this.tpKutle.Size = new System.Drawing.Size(315, 343);
             this.tpKutle.TabIndex = 6;
             this.tpKutle.Text = "Weight";
             this.tpKutle.UseVisualStyleBackColor = true;
@@ -789,7 +790,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpAgirlik.Location = new System.Drawing.Point(4, 22);
             this.tpAgirlik.Name = "tpAgirlik";
-            this.tpAgirlik.Size = new System.Drawing.Size(399, 343);
+            this.tpAgirlik.Size = new System.Drawing.Size(315, 343);
             this.tpAgirlik.TabIndex = 7;
             this.tpAgirlik.Text = "Mass";
             this.tpAgirlik.UseVisualStyleBackColor = true;
@@ -798,7 +799,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpYas.Location = new System.Drawing.Point(4, 22);
             this.tpYas.Name = "tpYas";
-            this.tpYas.Size = new System.Drawing.Size(399, 343);
+            this.tpYas.Size = new System.Drawing.Size(315, 343);
             this.tpYas.TabIndex = 8;
             this.tpYas.Text = "Age";
             this.tpYas.UseVisualStyleBackColor = true;
@@ -807,7 +808,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpTarih.Location = new System.Drawing.Point(4, 22);
             this.tpTarih.Name = "tpTarih";
-            this.tpTarih.Size = new System.Drawing.Size(399, 343);
+            this.tpTarih.Size = new System.Drawing.Size(315, 343);
             this.tpTarih.TabIndex = 9;
             this.tpTarih.Text = "Date";
             this.tpTarih.UseVisualStyleBackColor = true;
@@ -816,7 +817,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpZaman.Location = new System.Drawing.Point(4, 22);
             this.tpZaman.Name = "tpZaman";
-            this.tpZaman.Size = new System.Drawing.Size(399, 343);
+            this.tpZaman.Size = new System.Drawing.Size(315, 343);
             this.tpZaman.TabIndex = 10;
             this.tpZaman.Text = "Time";
             this.tpZaman.UseVisualStyleBackColor = true;
@@ -825,7 +826,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpSicaklik.Location = new System.Drawing.Point(4, 22);
             this.tpSicaklik.Name = "tpSicaklik";
-            this.tpSicaklik.Size = new System.Drawing.Size(399, 343);
+            this.tpSicaklik.Size = new System.Drawing.Size(315, 343);
             this.tpSicaklik.TabIndex = 11;
             this.tpSicaklik.Text = "Temperature";
             this.tpSicaklik.UseVisualStyleBackColor = true;
@@ -834,7 +835,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpHiz.Location = new System.Drawing.Point(4, 22);
             this.tpHiz.Name = "tpHiz";
-            this.tpHiz.Size = new System.Drawing.Size(399, 343);
+            this.tpHiz.Size = new System.Drawing.Size(315, 343);
             this.tpHiz.TabIndex = 12;
             this.tpHiz.Text = "Speed";
             this.tpHiz.UseVisualStyleBackColor = true;
@@ -843,7 +844,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpIndirim.Location = new System.Drawing.Point(4, 22);
             this.tpIndirim.Name = "tpIndirim";
-            this.tpIndirim.Size = new System.Drawing.Size(399, 343);
+            this.tpIndirim.Size = new System.Drawing.Size(315, 343);
             this.tpIndirim.TabIndex = 13;
             this.tpIndirim.Text = "Discount";
             this.tpIndirim.UseVisualStyleBackColor = true;
@@ -852,7 +853,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpParaBirimi.Location = new System.Drawing.Point(4, 22);
             this.tpParaBirimi.Name = "tpParaBirimi";
-            this.tpParaBirimi.Size = new System.Drawing.Size(399, 343);
+            this.tpParaBirimi.Size = new System.Drawing.Size(315, 343);
             this.tpParaBirimi.TabIndex = 14;
             this.tpParaBirimi.Text = "Currrency";
             this.tpParaBirimi.UseVisualStyleBackColor = true;
@@ -861,7 +862,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpKredi.Location = new System.Drawing.Point(4, 22);
             this.tpKredi.Name = "tpKredi";
-            this.tpKredi.Size = new System.Drawing.Size(399, 343);
+            this.tpKredi.Size = new System.Drawing.Size(315, 343);
             this.tpKredi.TabIndex = 15;
             this.tpKredi.Text = "Credit";
             this.tpKredi.UseVisualStyleBackColor = true;
@@ -870,7 +871,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpYatirim.Location = new System.Drawing.Point(4, 22);
             this.tpYatirim.Name = "tpYatirim";
-            this.tpYatirim.Size = new System.Drawing.Size(399, 343);
+            this.tpYatirim.Size = new System.Drawing.Size(315, 343);
             this.tpYatirim.TabIndex = 16;
             this.tpYatirim.Text = "Investing";
             this.tpYatirim.UseVisualStyleBackColor = true;
