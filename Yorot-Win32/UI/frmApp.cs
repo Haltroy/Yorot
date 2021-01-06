@@ -24,19 +24,58 @@ namespace Yorot.UI
             assocApp = app;
             if (app.isSystemApp)
             {
+                Form appc = null;
                 switch (app.AppCodeName)
                 {
                     case "com.haltroy.calc":
-                        SystemApp.calc calc = new SystemApp.calc() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
-                        appContainer = calc;
-                        pApp.Controls.Add(calc);
+                        appc = new SystemApp.calc() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appContainer = appc;
+                        pApp.Controls.Add(appc);
                         break;
-                    default:
-                        Label lbPlaceHolder = new Label() { Text = app.AppCodeName, AutoSize = true, Visible = true };
-                        Form gaster = new Form() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
-                        gaster.Controls.Add(lbPlaceHolder);
-                        appContainer = gaster;
-                        pApp.Controls.Add(gaster);
+                    case "com.haltroy.settings":
+                        appc = new SystemApp.settings() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appContainer = appc;
+                        pApp.Controls.Add(appc);
+                        break;
+                    case "com.haltroy.store":
+                        appc = new SystemApp.store() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appContainer = appc;
+                        pApp.Controls.Add(appc);
+                        break;
+                    case "com.haltroy.calendar":
+                        appc = new SystemApp.calendar() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appContainer = appc;
+                        pApp.Controls.Add(appc);
+                        break;
+                    case "com.haltroy.notepad":
+                        appc = new SystemApp.notepad() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appContainer = appc;
+                        pApp.Controls.Add(appc);
+                        break;
+                    case "com.haltroy.console":
+                        appc = new SystemApp.console() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appContainer = appc;
+                        pApp.Controls.Add(appc);
+                        break;
+                    case "com.haltroy.colman":
+                        appc = new SystemApp.collections() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appContainer = appc;
+                        pApp.Controls.Add(appc);
+                        break;
+                    case "com.haltroy.fileman":
+                        appc = new SystemApp.fileman() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appContainer = appc;
+                        pApp.Controls.Add(appc);
+                        break;
+                    case "com.haltroy.packdist":
+                        appc = new SystemApp.yopad() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appContainer = appc;
+                        pApp.Controls.Add(appc);
+                        break;
+                    case "com.haltroy.spacepass":
+                        appc = new SystemApp.spacepass() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appContainer = appc;
+                        pApp.Controls.Add(appc);
                         break;
                 }
             }
@@ -91,12 +130,14 @@ namespace Yorot.UI
                 assocApp.AssocPB = null;
             }
         }
+        System.Drawing.Size fmSize { get; set; } = new System.Drawing.Size(500, 450);
 
         private void htButton4_Click(object sender, EventArgs e)
         {
             if (!freeMode)
             {
                 Hide();
+                TopMost = false;
                 btPopOut.Text = "▌";
                 btMaximize.Visible = true;
                 assocForm.loadMainTab();
@@ -110,16 +151,17 @@ namespace Yorot.UI
                 FormBorderStyle = FormBorderStyle.Sizable;
                 pTitle.MouseDown += p_mdown;
                 pTitle.MouseDoubleClick += p_mdclick;
-                pbIcon.MouseDown += p_mdown;
-                pbIcon.MouseDoubleClick += p_mdclick;
                 lbTitle.MouseDown += p_mdown;
                 lbTitle.MouseDoubleClick += p_mdclick;
+                Size = fmSize;
                 Show();
                 freeMode = true;
             }
             else
             {
                 Hide();
+                fmSize = Size;
+                TopMost = false;
                 TopLevel = false;
                 btPopOut.Text = "□";
                 assocForm.loadSpecificTab(assocApp.AssocTab);
@@ -131,8 +173,6 @@ namespace Yorot.UI
                 FormBorderStyle = FormBorderStyle.None;
                 pTitle.MouseDown -= p_mdown;
                 pTitle.MouseDoubleClick -= p_mdclick;
-                pbIcon.MouseDown -= p_mdown;
-                pbIcon.MouseDoubleClick -= p_mdclick;
                 lbTitle.MouseDown -= p_mdown;
                 lbTitle.MouseDoubleClick -= p_mdclick;
                 Dock = DockStyle.Fill;
@@ -165,6 +205,15 @@ namespace Yorot.UI
                 Text = frm.Text;
                 lbTitle.Text = frm.Text;
                 Icon = frm.Icon;
+            }
+        }
+
+        private void pbIcon_Click(object sender, EventArgs e)
+        {
+            if (freeMode)
+            {
+                TopMost = !TopMost;
+                pbIcon.BorderStyle = TopMost ? BorderStyle.FixedSingle: BorderStyle.None;
             }
         }
     }

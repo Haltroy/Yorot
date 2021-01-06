@@ -55,8 +55,8 @@ namespace Yorot.UI.SystemApp
             this.htButton18 = new HTAlt.WinForms.HTButton();
             this.htButton17 = new HTAlt.WinForms.HTButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbCalc = new System.Windows.Forms.Label();
+            this.lbPrevCalc = new System.Windows.Forms.Label();
             this.htButton16 = new HTAlt.WinForms.HTButton();
             this.htButton15 = new HTAlt.WinForms.HTButton();
             this.htButton14 = new HTAlt.WinForms.HTButton();
@@ -339,8 +339,8 @@ namespace Yorot.UI.SystemApp
             // 
             this.tpTemel.Controls.Add(this.panel2);
             this.tpTemel.Controls.Add(this.flowLayoutPanel1);
-            this.tpTemel.Controls.Add(this.label2);
-            this.tpTemel.Controls.Add(this.label1);
+            this.tpTemel.Controls.Add(this.lbCalc);
+            this.tpTemel.Controls.Add(this.lbPrevCalc);
             this.tpTemel.Controls.Add(this.htButton16);
             this.tpTemel.Controls.Add(this.htButton15);
             this.tpTemel.Controls.Add(this.htButton14);
@@ -422,27 +422,27 @@ namespace Yorot.UI.SystemApp
             this.flowLayoutPanel1.Size = new System.Drawing.Size(90, 299);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
-            // label2
+            // lbCalc
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.label2.Location = new System.Drawing.Point(7, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 39);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "lbCalc";
+            this.lbCalc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbCalc.AutoSize = true;
+            this.lbCalc.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
+            this.lbCalc.Location = new System.Drawing.Point(7, 80);
+            this.lbCalc.Name = "lbCalc";
+            this.lbCalc.Size = new System.Drawing.Size(113, 39);
+            this.lbCalc.TabIndex = 1;
+            this.lbCalc.Text = "lbCalc";
             // 
-            // label1
+            // lbPrevCalc
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(11, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "lbPrevCalc";
+            this.lbPrevCalc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbPrevCalc.AutoSize = true;
+            this.lbPrevCalc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lbPrevCalc.Location = new System.Drawing.Point(11, 44);
+            this.lbPrevCalc.Name = "lbPrevCalc";
+            this.lbPrevCalc.Size = new System.Drawing.Size(75, 17);
+            this.lbPrevCalc.TabIndex = 1;
+            this.lbPrevCalc.Text = "lbPrevCalc";
             // 
             // htButton16
             // 
@@ -890,7 +890,7 @@ namespace Yorot.UI.SystemApp
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "calc";
-            this.Text = "calc";
+            this.Text = "Calculator";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHamMenu)).EndInit();
@@ -955,8 +955,8 @@ namespace Yorot.UI.SystemApp
         private HTAlt.WinForms.HTButton htButton5;
         private HTAlt.WinForms.HTButton htButton7;
         private HTAlt.WinForms.HTButton htButton4;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbCalc;
+        private System.Windows.Forms.Label lbPrevCalc;
         private HTAlt.WinForms.HTButton htButton16;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panel2;

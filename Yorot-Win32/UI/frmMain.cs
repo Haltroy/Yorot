@@ -395,7 +395,8 @@ namespace Yorot
             var settingApp = YorotGlobal.Settings.AppMan.FindByAppCN("com.haltroy.settings");
             if (settingApp.AssocTab == null)
             {
-                UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(settingApp) { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+                UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(settingApp) { assocForm = this,TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+                settingApp.AssocForm = fapp;
                 showApp(fapp);
             }
             else

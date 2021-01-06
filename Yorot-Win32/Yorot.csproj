@@ -95,6 +95,60 @@
     <Compile Include="UI\SystemApp\calc.Designer.cs">
       <DependentUpon>calc.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\SystemApp\calendar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SystemApp\calendar.Designer.cs">
+      <DependentUpon>calendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SystemApp\collections.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SystemApp\collections.Designer.cs">
+      <DependentUpon>collections.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SystemApp\console.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SystemApp\console.Designer.cs">
+      <DependentUpon>console.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SystemApp\fileman.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SystemApp\fileman.Designer.cs">
+      <DependentUpon>fileman.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SystemApp\notepad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SystemApp\notepad.Designer.cs">
+      <DependentUpon>notepad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SystemApp\settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SystemApp\settings.Designer.cs">
+      <DependentUpon>settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SystemApp\spacepass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SystemApp\spacepass.Designer.cs">
+      <DependentUpon>spacepass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SystemApp\store.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SystemApp\store.Designer.cs">
+      <DependentUpon>store.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SystemApp\yopad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SystemApp\yopad.Designer.cs">
+      <DependentUpon>yopad.cs</DependentUpon>
+    </Compile>
     <Compile Include="YorotSystem\YorotGlobal.cs" />
     <Compile Include="UI\YorotTabRenderer.cs" />
     <Compile Include="YorotSystem\Output.cs" />
