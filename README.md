@@ -12,7 +12,7 @@ Latest Available Version: `None`
 No images are available.
 
 ## Features:
-currently there are none sorry ;(
+ - Built in Apps. 
 
 ### Features that I'm aiming to add:
  - HTML5, CSS3, JS, HTML5 Video, WebGL 3D, etc. supported. (Except `H.264` and many non-free codecs. See [#12](https://github.com/Haltroy/Korot/issues/12))
@@ -21,6 +21,7 @@ currently there are none sorry ;(
  - Developer tools, View Source, Page screnshot, Print, Keyboard Shortcuts, Save page & Zoom in page
  - UI language, apps, theme and extension system (supports proxies).
  - Profiles
+ - Web apps & support for web engines. 
  - Notifications
  - Download manager
  - Custom pages (New Tab, Incognito, Error Page etc.)
