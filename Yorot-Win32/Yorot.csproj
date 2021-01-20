@@ -186,8 +186,32 @@
     <EmbeddedResource Include="UI\SystemApp\calc.resx">
       <DependentUpon>calc.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\SystemApp\calendar.resx">
+      <DependentUpon>calendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SystemApp\collections.resx">
+      <DependentUpon>collections.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\SystemApp\console.resx">
       <DependentUpon>console.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SystemApp\fileman.resx">
+      <DependentUpon>fileman.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SystemApp\notepad.resx">
+      <DependentUpon>notepad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SystemApp\settings.resx">
+      <DependentUpon>settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SystemApp\spacepass.resx">
+      <DependentUpon>spacepass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SystemApp\store.resx">
+      <DependentUpon>store.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SystemApp\yopad.resx">
+      <DependentUpon>yopad.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Languages\English-US.ylng" />
     <None Include="Languages\Turkish.ylng" />

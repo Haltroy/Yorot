@@ -265,13 +265,25 @@ namespace Yorot
         /// </summary>
         public bool isDuplicate {get;set;} = false;
         /// <summary>
+        /// A <see cref="List{T}"/> of identical duplicate <see cref="YorotApp"/>s.
+        /// </summary>
+        public List<YorotApp> Duplicates { get; set; } = new List<YorotApp>();
+        /// <summary>
         /// Determines if this application supports multiple sessions.
         /// </summary>
-        public bool multipleSession {get;set;} = false;
+        public bool MultipleSession {get;set;} = false;
         /// <summary>
         /// Determines if this <see cref="YorotApp"/> is a system app.
         /// </summary>
         public bool isSystemApp { get; set; }
+        /// <summary>
+        /// Figures out this <see cref="YorotApp"/> has open session(s).
+        /// </summary>
+        /// <returns><see cref="true"/> if this <see cref="YorotApp"/> has open session(s), otherwise <see cref="false"/>.</returns>
+        public bool hasSessions()
+        {
+            return AssocForm != null && Duplicates.FindAll(i => i.AssocForm != null).Count > 0;
+        }
         /// <summary>
         /// Codename of app.
         /// </summary>

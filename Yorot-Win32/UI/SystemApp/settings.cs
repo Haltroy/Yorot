@@ -15,6 +15,7 @@ namespace Yorot.UI.SystemApp
         public settings()
         {
             InitializeComponent();
+            Icon = YorotGlobal.IconFromImage(Properties.Resources.Settings);
         }
     }
 }

@@ -117,8 +117,20 @@ namespace Yorot.UI
             {
                 tcappman.TabPages.Remove(assocApp.AssocTab);
             }
-            assocApp.AssocTab = null;
-            assocApp.AssocForm = null;
+            // TODO: assocPB üstünde çalış
+            if (assocApp.Duplicates.Count > 0) 
+            {
+                var firstDup = assocApp.Duplicates[0];
+                assocApp.AssocTab = firstDup.AssocTab;
+                assocApp.AssocForm = firstDup.AssocForm;
+                firstDup.AssocForm.assocApp = assocApp;
+                assocApp.Duplicates.Remove(firstDup);
+            }
+            else
+            {
+                assocApp.AssocTab = null;
+                assocApp.AssocForm = null;
+            }
             if (assocApp.AppCodeName != "com.haltroy.settings")
             {
                 FlowLayoutPanel pappdrawer = assocApp.AssocPB.Parent as FlowLayoutPanel;

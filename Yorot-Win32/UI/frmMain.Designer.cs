@@ -50,12 +50,12 @@ namespace Yorot
             this.cmsApp = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openANewSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAllSessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsAppSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.pinToAppBarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.appSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsAppSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pAppDrawer.SuspendLayout();
             this.pAppGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).BeginInit();
@@ -107,7 +107,7 @@ namespace Yorot
             this.pbSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbSettings.TabIndex = 0;
             this.pbSettings.TabStop = false;
-            this.pbSettings.Click += new System.EventHandler(this.pbSettings_Click);
+            this.pbSettings.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbSettings_MouseClick);
             // 
             // pbYorot
             // 
@@ -119,7 +119,7 @@ namespace Yorot
             this.pbYorot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbYorot.TabIndex = 0;
             this.pbYorot.TabStop = false;
-            this.pbYorot.Click += new System.EventHandler(this.pbYorot_Click);
+            this.pbYorot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbYorot_MouseClick);
             // 
             // tcAppMan
             // 
@@ -229,10 +229,10 @@ namespace Yorot
             this.cmsApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openANewSessionToolStripMenuItem,
             this.closeAllSessionsToolStripMenuItem,
-            this.toolStripSeparator2,
+            this.tsAppSep1,
             this.pinToAppBarToolStripMenuItem,
             this.appSettingsToolStripMenuItem,
-            this.toolStripSeparator1,
+            this.tsAppSep2,
             this.reloadToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.cmsApp.Name = "cmsApp";
@@ -246,6 +246,7 @@ namespace Yorot
             this.openANewSessionToolStripMenuItem.Name = "openANewSessionToolStripMenuItem";
             this.openANewSessionToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.openANewSessionToolStripMenuItem.Text = "Open a new session";
+            this.openANewSessionToolStripMenuItem.Click += new System.EventHandler(this.openANewSessionToolStripMenuItem_Click);
             // 
             // closeAllSessionsToolStripMenuItem
             // 
@@ -253,17 +254,16 @@ namespace Yorot
             this.closeAllSessionsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.closeAllSessionsToolStripMenuItem.Text = "Close all sessions";
             // 
+            // tsAppSep1
+            // 
+            this.tsAppSep1.Name = "tsAppSep1";
+            this.tsAppSep1.Size = new System.Drawing.Size(152, 6);
+            // 
             // pinToAppBarToolStripMenuItem
             // 
             this.pinToAppBarToolStripMenuItem.Name = "pinToAppBarToolStripMenuItem";
             this.pinToAppBarToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.pinToAppBarToolStripMenuItem.Text = "Pin to app bar";
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // appSettingsToolStripMenuItem
             // 
@@ -271,21 +271,22 @@ namespace Yorot
             this.appSettingsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.appSettingsToolStripMenuItem.Text = "App Settings";
             // 
+            // tsAppSep2
+            // 
+            this.tsAppSep2.Name = "tsAppSep2";
+            this.tsAppSep2.Size = new System.Drawing.Size(152, 6);
+            // 
             // reloadToolStripMenuItem
             // 
             this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
             this.reloadToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.reloadToolStripMenuItem.Text = "Reload";
             // 
-            // toolStripSeparator1
+            // settingsToolStripMenuItem
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(152, 6);
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // frmMain
             // 
@@ -329,9 +330,9 @@ namespace Yorot
         private ToolStripMenuItem openANewSessionToolStripMenuItem;
         private ToolStripMenuItem pinToAppBarToolStripMenuItem;
         private ToolStripMenuItem closeAllSessionsToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripSeparator tsAppSep1;
         private ToolStripMenuItem appSettingsToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripSeparator tsAppSep2;
         private ToolStripMenuItem reloadToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
     }

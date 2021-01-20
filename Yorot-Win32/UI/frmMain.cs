@@ -196,22 +196,7 @@ namespace Yorot
         }
         private void pbYorot_Click(object sender, EventArgs e)
         {
-            if (tcAppMan.SelectedTab == tabPage1)
-            {
-                if (pAppDrawer.Width == panelMaxSize)
-                {
-                    AnimateTo(PrevDirection == AnimateDirection.Right ? AnimateDirection.Left : AnimateDirection.RightMost);
-                }
-                else
-                {
-                    AnimateTo(PrevDirection == AnimateDirection.Right ? AnimateDirection.Left : AnimateDirection.Right);
-                }
-            }
-            else
-            {
-                allowSwitch = true;
-                tcAppMan.SelectedTab = tabPage1;
-            }
+            
         }
 
         private void label1_MouseDown(object sender, MouseEventArgs e)
@@ -367,63 +352,45 @@ namespace Yorot
             if (app.assocApp.AppCodeName != "com.haltroy.settings")
             {
                 PictureBox pbIcon = new PictureBox() { SizeMode = PictureBoxSizeMode.Zoom, Image = app.assocApp.GetAppIcon(), Size = new Size(32, 32), Margin = new Padding(5), Visible = true, Tag = app };
-                pbIcon.Click += pbIcon_Click;
+                pbIcon.MouseClick += pbIcon_MouseClick;
                 app.assocApp.AssocPB = pbIcon;
                 flpFavApps.Controls.Add(pbIcon);
             }
         }
-        private void pbIcon_Click(object sender, EventArgs e)
+        private void pbIcon_MouseClick(object sender, MouseEventArgs e)
         {
-            if (pAppDrawer.Width < panelMaxSize)
-            {
-                AnimateTo(AnimateDirection.Right);
-            }
-            PictureBox pbIcon = sender as PictureBox;
-            var fapp = pbIcon.Tag as UI.frmApp;
-            if (fapp.freeMode) 
-            {
-                fapp.Show();
-                fapp.BringToFront();
-            }
-            else
-            {
-                allowSwitch = true;
-                tcAppMan.SelectedTab = fapp.assocApp.AssocTab;
-            }
-        }
-
-        public void pbSettings_Click(object sender, EventArgs e)
-        {
-            if (isCarbonCopy) 
-            {
-                YorotGlobal.Settings.MainForm.Invoke(new Action(() => { YorotGlobal.Settings.MainForm.pbSettings_Click(this, e); YorotGlobal.Settings.MainForm.BringToFront(); }));
-            }
-            else
+            if (e.Button == MouseButtons.Left)
             {
                 if (pAppDrawer.Width < panelMaxSize)
                 {
                     AnimateTo(AnimateDirection.Right);
                 }
-                var settingApp = YorotGlobal.Settings.AppMan.FindByAppCN("com.haltroy.settings");
-                if (settingApp.AssocTab == null)
+                PictureBox pbIcon = sender as PictureBox;
+                var fapp = pbIcon.Tag as UI.frmApp;
+                if (fapp.freeMode)
                 {
-                    UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(settingApp) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
-                    settingApp.AssocForm = fapp;
-                    showApp(fapp);
+                    fapp.Show();
+                    fapp.BringToFront();
                 }
                 else
                 {
-                    TabControl tabc = settingApp.AssocTab.Parent as TabControl;
-                    if (tabc.InvokeRequired)
-                    {
-                        Invoke(new Action(() => tabc.SelectedTab = settingApp.AssocTab));
-                    }
-                    else
-                    {
-                        tabc.SelectedTab = settingApp.AssocTab;
-                    }
+                    allowSwitch = true;
+                    tcAppMan.SelectedTab = fapp.assocApp.AssocTab;
                 }
+            }else if (e.Button == MouseButtons.Right)
+            {
+                PictureBox pbIcon = sender as PictureBox;
+                var fapp = pbIcon.Tag as UI.frmApp;
+                var app = fapp.assocApp;
+                rcSender = app;
+                rcType = 2;
+                cmsApp.Show(MousePosition);
             }
+        }
+
+        public void pbSettings_Click(object sender, EventArgs e)
+        {
+           
         }
         /// <summary>
         /// -1= None 0= lvApps 1= lvApps App 2= App 3= Yorot 4= Settings
@@ -447,15 +414,15 @@ namespace Yorot
         {
             if (e.Button == MouseButtons.Right)
             {
-                if (lvApps.SelectedItems.Count == 0) // App right-click
-                {
-                    rcType = 0;
-                    rcSender = lvApps;
-                }
-                else // Normnal right-click
+                if (lvApps.SelectedItems.Count != 0) // App right-click
                 {
                     rcType = 1;
                     rcSender = lvApps.SelectedItems[0];
+                }
+                else // Normnal right-click
+                {
+                    rcType = 0;
+                    rcSender = lvApps;
                 }
                 cmsApp.Show(MousePosition);
             }
@@ -463,7 +430,236 @@ namespace Yorot
 
         private void cmsApp_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            switch(rcType)
+            {
+                case -1:
+                    e.Cancel = true;
+                    break;
+                case 0:
+                    openANewSessionToolStripMenuItem.Visible = false;
+                    closeAllSessionsToolStripMenuItem.Visible = false;
+                    tsAppSep1.Visible = false;
+                    pinToAppBarToolStripMenuItem.Visible = false;
+                    appSettingsToolStripMenuItem.Visible = false;
+                    tsAppSep2.Visible = false;
+                    reloadToolStripMenuItem.Visible = true;
+                    settingsToolStripMenuItem.Visible = true;
+                    openANewSessionToolStripMenuItem.Enabled = false;
+                    closeAllSessionsToolStripMenuItem.Enabled = false;
+                    tsAppSep1.Enabled = false;
+                    pinToAppBarToolStripMenuItem.Enabled = false;
+                    appSettingsToolStripMenuItem.Enabled = false;
+                    tsAppSep2.Enabled = false;
+                    reloadToolStripMenuItem.Enabled = true;
+                    settingsToolStripMenuItem.Enabled = true;
+                    break;
+                case 1:
+                    openANewSessionToolStripMenuItem.Visible = true;
+                    tsAppSep1.Visible = true;
+                    reloadToolStripMenuItem.Visible = true;
+                    settingsToolStripMenuItem.Visible = true;
+                    openANewSessionToolStripMenuItem.Enabled = true;
+                    tsAppSep1.Enabled = true;
+                    reloadToolStripMenuItem.Enabled = true;
+                    settingsToolStripMenuItem.Enabled = true;
+                    if (rcSender is ListViewItem)
+                    {
+                        var cntrl = rcSender as ListViewItem;
+                        var app = cntrl.Tag as YorotApp;
+                        if (app.AppCodeName == DefaultApps.WebBrowser.AppCodeName)
+                        {
+                            closeAllSessionsToolStripMenuItem.Enabled = true;
+                            closeAllSessionsToolStripMenuItem.Visible = true;
+                            appSettingsToolStripMenuItem.Visible = false;
+                            pinToAppBarToolStripMenuItem.Visible = false;
+                            tsAppSep2.Visible = false;
+                            appSettingsToolStripMenuItem.Enabled = false;
+                            pinToAppBarToolStripMenuItem.Enabled = false;
+                            tsAppSep2.Enabled = false;
+                        }
+                        else
+                        {
+                            var hasSession = app.hasSessions();
+                            closeAllSessionsToolStripMenuItem.Enabled = hasSession;
+                            closeAllSessionsToolStripMenuItem.Visible = hasSession;
+                            appSettingsToolStripMenuItem.Visible = true;
+                            tsAppSep2.Visible = true;
+                            if (app.AppCodeName == DefaultApps.Settings.AppCodeName)
+                            {
+                                pinToAppBarToolStripMenuItem.Visible = false;
+                                pinToAppBarToolStripMenuItem.Enabled = false;
+                            }
+                            else
+                            {
+                                pinToAppBarToolStripMenuItem.Visible = true;
+                                pinToAppBarToolStripMenuItem.Enabled = true;
+                            }
+                            appSettingsToolStripMenuItem.Visible = true;
+                            tsAppSep2.Visible = true;
+                            appSettingsToolStripMenuItem.Enabled = true;
+                            tsAppSep2.Enabled = true;
+                        }
+                    }else
+                    {
+                        closeAllSessionsToolStripMenuItem.Enabled = false;
+                        closeAllSessionsToolStripMenuItem.Visible = false;
+                        pinToAppBarToolStripMenuItem.Visible = true;
+                        appSettingsToolStripMenuItem.Visible = true;
+                        tsAppSep2.Visible = true;
+                        pinToAppBarToolStripMenuItem.Enabled = true;
+                        appSettingsToolStripMenuItem.Enabled = true;
+                        tsAppSep2.Enabled = true;
+                    }
+                    break;
+                case 2:
+                    openANewSessionToolStripMenuItem.Visible = true;
+                    if (rcSender is YorotApp)
+                    {
+                        var app = rcSender as YorotApp;
+                        var hasSession = app.hasSessions();
+                        closeAllSessionsToolStripMenuItem.Visible = hasSession;
+                        closeAllSessionsToolStripMenuItem.Enabled = hasSession;
+                    }
+                    else
+                    {
+                        closeAllSessionsToolStripMenuItem.Enabled = false;
+                        closeAllSessionsToolStripMenuItem.Visible = false;
+                    }
+                    tsAppSep1.Visible = true;
+                    pinToAppBarToolStripMenuItem.Visible = true;
+                    appSettingsToolStripMenuItem.Visible = true;
+                    tsAppSep2.Visible = true;
+                    reloadToolStripMenuItem.Visible = true;
+                    settingsToolStripMenuItem.Visible = true;
+                    openANewSessionToolStripMenuItem.Enabled = true;
+                    tsAppSep1.Enabled = true;
+                    pinToAppBarToolStripMenuItem.Enabled = true;
+                    appSettingsToolStripMenuItem.Enabled = true;
+                    tsAppSep2.Enabled = true;
+                    reloadToolStripMenuItem.Enabled = true;
+                    settingsToolStripMenuItem.Enabled = true;
+                    break;
+                case 3:
+                    openANewSessionToolStripMenuItem.Visible = true;
+                    closeAllSessionsToolStripMenuItem.Visible = true;
+                    closeAllSessionsToolStripMenuItem.Enabled = true;
+                    tsAppSep1.Visible = true;
+                    pinToAppBarToolStripMenuItem.Visible = false;
+                    appSettingsToolStripMenuItem.Visible = false;
+                    tsAppSep2.Visible = false;
+                    reloadToolStripMenuItem.Visible = false;
+                    settingsToolStripMenuItem.Visible = true;
+                    openANewSessionToolStripMenuItem.Enabled = true;
+                    tsAppSep1.Enabled = true;
+                    pinToAppBarToolStripMenuItem.Enabled = false;
+                    appSettingsToolStripMenuItem.Enabled = false;
+                    tsAppSep2.Enabled = false;
+                    reloadToolStripMenuItem.Enabled = false;
+                    settingsToolStripMenuItem.Enabled = true;
+                    break;
+                case 4:
+                    openANewSessionToolStripMenuItem.Visible = true;
+                    closeAllSessionsToolStripMenuItem.Visible = YorotGlobal.Settings.AppMan.FindByAppCN(DefaultApps.Settings.AppCodeName).hasSessions();
+                    closeAllSessionsToolStripMenuItem.Enabled = closeAllSessionsToolStripMenuItem.Visible;
+                    tsAppSep1.Visible = true;
+                    pinToAppBarToolStripMenuItem.Visible = false;
+                    appSettingsToolStripMenuItem.Visible = true;
+                    tsAppSep2.Visible = true;
+                    reloadToolStripMenuItem.Visible = false;
+                    settingsToolStripMenuItem.Visible = true;
+                    openANewSessionToolStripMenuItem.Enabled = true;
+                    tsAppSep1.Enabled = true;
+                    pinToAppBarToolStripMenuItem.Enabled = false;
+                    appSettingsToolStripMenuItem.Enabled = true;
+                    tsAppSep2.Enabled = true;
+                    reloadToolStripMenuItem.Enabled = false;
+                    settingsToolStripMenuItem.Enabled = true;
+                    break;
+            }
+        }
 
+        private void pbSettings_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (isCarbonCopy)
+                {
+                    YorotGlobal.Settings.MainForm.Invoke(new Action(() => { YorotGlobal.Settings.MainForm.pbSettings_Click(this, e); YorotGlobal.Settings.MainForm.BringToFront(); }));
+                }
+                else
+                {
+                    if (pAppDrawer.Width < panelMaxSize)
+                    {
+                        AnimateTo(AnimateDirection.Right);
+                    }
+                    var settingApp = YorotGlobal.Settings.AppMan.FindByAppCN("com.haltroy.settings");
+                    if (settingApp.AssocTab == null)
+                    {
+                        UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(settingApp) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+                        settingApp.AssocForm = fapp;
+                        showApp(fapp);
+                    }
+                    else
+                    {
+                        TabControl tabc = settingApp.AssocTab.Parent as TabControl;
+                        if (tabc.InvokeRequired)
+                        {
+                            Invoke(new Action(() => tabc.SelectedTab = settingApp.AssocTab));
+                        }
+                        else
+                        {
+                            tabc.SelectedTab = settingApp.AssocTab;
+                        }
+                    }
+                }
+            }else if (e.Button == MouseButtons.Right)
+            {
+                rcType = 4;
+                rcSender = null;
+                cmsApp.Show(MousePosition);
+            }
+        }
+
+        private void pbYorot_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (tcAppMan.SelectedTab == tabPage1)
+                {
+                    if (pAppDrawer.Width == panelMaxSize)
+                    {
+                        AnimateTo(PrevDirection == AnimateDirection.Right ? AnimateDirection.Left : AnimateDirection.RightMost);
+                    }
+                    else
+                    {
+                        AnimateTo(PrevDirection == AnimateDirection.Right ? AnimateDirection.Left : AnimateDirection.Right);
+                    }
+                }
+                else
+                {
+                    allowSwitch = true;
+                    tcAppMan.SelectedTab = tabPage1;
+                }
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                rcType = 3;
+                rcSender = null;
+                cmsApp.Show(MousePosition);
+            }
+        }
+
+        private void openANewSessionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (rcType == 3)
+            {
+                frmMain main = new frmMain();
+                main.Show();
+            }
+            else
+            {
+                var app = rcType == 1 ? (rcSender as ListViewItem).Tag as YorotApp : rcSender as YorotApp;
+            }
         }
     }
 }
