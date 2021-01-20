@@ -46,59 +46,6 @@ namespace Yorot
         {
             return Apps.FindAll(i => string.Equals(i.AppCodeName, appcn));
         }
-        public void SuspendLayouts()
-        {
-            for(int i = 0; i < Apps.Count;i++)
-            {
-                var app = Apps[i];
-                if (app.AssocForm != null)
-                {
-                    if (app.isLayoutSuspended)
-                    {
-                        Console.WriteLine(" [APPS] Cannot suspend app \"" + app.AppCodeName + "\" (" + app.AssocForm.Text + "). Layout already suspended. Skipped.");
-                    }
-                    else
-                    {
-                        if (app.AssocForm.InvokeRequired)
-                        {
-                            app.AssocForm.Invoke(new Action(() => app.AssocForm.SuspendLayout()));
-                        }
-                        else
-                        {
-                            app.AssocForm.SuspendLayout();
-                        }
-                        app.isLayoutSuspended = true;
-                        Console.WriteLine(" [APPS] Suspended layout for app \"" + app.AppCodeName + "\" (" + app.AssocForm.Text + ")");
-                    }
-                }
-            }
-        }
-        public void ResumeLayouts(bool perform = true)
-        {
-            for (int i = 0; i < Apps.Count; i++)
-            {
-                var app = Apps[i];
-                if (app.AssocForm != null)
-                {
-                    if (app.isLayoutSuspended)
-                    {
-                        if (app.AssocForm.InvokeRequired)
-                        {
-                            app.AssocForm.Invoke(new Action(() => app.AssocForm.ResumeLayout(perform)));
-                        }
-                        else
-                        {
-                            app.AssocForm.ResumeLayout(perform);
-                        }
-                        app.isLayoutSuspended = false;
-                        Console.WriteLine(" [APPS] Resumed layout for app \"" + app.AppCodeName + "\" (" + app.AssocForm.Text + ")");
-                    }else
-                    {
-                        Console.WriteLine(" [APPS] Cannot resume app \"" + app.AppCodeName + "\" (" + app.AssocForm.Text + "). Layout already resumed. Skipped.");
-                    }
-                }
-            }
-        }
     }
     /// <summary>
     /// This class contains default <see cref="YorotApp"/>s.
@@ -112,7 +59,7 @@ namespace Yorot
         {
             AppName = "Yorot",
             AppCodeName = "com.haltroy.yorot",
-            AppIcon = "Yorot.png",
+            AppIcon = "yorot.png",
             isLocal = true,
             HTUPDATE = null,
             isSystemApp = true,
@@ -281,10 +228,10 @@ namespace Yorot
         {
             if (isSystemApp)
             {
-                switch (AppIcon.ToLowerInvariant())
+                switch (AppIcon)
                 {
                     default:
-                    case "Yorot.png":
+                    case "yorot.png":
                         return Properties.Resources.Yorot;
                     case "settings.png":
                         return Properties.Resources.Settings;
@@ -313,6 +260,14 @@ namespace Yorot
                 return HTAlt.Tools.ReadFile(YorotGlobal.UserApps + AppCodeName + "\\" + AppIcon, System.Drawing.Imaging.ImageFormat.Png);
             }
         }
+        /// <summary>
+        /// Determines if this application is duplicated to create another session.
+        /// </summary>
+        public bool isDuplicate {get;set;} = false;
+        /// <summary>
+        /// Determines if this application supports multiple sessions.
+        /// </summary>
+        public bool multipleSession {get;set;} = false;
         /// <summary>
         /// Determines if this <see cref="YorotApp"/> is a system app.
         /// </summary>

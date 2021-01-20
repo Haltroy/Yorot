@@ -102,7 +102,10 @@ namespace Yorot.UI
         private void frmApp_FormClosing(object sender, FormClosingEventArgs e)
         {
             TabControl tcappman = assocApp.AssocTab.Parent as TabControl;
-            assocForm.loadMainTab();
+            if (tcappman.SelectedTab == assocApp.AssocTab)
+            {
+                assocForm.loadMainTab();
+            }
             if (tcappman.InvokeRequired)
             {
                 tcappman.Invoke(new Action(() =>
@@ -130,7 +133,7 @@ namespace Yorot.UI
                 assocApp.AssocPB = null;
             }
         }
-        System.Drawing.Size fmSize { get; set; } = new System.Drawing.Size(500, 450);
+        System.Drawing.Size fmSize { get; set; } = new System.Drawing.Size(600, 500);
 
         private void htButton4_Click(object sender, EventArgs e)
         {

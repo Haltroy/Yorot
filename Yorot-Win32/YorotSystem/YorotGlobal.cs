@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Yorot
@@ -12,7 +13,7 @@ namespace Yorot
         /// <summary>
         /// Application location.
         /// </summary>
-        public static string YorotAppPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Yorot\\";
+        public static string YorotAppPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.yorot\\";
         /// <summary>
         /// Application Settings.
         /// </summary>
@@ -150,6 +151,57 @@ namespace Yorot
 
             // And load it
             return new Icon(ms);
+        }
+        /// <summary>
+        /// Trims all non-numeric chars (except ",","." and "-")
+        /// </summary>
+        /// <param name="input">String</param>
+        /// <returns></returns>
+        public static string TrimToNumbers(this string input)
+        {
+            return new string(input.Where(c => (char.IsDigit(c) || c == ',' || c == '.' || c == '-')).ToArray());
+        }
+        /// <summary>
+        /// Prettifies XML code.
+        /// Thanks to S M Kamran & Bakudan from StackOverflow
+        /// https://stackoverflow.com/a/1123731
+        /// </summary>
+        /// <param name="xml">XML code</param>
+        /// <returns>Prettified <paramref name="xml"/></returns>
+        public static string PrintXML(string xml)
+        {
+            string result = "";
+
+            System.IO.MemoryStream mStream = new System.IO.MemoryStream();
+            System.Xml.XmlTextWriter writer = new System.Xml.XmlTextWriter(mStream, System.Text.Encoding.Unicode);
+            System.Xml.XmlDocument document = new System.Xml.XmlDocument();
+
+            // Load the XmlDocument with the XML.
+            document.LoadXml(xml);
+
+            writer.Formatting = System.Xml.Formatting.Indented;
+
+            // Write the XML into a formatting XmlTextWriter
+            document.WriteContentTo(writer);
+            writer.Flush();
+            mStream.Flush();
+
+            // Have to rewind the MemoryStream in order to read
+            // its contents.
+            mStream.Position = 0;
+
+            // Read MemoryStream contents into a StreamReader.
+            System.IO.StreamReader sReader = new System.IO.StreamReader(mStream);
+
+            // Extract the text from the StreamReader.
+            string formattedXml = sReader.ReadToEnd();
+
+            result = formattedXml;
+
+            mStream.Close();
+            writer.Close();
+
+            return result;
         }
     }
 }

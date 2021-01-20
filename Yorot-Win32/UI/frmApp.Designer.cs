@@ -138,8 +138,8 @@ namespace Yorot.UI
             this.btMinimize = new HTAlt.WinForms.HTButton();
             this.btPopOut = new HTAlt.WinForms.HTButton();
             this.lbTitle = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pbIcon = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pTitle.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
@@ -152,7 +152,7 @@ namespace Yorot.UI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pApp.Location = new System.Drawing.Point(1, 44);
             this.pApp.Name = "pApp";
-            this.pApp.Size = new System.Drawing.Size(400, 304);
+            this.pApp.Size = new System.Drawing.Size(300, 454);
             this.pApp.TabIndex = 0;
             // 
             // pTitle
@@ -163,7 +163,7 @@ namespace Yorot.UI
             this.pTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.pTitle.Location = new System.Drawing.Point(0, 0);
             this.pTitle.Name = "pTitle";
-            this.pTitle.Size = new System.Drawing.Size(400, 44);
+            this.pTitle.Size = new System.Drawing.Size(300, 44);
             this.pTitle.TabIndex = 1;
             // 
             // flowLayoutPanel1
@@ -174,7 +174,7 @@ namespace Yorot.UI
             this.flowLayoutPanel1.Controls.Add(this.btPopOut);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(291, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(191, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(109, 44);
             this.flowLayoutPanel1.TabIndex = 2;
@@ -269,11 +269,6 @@ namespace Yorot.UI
             this.lbTitle.TabIndex = 1;
             this.lbTitle.Text = "AppTitle";
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // pbIcon
             // 
             this.pbIcon.Image = global::Yorot.Properties.Resources.Yorot;
@@ -285,14 +280,20 @@ namespace Yorot.UI
             this.pbIcon.TabStop = false;
             this.pbIcon.Click += new System.EventHandler(this.pbIcon_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // frmApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 350);
+            this.ClientSize = new System.Drawing.Size(300, 500);
             this.Controls.Add(this.pApp);
             this.Controls.Add(this.pTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MinimumSize = new System.Drawing.Size(250, 500);
             this.Name = "frmApp";
             this.Text = "frmApp";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmApp_FormClosing);

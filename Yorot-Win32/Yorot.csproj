@@ -186,6 +186,11 @@
     <EmbeddedResource Include="UI\SystemApp\calc.resx">
       <DependentUpon>calc.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\SystemApp\console.resx">
+      <DependentUpon>console.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Languages\English-US.ylng" />
+    <None Include="Languages\Turkish.ylng" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +234,8 @@
   <ItemGroup>
     <None Include="Resources\hamburger.png" />
     <None Include="Resources\hamburger-w.png" />
+    <None Include="Resources\trash.png" />
+    <None Include="Resources\trash-w.png" />
     <Content Include="Yorot.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,7 +10,10 @@ namespace Yorot
 
         #region Constructor
 
-        public frmMain()
+        bool isCarbonCopy = true;
+
+        public frmMain() : this(false) { }
+        public frmMain(bool isMainSession)
         {
             if (YorotGlobal.Settings == null)
             {
@@ -18,7 +21,14 @@ namespace Yorot
             }
             InitializeComponent();
             pAppDrawer.Width = panelMinSize;
-            RefreshAppList(true);
+            isCarbonCopy = !isMainSession;
+            if (!isCarbonCopy) { RefreshAppList(true); YorotGlobal.Settings.MainForm = this; }  else
+            {
+                label2.Visible = true;
+                label2.Enabled = true;
+                htButton1.Visible = true;
+                htButton1.Enabled = true;
+            }
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -86,7 +96,6 @@ namespace Yorot
         private void AnimateTo(AnimateDirection animate)
         {
             if (animate == AnimateDirection.Nothing) { return; }
-            YorotGlobal.Settings.AppMan.SuspendLayouts();
             AnimationContinue = true;
             Direction = animate;
             timer1.Start();
@@ -158,7 +167,6 @@ namespace Yorot
                     }
                     break;
                 case false:
-                    YorotGlobal.Settings.AppMan.ResumeLayouts();
                     switch (Direction)
                     {
                         case AnimateDirection.Nothing:
@@ -212,7 +220,6 @@ namespace Yorot
             {
                 pAppDrawer.Dock = DockStyle.Left;
             }
-            YorotGlobal.Settings.AppMan.SuspendLayouts();
             if (e.Clicks > 2)
             {
                 switch (PrevDirection)
@@ -258,7 +265,6 @@ namespace Yorot
                 }
             }
             allowResize = false;
-            YorotGlobal.Settings.AppMan.ResumeLayouts();
         }
 
         private void label1_MouseMove(object sender, MouseEventArgs e)
@@ -386,31 +392,78 @@ namespace Yorot
             }
         }
 
-        private void pbSettings_Click(object sender, EventArgs e)
+        public void pbSettings_Click(object sender, EventArgs e)
         {
-            if (pAppDrawer.Width < panelMaxSize)
+            if (isCarbonCopy) 
             {
-                AnimateTo(AnimateDirection.Right);
-            }
-            var settingApp = YorotGlobal.Settings.AppMan.FindByAppCN("com.haltroy.settings");
-            if (settingApp.AssocTab == null)
-            {
-                UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(settingApp) { assocForm = this,TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
-                settingApp.AssocForm = fapp;
-                showApp(fapp);
+                YorotGlobal.Settings.MainForm.Invoke(new Action(() => { YorotGlobal.Settings.MainForm.pbSettings_Click(this, e); YorotGlobal.Settings.MainForm.BringToFront(); }));
             }
             else
             {
-                TabControl tabc = settingApp.AssocTab.Parent as TabControl;
-                if (tabc.InvokeRequired)
+                if (pAppDrawer.Width < panelMaxSize)
                 {
-                    Invoke(new Action(() => tabc.SelectedTab = settingApp.AssocTab));
+                    AnimateTo(AnimateDirection.Right);
+                }
+                var settingApp = YorotGlobal.Settings.AppMan.FindByAppCN("com.haltroy.settings");
+                if (settingApp.AssocTab == null)
+                {
+                    UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(settingApp) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+                    settingApp.AssocForm = fapp;
+                    showApp(fapp);
                 }
                 else
                 {
-                    tabc.SelectedTab = settingApp.AssocTab;
+                    TabControl tabc = settingApp.AssocTab.Parent as TabControl;
+                    if (tabc.InvokeRequired)
+                    {
+                        Invoke(new Action(() => tabc.SelectedTab = settingApp.AssocTab));
+                    }
+                    else
+                    {
+                        tabc.SelectedTab = settingApp.AssocTab;
+                    }
                 }
             }
+        }
+        /// <summary>
+        /// -1= None 0= lvApps 1= lvApps App 2= App 3= Yorot 4= Settings
+        /// </summary>
+        int rcType = -1;
+        /// <summary>
+        /// Sender of RC request
+        /// </summary>
+        object rcSender;
+
+        private void htButton1_Click(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            label2.Enabled = false;
+            htButton1.Visible = false;
+            htButton1.Enabled = false;
+            RefreshAppList(true);
+        }
+
+        private void lvApps_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (lvApps.SelectedItems.Count == 0) // App right-click
+                {
+                    rcType = 0;
+                    rcSender = lvApps;
+                }
+                else // Normnal right-click
+                {
+                    rcType = 1;
+                    rcSender = lvApps.SelectedItems[0];
+                }
+                cmsApp.Show(MousePosition);
+            }
+        }
+
+        private void cmsApp_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
         }
     }
 }
