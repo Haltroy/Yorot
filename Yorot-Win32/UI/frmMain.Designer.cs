@@ -37,8 +37,6 @@ namespace Yorot
             this.pAppDrawer = new System.Windows.Forms.Panel();
             this.pAppGrid = new System.Windows.Forms.Panel();
             this.flpFavApps = new System.Windows.Forms.FlowLayoutPanel();
-            this.pbSettings = new System.Windows.Forms.PictureBox();
-            this.pbYorot = new System.Windows.Forms.PictureBox();
             this.tcAppMan = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.htButton1 = new HTAlt.WinForms.HTButton();
@@ -56,13 +54,15 @@ namespace Yorot
             this.tsAppSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pbSettings = new System.Windows.Forms.PictureBox();
+            this.pbYorot = new System.Windows.Forms.PictureBox();
             this.pAppDrawer.SuspendLayout();
             this.pAppGrid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbYorot)).BeginInit();
             this.tcAppMan.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.cmsApp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbYorot)).BeginInit();
             this.SuspendLayout();
             // 
             // pAppDrawer
@@ -96,30 +96,6 @@ namespace Yorot
             this.flpFavApps.Name = "flpFavApps";
             this.flpFavApps.Size = new System.Drawing.Size(40, 487);
             this.flpFavApps.TabIndex = 1;
-            // 
-            // pbSettings
-            // 
-            this.pbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbSettings.Image = global::Yorot.Properties.Resources.Settings;
-            this.pbSettings.Location = new System.Drawing.Point(8, 543);
-            this.pbSettings.Name = "pbSettings";
-            this.pbSettings.Size = new System.Drawing.Size(40, 40);
-            this.pbSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbSettings.TabIndex = 0;
-            this.pbSettings.TabStop = false;
-            this.pbSettings.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbSettings_MouseClick);
-            // 
-            // pbYorot
-            // 
-            this.pbYorot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbYorot.Image = global::Yorot.Properties.Resources.Yorot;
-            this.pbYorot.Location = new System.Drawing.Point(8, 3);
-            this.pbYorot.Name = "pbYorot";
-            this.pbYorot.Size = new System.Drawing.Size(40, 40);
-            this.pbYorot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbYorot.TabIndex = 0;
-            this.pbYorot.TabStop = false;
-            this.pbYorot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbYorot_MouseClick);
             // 
             // tcAppMan
             // 
@@ -238,55 +214,84 @@ namespace Yorot
             this.cmsApp.Name = "cmsApp";
             this.cmsApp.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.cmsApp.ShowImageMargin = false;
-            this.cmsApp.Size = new System.Drawing.Size(156, 170);
+            this.cmsApp.Size = new System.Drawing.Size(154, 148);
             this.cmsApp.Opening += new System.ComponentModel.CancelEventHandler(this.cmsApp_Opening);
             // 
             // openANewSessionToolStripMenuItem
             // 
             this.openANewSessionToolStripMenuItem.Name = "openANewSessionToolStripMenuItem";
-            this.openANewSessionToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.openANewSessionToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.openANewSessionToolStripMenuItem.Text = "Open a new session";
             this.openANewSessionToolStripMenuItem.Click += new System.EventHandler(this.openANewSessionToolStripMenuItem_Click);
             // 
             // closeAllSessionsToolStripMenuItem
             // 
             this.closeAllSessionsToolStripMenuItem.Name = "closeAllSessionsToolStripMenuItem";
-            this.closeAllSessionsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.closeAllSessionsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.closeAllSessionsToolStripMenuItem.Text = "Close all sessions";
+            this.closeAllSessionsToolStripMenuItem.Click += new System.EventHandler(this.closeAllSessionsToolStripMenuItem_Click);
             // 
             // tsAppSep1
             // 
             this.tsAppSep1.Name = "tsAppSep1";
-            this.tsAppSep1.Size = new System.Drawing.Size(152, 6);
+            this.tsAppSep1.Size = new System.Drawing.Size(150, 6);
             // 
             // pinToAppBarToolStripMenuItem
             // 
             this.pinToAppBarToolStripMenuItem.Name = "pinToAppBarToolStripMenuItem";
-            this.pinToAppBarToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.pinToAppBarToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.pinToAppBarToolStripMenuItem.Text = "Pin to app bar";
+            this.pinToAppBarToolStripMenuItem.Click += new System.EventHandler(this.pinToAppBarToolStripMenuItem_Click);
             // 
             // appSettingsToolStripMenuItem
             // 
             this.appSettingsToolStripMenuItem.Name = "appSettingsToolStripMenuItem";
-            this.appSettingsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.appSettingsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.appSettingsToolStripMenuItem.Text = "App Settings";
+            this.appSettingsToolStripMenuItem.Click += new System.EventHandler(this.appSettingsToolStripMenuItem_Click);
             // 
             // tsAppSep2
             // 
             this.tsAppSep2.Name = "tsAppSep2";
-            this.tsAppSep2.Size = new System.Drawing.Size(152, 6);
+            this.tsAppSep2.Size = new System.Drawing.Size(150, 6);
             // 
             // reloadToolStripMenuItem
             // 
             this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
-            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.reloadToolStripMenuItem.Text = "Reload";
+            this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // pbSettings
+            // 
+            this.pbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbSettings.Image = global::Yorot.Properties.Resources.Settings;
+            this.pbSettings.Location = new System.Drawing.Point(8, 543);
+            this.pbSettings.Name = "pbSettings";
+            this.pbSettings.Size = new System.Drawing.Size(40, 40);
+            this.pbSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSettings.TabIndex = 0;
+            this.pbSettings.TabStop = false;
+            this.pbSettings.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbSettings_MouseClick);
+            // 
+            // pbYorot
+            // 
+            this.pbYorot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbYorot.Image = global::Yorot.Properties.Resources.Yorot;
+            this.pbYorot.Location = new System.Drawing.Point(8, 3);
+            this.pbYorot.Name = "pbYorot";
+            this.pbYorot.Size = new System.Drawing.Size(40, 40);
+            this.pbYorot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbYorot.TabIndex = 0;
+            this.pbYorot.TabStop = false;
+            this.pbYorot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbYorot_MouseClick);
             // 
             // frmMain
             // 
@@ -303,11 +308,11 @@ namespace Yorot
             this.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);
             this.pAppDrawer.ResumeLayout(false);
             this.pAppGrid.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbYorot)).EndInit();
             this.tcAppMan.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.cmsApp.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbYorot)).EndInit();
             this.ResumeLayout(false);
 
         }

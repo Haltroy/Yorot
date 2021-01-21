@@ -39,25 +39,55 @@ namespace Yorot
 
         private void RefreshAppList(bool clearCurrent = false)
         {
-            if (clearCurrent) { lvApps.Items.Clear(); }
-            ListViewItem yorotApp = null;
-            foreach (YorotApp kapp in YorotGlobal.Settings.AppMan.Apps)
+            if (clearCurrent)
             {
-                ilAppMan.Images.Add(YorotGlobal.GenerateAppIcon(kapp.GetAppIcon(), "#808080".HexToColor()));
-                ListViewItem item = new ListViewItem()
+                lvApps.Items.Clear();
+
+                ListViewItem yorotApp = null;
+                foreach (YorotApp kapp in YorotGlobal.Settings.AppMan.Apps)
                 {
-                    Text = kapp.AppName,
-                    ToolTipText = kapp.AppCodeName,
-                    ImageIndex = ilAppMan.Images.Count - 1,
-                    Tag = kapp,
-                };
-                if (kapp.AppCodeName == "com.haltroy.yorot") { yorotApp = item; }
-                else
+                    ilAppMan.Images.Add(YorotGlobal.GenerateAppIcon(kapp.GetAppIcon(), "#808080".HexToColor()));
+                    ListViewItem item = new ListViewItem()
+                    {
+                        Text = kapp.AppName,
+                        ToolTipText = kapp.AppCodeName,
+                        ImageIndex = ilAppMan.Images.Count - 1,
+                        Tag = kapp,
+                    };
+                    if (kapp.AppCodeName == "com.haltroy.yorot") { yorotApp = item; }
+                    else
+                    {
+                        lvApps.Items.Add(item);
+                    }
+                }
+                lvApps.Items.Insert(0, yorotApp);
+            }else
+            {
+                foreach(YorotApp yapp in YorotGlobal.Settings.AppMan.Apps)
                 {
-                    lvApps.Items.Add(item);
+                    bool found = false;
+                    for(int i =0;i < lvApps.Items.Count;i++)
+                    {
+                        if (lvApps.Items[i].ToolTipText == yapp.AppCodeName)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found)
+                    {
+                        ilAppMan.Images.Add(YorotGlobal.GenerateAppIcon(yapp.GetAppIcon(), "#808080".HexToColor()));
+                        ListViewItem item = new ListViewItem()
+                        {
+                            Text = yapp.AppName,
+                            ToolTipText = yapp.AppCodeName,
+                            ImageIndex = ilAppMan.Images.Count - 1,
+                            Tag = yapp,
+                        };
+                        lvApps.Items.Add(item);
+                    }
                 }
             }
-            lvApps.Items.Insert(0, yorotApp);
         }
 
         #endregion Constructor
@@ -387,11 +417,6 @@ namespace Yorot
                 cmsApp.Show(MousePosition);
             }
         }
-
-        public void pbSettings_Click(object sender, EventArgs e)
-        {
-           
-        }
         /// <summary>
         /// -1= None 0= lvApps 1= lvApps App 2= App 3= Yorot 4= Settings
         /// </summary>
@@ -584,7 +609,7 @@ namespace Yorot
             {
                 if (isCarbonCopy)
                 {
-                    YorotGlobal.Settings.MainForm.Invoke(new Action(() => { YorotGlobal.Settings.MainForm.pbSettings_Click(this, e); YorotGlobal.Settings.MainForm.BringToFront(); }));
+                    YorotGlobal.Settings.MainForm.Invoke(new Action(() => { YorotGlobal.Settings.MainForm.pbSettings_MouseClick(this, e); YorotGlobal.Settings.MainForm.BringToFront(); }));
                 }
                 else
                 {
@@ -659,6 +684,49 @@ namespace Yorot
             else
             {
                 var app = rcType == 1 ? (rcSender as ListViewItem).Tag as YorotApp : rcSender as YorotApp;
+                // TODO: Spawn a new app
+            }
+        }
+
+        private void closeAllSessionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (rcType == 3)
+            {
+                // TODO: Close all apps.
+            }
+            else
+            {
+                var app = rcType == 1 ? (rcSender as ListViewItem).Tag as YorotApp : rcSender as YorotApp;
+                // TODO: Remove duplicates and close app itself.
+            }
+        }
+
+        private void pinToAppBarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var app = rcType == 1 ? (rcSender as ListViewItem).Tag as YorotApp : rcSender as YorotApp;
+            // TODO: Pin app to app bar.
+        }
+
+        private void appSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var app = rcType == 1 ? (rcSender as ListViewItem).Tag as YorotApp : rcSender as YorotApp;
+            // TODO: Open settings for this app.
+        }
+
+        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RefreshAppList(false);
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (rcType == 0)
+            {
+                // TODO: Open Apps Menu Settings
+            }
+            else
+            {
+                pbSettings_MouseClick(settingsToolStripMenuItem, new MouseEventArgs(MouseButtons.Left, 1, MousePosition.X, MousePosition.Y, 0));
             }
         }
     }

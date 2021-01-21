@@ -147,6 +147,7 @@ namespace Yorot.UI.SystemApp
                     lbParaBirimi.Location.X + lbParaBirimi.Width + 5,
                     lbKredi.Location.X + lbKredi.Width + 5,
                     lbYatirim.Location.X + lbYatirim.Width + 5,
+                    lbHakkinda.Location.X + lbHakkinda.Width + 5,
                 };
                 int? maxVal = null;
                 int index = -1;
@@ -228,6 +229,7 @@ namespace Yorot.UI.SystemApp
             lbHakkinda.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
             // Make label bold
             senderLB.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold);
+            pbHamMenu_Click(senderLB, new EventArgs());
         }
 
         private void lbTemel_Click(object sender, EventArgs e) => switchTab(lbTemel, tpTemel);
