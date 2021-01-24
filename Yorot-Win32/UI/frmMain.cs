@@ -35,10 +35,22 @@ namespace Yorot
         {
             
         }
-
-
+        int appListUpdate = 0;
+        private void tmrAppSync_Tick(object sender, EventArgs e)
+        {
+            if (appListUpdate != YorotGlobal.Settings.AppMan.UpdateCount)
+            {
+                RefreshAppList(false);
+            }
+            // These both if() statements do diffrenet jobs, so that SideCreekGiant cards won't work on here.
+            if (isFullScreen && PrevDirection != AnimateDirection.LeftFullScreen && !AnimationContinue)
+            {
+                AnimateTo(AnimateDirection.LeftFullScreen);
+            }
+        }
         private void RefreshAppList(bool clearCurrent = false)
         {
+            appListUpdate = YorotGlobal.Settings.AppMan.UpdateCount;
             if (clearCurrent)
             {
                 lvApps.Items.Clear();
@@ -110,10 +122,6 @@ namespace Yorot
             /// </summary>
             Left,
             /// <summary>
-            /// Expand a little
-            /// </summary>
-            Right,
-            /// <summary>
             /// Expand to current screen
             /// </summary>
             RightMost,
@@ -127,6 +135,7 @@ namespace Yorot
         {
             if (animate == AnimateDirection.Nothing) { return; }
             AnimationContinue = true;
+            panelMaxSize = Width - 220;
             Direction = animate;
             timer1.Start();
         }
@@ -135,7 +144,10 @@ namespace Yorot
         private AnimateDirection PrevDirection = AnimateDirection.Left;
         private readonly int AnimationSpeed = 60;
         private readonly int panelMinSize = 60;
-        private readonly int panelMaxSize = 420;
+        private int panelMaxSize = 220;
+        // ş
+        private int panelMinDeadZWord = 220;
+        // ş
         private bool AnimationContinue = false;
         private bool isAnimating => Direction != AnimateDirection.Nothing;
 
@@ -154,12 +166,11 @@ namespace Yorot
                             switch (PrevDirection)
                             {
                                 case AnimateDirection.RightMost:
-                                case AnimateDirection.Right:
                                     pAppDrawer.Width = pAppDrawer.Width > panelMinSize ? pAppDrawer.Width - AnimationSpeed : panelMinSize;
                                     AnimationContinue = pAppDrawer.Width > panelMinSize;
                                     break;
                                 case AnimateDirection.LeftFullScreen:
-                                    pAppDrawer.Width = pAppDrawer.Width < panelMinSize ? pAppDrawer.Width + AnimationSpeed : panelMinSize;
+                                    pAppDrawer.Width = pAppDrawer.Width < panelMinSize ? pAppDrawer.Width + (pAppDrawer.Width < panelMinDeadZWord ? (AnimationSpeed / 6) : AnimationSpeed) : panelMinSize;
                                     AnimationContinue = pAppDrawer.Width < panelMinSize;
                                     break;
                                 case AnimateDirection.Left:
@@ -169,26 +180,8 @@ namespace Yorot
                             }
                             break;
                         case AnimateDirection.LeftFullScreen:
-                            pAppDrawer.Width = pAppDrawer.Width > 10 ? pAppDrawer.Width - AnimationSpeed : pAppDrawer.Width;
-                            AnimationContinue = pAppDrawer.Width > 10;
-                            break;
-                        case AnimateDirection.Right:
-                            switch (PrevDirection)
-                            {
-                                case AnimateDirection.LeftFullScreen:
-                                case AnimateDirection.Left:
-                                    pAppDrawer.Width = pAppDrawer.Width < panelMaxSize ? pAppDrawer.Width + AnimationSpeed : panelMaxSize;
-                                    AnimationContinue = pAppDrawer.Width < panelMaxSize;
-                                    break;
-                                case AnimateDirection.RightMost:
-                                    pAppDrawer.Width = pAppDrawer.Width > panelMaxSize ? pAppDrawer.Width - AnimationSpeed : panelMaxSize;
-                                    AnimationContinue = pAppDrawer.Width > panelMaxSize;
-                                    break;
-                                case AnimateDirection.Right:
-                                    pAppDrawer.Width = panelMaxSize;
-                                    AnimationContinue = false;
-                                    break;
-                            }
+                            pAppDrawer.Width = pAppDrawer.Width > label1.Width ? pAppDrawer.Width - (pAppDrawer.Width < panelMinDeadZWord ? (AnimationSpeed/6) : AnimationSpeed) : pAppDrawer.Width;
+                            AnimationContinue = pAppDrawer.Width > label1.Width;
                             break;
                         case AnimateDirection.RightMost:
                             pAppDrawer.Width = pAppDrawer.Width < (Width - 10) ? pAppDrawer.Width + AnimationSpeed : (Width - 10);
@@ -205,10 +198,7 @@ namespace Yorot
                             pAppDrawer.Width = panelMinSize;
                             break;
                         case AnimateDirection.LeftFullScreen:
-                            pAppDrawer.Width = 10;
-                            break;
-                        case AnimateDirection.Right:
-                            pAppDrawer.Width = panelMaxSize;
+                            pAppDrawer.Width = label1.Width;
                             break;
                         case AnimateDirection.RightMost:
                             pAppDrawer.Width = Width - 15;
@@ -223,10 +213,6 @@ namespace Yorot
                     timer1.Stop();
                     break;
             }
-        }
-        private void pbYorot_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void label1_MouseDown(object sender, MouseEventArgs e)
@@ -244,15 +230,11 @@ namespace Yorot
                     case AnimateDirection.Nothing:
                     case AnimateDirection.LeftFullScreen:
                         RightMostClosing = false;
-                        AnimateTo(AnimateDirection.Right);
-                        break;
-                    case AnimateDirection.Right:
-                        AnimateTo(RightMostClosing ? AnimateDirection.Left : AnimateDirection.RightMost);
-                        RightMostClosing = false;
+                        AnimateTo(AnimateDirection.RightMost);
                         break;
                     case AnimateDirection.RightMost:
                         RightMostClosing = true;
-                        AnimateTo(AnimateDirection.Right);
+                        AnimateTo(AnimateDirection.Left);
                         break;
                 }
             }
@@ -268,15 +250,12 @@ namespace Yorot
             {
                 if (pAppDrawer.Width > panelMaxSize)
                 {
-                    AnimateTo(PrevDirection == AnimateDirection.RightMost ? AnimateDirection.Right : AnimateDirection.RightMost);
+                    AnimateTo(AnimateDirection.RightMost);
                 }
-                else if (pAppDrawer.Width < panelMaxSize)
+                else if (pAppDrawer.Width < panelMinDeadZWord)
                 {
-                    AnimateTo(PrevDirection == AnimateDirection.Right ? AnimateDirection.Left : AnimateDirection.Right);
-                }
-                else if (pAppDrawer.Width == panelMaxSize)
-                {
-                    AnimateTo(PrevDirection == AnimateDirection.RightMost ? AnimateDirection.Left : AnimateDirection.RightMost);
+                    PrevDirection = AnimateDirection.RightMost;
+                    AnimateTo(AnimateDirection.Left);
                 }
             }
             allowResize = false;
@@ -393,7 +372,7 @@ namespace Yorot
             {
                 if (pAppDrawer.Width < panelMaxSize)
                 {
-                    AnimateTo(AnimateDirection.Right);
+                    AnimateTo(AnimateDirection.RightMost);
                 }
                 PictureBox pbIcon = sender as PictureBox;
                 var fapp = pbIcon.Tag as UI.frmApp;
@@ -615,7 +594,7 @@ namespace Yorot
                 {
                     if (pAppDrawer.Width < panelMaxSize)
                     {
-                        AnimateTo(AnimateDirection.Right);
+                        AnimateTo(AnimateDirection.RightMost);
                     }
                     var settingApp = YorotGlobal.Settings.AppMan.FindByAppCN("com.haltroy.settings");
                     if (settingApp.AssocTab == null)
@@ -651,14 +630,7 @@ namespace Yorot
             {
                 if (tcAppMan.SelectedTab == tabPage1)
                 {
-                    if (pAppDrawer.Width == panelMaxSize)
-                    {
-                        AnimateTo(PrevDirection == AnimateDirection.Right ? AnimateDirection.Left : AnimateDirection.RightMost);
-                    }
-                    else
-                    {
-                        AnimateTo(PrevDirection == AnimateDirection.Right ? AnimateDirection.Left : AnimateDirection.Right);
-                    }
+                    AnimateTo(PrevDirection == AnimateDirection.Left ? AnimateDirection.RightMost : AnimateDirection.Left);
                 }
                 else
                 {
@@ -728,6 +700,38 @@ namespace Yorot
             {
                 pbSettings_MouseClick(settingsToolStripMenuItem, new MouseEventArgs(MouseButtons.Left, 1, MousePosition.X, MousePosition.Y, 0));
             }
+        }
+
+        private void frmMain_Resize(object sender, EventArgs e) => panelMaxSize = Width - 220;
+        public bool isFullScreen { get; set; } = false;
+        private FormWindowState prevState { get; set; } = FormWindowState.Normal;
+        private AnimateDirection FSprev { get; set; } = AnimateDirection.Nothing;
+        public void FullScreen(bool fs = false)
+        {
+            if (fs) // Switch to Full Screen
+            {
+                prevState = WindowState;
+                Rectangle max = Screen.FromControl(this).Bounds;
+                MaximizedBounds = max;
+                MaximumSize = new Size(max.Width, max.Height);
+                FormBorderStyle = FormBorderStyle.None;
+                WindowState = FormWindowState.Normal;
+                WindowState = FormWindowState.Maximized;
+                AnimateTo(AnimateDirection.LeftFullScreen);
+            }else // Switch to normal
+            {
+                MaximizedBounds = Screen.FromControl(this).WorkingArea;
+                WindowState = FormWindowState.Normal;
+                FormBorderStyle = FormBorderStyle.Sizable;
+                WindowState = prevState;
+                AnimateTo(FSprev == AnimateDirection.Nothing ? AnimateDirection.Left : FSprev);
+            }
+            isFullScreen = fs;
+        }
+
+        private void frmMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F10) { FullScreen(!isFullScreen); }
         }
     }
 }

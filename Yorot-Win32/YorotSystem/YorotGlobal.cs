@@ -25,7 +25,7 @@ namespace Yorot
         /// <summary>
         /// <c>true</c> if this session is a PreOut, otherwise <c>false</c>.
         /// </summary>
-        public static bool isPreOut = false;
+        public static bool isPreOut = true;
         /// <summary>
         /// Version of Yorot.
         /// </summary>
@@ -38,6 +38,10 @@ namespace Yorot
         /// Codename of current Yorot version.
         /// </summary>
         public static string CodeName = "Hamantha";
+        /// <summary>
+        /// Placeholder text used by default apps. 
+        /// </summary>
+        public static string DefaultaAppOriginPlaceHolder = "24 January 2021 16:50:00 GMT+3:00" + Environment.NewLine + "https://github.com/Haltroy/Yorot , Turkey" + Environment.NewLine + "Yorot C# Embedded Code" + Environment.NewLine + "(<Source>/Yorot-Win32/UI/"; // TODO: Change date on releases.
         /// <summary>
         /// Version Control (HTUPDATE) URL.
         /// </summary>

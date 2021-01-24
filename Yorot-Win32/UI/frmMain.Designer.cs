@@ -37,6 +37,8 @@ namespace Yorot
             this.pAppDrawer = new System.Windows.Forms.Panel();
             this.pAppGrid = new System.Windows.Forms.Panel();
             this.flpFavApps = new System.Windows.Forms.FlowLayoutPanel();
+            this.pbSettings = new System.Windows.Forms.PictureBox();
+            this.pbYorot = new System.Windows.Forms.PictureBox();
             this.tcAppMan = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.htButton1 = new HTAlt.WinForms.HTButton();
@@ -54,15 +56,14 @@ namespace Yorot
             this.tsAppSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pbSettings = new System.Windows.Forms.PictureBox();
-            this.pbYorot = new System.Windows.Forms.PictureBox();
+            this.tmrAppSync = new System.Windows.Forms.Timer(this.components);
             this.pAppDrawer.SuspendLayout();
             this.pAppGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbYorot)).BeginInit();
             this.tcAppMan.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.cmsApp.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbYorot)).BeginInit();
             this.SuspendLayout();
             // 
             // pAppDrawer
@@ -83,7 +84,7 @@ namespace Yorot
             this.pAppGrid.Controls.Add(this.pbSettings);
             this.pAppGrid.Controls.Add(this.pbYorot);
             this.pAppGrid.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pAppGrid.Location = new System.Drawing.Point(540, 0);
+            this.pAppGrid.Location = new System.Drawing.Point(542, 0);
             this.pAppGrid.Name = "pAppGrid";
             this.pAppGrid.Size = new System.Drawing.Size(55, 586);
             this.pAppGrid.TabIndex = 3;
@@ -96,6 +97,30 @@ namespace Yorot
             this.flpFavApps.Name = "flpFavApps";
             this.flpFavApps.Size = new System.Drawing.Size(40, 487);
             this.flpFavApps.TabIndex = 1;
+            // 
+            // pbSettings
+            // 
+            this.pbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbSettings.Image = global::Yorot.Properties.Resources.Settings;
+            this.pbSettings.Location = new System.Drawing.Point(8, 543);
+            this.pbSettings.Name = "pbSettings";
+            this.pbSettings.Size = new System.Drawing.Size(40, 40);
+            this.pbSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSettings.TabIndex = 0;
+            this.pbSettings.TabStop = false;
+            this.pbSettings.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbSettings_MouseClick);
+            // 
+            // pbYorot
+            // 
+            this.pbYorot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbYorot.Image = global::Yorot.Properties.Resources.Yorot;
+            this.pbYorot.Location = new System.Drawing.Point(8, 3);
+            this.pbYorot.Name = "pbYorot";
+            this.pbYorot.Size = new System.Drawing.Size(40, 40);
+            this.pbYorot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbYorot.TabIndex = 0;
+            this.pbYorot.TabStop = false;
+            this.pbYorot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbYorot_MouseClick);
             // 
             // tcAppMan
             // 
@@ -186,9 +211,9 @@ namespace Yorot
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.label1.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.label1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label1.Location = new System.Drawing.Point(595, 0);
+            this.label1.Location = new System.Drawing.Point(597, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(5, 586);
+            this.label1.Size = new System.Drawing.Size(3, 586);
             this.label1.TabIndex = 0;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.label1_MouseDown);
@@ -269,29 +294,11 @@ namespace Yorot
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
-            // pbSettings
+            // tmrAppSync
             // 
-            this.pbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbSettings.Image = global::Yorot.Properties.Resources.Settings;
-            this.pbSettings.Location = new System.Drawing.Point(8, 543);
-            this.pbSettings.Name = "pbSettings";
-            this.pbSettings.Size = new System.Drawing.Size(40, 40);
-            this.pbSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbSettings.TabIndex = 0;
-            this.pbSettings.TabStop = false;
-            this.pbSettings.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbSettings_MouseClick);
-            // 
-            // pbYorot
-            // 
-            this.pbYorot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbYorot.Image = global::Yorot.Properties.Resources.Yorot;
-            this.pbYorot.Location = new System.Drawing.Point(8, 3);
-            this.pbYorot.Name = "pbYorot";
-            this.pbYorot.Size = new System.Drawing.Size(40, 40);
-            this.pbYorot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbYorot.TabIndex = 0;
-            this.pbYorot.TabStop = false;
-            this.pbYorot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbYorot_MouseClick);
+            this.tmrAppSync.Enabled = true;
+            this.tmrAppSync.Interval = 5000;
+            this.tmrAppSync.Tick += new System.EventHandler(this.tmrAppSync_Tick);
             // 
             // frmMain
             // 
@@ -305,14 +312,16 @@ namespace Yorot
             this.Name = "frmMain";
             this.Text = "Yorot";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMain_KeyDown);
             this.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);
+            this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.pAppDrawer.ResumeLayout(false);
             this.pAppGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbYorot)).EndInit();
             this.tcAppMan.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.cmsApp.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbYorot)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -340,6 +349,7 @@ namespace Yorot
         private ToolStripSeparator tsAppSep2;
         private ToolStripMenuItem reloadToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
+        private Timer tmrAppSync;
     }
 }
 

@@ -23,7 +23,12 @@ namespace Yorot
             Apps.Add(DefaultApps.Settings.CreateCarbonCopy());
             Apps.Add(DefaultApps.Store.CreateCarbonCopy());
             Apps.Add(DefaultApps.WebBrowser.CreateCarbonCopy());
+            UpdateCount++;
         }
+        /// <summary>
+        /// Serves information of update count. Used in App menu refreshment
+        /// </summary>
+        public int UpdateCount { get; set; } = 0;
         /// <summary>
         /// A <see cref="List{T}"/> of <see cref="YorotApp"/>(s).
         /// </summary>
@@ -64,6 +69,12 @@ namespace Yorot
             HTUPDATE = null,
             isSystemApp = true,
             StartFile = null,
+            Version = YorotGlobal.Version,
+            VersionNo = YorotGlobal.VersionNo,
+            MultipleSession = true,
+            AppOrigin = YorotAppOrigin.Embedded,
+            Author = "Haltroy",
+            AppOriginInfo = YorotGlobal.DefaultaAppOriginPlaceHolder + "frmMain*.cs",
         };
         /// <summary>
         /// Yorot Settings
@@ -77,6 +88,12 @@ namespace Yorot
             HTUPDATE = null,
             isSystemApp = true,
             StartFile = null,
+            Version = YorotGlobal.Version,
+            VersionNo = YorotGlobal.VersionNo,
+            MultipleSession = true,
+            AppOrigin = YorotAppOrigin.Embedded,
+            Author = "Haltroy",
+            AppOriginInfo = YorotGlobal.DefaultaAppOriginPlaceHolder + "SystemApps/settings*.cs",
         };
         /// <summary>
         /// Haltroy Web Store
@@ -90,6 +107,12 @@ namespace Yorot
             HTUPDATE = null,
             isSystemApp = true,
             StartFile = null,
+            Version = YorotGlobal.Version,
+            VersionNo = YorotGlobal.VersionNo,
+            MultipleSession = true,
+            AppOrigin = YorotAppOrigin.Embedded,
+            Author = "Haltroy",
+            AppOriginInfo = YorotGlobal.DefaultaAppOriginPlaceHolder + "SystemApps/store*.cs",
         };
         /// <summary>
         /// Calculator
@@ -103,6 +126,12 @@ namespace Yorot
             HTUPDATE = null,
             isSystemApp = true,
             StartFile = null,
+            Version = YorotGlobal.Version,
+            VersionNo = YorotGlobal.VersionNo,
+            MultipleSession = true,
+            AppOrigin = YorotAppOrigin.Embedded,
+            Author = "Haltroy",
+            AppOriginInfo = YorotGlobal.DefaultaAppOriginPlaceHolder + "SystemApps/calc*.cs",
         };
         /// <summary>
         /// Calendar
@@ -116,6 +145,12 @@ namespace Yorot
             HTUPDATE = null,
             isSystemApp = true,
             StartFile = null,
+            Version = YorotGlobal.Version,
+            VersionNo = YorotGlobal.VersionNo,
+            MultipleSession = true,
+            AppOrigin = YorotAppOrigin.Embedded,
+            Author = "Haltroy",
+            AppOriginInfo = YorotGlobal.DefaultaAppOriginPlaceHolder + "SystemApps/calendar*.cs",
         };
         /// <summary>
         /// Text altering program.
@@ -129,6 +164,12 @@ namespace Yorot
             HTUPDATE = null,
             isSystemApp = true,
             StartFile = null,
+            Version = YorotGlobal.Version,
+            VersionNo = YorotGlobal.VersionNo,
+            MultipleSession = true,
+            AppOrigin = YorotAppOrigin.Embedded,
+            Author = "Haltroy",
+            AppOriginInfo = YorotGlobal.DefaultaAppOriginPlaceHolder + "SystemApps/notepad*.cs",
         };
         /// <summary>
         /// Console
@@ -142,6 +183,12 @@ namespace Yorot
             HTUPDATE = null,
             isSystemApp = true,
             StartFile = null,
+            Version = YorotGlobal.Version,
+            VersionNo = YorotGlobal.VersionNo,
+            MultipleSession = true,
+            AppOrigin = YorotAppOrigin.Embedded,
+            Author = "Haltroy",
+            AppOriginInfo = YorotGlobal.DefaultaAppOriginPlaceHolder + "SystemApps/console*.cs",
         };
         /// <summary>
         /// Collection management application.
@@ -155,6 +202,12 @@ namespace Yorot
             HTUPDATE = null,
             isSystemApp = true,
             StartFile = null,
+            Version = YorotGlobal.Version,
+            VersionNo = YorotGlobal.VersionNo,
+            MultipleSession = true,
+            AppOrigin = YorotAppOrigin.Embedded,
+            Author = "Haltroy",
+            AppOriginInfo = YorotGlobal.DefaultaAppOriginPlaceHolder + "SystemApps/colman*.cs",
         };
         /// <summary>
         /// File exploration app.
@@ -168,6 +221,12 @@ namespace Yorot
             HTUPDATE = null,
             StartFile = null,
             isSystemApp = true,
+            Version = YorotGlobal.Version,
+            VersionNo = YorotGlobal.VersionNo,
+            MultipleSession = true,
+            AppOrigin = YorotAppOrigin.Embedded,
+            Author = "Haltroy",
+            AppOriginInfo = YorotGlobal.DefaultaAppOriginPlaceHolder + "SystemApps/fileman*.cs",
         };
         /// <summary>
         /// Yorot Package Distrubiton system.
@@ -181,6 +240,12 @@ namespace Yorot
             HTUPDATE = null,
             isSystemApp = true,
             StartFile = null,
+            Version = YorotGlobal.Version,
+            VersionNo = YorotGlobal.VersionNo,
+            MultipleSession = true,
+            AppOrigin = YorotAppOrigin.Embedded,
+            Author = "Haltroy",
+            AppOriginInfo = YorotGlobal.DefaultaAppOriginPlaceHolder + "SystemApps/yopad*.cs",
         };
         /// <summary>
         /// App that handles Space Pass stuff.
@@ -194,6 +259,12 @@ namespace Yorot
             HTUPDATE = null,
             isSystemApp = true,
             StartFile = null,
+            Version = YorotGlobal.Version,
+            VersionNo = YorotGlobal.VersionNo,
+            MultipleSession = true,
+            AppOrigin = YorotAppOrigin.Embedded,
+            Author = "Haltroy",
+            AppOriginInfo = YorotGlobal.DefaultaAppOriginPlaceHolder + "SystemApps/spacepass*.cs",
         };
     }
     /// <summary>
@@ -261,13 +332,25 @@ namespace Yorot
             }
         }
         /// <summary>
-        /// Determines if this application is duplicated to create another session.
+        /// Creator of this app.
         /// </summary>
-        public bool isDuplicate {get;set;} = false;
+        public string Author { get; set; }
         /// <summary>
-        /// A <see cref="List{T}"/> of identical duplicate <see cref="YorotApp"/>s.
+        /// Origin of aapp.
         /// </summary>
-        public List<YorotApp> Duplicates { get; set; } = new List<YorotApp>();
+        public YorotAppOrigin AppOrigin { get; set; }
+        /// <summary>
+        /// Information about origin of this app.
+        /// </summary>
+        public string AppOriginInfo { get; set; }
+        /// <summary>
+        /// Display version of this app.
+        /// </summary>
+        public string Version { get; set; } = "0";
+        /// <summary>
+        /// Actual version of this app. Used by HTUPDATE.
+        /// </summary>
+        public int VersionNo { get; set; } = 0;
         /// <summary>
         /// Determines if this application supports multiple sessions.
         /// </summary>
@@ -282,7 +365,41 @@ namespace Yorot
         /// <returns><see cref="true"/> if this <see cref="YorotApp"/> has open session(s), otherwise <see cref="false"/>.</returns>
         public bool hasSessions()
         {
-            return AssocForm != null && Duplicates.FindAll(i => i.AssocForm != null).Count > 0;
+            return Layouts.FindAll(i => i.AssocForm != null).Count > 0;
+        }
+        /// <summary>
+        /// Returns app size in bytes.
+        /// </summary>
+        public float AppSize
+        {
+            get
+            {
+                //TODO: Add App Sie detection.
+                throw new NotImplementedException("TODO");
+            }
+        }
+        public string GetAppSizeInfo(string bytes)
+        {
+            var size = AppSize;
+            if (size > 1099511627776F) //TiB 
+            {
+                return (size / 1099511627776F) + " TiB (" + size + " " + bytes + ")"; 
+            }
+            else if (size > 1073741824F) //GiB 
+            {
+                return (size / 1073741824F) + " GiB (" + size + " " + bytes + ")";
+            }
+            else if (size > 1048576F) //MiB 
+            {
+                return (size / 1048576F) + " MiB (" + size + " " + bytes + ")";
+            }
+            else if (size > 1024F) // KiB
+            {
+                return (size / 1024F) + " KiB (" + size + " " + bytes + ")";
+            }else
+            {
+                return size + " " + bytes;
+            }
         }
         /// <summary>
         /// Codename of app.
@@ -317,9 +434,20 @@ namespace Yorot
             };
         }
         /// <summary>
+        /// List of layouts (sessions) for this app.
+        /// </summary>
+        public List<YorotAppLayout> Layouts { get; set; } = new List<YorotAppLayout>();
+        /// <summary>
         /// Display name of application.
         /// </summary>
         public string AppName { get; set; }
+    }
+    public class YorotAppLayout
+    {
+        /// <summary>
+        /// Ownner of this app layout.
+        /// </summary>
+        public YorotApp Parent { get; set; }
         /// <summary>
         /// Gets associated <see cref="UI.frmApp"/> of this <see cref="YorotApp"/>. <see cref="null"/> if no forms are associated.
         /// </summary>
@@ -333,8 +461,27 @@ namespace Yorot
         /// </summary>
         public System.Windows.Forms.PictureBox AssocPB { get; set; }
         /// <summary>
-        /// Determines if <see cref="AssocForm"/> is suspended.
+        /// <see cref="true"/> to ask this layout to reload app, otherwise <see cref="false"/>
         /// </summary>
-        public bool isLayoutSuspended { get; set; } = false;
+        public bool waitLayoutRestart { get; set; } = false;
+    }
+    public enum YorotAppOrigin
+    {
+        /// <summary>
+        /// App instalked from other software outside Yorot.
+        /// </summary>
+        Other,
+        /// <summary>
+        /// App installed using Yopad.
+        /// </summary>
+        Yopad,
+        /// <summary>
+        /// App downloaded and instaalled from store.
+        /// </summary>
+        Store,
+        /// <summary>
+        /// App embedded to Yorot.
+        /// </summary>
+        Embedded,
     }
 }
