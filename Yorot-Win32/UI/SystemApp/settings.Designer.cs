@@ -126,6 +126,9 @@ namespace Yorot.UI.SystemApp
             this.lbAdvanced = new System.Windows.Forms.Label();
             this.tmrAnimate = new System.Windows.Forms.Timer(this.components);
             this.tmrAppSync = new System.Windows.Forms.Timer(this.components);
+            this.lbSync = new System.Windows.Forms.Label();
+            this.tpSync = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tpSettings.SuspendLayout();
             this.pSchedule.SuspendLayout();
@@ -146,6 +149,7 @@ namespace Yorot.UI.SystemApp
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHamMenu)).BeginInit();
+            this.tpSync.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -158,6 +162,7 @@ namespace Yorot.UI.SystemApp
             this.tabControl1.Controls.Add(this.tpApps);
             this.tabControl1.Controls.Add(this.tpAdvanced);
             this.tabControl1.Controls.Add(this.tpAbout);
+            this.tabControl1.Controls.Add(this.tpSync);
             this.tabControl1.Location = new System.Drawing.Point(154, -23);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1199,6 +1204,7 @@ namespace Yorot.UI.SystemApp
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.pbHamMenu);
             this.panel1.Controls.Add(this.lbSettings);
+            this.panel1.Controls.Add(this.lbSync);
             this.panel1.Controls.Add(this.lbThemes);
             this.panel1.Controls.Add(this.lbApps);
             this.panel1.Controls.Add(this.lbHakkinda);
@@ -1234,7 +1240,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.lbThemes.AutoSize = true;
             this.lbThemes.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.lbThemes.Location = new System.Drawing.Point(3, 67);
+            this.lbThemes.Location = new System.Drawing.Point(3, 92);
             this.lbThemes.Name = "lbThemes";
             this.lbThemes.Size = new System.Drawing.Size(84, 25);
             this.lbThemes.TabIndex = 0;
@@ -1245,7 +1251,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.lbApps.AutoSize = true;
             this.lbApps.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.lbApps.Location = new System.Drawing.Point(3, 92);
+            this.lbApps.Location = new System.Drawing.Point(3, 117);
             this.lbApps.Name = "lbApps";
             this.lbApps.Size = new System.Drawing.Size(58, 25);
             this.lbApps.TabIndex = 0;
@@ -1256,7 +1262,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.lbHakkinda.AutoSize = true;
             this.lbHakkinda.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.lbHakkinda.Location = new System.Drawing.Point(3, 142);
+            this.lbHakkinda.Location = new System.Drawing.Point(3, 167);
             this.lbHakkinda.Name = "lbHakkinda";
             this.lbHakkinda.Size = new System.Drawing.Size(64, 25);
             this.lbHakkinda.TabIndex = 0;
@@ -1267,7 +1273,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.lbAdvanced.AutoSize = true;
             this.lbAdvanced.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.lbAdvanced.Location = new System.Drawing.Point(3, 117);
+            this.lbAdvanced.Location = new System.Drawing.Point(3, 142);
             this.lbAdvanced.Name = "lbAdvanced";
             this.lbAdvanced.Size = new System.Drawing.Size(101, 25);
             this.lbAdvanced.TabIndex = 0;
@@ -1283,6 +1289,36 @@ namespace Yorot.UI.SystemApp
             // 
             this.tmrAppSync.Enabled = true;
             this.tmrAppSync.Interval = 5000;
+            // 
+            // lbSync
+            // 
+            this.lbSync.AutoSize = true;
+            this.lbSync.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbSync.Location = new System.Drawing.Point(3, 67);
+            this.lbSync.Name = "lbSync";
+            this.lbSync.Size = new System.Drawing.Size(57, 25);
+            this.lbSync.TabIndex = 0;
+            this.lbSync.Text = "Sync";
+            // 
+            // tpSync
+            // 
+            this.tpSync.Controls.Add(this.label15);
+            this.tpSync.Location = new System.Drawing.Point(4, 22);
+            this.tpSync.Name = "tpSync";
+            this.tpSync.Size = new System.Drawing.Size(568, 1070);
+            this.tpSync.TabIndex = 6;
+            this.tpSync.Text = "Sync";
+            this.tpSync.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label15.Location = new System.Drawing.Point(21, 13);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(61, 25);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Sync";
             // 
             // settings
             // 
@@ -1322,6 +1358,8 @@ namespace Yorot.UI.SystemApp
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHamMenu)).EndInit();
+            this.tpSync.ResumeLayout(false);
+            this.tpSync.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1424,5 +1462,8 @@ namespace Yorot.UI.SystemApp
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TabPage tpSync;
+        private System.Windows.Forms.Label lbSync;
+        private System.Windows.Forms.Label label15;
     }
 }

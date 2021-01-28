@@ -105,9 +105,6 @@ namespace Yorot
         #endregion Constructor
 
         #region Animator
-
-        private bool RightMostClosing = false;
-
         /// <summary>
         /// Animation directions.
         /// </summary>
@@ -229,11 +226,9 @@ namespace Yorot
                     case AnimateDirection.Left:
                     case AnimateDirection.Nothing:
                     case AnimateDirection.LeftFullScreen:
-                        RightMostClosing = false;
                         AnimateTo(AnimateDirection.RightMost);
                         break;
                     case AnimateDirection.RightMost:
-                        RightMostClosing = true;
                         AnimateTo(AnimateDirection.Left);
                         break;
                 }
@@ -317,81 +312,126 @@ namespace Yorot
                 if (appcn == "com.haltroy.yorot") 
                 {
                     AnimateTo(AnimateDirection.Left);
-                } 
+                }else if (appcn == "com.haltroy.settings")
+                {
+                    pbSettings_MouseClick(sender, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+                }
                 else
                 {
-                    if (app.AssocTab == null)
+                    if (app.Layouts.Count > 0)
                     {
-                        UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(app) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
-                        app.AssocForm = fapp;
-                        showApp(fapp);
-                    }
-                    else
-                    {
-                        if (app.AssocForm.freeMode) 
+                        var layout = app.Layouts[0];
+                        if (layout.AssocForm.freeMode)
                         {
-                            app.AssocForm.Show();
-                            app.AssocForm.BringToFront();
+                            layout.AssocForm.Show();
+                            layout.AssocForm.BringToFront();
                         }
                         else
                         {
-                            TabControl tabc = app.AssocTab.Parent as TabControl;
+                            TabControl tabc = layout.AssocTab.Parent as TabControl;
                             if (tabc.InvokeRequired)
                             {
-                                Invoke(new Action(() => { allowSwitch = true; tabc.SelectedTab = app.AssocTab; }));
+                                Invoke(new Action(() => { allowSwitch = true; tabc.SelectedTab = layout.AssocTab; }));
                             }
                             else
                             {
                                 allowSwitch = true;
-                                tabc.SelectedTab = app.AssocTab;
+                                tabc.SelectedTab = layout.AssocTab;
                             }
                         }
                     }
+                    else
+                    {
+                        UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(app) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+                        showApp(fapp);
+                    }
+                }
+                foreach(Control x in flpFavApps.Controls)
+                {
+                    x.Refresh();
                 }
             }
         }
-        private void showApp(UI.frmApp app)
+        private void showApp(UI.frmApp app,YAMItem sender = null)
         {
-            TabPage tp = new TabPage() { Text = app.assocApp.AppName };
-            app.assocApp.AssocTab = tp;
-            tp.Controls.Add(app);
-            tcAppMan.TabPages.Add(tp);
-            allowSwitch = true;
-            tcAppMan.SelectedTab = tp;
-            if (app.assocApp.AppCodeName != "com.haltroy.settings")
+            if (sender == null)
             {
-                PictureBox pbIcon = new PictureBox() { SizeMode = PictureBoxSizeMode.Zoom, Image = app.assocApp.GetAppIcon(), Size = new Size(32, 32), Margin = new Padding(5), Visible = true, Tag = app };
-                pbIcon.MouseClick += pbIcon_MouseClick;
-                app.assocApp.AssocPB = pbIcon;
-                flpFavApps.Controls.Add(pbIcon);
+                TabPage tp = new TabPage() { Text = app.assocApp.AppName };
+                YorotAppLayout layout = new YorotAppLayout()
+                {
+                    AssocForm = app,
+                    AssocTab = tp,
+                };
+                app.assocApp.Layouts.Add(layout);
+                app.assocLayout = layout;
+                tp.Controls.Add(app);
+                tcAppMan.TabPages.Add(tp);
+                allowSwitch = true;
+                tcAppMan.SelectedTab = tp;
+                if (app.assocApp.AppCodeName != "com.haltroy.settings")
+                {
+                    YAMItem pbIcon = new YAMItem() { Size = new Size(38, 38), Margin = new Padding(3), Visible = true, AssocApp = app.assocApp, AssocFrmMain = this };
+                    pbIcon.MouseClick += pbIcon_MouseClick;
+                    layout.AssocItem = pbIcon;
+                    flpFavApps.Controls.Add(pbIcon); pbIcon.Refresh();
+                }
+            }else
+            {
+                TabPage tp = new TabPage() { Text = app.assocApp.AppName };
+                YorotAppLayout layout = new YorotAppLayout()
+                {
+                    AssocForm = app,
+                    AssocTab = tp,
+                };
+                app.assocApp.Layouts.Add(layout);
+                app.assocLayout = layout;
+                tp.Controls.Add(app);
+                tcAppMan.TabPages.Add(tp);
+                allowSwitch = true;
+                tcAppMan.SelectedTab = tp;
+                layout.AssocItem = sender;
+                if (app.assocLayout.AssocItem.InvokeRequired) { app.assocLayout.AssocItem.Invoke(new Action(() => app.assocLayout.AssocItem.Refresh())); } else { app.assocLayout.AssocItem.Refresh(); }
             }
         }
         private void pbIcon_MouseClick(object sender, MouseEventArgs e)
         {
+            YAMItem pbIcon = sender as YAMItem;
             if (e.Button == MouseButtons.Left)
             {
-                if (pAppDrawer.Width < panelMaxSize)
+                if (pbIcon.CurrentStatus == YAMItem.AppStatuses.Pinned) // Launch app
                 {
-                    AnimateTo(AnimateDirection.RightMost);
-                }
-                PictureBox pbIcon = sender as PictureBox;
-                var fapp = pbIcon.Tag as UI.frmApp;
-                if (fapp.freeMode)
-                {
-                    fapp.Show();
-                    fapp.BringToFront();
+                    UI.frmApp fapp  = new UI.frmApp(pbIcon.AssocApp) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+                    showApp(fapp,pbIcon);
                 }
                 else
                 {
-                    allowSwitch = true;
-                    tcAppMan.SelectedTab = fapp.assocApp.AssocTab;
+                    if (pbIcon.AssocApp.Layouts[pbIcon.FocusedLayoutIndex].AssocForm.ContainsFocus || pbIcon.AssocApp.Layouts[pbIcon.FocusedLayoutIndex].AssocForm.Focused)
+                    {
+                        // shift between sessions
+                        pbIcon.FocusedLayoutIndex = pbIcon.FocusedLayoutIndex < pbIcon.AssocApp.Layouts.Count - 1 ? pbIcon.FocusedLayoutIndex + 1 : 0;
+
+                    }
+                    var fapp = pbIcon.AssocApp.Layouts[pbIcon.FocusedLayoutIndex].AssocForm;
+                    if (fapp.freeMode)
+                    {
+                        fapp.Show();
+                        fapp.BringToFront();
+                    }
+                    else
+                    {
+                        if (pAppDrawer.Width < panelMaxSize)
+                        {
+                            AnimateTo(AnimateDirection.RightMost);
+                        }
+                        allowSwitch = true;
+                        tcAppMan.SelectedTab = fapp.assocLayout.AssocTab;
+                    }
                 }
-            }else if (e.Button == MouseButtons.Right)
+
+            }
+            else if (e.Button == MouseButtons.Right)
             {
-                PictureBox pbIcon = sender as PictureBox;
-                var fapp = pbIcon.Tag as UI.frmApp;
-                var app = fapp.assocApp;
-                rcSender = app;
+                rcSender = pbIcon;
                 rcType = 2;
                 cmsApp.Show(MousePosition);
             }
@@ -517,10 +557,9 @@ namespace Yorot
                     break;
                 case 2:
                     openANewSessionToolStripMenuItem.Visible = true;
-                    if (rcSender is YorotApp)
+                    if (rcSender is YAMItem)
                     {
-                        var app = rcSender as YorotApp;
-                        var hasSession = app.hasSessions();
+                        var hasSession = (rcSender as YAMItem).CurrentStatus != YAMItem.AppStatuses.Pinned;
                         closeAllSessionsToolStripMenuItem.Visible = hasSession;
                         closeAllSessionsToolStripMenuItem.Enabled = hasSession;
                     }
@@ -562,17 +601,18 @@ namespace Yorot
                     settingsToolStripMenuItem.Enabled = true;
                     break;
                 case 4:
-                    openANewSessionToolStripMenuItem.Visible = true;
-                    closeAllSessionsToolStripMenuItem.Visible = YorotGlobal.Settings.AppMan.FindByAppCN(DefaultApps.Settings.AppCodeName).hasSessions();
-                    closeAllSessionsToolStripMenuItem.Enabled = closeAllSessionsToolStripMenuItem.Visible;
-                    tsAppSep1.Visible = true;
+                    openANewSessionToolStripMenuItem.Visible = false;
+                    var hasSessions = YorotGlobal.Settings.AppMan.FindByAppCN(DefaultApps.Settings.AppCodeName).hasSessions();
+                    closeAllSessionsToolStripMenuItem.Visible = hasSessions;
+                    closeAllSessionsToolStripMenuItem.Enabled = hasSessions;
+                    tsAppSep1.Visible = false;
                     pinToAppBarToolStripMenuItem.Visible = false;
                     appSettingsToolStripMenuItem.Visible = true;
                     tsAppSep2.Visible = true;
                     reloadToolStripMenuItem.Visible = false;
                     settingsToolStripMenuItem.Visible = true;
-                    openANewSessionToolStripMenuItem.Enabled = true;
-                    tsAppSep1.Enabled = true;
+                    openANewSessionToolStripMenuItem.Enabled = false;
+                    tsAppSep1.Enabled = false;
                     pinToAppBarToolStripMenuItem.Enabled = false;
                     appSettingsToolStripMenuItem.Enabled = true;
                     tsAppSep2.Enabled = true;
@@ -597,23 +637,23 @@ namespace Yorot
                         AnimateTo(AnimateDirection.RightMost);
                     }
                     var settingApp = YorotGlobal.Settings.AppMan.FindByAppCN("com.haltroy.settings");
-                    if (settingApp.AssocTab == null)
+                    if (settingApp.Layouts.Count > 0)
                     {
-                        UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(settingApp) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
-                        settingApp.AssocForm = fapp;
-                        showApp(fapp);
-                    }
-                    else
-                    {
-                        TabControl tabc = settingApp.AssocTab.Parent as TabControl;
+                        var layout = settingApp.Layouts[0];
+                        TabControl tabc = layout.AssocTab.Parent as TabControl;
                         if (tabc.InvokeRequired)
                         {
-                            Invoke(new Action(() => tabc.SelectedTab = settingApp.AssocTab));
+                            Invoke(new Action(() => tabc.SelectedTab = layout.AssocTab));
                         }
                         else
                         {
-                            tabc.SelectedTab = settingApp.AssocTab;
+                            tabc.SelectedTab = layout.AssocTab;
                         }
+                    }
+                    else
+                    {
+                        UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(settingApp) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+                        showApp(fapp);
                     }
                 }
             }else if (e.Button == MouseButtons.Right)
@@ -655,8 +695,16 @@ namespace Yorot
             }
             else
             {
-                var app = rcType == 1 ? (rcSender as ListViewItem).Tag as YorotApp : rcSender as YorotApp;
-                // TODO: Spawn a new app
+                if (rcType == 1) {
+                    var app =  (rcSender as ListViewItem).Tag as YorotApp;
+                    UI.frmApp fapp = new UI.frmApp(app) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+                    showApp(fapp);
+                }else
+                {
+                    var app = (rcSender as YAMItem).AssocApp;
+                    UI.frmApp fapp = new UI.frmApp(app) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+                    showApp(fapp, (rcSender as YAMItem));
+                }
             }
         }
 
@@ -665,23 +713,52 @@ namespace Yorot
             if (rcType == 3)
             {
                 // TODO: Close all apps.
+                foreach (YorotApp app in YorotGlobal.Settings.AppMan.Apps)
+                {
+                    YorotAppLayout[] layArray = app.Layouts.ToArray();
+                    foreach (YorotAppLayout layout in layArray)
+                    {
+                        if (layout.AssocForm.InvokeRequired) { layout.AssocForm.Invoke(new Action(() => layout.AssocForm.Close())); } else { layout.AssocForm.Close(); }
+                    }
+                }
+            }
+            else if (rcType == 4)
+            {
+                var settingApp = YorotGlobal.Settings.AppMan.FindByAppCN("com.haltroy.settings");
+                if (settingApp.Layouts.Count > 0)
+                {
+                    var layout = settingApp.Layouts[0];
+                    if(layout.AssocForm.InvokeRequired) { layout.AssocForm.Invoke(new Action(()=> layout.AssocForm.Close())); } else { layout.AssocForm.Close(); }
+                }
             }
             else
             {
-                var app = rcType == 1 ? (rcSender as ListViewItem).Tag as YorotApp : rcSender as YorotApp;
-                // TODO: Remove duplicates and close app itself.
+                var app = rcType == 1 ? (rcSender as ListViewItem).Tag as YorotApp : (rcSender as YAMItem).AssocApp;
+                YorotAppLayout[] layArray = app.Layouts.ToArray();
+                foreach (YorotAppLayout layout in layArray)
+                {
+                    if (layout.AssocForm.InvokeRequired) { layout.AssocForm.Invoke(new Action(() => layout.AssocForm.Close())); } else { layout.AssocForm.Close(); }
+                }
             }
         }
 
         private void pinToAppBarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var app = rcType == 1 ? (rcSender as ListViewItem).Tag as YorotApp : rcSender as YorotApp;
-            // TODO: Pin app to app bar.
+            var app = rcType == 1 ? (rcSender as ListViewItem).Tag as YorotApp : (rcSender as YAMItem).AssocApp;
+            app.isPinned = !app.isPinned;
+            if (rcSender is YAMItem) 
+            {
+                var cntrl = (rcSender as YAMItem);
+                if (!app.isPinned && cntrl.CurrentStatus == YAMItem.AppStatuses.Pinned)
+                {
+                    // TODO: Remove cntrl
+                }
+            }
         }
 
         private void appSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var app = rcType == 1 ? (rcSender as ListViewItem).Tag as YorotApp : rcSender as YorotApp;
+            var app = rcType == 4 ? YorotGlobal.Settings.AppMan.FindByAppCN("com.haltroy.settings") : (rcType == 1 ? (rcSender as ListViewItem).Tag as YorotApp : (rcSender as YAMItem).AssocApp);
             // TODO: Open settings for this app.
         }
 

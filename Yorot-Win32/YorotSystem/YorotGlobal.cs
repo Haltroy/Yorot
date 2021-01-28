@@ -41,51 +41,12 @@ namespace Yorot
         /// <summary>
         /// Placeholder text used by default apps. 
         /// </summary>
-        public static string DefaultaAppOriginPlaceHolder = "24 January 2021 16:50:00 GMT+3:00" + Environment.NewLine + "https://github.com/Haltroy/Yorot , Turkey" + Environment.NewLine + "Yorot C# Embedded Code" + Environment.NewLine + "(<Source>/Yorot-Win32/UI/"; // TODO: Change date on releases.
+        public static string DefaultaAppOriginPlaceHolder = "24 January 2021 16:50:00 GMT+3:00" + Environment.NewLine + "https://github.com/Haltroy/Yorot" + Environment.NewLine + "Yorot C# Embedded Code" + Environment.NewLine + "(<Source>/Yorot-Win32/UI/"; // TODO: Change date on releases.
         /// <summary>
         /// Version Control (HTUPDATE) URL.
         /// </summary>
         public static string HTULoc = "https://raw.githubusercontent.com/Haltroy/Yorot/main/Yorot.htupdate"; 
-        /// <summary>
-        /// User Files location.
-        /// </summary>
-        public static string UserLoc = YorotAppPath + "\\usr\\";
-        /// <summary>
-        /// User Cache location.
-        /// </summary>
-        public static string CacheLoc = UserLoc + "\\c\\";
-        /// <summary>
-        /// User settings location.
-        /// </summary>
-        public static string UserSettings = UserLoc + "usr.knf";
-        /// <summary>
-        /// History Manager configuration file location.
-        /// </summary>
-        public static string UserHistory = UserLoc + "hman.knf";
-        /// <summary>
-        /// Favorites Manager configuration file location.
-        /// </summary>
-        public static string UserFavorites = UserLoc + "fman.knf";
-        /// <summary>
-        /// Downloads Manager configuration file location.
-        /// </summary>
-        public static string UserDownloads = UserLoc + "dman.knf";
-        /// <summary>
-        /// Themes Manager configuration file location.
-        /// </summary>
-        public static string UserTheme = UserLoc + "tman.knf";
-        /// <summary>
-        /// Extension Manager configuration file location.
-        /// </summary>
-        public static string UserExt = UserLoc + "extman.knf";
-        /// <summary>
-        /// Yorot App Manager configuration file location.
-        /// </summary>
-        public static string UserApp = UserLoc + "yam.knf";
-        /// <summary>
-        /// Yorot App Manager Application storage.
-        /// </summary>
-        public static string UserApps = UserLoc + "yam\\";
+        
         /// <summary>
         /// Generates <see cref="Image"/> from <paramref name="baseIcon"/>.
         /// </summary>

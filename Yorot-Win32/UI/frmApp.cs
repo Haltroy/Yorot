@@ -8,6 +8,7 @@ namespace Yorot.UI
     {
         public YorotApp assocApp;
         public frmMain assocForm;
+        public YorotAppLayout assocLayout;
         object appContainer = null;
         public frmApp(string appcn)
         {
@@ -81,7 +82,7 @@ namespace Yorot.UI
             }
             else
             {
-                assocApp.AssocForm = this;
+                assocLayout.AssocForm = this;
             }
             Text = app.AppName;
             lbTitle.Text = app.AppName;
@@ -101,8 +102,8 @@ namespace Yorot.UI
         }
         private void frmApp_FormClosing(object sender, FormClosingEventArgs e)
         {
-            TabControl tcappman = assocApp.AssocTab.Parent as TabControl;
-            if (tcappman.SelectedTab == assocApp.AssocTab)
+            TabControl tcappman = assocLayout.AssocTab.Parent as TabControl;
+            if (tcappman.SelectedTab == assocLayout.AssocTab)
             {
                 assocForm.loadMainTab();
             }
@@ -110,39 +111,35 @@ namespace Yorot.UI
             {
                 tcappman.Invoke(new Action(() =>
                 {
-                    tcappman.TabPages.Remove(assocApp.AssocTab);
+                    tcappman.TabPages.Remove(assocLayout.AssocTab);
                 }));
             }
             else
             {
-                tcappman.TabPages.Remove(assocApp.AssocTab);
+                tcappman.TabPages.Remove(assocLayout.AssocTab);
             }
-            // TODO: assocPB üstünde çalış
-            if (assocApp.Duplicates.Count > 0) 
-            {
-                var firstDup = assocApp.Duplicates[0];
-                assocApp.AssocTab = firstDup.AssocTab;
-                assocApp.AssocForm = firstDup.AssocForm;
-                firstDup.AssocForm.assocApp = assocApp;
-                assocApp.Duplicates.Remove(firstDup);
-            }
+            assocLayout.AssocTab = null;
+            assocApp.Layouts.Remove(assocLayout);
+            var hasMoreSessions = assocApp.Layouts.FindAll(i => i.AssocItem.AssocFrmMain == assocForm).Count > 0;
+            if (assocApp.isPinned) { if (assocLayout.AssocItem.InvokeRequired) { assocLayout.AssocItem.Invoke(new Action(() => assocLayout.AssocItem.Invalidate())); } else { assocLayout.AssocItem.Invalidate(); } }
             else
             {
-                assocApp.AssocTab = null;
-                assocApp.AssocForm = null;
-            }
-            if (assocApp.AppCodeName != "com.haltroy.settings")
-            {
-                FlowLayoutPanel pappdrawer = assocApp.AssocPB.Parent as FlowLayoutPanel;
-                if (pappdrawer.InvokeRequired)
+                if (assocApp.AppCodeName != "com.haltroy.settings" && !hasMoreSessions)
                 {
-                    pappdrawer.Invoke(new Action(() => pappdrawer.Controls.Remove(assocApp.AssocPB)));
+                    FlowLayoutPanel pappdrawer = assocLayout.AssocItem.Parent as FlowLayoutPanel;
+                    if (pappdrawer.InvokeRequired)
+                    {
+                        pappdrawer.Invoke(new Action(() => pappdrawer.Controls.Remove(assocLayout.AssocItem)));
+                    }
+                    else
+                    {
+                        pappdrawer.Controls.Remove(assocLayout.AssocItem);
+                    }
                 }
-                else
+                else if (assocApp.AppCodeName != "com.haltroy.settings" && hasMoreSessions) // Redraw it cuzz its updated.
                 {
-                    pappdrawer.Controls.Remove(assocApp.AssocPB);
+                    if (assocLayout.AssocItem.InvokeRequired) { assocLayout.AssocItem.Invoke(new Action(() => assocLayout.AssocItem.Invalidate())); } else { assocLayout.AssocItem.Invalidate(); }
                 }
-                assocApp.AssocPB = null;
             }
         }
         System.Drawing.Size fmSize { get; set; } = new System.Drawing.Size(600, 500);
@@ -160,7 +157,7 @@ namespace Yorot.UI
                 btMinimize.Visible = true;
                 btMinimize.Enabled = true;
                 Parent = null;
-                assocApp.AssocTab.Controls.Remove(this);
+                assocLayout.AssocTab.Controls.Remove(this);
                 Dock = DockStyle.None;
                 TopLevel = true;
                 FormBorderStyle = FormBorderStyle.Sizable;
@@ -179,19 +176,19 @@ namespace Yorot.UI
                 TopMost = false;
                 TopLevel = false;
                 btPopOut.Text = "□";
-                assocForm.loadSpecificTab(assocApp.AssocTab);
+                assocForm.loadSpecificTab(assocLayout.AssocTab);
                 btMaximize.Visible = false;
                 btMaximize.Enabled = false;
                 btMinimize.Visible = false;
                 btMinimize.Enabled = false;
-                Parent = assocApp.AssocTab;
+                Parent = assocLayout.AssocTab;
                 FormBorderStyle = FormBorderStyle.None;
                 pTitle.MouseDown -= p_mdown;
                 pTitle.MouseDoubleClick -= p_mdclick;
                 lbTitle.MouseDown -= p_mdown;
                 lbTitle.MouseDoubleClick -= p_mdclick;
                 Dock = DockStyle.Fill;
-                assocApp.AssocTab.Controls.Add(this);
+                assocLayout.AssocTab.Controls.Add(this);
                 Show();
                 freeMode = false;
             }

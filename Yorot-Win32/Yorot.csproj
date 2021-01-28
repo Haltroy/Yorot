@@ -83,6 +83,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UI\CustomControls\YAMItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\frmApp.cs">
       <SubType>Form</SubType>
     </Compile>

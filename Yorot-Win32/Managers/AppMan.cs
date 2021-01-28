@@ -13,6 +13,7 @@ namespace Yorot
     {
         public AppMan(string configFile)
         {
+            if (!string.IsNullOrWhiteSpace(configFile)) { }
             Apps.Add(DefaultApps.Calculator.CreateCarbonCopy());
             Apps.Add(DefaultApps.Collections.CreateCarbonCopy());
             Apps.Add(DefaultApps.Console.CreateCarbonCopy());
@@ -328,7 +329,7 @@ namespace Yorot
             }
             else
             {
-                return HTAlt.Tools.ReadFile(YorotGlobal.UserApps + AppCodeName + "\\" + AppIcon, System.Drawing.Imaging.ImageFormat.Png);
+                return HTAlt.Tools.ReadFile(YorotGlobal.Settings.UserApps + AppCodeName + "\\" + AppIcon, System.Drawing.Imaging.ImageFormat.Png);
             }
         }
         /// <summary>
@@ -410,6 +411,10 @@ namespace Yorot
         /// </summary>
         public bool isLocal { get; set; }
         /// <summary>
+        /// <see cref="true"/> if this app is pinned, otherwise <seealso cref="false"/>.
+        /// </summary>
+        public bool isPinned { get; set; } = false;
+        /// <summary>
         /// URL of HTUPDATE file for this app.
         /// </summary>
         public string HTUPDATE { get; set; }
@@ -457,9 +462,9 @@ namespace Yorot
         /// </summary>
         public System.Windows.Forms.TabPage AssocTab { get; set; }
         /// <summary>
-        /// Gets associated <see cref="System.Windows.Forms.PictureBox"/> of this <see cref="YorotApp"/>. <see cref="null"/> if no PBs are associated.
+        /// Gets associated <see cref="YAMItem"/> of this <see cref="YorotApp"/>. <see cref="null"/> if no YAMIs are associated.
         /// </summary>
-        public System.Windows.Forms.PictureBox AssocPB { get; set; }
+        public YAMItem AssocItem { get; set; }
         /// <summary>
         /// <see cref="true"/> to ask this layout to reload app, otherwise <see cref="false"/>
         /// </summary>
