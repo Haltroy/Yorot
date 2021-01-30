@@ -32,32 +32,9 @@ namespace Yorot.UI.SystemApp
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpSettings = new System.Windows.Forms.TabPage();
-            this.pSchedule = new System.Windows.Forms.Panel();
-            this.flpFrom = new System.Windows.Forms.FlowLayoutPanel();
-            this.fromHour = new System.Windows.Forms.NumericUpDown();
-            this.label40 = new System.Windows.Forms.Label();
-            this.fromMin = new System.Windows.Forms.NumericUpDown();
-            this.flpEvery = new System.Windows.Forms.FlowLayoutPanel();
-            this.lbSunday = new System.Windows.Forms.Label();
-            this.lbMonday = new System.Windows.Forms.Label();
-            this.lbTuesday = new System.Windows.Forms.Label();
-            this.lbWednesday = new System.Windows.Forms.Label();
-            this.lbThursday = new System.Windows.Forms.Label();
-            this.lbFriday = new System.Windows.Forms.Label();
-            this.lbSaturday = new System.Windows.Forms.Label();
-            this.lb24HType = new System.Windows.Forms.Label();
-            this.scheduleFrom = new System.Windows.Forms.Label();
-            this.flpTo = new System.Windows.Forms.FlowLayoutPanel();
-            this.toHour = new System.Windows.Forms.NumericUpDown();
-            this.label41 = new System.Windows.Forms.Label();
-            this.toMin = new System.Windows.Forms.NumericUpDown();
-            this.scheduleEvery = new System.Windows.Forms.Label();
-            this.scheduleTo = new System.Windows.Forms.Label();
             this.btOpenSound = new HTAlt.WinForms.HTButton();
             this.tbSoundLoc = new System.Windows.Forms.TextBox();
-            this.lbSchedule = new System.Windows.Forms.Label();
             this.lbSilentMode = new System.Windows.Forms.Label();
-            this.hsSchedule = new HTAlt.WinForms.HTSwitch();
             this.hsSilent = new HTAlt.WinForms.HTSwitch();
             this.lbDefaultNotifSound = new System.Windows.Forms.Label();
             this.hsDefaultSound = new HTAlt.WinForms.HTSwitch();
@@ -117,28 +94,26 @@ namespace Yorot.UI.SystemApp
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.tpSync = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pbHamMenu = new System.Windows.Forms.PictureBox();
             this.lbSettings = new System.Windows.Forms.Label();
+            this.lbSync = new System.Windows.Forms.Label();
             this.lbThemes = new System.Windows.Forms.Label();
             this.lbApps = new System.Windows.Forms.Label();
             this.lbHakkinda = new System.Windows.Forms.Label();
             this.lbAdvanced = new System.Windows.Forms.Label();
             this.tmrAnimate = new System.Windows.Forms.Timer(this.components);
             this.tmrAppSync = new System.Windows.Forms.Timer(this.components);
-            this.lbSync = new System.Windows.Forms.Label();
-            this.tpSync = new System.Windows.Forms.TabPage();
-            this.label15 = new System.Windows.Forms.Label();
+            this.listView2 = new System.Windows.Forms.ListView();
+            this.htButton1 = new HTAlt.WinForms.HTButton();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.htButton2 = new HTAlt.WinForms.HTButton();
+            this.label16 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tpSettings.SuspendLayout();
-            this.pSchedule.SuspendLayout();
-            this.flpFrom.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fromHour)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fromMin)).BeginInit();
-            this.flpEvery.SuspendLayout();
-            this.flpTo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.toHour)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.toMin)).BeginInit();
+            this.tpThemes.SuspendLayout();
             this.tpApps.SuspendLayout();
             this.tcApps.SuspendLayout();
             this.tpAppList.SuspendLayout();
@@ -147,9 +122,10 @@ namespace Yorot.UI.SystemApp
             ((System.ComponentModel.ISupportInitialize)(this.nudSynthVol)).BeginInit();
             this.tpAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.tpSync.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHamMenu)).BeginInit();
-            this.tpSync.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -173,12 +149,9 @@ namespace Yorot.UI.SystemApp
             // tpSettings
             // 
             this.tpSettings.AutoScroll = true;
-            this.tpSettings.Controls.Add(this.pSchedule);
             this.tpSettings.Controls.Add(this.btOpenSound);
             this.tpSettings.Controls.Add(this.tbSoundLoc);
-            this.tpSettings.Controls.Add(this.lbSchedule);
             this.tpSettings.Controls.Add(this.lbSilentMode);
-            this.tpSettings.Controls.Add(this.hsSchedule);
             this.tpSettings.Controls.Add(this.hsSilent);
             this.tpSettings.Controls.Add(this.lbDefaultNotifSound);
             this.tpSettings.Controls.Add(this.hsDefaultSound);
@@ -227,291 +200,6 @@ namespace Yorot.UI.SystemApp
             this.tpSettings.Text = "Settings";
             this.tpSettings.UseVisualStyleBackColor = true;
             // 
-            // pSchedule
-            // 
-            this.pSchedule.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pSchedule.Controls.Add(this.flpFrom);
-            this.pSchedule.Controls.Add(this.flpEvery);
-            this.pSchedule.Controls.Add(this.lb24HType);
-            this.pSchedule.Controls.Add(this.scheduleFrom);
-            this.pSchedule.Controls.Add(this.flpTo);
-            this.pSchedule.Controls.Add(this.scheduleEvery);
-            this.pSchedule.Controls.Add(this.scheduleTo);
-            this.pSchedule.Location = new System.Drawing.Point(16, 867);
-            this.pSchedule.Name = "pSchedule";
-            this.pSchedule.Size = new System.Drawing.Size(535, 103);
-            this.pSchedule.TabIndex = 170;
-            // 
-            // flpFrom
-            // 
-            this.flpFrom.AutoSize = true;
-            this.flpFrom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flpFrom.Controls.Add(this.fromHour);
-            this.flpFrom.Controls.Add(this.label40);
-            this.flpFrom.Controls.Add(this.fromMin);
-            this.flpFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.flpFrom.Location = new System.Drawing.Point(49, 6);
-            this.flpFrom.Name = "flpFrom";
-            this.flpFrom.Size = new System.Drawing.Size(98, 29);
-            this.flpFrom.TabIndex = 43;
-            // 
-            // fromHour
-            // 
-            this.fromHour.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.fromHour.Location = new System.Drawing.Point(3, 3);
-            this.fromHour.Maximum = new decimal(new int[] {
-            23,
-            0,
-            0,
-            0});
-            this.fromHour.Name = "fromHour";
-            this.fromHour.Size = new System.Drawing.Size(34, 23);
-            this.fromHour.TabIndex = 46;
-            this.fromHour.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(43, 3);
-            this.label40.Margin = new System.Windows.Forms.Padding(3);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(12, 17);
-            this.label40.TabIndex = 45;
-            this.label40.Text = ":";
-            // 
-            // fromMin
-            // 
-            this.fromMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.fromMin.Location = new System.Drawing.Point(61, 3);
-            this.fromMin.Maximum = new decimal(new int[] {
-            59,
-            0,
-            0,
-            0});
-            this.fromMin.Name = "fromMin";
-            this.fromMin.Size = new System.Drawing.Size(34, 23);
-            this.fromMin.TabIndex = 47;
-            this.fromMin.Value = new decimal(new int[] {
-            59,
-            0,
-            0,
-            0});
-            // 
-            // flpEvery
-            // 
-            this.flpEvery.AutoSize = true;
-            this.flpEvery.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flpEvery.Controls.Add(this.lbSunday);
-            this.flpEvery.Controls.Add(this.lbMonday);
-            this.flpEvery.Controls.Add(this.lbTuesday);
-            this.flpEvery.Controls.Add(this.lbWednesday);
-            this.flpEvery.Controls.Add(this.lbThursday);
-            this.flpEvery.Controls.Add(this.lbFriday);
-            this.flpEvery.Controls.Add(this.lbSaturday);
-            this.flpEvery.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.flpEvery.Location = new System.Drawing.Point(49, 68);
-            this.flpEvery.Name = "flpEvery";
-            this.flpEvery.Size = new System.Drawing.Size(226, 29);
-            this.flpEvery.TabIndex = 43;
-            // 
-            // lbSunday
-            // 
-            this.lbSunday.AutoSize = true;
-            this.lbSunday.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lbSunday.Location = new System.Drawing.Point(3, 3);
-            this.lbSunday.Margin = new System.Windows.Forms.Padding(3);
-            this.lbSunday.Name = "lbSunday";
-            this.lbSunday.Padding = new System.Windows.Forms.Padding(3);
-            this.lbSunday.Size = new System.Drawing.Size(31, 23);
-            this.lbSunday.TabIndex = 0;
-            this.lbSunday.Tag = "0";
-            this.lbSunday.Text = "Su";
-            // 
-            // lbMonday
-            // 
-            this.lbMonday.AutoSize = true;
-            this.lbMonday.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lbMonday.Location = new System.Drawing.Point(40, 3);
-            this.lbMonday.Margin = new System.Windows.Forms.Padding(3);
-            this.lbMonday.Name = "lbMonday";
-            this.lbMonday.Padding = new System.Windows.Forms.Padding(3);
-            this.lbMonday.Size = new System.Drawing.Size(25, 23);
-            this.lbMonday.TabIndex = 1;
-            this.lbMonday.Tag = "0";
-            this.lbMonday.Text = "M";
-            // 
-            // lbTuesday
-            // 
-            this.lbTuesday.AutoSize = true;
-            this.lbTuesday.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lbTuesday.Location = new System.Drawing.Point(71, 3);
-            this.lbTuesday.Margin = new System.Windows.Forms.Padding(3);
-            this.lbTuesday.Name = "lbTuesday";
-            this.lbTuesday.Padding = new System.Windows.Forms.Padding(3);
-            this.lbTuesday.Size = new System.Drawing.Size(23, 23);
-            this.lbTuesday.TabIndex = 2;
-            this.lbTuesday.Tag = "0";
-            this.lbTuesday.Text = "T";
-            // 
-            // lbWednesday
-            // 
-            this.lbWednesday.AutoSize = true;
-            this.lbWednesday.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lbWednesday.Location = new System.Drawing.Point(100, 3);
-            this.lbWednesday.Margin = new System.Windows.Forms.Padding(3);
-            this.lbWednesday.Name = "lbWednesday";
-            this.lbWednesday.Padding = new System.Windows.Forms.Padding(3);
-            this.lbWednesday.Size = new System.Drawing.Size(27, 23);
-            this.lbWednesday.TabIndex = 3;
-            this.lbWednesday.Tag = "0";
-            this.lbWednesday.Text = "W";
-            // 
-            // lbThursday
-            // 
-            this.lbThursday.AutoSize = true;
-            this.lbThursday.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lbThursday.Location = new System.Drawing.Point(133, 3);
-            this.lbThursday.Margin = new System.Windows.Forms.Padding(3);
-            this.lbThursday.Name = "lbThursday";
-            this.lbThursday.Padding = new System.Windows.Forms.Padding(3);
-            this.lbThursday.Size = new System.Drawing.Size(33, 23);
-            this.lbThursday.TabIndex = 4;
-            this.lbThursday.Tag = "0";
-            this.lbThursday.Text = "TH";
-            // 
-            // lbFriday
-            // 
-            this.lbFriday.AutoSize = true;
-            this.lbFriday.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lbFriday.Location = new System.Drawing.Point(172, 3);
-            this.lbFriday.Margin = new System.Windows.Forms.Padding(3);
-            this.lbFriday.Name = "lbFriday";
-            this.lbFriday.Padding = new System.Windows.Forms.Padding(3);
-            this.lbFriday.Size = new System.Drawing.Size(22, 23);
-            this.lbFriday.TabIndex = 5;
-            this.lbFriday.Tag = "0";
-            this.lbFriday.Text = "F";
-            // 
-            // lbSaturday
-            // 
-            this.lbSaturday.AutoSize = true;
-            this.lbSaturday.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lbSaturday.Location = new System.Drawing.Point(200, 3);
-            this.lbSaturday.Margin = new System.Windows.Forms.Padding(3);
-            this.lbSaturday.Name = "lbSaturday";
-            this.lbSaturday.Padding = new System.Windows.Forms.Padding(3);
-            this.lbSaturday.Size = new System.Drawing.Size(23, 23);
-            this.lbSaturday.TabIndex = 6;
-            this.lbSaturday.Tag = "0";
-            this.lbSaturday.Text = "S";
-            // 
-            // lb24HType
-            // 
-            this.lb24HType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lb24HType.BackColor = System.Drawing.Color.Transparent;
-            this.lb24HType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lb24HType.Location = new System.Drawing.Point(3, 38);
-            this.lb24HType.Name = "lb24HType";
-            this.lb24HType.Size = new System.Drawing.Size(529, 24);
-            this.lb24HType.TabIndex = 40;
-            this.lb24HType.Text = "Based on 24-hour type. Add 12 to hours on PM.";
-            this.lb24HType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // scheduleFrom
-            // 
-            this.scheduleFrom.AutoSize = true;
-            this.scheduleFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.scheduleFrom.Location = new System.Drawing.Point(2, 11);
-            this.scheduleFrom.Name = "scheduleFrom";
-            this.scheduleFrom.Size = new System.Drawing.Size(44, 17);
-            this.scheduleFrom.TabIndex = 41;
-            this.scheduleFrom.Text = "From:";
-            // 
-            // flpTo
-            // 
-            this.flpTo.AutoSize = true;
-            this.flpTo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flpTo.Controls.Add(this.toHour);
-            this.flpTo.Controls.Add(this.label41);
-            this.flpTo.Controls.Add(this.toMin);
-            this.flpTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.flpTo.Location = new System.Drawing.Point(186, 6);
-            this.flpTo.Name = "flpTo";
-            this.flpTo.Size = new System.Drawing.Size(98, 29);
-            this.flpTo.TabIndex = 48;
-            // 
-            // toHour
-            // 
-            this.toHour.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.toHour.Location = new System.Drawing.Point(3, 3);
-            this.toHour.Maximum = new decimal(new int[] {
-            23,
-            0,
-            0,
-            0});
-            this.toHour.Name = "toHour";
-            this.toHour.Size = new System.Drawing.Size(34, 23);
-            this.toHour.TabIndex = 46;
-            this.toHour.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(43, 3);
-            this.label41.Margin = new System.Windows.Forms.Padding(3);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(12, 17);
-            this.label41.TabIndex = 45;
-            this.label41.Text = ":";
-            // 
-            // toMin
-            // 
-            this.toMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.toMin.Location = new System.Drawing.Point(61, 3);
-            this.toMin.Maximum = new decimal(new int[] {
-            59,
-            0,
-            0,
-            0});
-            this.toMin.Name = "toMin";
-            this.toMin.Size = new System.Drawing.Size(34, 23);
-            this.toMin.TabIndex = 47;
-            this.toMin.Value = new decimal(new int[] {
-            59,
-            0,
-            0,
-            0});
-            // 
-            // scheduleEvery
-            // 
-            this.scheduleEvery.AutoSize = true;
-            this.scheduleEvery.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.scheduleEvery.Location = new System.Drawing.Point(3, 74);
-            this.scheduleEvery.Name = "scheduleEvery";
-            this.scheduleEvery.Size = new System.Drawing.Size(48, 17);
-            this.scheduleEvery.TabIndex = 41;
-            this.scheduleEvery.Text = "Every:";
-            // 
-            // scheduleTo
-            // 
-            this.scheduleTo.AutoSize = true;
-            this.scheduleTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.scheduleTo.Location = new System.Drawing.Point(151, 11);
-            this.scheduleTo.Name = "scheduleTo";
-            this.scheduleTo.Size = new System.Drawing.Size(29, 17);
-            this.scheduleTo.TabIndex = 41;
-            this.scheduleTo.Text = "To:";
-            // 
             // btOpenSound
             // 
             this.btOpenSound.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -540,17 +228,6 @@ namespace Yorot.UI.SystemApp
             this.tbSoundLoc.Size = new System.Drawing.Size(502, 23);
             this.tbSoundLoc.TabIndex = 168;
             // 
-            // lbSchedule
-            // 
-            this.lbSchedule.AutoSize = true;
-            this.lbSchedule.BackColor = System.Drawing.Color.Transparent;
-            this.lbSchedule.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lbSchedule.Location = new System.Drawing.Point(13, 835);
-            this.lbSchedule.Name = "lbSchedule";
-            this.lbSchedule.Size = new System.Drawing.Size(149, 17);
-            this.lbSchedule.TabIndex = 164;
-            this.lbSchedule.Text = "Schedule Silent Mode:";
-            // 
             // lbSilentMode
             // 
             this.lbSilentMode.AutoSize = true;
@@ -561,13 +238,6 @@ namespace Yorot.UI.SystemApp
             this.lbSilentMode.Size = new System.Drawing.Size(86, 17);
             this.lbSilentMode.TabIndex = 165;
             this.lbSilentMode.Text = "Silent Mode:";
-            // 
-            // hsSchedule
-            // 
-            this.hsSchedule.Location = new System.Drawing.Point(169, 834);
-            this.hsSchedule.Name = "hsSchedule";
-            this.hsSchedule.Size = new System.Drawing.Size(50, 20);
-            this.hsSchedule.TabIndex = 160;
             // 
             // hsSilent
             // 
@@ -979,6 +649,9 @@ namespace Yorot.UI.SystemApp
             // 
             // tpThemes
             // 
+            this.tpThemes.Controls.Add(this.label16);
+            this.tpThemes.Controls.Add(this.flowLayoutPanel1);
+            this.tpThemes.Controls.Add(this.listView2);
             this.tpThemes.Location = new System.Drawing.Point(4, 22);
             this.tpThemes.Name = "tpThemes";
             this.tpThemes.Padding = new System.Windows.Forms.Padding(3);
@@ -1197,6 +870,26 @@ namespace Yorot.UI.SystemApp
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 
+            // tpSync
+            // 
+            this.tpSync.Controls.Add(this.label15);
+            this.tpSync.Location = new System.Drawing.Point(4, 22);
+            this.tpSync.Name = "tpSync";
+            this.tpSync.Size = new System.Drawing.Size(568, 1070);
+            this.tpSync.TabIndex = 6;
+            this.tpSync.Text = "Sync";
+            this.tpSync.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label15.Location = new System.Drawing.Point(21, 13);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(61, 25);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Sync";
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1235,6 +928,16 @@ namespace Yorot.UI.SystemApp
             this.lbSettings.TabIndex = 0;
             this.lbSettings.Text = "Settings";
             this.lbSettings.Click += new System.EventHandler(this.lbSettings_Click);
+            // 
+            // lbSync
+            // 
+            this.lbSync.AutoSize = true;
+            this.lbSync.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbSync.Location = new System.Drawing.Point(3, 67);
+            this.lbSync.Name = "lbSync";
+            this.lbSync.Size = new System.Drawing.Size(57, 25);
+            this.lbSync.TabIndex = 0;
+            this.lbSync.Text = "Sync";
             // 
             // lbThemes
             // 
@@ -1290,35 +993,70 @@ namespace Yorot.UI.SystemApp
             this.tmrAppSync.Enabled = true;
             this.tmrAppSync.Interval = 5000;
             // 
-            // lbSync
+            // listView2
             // 
-            this.lbSync.AutoSize = true;
-            this.lbSync.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.lbSync.Location = new System.Drawing.Point(3, 67);
-            this.lbSync.Name = "lbSync";
-            this.lbSync.Size = new System.Drawing.Size(57, 25);
-            this.lbSync.TabIndex = 0;
-            this.lbSync.Text = "Sync";
+            this.listView2.HideSelection = false;
+            this.listView2.Location = new System.Drawing.Point(7, 44);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(555, 966);
+            this.listView2.TabIndex = 0;
+            this.listView2.UseCompatibleStateImageBehavior = false;
             // 
-            // tpSync
+            // htButton1
             // 
-            this.tpSync.Controls.Add(this.label15);
-            this.tpSync.Location = new System.Drawing.Point(4, 22);
-            this.tpSync.Name = "tpSync";
-            this.tpSync.Size = new System.Drawing.Size(568, 1070);
-            this.tpSync.TabIndex = 6;
-            this.tpSync.Text = "Sync";
-            this.tpSync.UseVisualStyleBackColor = true;
+            this.htButton1.AutoColor = true;
+            this.htButton1.ButtonImage = null;
+            this.htButton1.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            this.htButton1.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.htButton1.DrawImage = false;
+            this.htButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.htButton1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.htButton1.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
+            this.htButton1.Location = new System.Drawing.Point(343, 3);
+            this.htButton1.Name = "htButton1";
+            this.htButton1.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.htButton1.Size = new System.Drawing.Size(209, 24);
+            this.htButton1.TabIndex = 1;
+            this.htButton1.Text = "Create a new theme...";
             // 
-            // label15
+            // flowLayoutPanel1
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label15.Location = new System.Drawing.Point(21, 13);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(61, 25);
-            this.label15.TabIndex = 1;
-            this.label15.Text = "Sync";
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel1.Controls.Add(this.htButton1);
+            this.flowLayoutPanel1.Controls.Add(this.htButton2);
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(7, 1018);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(555, 32);
+            this.flowLayoutPanel1.TabIndex = 2;
+            // 
+            // htButton2
+            // 
+            this.htButton2.AutoColor = true;
+            this.htButton2.ButtonImage = null;
+            this.htButton2.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            this.htButton2.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.htButton2.DrawImage = false;
+            this.htButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.htButton2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.htButton2.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
+            this.htButton2.Location = new System.Drawing.Point(106, 3);
+            this.htButton2.Name = "htButton2";
+            this.htButton2.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.htButton2.Size = new System.Drawing.Size(231, 24);
+            this.htButton2.TabIndex = 1;
+            this.htButton2.Text = "Download new themes...";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label16.Location = new System.Drawing.Point(7, 10);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(61, 25);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "Sync";
             // 
             // settings
             // 
@@ -1332,18 +1070,8 @@ namespace Yorot.UI.SystemApp
             this.tabControl1.ResumeLayout(false);
             this.tpSettings.ResumeLayout(false);
             this.tpSettings.PerformLayout();
-            this.pSchedule.ResumeLayout(false);
-            this.pSchedule.PerformLayout();
-            this.flpFrom.ResumeLayout(false);
-            this.flpFrom.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fromHour)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fromMin)).EndInit();
-            this.flpEvery.ResumeLayout(false);
-            this.flpEvery.PerformLayout();
-            this.flpTo.ResumeLayout(false);
-            this.flpTo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.toHour)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.toMin)).EndInit();
+            this.tpThemes.ResumeLayout(false);
+            this.tpThemes.PerformLayout();
             this.tpApps.ResumeLayout(false);
             this.tcApps.ResumeLayout(false);
             this.tpAppList.ResumeLayout(false);
@@ -1355,11 +1083,13 @@ namespace Yorot.UI.SystemApp
             this.tpAbout.ResumeLayout(false);
             this.tpAbout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.tpSync.ResumeLayout(false);
+            this.tpSync.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHamMenu)).EndInit();
-            this.tpSync.ResumeLayout(false);
-            this.tpSync.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1404,32 +1134,9 @@ namespace Yorot.UI.SystemApp
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel pSchedule;
-        private System.Windows.Forms.FlowLayoutPanel flpFrom;
-        private System.Windows.Forms.NumericUpDown fromHour;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.NumericUpDown fromMin;
-        private System.Windows.Forms.FlowLayoutPanel flpEvery;
-        private System.Windows.Forms.Label lbSunday;
-        private System.Windows.Forms.Label lbMonday;
-        private System.Windows.Forms.Label lbTuesday;
-        private System.Windows.Forms.Label lbWednesday;
-        private System.Windows.Forms.Label lbThursday;
-        private System.Windows.Forms.Label lbFriday;
-        private System.Windows.Forms.Label lbSaturday;
-        private System.Windows.Forms.Label lb24HType;
-        private System.Windows.Forms.Label scheduleFrom;
-        private System.Windows.Forms.FlowLayoutPanel flpTo;
-        private System.Windows.Forms.NumericUpDown toHour;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.NumericUpDown toMin;
-        private System.Windows.Forms.Label scheduleEvery;
-        private System.Windows.Forms.Label scheduleTo;
         private HTAlt.WinForms.HTButton btOpenSound;
         private System.Windows.Forms.TextBox tbSoundLoc;
-        private System.Windows.Forms.Label lbSchedule;
         private System.Windows.Forms.Label lbSilentMode;
-        private HTAlt.WinForms.HTSwitch hsSchedule;
         private HTAlt.WinForms.HTSwitch hsSilent;
         private System.Windows.Forms.Label lbDefaultNotifSound;
         private HTAlt.WinForms.HTSwitch hsDefaultSound;
@@ -1465,5 +1172,10 @@ namespace Yorot.UI.SystemApp
         private System.Windows.Forms.TabPage tpSync;
         private System.Windows.Forms.Label lbSync;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private HTAlt.WinForms.HTButton htButton1;
+        private HTAlt.WinForms.HTButton htButton2;
+        private System.Windows.Forms.ListView listView2;
     }
 }

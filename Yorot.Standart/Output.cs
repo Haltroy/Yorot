@@ -13,7 +13,7 @@ namespace Yorot
 {
     public class Output
     {
-        private readonly string LogDirPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.yorot\\log\\";
+        public static string LogDirPath = "";
 
         private static Output _outputSingleton;
 

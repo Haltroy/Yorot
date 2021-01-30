@@ -87,7 +87,7 @@ namespace Yorot.UI
             Text = app.AppName;
             lbTitle.Text = app.AppName;
             pbIcon.Image = app.GetAppIcon();
-            Icon = YorotGlobal.IconFromImage(pbIcon.Image);
+            Icon = YorotTools.IconFromImage(pbIcon.Image);
         }
 
         public bool freeMode { get; set; } = false;

@@ -370,13 +370,12 @@ namespace Yorot
         }
         /// <summary>
         /// Returns app size in bytes.
-        /// </summary>
-        public float AppSize
+        /// </summary>+
+        public long AppSize
         {
             get
             {
-                //TODO: Add App Sie detection.
-                throw new NotImplementedException("TODO");
+                return YorotTools.DirSize(new System.IO.DirectoryInfo(YorotGlobal.Settings.UserApps + AppCodeName));
             }
         }
         public string GetAppSizeInfo(string bytes)

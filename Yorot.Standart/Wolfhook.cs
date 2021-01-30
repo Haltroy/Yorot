@@ -13,9 +13,9 @@ namespace Yorot
     public class Wolfhook
     {
         /// <summary>
-        /// Location of Wolves in 
+        /// Location of Wolves.
         /// </summary>
-        public string WhFolder => YorotGlobal.YorotAppPath + "\\wolfhook\\";
+        public string WhFolder = "";
 
         /// <summary>
         /// Determines the <see cref="Encoding"/> of Wolves.

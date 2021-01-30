@@ -22,7 +22,8 @@ namespace Yorot
             InitializeComponent();
             pAppDrawer.Width = panelMinSize;
             isCarbonCopy = !isMainSession;
-            if (!isCarbonCopy) { RefreshAppList(true); YorotGlobal.Settings.MainForm = this; }  else
+            YorotGlobal.Y1.MainForms.Add(this);
+            if (!isCarbonCopy) { RefreshAppList(true); }  else
             {
                 label2.Visible = true;
                 label2.Enabled = true;
@@ -58,7 +59,7 @@ namespace Yorot
                 ListViewItem yorotApp = null;
                 foreach (YorotApp kapp in YorotGlobal.Settings.AppMan.Apps)
                 {
-                    ilAppMan.Images.Add(YorotGlobal.GenerateAppIcon(kapp.GetAppIcon(), "#808080".HexToColor()));
+                    ilAppMan.Images.Add(YorotTools.GenerateAppIcon(kapp.GetAppIcon(), "#808080".HexToColor()));
                     ListViewItem item = new ListViewItem()
                     {
                         Text = kapp.AppName,
@@ -88,7 +89,7 @@ namespace Yorot
                     }
                     if (!found)
                     {
-                        ilAppMan.Images.Add(YorotGlobal.GenerateAppIcon(yapp.GetAppIcon(), "#808080".HexToColor()));
+                        ilAppMan.Images.Add(YorotTools.GenerateAppIcon(yapp.GetAppIcon(), "#808080".HexToColor()));
                         ListViewItem item = new ListViewItem()
                         {
                             Text = yapp.AppName,
@@ -628,7 +629,7 @@ namespace Yorot
             {
                 if (isCarbonCopy)
                 {
-                    YorotGlobal.Settings.MainForm.Invoke(new Action(() => { YorotGlobal.Settings.MainForm.pbSettings_MouseClick(this, e); YorotGlobal.Settings.MainForm.BringToFront(); }));
+                    YorotGlobal.Y1.MainForm.Invoke(new Action(() => { YorotGlobal.Y1.MainForm.pbSettings_MouseClick(this, e); YorotGlobal.Y1.MainForm.BringToFront(); }));
                 }
                 else
                 {
@@ -809,6 +810,14 @@ namespace Yorot
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F10) { FullScreen(!isFullScreen); }
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (YorotGlobal.Y1.MainForms.Count == 1)
+            {
+                YorotGlobal.Settings.Save();
+            }
         }
     }
 }

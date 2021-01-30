@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Yorot</RootNamespace>
+    <Version>1.0.0.0</Version>
+    <Authors>Haltroy</Authors>
+    <Description>Standart library for all Yorot flavors.</Description>
+    <PackageProjectUrl>https://github.com/Haltroy/Yorot</PackageProjectUrl>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HTAlt.Standart" Version="0.1.6.3" />
+  </ItemGroup>
+
+</Project>

@@ -15,7 +15,7 @@ namespace Yorot.UI.SystemApp
         public calendar()
         {
             InitializeComponent();
-            Icon = YorotGlobal.IconFromImage(Properties.Resources.calendar);
+            Icon = YorotTools.IconFromImage(Properties.Resources.calendar);
         }
     }
 }

@@ -311,6 +311,7 @@ namespace Yorot
             this.KeyPreview = true;
             this.Name = "frmMain";
             this.Text = "Yorot";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMain_KeyDown);
             this.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);
