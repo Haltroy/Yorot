@@ -713,7 +713,6 @@ namespace Yorot
         {
             if (rcType == 3)
             {
-                // TODO: Close all apps.
                 foreach (YorotApp app in YorotGlobal.Settings.AppMan.Apps)
                 {
                     YorotAppLayout[] layArray = app.Layouts.ToArray();

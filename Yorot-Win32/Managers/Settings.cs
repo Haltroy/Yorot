@@ -7,6 +7,7 @@ using System.Xml;
 
 namespace Yorot
 {
+    // TODO: Add Web Engines Support
     public class Settings
     {
         public Settings()
@@ -23,9 +24,9 @@ namespace Yorot
                         CacheLoc = MOVED + @"usr\\cache\";
                         ThemesLoc = MOVED + @"usr\\themes\";
                         UserSettings = MOVED + @"usr\usr.ycf";
-                        UserHistory = MOVED + @"usr\hman.ycf";
-                        UserFavorites = MOVED + @"usr\fman.ycf";
-                        UserDownloads = MOVED + @"usr\dman.ycf";
+                        UserHistory = MOVED + @"usr\history.ycf";
+                        UserFavorites = MOVED + @"usr\favorites.ycf";
+                        UserDownloads = MOVED + @"usr\downloads.ycf";
                         UserTheme = MOVED + @"usr\tman.ycf";
                         UserExt = MOVED + @"usr\extman.ycf";
                         UserApp = MOVED + @"usr\yam.ycf";
@@ -33,6 +34,8 @@ namespace Yorot
                         LangLoc = MOVED + @"usr\lang\";
                         ExtLoc = MOVED + @"usr\ext\";
                         EngineLoc = MOVED + @"usr\engines\";
+                        UserProfile = MOVED + @"usr\profiles.ycf";
+                        UserProfiles = MOVED + @"usr\profiles\";
                     }else
                     {
                         Output.WriteLine("[Settings] Ignoring yorot.moved file. Cannot use path given in this file.", LogLevel.Warning);
@@ -61,7 +64,6 @@ namespace Yorot
                 {
                     try
                     {
-                        // TODO: Add all settings and read file in XML format
                         XmlDocument doc = new XmlDocument();
                         doc.LoadXml(HTAlt.Tools.ReadFile(UserSettings,Encoding.Unicode));
                         XmlNode root = YorotTools.FindRoot(doc);
@@ -275,7 +277,11 @@ namespace Yorot
                     }
                     catch (XmlException)
                     {
-                        Output.WriteLine("Loaded default settings because file is in invalid format.", LogLevel.Warning);
+                        Output.WriteLine("[Settings] Loaded default settings because file is in invalid format.", LogLevel.Warning);
+                    }
+                    catch (Exception ex)
+                    {
+                        Output.WriteLine("[Settings] Loaded default settings because of this exception:" + Environment.NewLine + ex.ToString(), LogLevel.Warning);
                     }
                 }
             }
@@ -349,6 +355,8 @@ namespace Yorot
             {
                 Directory.CreateDirectory(EngineLoc);
             }
+            AppMan = new AppMan(UserApp);
+            ThemeMan = new ThemeManager(UserTheme);
             HomePage = "yorot://newtab";
             // BEGIN: Search Engines
             SearchEngines.Clear();
@@ -384,11 +392,12 @@ namespace Yorot
 
         public void Save()
         {
+            ThemeMan.Save();
             HTAlt.Tools.WriteFile(UserSettings, ToXml(), Encoding.Unicode);
         }
 
-        public AppMan AppMan { get; set; } = new AppMan(null);
-        public ThemeManager ThemeMan { get; set; } = new ThemeManager(null);
+        public AppMan AppMan { get; set; }
+        public ThemeManager ThemeMan { get; set; }
         public bool SearchEngineExists(string name, string url)
         {
             return SearchEngines.FindAll(i => i.Name == name && i.Url == url).Count > 0;
@@ -396,6 +405,7 @@ namespace Yorot
         public string HomePage { get; set; } = "";
         public YorotSearchEngine SearchEngine { get; set; } = null;
         public List<YorotSearchEngine> SearchEngines { get; set; } = new List<YorotSearchEngine>();
+        public List<YorotWebEngine> WebEngines { get; set; } = new List<YorotWebEngine>();
         public bool RestoreOldSessions { get; set; } = false;
         public bool RememberLastProxy { get; set; } = false;
         public bool DoNotTrack { get; set; } = true;
@@ -442,15 +452,15 @@ namespace Yorot
         /// <summary>
         /// History Manager configuration file location.
         /// </summary>
-        public string UserHistory = YorotGlobal.YorotAppPath + @"usr\hman.ycf";
+        public string UserHistory = YorotGlobal.YorotAppPath + @"usr\history.ycf";
         /// <summary>
         /// Favorites Manager configuration file location.
         /// </summary>
-        public string UserFavorites = YorotGlobal.YorotAppPath + @"usr\fman.ycf";
+        public string UserFavorites = YorotGlobal.YorotAppPath + @"usr\favorites.ycf";
         /// <summary>
         /// Downloads Manager configuration file location.
         /// </summary>
-        public string UserDownloads = YorotGlobal.YorotAppPath + @"usr\dman.ycf";
+        public string UserDownloads = YorotGlobal.YorotAppPath + @"usr\downloads.ycf";
         /// <summary>
         /// Themes Manager configuration file location.
         /// </summary>
@@ -467,6 +477,14 @@ namespace Yorot
         /// Yorot App Manager Application storage.
         /// </summary>
         public string UserApps = YorotGlobal.YorotAppPath + @"usr\apps\";
+        /// <summary>
+        /// User profiles folder.
+        /// </summary>
+        public string UserProfiles = YorotGlobal.YorotAppPath + @"\usr\profiles\";
+        /// <summary>
+        /// User profiles configuration file.
+        /// </summary>
+        public string UserProfile = YorotGlobal.YorotAppPath + @"\usr\profiles.ycf";
 
     }
     public class YorotSearchEngine
@@ -479,5 +497,39 @@ namespace Yorot
         public string Name { get; set; }
         public string Url { get; set; }
         public bool comesWithYorot { get; set; } = false;
+    }
+    /// <summary>
+    /// Yorot Web Engine
+    /// </summary>
+    public class YorotWebEngine
+    {
+        /// <summary>
+        /// HTUPDATE address of this engine.
+        /// </summary>
+        public string HTUPDATE { get; set; }
+        /// <summary>
+        /// Location of thi engine in locaal drive.
+        /// </summary>
+        public string EngineLoc { get; set; }
+        /// <summary>
+        /// Current version of this engine.
+        /// </summary>
+        public int Version { get; set; }
+        /// <summary>
+        /// Name of this engine.
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// Description of this engine.
+        /// </summary>
+        public string Desc { get; set; }
+        /// <summary>
+        /// Location of this engine's logo on local drive.
+        /// </summary>
+        public string IconLoc { get; set; }
+        /// <summary>
+        /// Gets the engine's logo.
+        /// </summary>
+        public System.Drawing.Image Icon => HTAlt.Tools.ReadFile(IconLoc, System.Drawing.Imaging.ImageFormat.Png);
     }
 }

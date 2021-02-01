@@ -6,6 +6,14 @@ namespace Yorot
 {
     public static class YorotTools
     {
+        public static string FromThemeFolder(this string x)
+        {
+            return x.Replace("[THEMES]", YorotGlobal.Settings.ThemesLoc);
+        }
+        public static string ToThemeFolder(this string x)
+        {
+            return x.Replace(YorotGlobal.Settings.ThemesLoc, "[THEMES]");
+        }
         /// <summary>
         /// Detects if user can access <paramref name="dir"/> by try{} method.
         /// </summary>

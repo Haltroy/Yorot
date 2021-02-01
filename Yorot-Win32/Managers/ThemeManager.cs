@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using HTAlt;
 
 namespace Yorot
@@ -13,93 +15,233 @@ namespace Yorot
     {
         public ThemeManager(string configFile)
         {
-            // TODO: Read Config Fİle
             Themes.Add(DefaultThemes.YorotLight.CarbonCopy());
             Themes.Add(DefaultThemes.YorotDeepBlue.CarbonCopy());
             Themes.Add(DefaultThemes.YorotStone.CarbonCopy());
             Themes.Add(DefaultThemes.YorotShadow.CarbonCopy());
             Themes.Add(DefaultThemes.YorotRazor.CarbonCopy());
             Themes.Add(DefaultThemes.YorotDark.CarbonCopy());
+            if (string.IsNullOrWhiteSpace(configFile))
+            {
+                Output.WriteLine("[ThemeMan] Loaded defaults because config file location was empty.", LogLevel.Warning);
+            }else
+            {
+                if(!File.Exists(configFile))
+                {
+                    Output.WriteLine("[ThemeMan] Loaded defaults beacuse config file does not exists.", LogLevel.Warning);
+                }
+                else
+                {
+                    try
+                    {
+                        XmlDocument doc = new XmlDocument();
+                        doc.LoadXml(Tools.ReadFile(configFile, Encoding.Unicode));
+                        XmlNode rootnode = YorotTools.FindRoot(doc);
+                        List<string> acceptedSetting = new List<string>();
+                        bool ayaj = false;
+                        for (int i = 0; i < rootnode.ChildNodes.Count;i++)
+                        {
+                            var node = rootnode.ChildNodes[i];
+                            switch(node.Name)
+                            {
+                                case "LoadedTheme":
+                                    if (acceptedSetting.Contains(node.Name))
+                                    {
+                                        Output.WriteLine("[ThemeMan] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    acceptedSetting.Add(node.Name);
+                                    if (node.InnerXml.InnerXmlToString().ToLower().StartsWith("com.haltroy."))
+                                    {
+                                        AppliedTheme = Themes.Find(t => t.CodeName == node.InnerXml.InnerXmlToString());
+                                        ayaj = false;
+                                    }
+                                    else
+                                    {
+                                        if (Themes.FindAll(t => t.Config == node.InnerXml.InnerXmlToString().FromThemeFolder()).Count > 0)
+                                        {
+                                            ayaj = false;
+                                            AppliedTheme = Themes.Find(t => t.Config == node.InnerXml.InnerXmlToString().FromThemeFolder());
+                                        }
+                                        else
+                                        {
+                                            AppliedTheme = new YorotTheme(node.InnerText.InnerXmlToString().FromThemeFolder());
+                                            ayaj = true;
+                                        }
+                                    }
+                                    break;
+                                case "Themes":
+                                    if (acceptedSetting.Contains(node.Name))
+                                    {
+                                        Output.WriteLine("[ThemeMan] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    acceptedSetting.Add(node.Name);
+                                    for(int ı = 0; ı < node.ChildNodes.Count;ı++)
+                                    {
+                                        var subnode = node.ChildNodes[ı];
+                                        switch(subnode.Name)
+                                        {
+                                            case "Theme":
+                                                if (AppliedTheme == null)
+                                                {
+                                                    ayaj = false;
+                                                }
+                                                if (ayaj) // Applied theme might be in 
+                                                {
+                                                    if (subnode.InnerXml.InnerXmlToString() == AppliedTheme.Config)
+                                                    {
+                                                        Themes.Add(AppliedTheme);
+                                                    }else
+                                                    {
+                                                        Themes.Add(new YorotTheme(subnode.InnerXml.InnerXmlToString().FromThemeFolder()));
+                                                    }
+                                                }else //Applied theme is already in, no need to worry about duplication.
+                                                {
+                                                    Themes.Add(new YorotTheme(subnode.InnerXml.InnerXmlToString().FromThemeFolder()));
+                                                }
+                                                break;
+                                            default:
+                                                Output.WriteLine("[ThemeMan] Threw away \"" + subnode.OuterXml + "\". Invalid format.", LogLevel.Warning);
+                                                break;
+                                        }
+                                    }
+                                    break;
+                                default:
+                                    if (!node.OuterXml.StartsWith("<!--")) 
+                                    {
+                                        Output.WriteLine("[ThemeMan] Threw away \"" + node.OuterXml + "\". Unsupported.", LogLevel.Warning);
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                    catch(XmlException)
+                    {
+                        Output.WriteLine("[ThemeMan] Loaded defaults beacuse config file is in invalid format or has XML errors.", LogLevel.Warning);
+                    }
+                    catch (Exception ex)
+                    {
+                        Output.WriteLine("[ThemeMan] Loaded defaults because of this exception:" + Environment.NewLine + ex.ToString(), LogLevel.Warning);
+                    }
+                }
+            }
+            if (AppliedTheme == null)
+            {
+                if (Themes.Count > 0)
+                {
+                    AppliedTheme = Themes[0];
+                }else
+                {
+                    Themes.Add(DefaultThemes.YorotLight);
+                    AppliedTheme = Themes[0];
+                }
+            }
         }
         public YorotTheme AppliedTheme { get; set; }
         public List<YorotTheme> Themes { get; set; } = new List<YorotTheme>();
+
+        public string ToXml()
+        {
+            string x = "<?xml version=\"1.0\" encoding=\"utf-16\"?>" + Environment.NewLine + 
+                "<root>" + Environment.NewLine +
+                "<!-- Yorot Theme Config File" + Environment.NewLine + Environment.NewLine +
+                "This file is used to configure themes." + Environment.NewLine +
+                "Editing this file might cause problems with themes." + Environment.NewLine +
+                "-->" + Environment.NewLine +
+                "<LoadedTheme>" + (AppliedTheme.isDefaultTheme ? AppliedTheme.CodeName : AppliedTheme.Config.ToXML().ToThemeFolder())+ "</LoadedTheme>" + Environment.NewLine +
+                "<Themes>" + Environment.NewLine;
+            for(int i = 0; i < Themes.Count;i++)
+            {
+                var theme = Themes[i];
+                if (!theme.isDefaultTheme)
+                {
+                    x += "<Theme>" + theme.Config.ToThemeFolder() + "</Theme>" + Environment.NewLine;
+                }
+            }
+            return YorotTools.PrintXML(x + "</Themes>" + Environment.NewLine + "</root>");
+        }
+        public void Save()
+        {
+            ToXml().WriteToFile(YorotGlobal.Settings.UserTheme,Encoding.Unicode);
+        }
     }
 
     public static class DefaultThemes
     {
-        public static YorotTheme YorotLight => new YorotTheme()
+        public static YorotTheme YorotLight => new YorotTheme(null)
         {
             Name = "Yorot Light",
             Author = "Haltroy",
             CodeName = "com.haltroy.yorotlight",
             isDefaultTheme = true,
             Version = 1,
-            ThumbLoc = @"§RES\YorotLight.png",
+            ThumbLoc = @"YorotLight.png",
             BackColor = Color.FromArgb(255, 255, 255, 255),
             ForeColor = Color.FromArgb(255, 0, 0, 0),
             OverlayColor = Color.FromArgb(255, 64, 128, 255),
             ArtColor = Color.FromArgb(255, 235,235,235),
         };
-        public static YorotTheme YorotStone => new YorotTheme()
+        public static YorotTheme YorotStone => new YorotTheme(null)
         {
             Name = "Yorot Stone",
             Author = "Haltroy",
             CodeName = "com.haltroy.yorotstone",
             isDefaultTheme = true,
             Version = 1,
-            ThumbLoc = @"§RES\YorotStone.png",
+            ThumbLoc = @"YorotStone.png",
             BackColor = Color.FromArgb(255, 155,155,155),
             ForeColor = Color.FromArgb(255, 0, 0, 0),
             OverlayColor = Color.FromArgb(255, 64, 128, 255),
             ArtColor = Color.FromArgb(255, 0,0,255),
         };
-        public static YorotTheme YorotRazor => new YorotTheme()
+        public static YorotTheme YorotRazor => new YorotTheme(null)
         {
             Name = "Yorot Razor",
             Author = "Haltroy",
             CodeName = "com.haltroy.yorotrazor",
             isDefaultTheme = true,
             Version = 1,
-            ThumbLoc = @"§RES\YorotRazor.png",
+            ThumbLoc = @"YorotRazor.png",
             BackColor = Color.FromArgb(255,255,255,255),
             ForeColor = Color.FromArgb(255,0,0,0),
             OverlayColor = Color.FromArgb(255, 64, 32, 64),
             ArtColor = Color.FromArgb(255, 64, 32, 16),
         };
-        public static YorotTheme YorotDark => new YorotTheme()
+        public static YorotTheme YorotDark => new YorotTheme(null)
         {
             Name = "Yorot Dark",
             Author = "Haltroy",
             CodeName = "com.haltroy.yorotdark",
             isDefaultTheme = true,
             Version = 1,
-            ThumbLoc = @"§RES\YorotDark.png",
+            ThumbLoc = @"YorotDark.png",
             BackColor = Color.FromArgb(255, 0,0,0),
             ForeColor = Color.FromArgb(255, 195,195,195),
             OverlayColor = Color.FromArgb(255, 64, 128, 255),
             ArtColor = Color.FromArgb(255, 64,64,64),
         };
-        public static YorotTheme YorotShadow => new YorotTheme()
+        public static YorotTheme YorotShadow => new YorotTheme(null)
         {
             Name = "Yorot Shadow",
             Author = "Haltroy",
             CodeName = "com.haltroy.yorotshadow",
             isDefaultTheme = true,
             Version = 1,
-            ThumbLoc = @"§RES\YorotShadow.png",
+            ThumbLoc = @"YorotShadow.png",
             BackColor = Color.FromArgb(255, 23,32,32),
             ForeColor = Color.FromArgb(255, 195, 195, 195),
             OverlayColor = Color.FromArgb(255, 64, 128, 255),
             ArtColor = Color.FromArgb(255, 64, 64, 64),
         };
-        public static YorotTheme YorotDeepBlue => new YorotTheme()
+        public static YorotTheme YorotDeepBlue => new YorotTheme(null)
         {
             Name = "Yorot Deep Blue",
             Author = "Haltroy",
             CodeName = "com.haltroy.yorotdeepblue",
             isDefaultTheme = true,
             Version = 1,
-            ThumbLoc = @"§RES\YorotDeepBlue.png",
+            ThumbLoc = @"YorotDeepBlue.png",
             BackColor = Color.FromArgb(255, 8, 0, 64),
             ForeColor = Color.FromArgb(255, 0, 255, 196),
             OverlayColor = Color.FromArgb(255, 64, 128, 255),
@@ -109,9 +251,13 @@ namespace Yorot
 
     public class YorotTheme
     {
+        public YorotTheme(string fileLoc)
+        {
+
+        }
         public YorotTheme CarbonCopy()
         {
-            return new YorotTheme()
+            return new YorotTheme(null)
             {
                 Name = Name,
                 Author = Author,
@@ -136,11 +282,25 @@ namespace Yorot
         {
             get
             {
-                // TODO
-                return HTAlt.Tools.ReadFile(YorotGlobal.Settings.ThemesLoc + CodeName + @"\" + ThumbLoc, ImageFormat.Png);
+                if (isDefaultTheme)
+                {
+                    switch (ThumbLoc)
+                    {
+                        default:  case "YorotLight.png": return Properties.Resources.YorotLight;
+                        case "YorotStone.png": return Properties.Resources.YorotStone;
+                        case "YorotRazor.png": return Properties.Resources.YorotRazor;
+                        case "YorotDark.png": return Properties.Resources.YorotDark;
+                        case "YorotShadow.png": return Properties.Resources.YorotShadow;
+                        case "YorotDeepBlue.png": return Properties.Resources.YorotDeepBlue;
+                    }
+                }
+                else
+                {
+                    return HTAlt.Tools.ReadFile(YorotGlobal.Settings.ThemesLoc + CodeName + @"\" + ThumbLoc, ImageFormat.Png);
+                }
             }
         }
-
+        public string Config { get; set; }
         public bool isDefaultTheme { get; set; } = false;
         public System.Drawing.Color BackColor { get; set; }
         public Color BackColor2 => BackColor.ShiftBrightness(20, false);
