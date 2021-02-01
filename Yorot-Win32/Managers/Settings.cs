@@ -307,6 +307,12 @@ namespace Yorot
                 }
             }
             x += "</SearchEngines>" + Environment.NewLine;
+            x += "<WebEngines>" + Environment.NewLine;
+            for (int i = 0; i < WebEngines.Count; i++)
+            {
+                x += "<Engine Name=\"" + WebEngines[i].CodeName.ToXML() + "\" />" + Environment.NewLine;
+            }
+            x += "</WebEngines>" + Environment.NewLine;
             x += "<RestoreOldSessions>" + (RestoreOldSessions ? "true" : "false") + "</RestoreOldSessions>" + Environment.NewLine;
             x += "<RememberLastProxy>" + (RememberLastProxy ? "true" : "false") + "</RememberLastProxy>" + Environment.NewLine;
             x += "<DoNotTrack>" + (DoNotTrack ? "true" : "false") + "</DoNotTrack>" + Environment.NewLine;
@@ -519,6 +525,10 @@ namespace Yorot
         /// Name of this engine.
         /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Codename of the engine.
+        /// </summary>
+        public string CodeName { get; set; }
         /// <summary>
         /// Description of this engine.
         /// </summary>
