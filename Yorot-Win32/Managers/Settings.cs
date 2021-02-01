@@ -7,7 +7,6 @@ using System.Xml;
 
 namespace Yorot
 {
-    // TODO: Add Web Engines Support
     public class Settings
     {
         public Settings()
