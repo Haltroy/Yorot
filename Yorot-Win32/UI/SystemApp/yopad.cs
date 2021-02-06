@@ -15,7 +15,7 @@ namespace Yorot.UI.SystemApp
         public yopad()
         {
             InitializeComponent();
-            Icon = YorotTools.IconFromImage(Properties.Resources.yopad);
+            Icon = Yorot.Tools.IconFromImage(Properties.Resources.yopad);
         }
     }
 }

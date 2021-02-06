@@ -8,7 +8,7 @@ namespace Yorot.UI
     {
         public YorotApp assocApp;
         public frmMain assocForm;
-        public YorotAppLayout assocLayout;
+        public WinAppLayout assocLayout;
         object appContainer = null;
         public frmApp(string appcn)
         {
@@ -86,8 +86,8 @@ namespace Yorot.UI
             }
             Text = app.AppName;
             lbTitle.Text = app.AppName;
-            pbIcon.Image = app.GetAppIcon();
-            Icon = YorotTools.IconFromImage(pbIcon.Image);
+            pbIcon.Image = YorotTools.GetAppIcon(app);
+            Icon = Yorot.Tools.IconFromImage(pbIcon.Image);
         }
 
         public bool freeMode { get; set; } = false;
@@ -120,7 +120,7 @@ namespace Yorot.UI
             }
             assocLayout.AssocTab = null;
             assocApp.Layouts.Remove(assocLayout);
-            var hasMoreSessions = assocApp.Layouts.FindAll(i => i.AssocItem.AssocFrmMain == assocForm).Count > 0;
+            var hasMoreSessions = assocApp.Layouts.FindAll(i => (i is WinAppLayout) && (i as WinAppLayout).AssocItem.AssocFrmMain == assocForm).Count > 0;
             if (assocApp.isPinned) { if (assocLayout.AssocItem.InvokeRequired) { assocLayout.AssocItem.Invoke(new Action(() => assocLayout.AssocItem.Invalidate())); } else { assocLayout.AssocItem.Invalidate(); } }
             else
             {

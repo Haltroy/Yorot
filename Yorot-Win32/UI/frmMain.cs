@@ -17,7 +17,7 @@ namespace Yorot
         {
             if (YorotGlobal.Settings == null)
             {
-                YorotGlobal.Settings = new Settings();
+                YorotGlobal.Settings = new Settings(YorotGlobal.YorotAppPath);
             }
             InitializeComponent();
             pAppDrawer.Width = panelMinSize;
@@ -59,7 +59,7 @@ namespace Yorot
                 ListViewItem yorotApp = null;
                 foreach (YorotApp kapp in YorotGlobal.Settings.AppMan.Apps)
                 {
-                    ilAppMan.Images.Add(YorotTools.GenerateAppIcon(kapp.GetAppIcon(), "#808080".HexToColor()));
+                    ilAppMan.Images.Add(Tools.GenerateAppIcon(YorotTools.GetAppIcon(kapp), "#808080".HexToColor()));
                     ListViewItem item = new ListViewItem()
                     {
                         Text = kapp.AppName,
@@ -89,7 +89,7 @@ namespace Yorot
                     }
                     if (!found)
                     {
-                        ilAppMan.Images.Add(YorotTools.GenerateAppIcon(yapp.GetAppIcon(), "#808080".HexToColor()));
+                        ilAppMan.Images.Add(Yorot.Tools.GenerateAppIcon(YorotTools.GetAppIcon(yapp), "#808080".HexToColor()));
                         ListViewItem item = new ListViewItem()
                         {
                             Text = yapp.AppName,
@@ -321,7 +321,7 @@ namespace Yorot
                 {
                     if (app.Layouts.Count > 0)
                     {
-                        var layout = app.Layouts[0];
+                        var layout = app.Layouts[0] as WinAppLayout;
                         if (layout.AssocForm.freeMode)
                         {
                             layout.AssocForm.Show();
@@ -358,7 +358,7 @@ namespace Yorot
             if (sender == null)
             {
                 TabPage tp = new TabPage() { Text = app.assocApp.AppName };
-                YorotAppLayout layout = new YorotAppLayout()
+                WinAppLayout layout = new WinAppLayout()
                 {
                     AssocForm = app,
                     AssocTab = tp,
@@ -379,7 +379,7 @@ namespace Yorot
             }else
             {
                 TabPage tp = new TabPage() { Text = app.assocApp.AppName };
-                YorotAppLayout layout = new YorotAppLayout()
+                WinAppLayout layout = new WinAppLayout()
                 {
                     AssocForm = app,
                     AssocTab = tp,
@@ -406,13 +406,14 @@ namespace Yorot
                 }
                 else
                 {
-                    if (pbIcon.AssocApp.Layouts[pbIcon.FocusedLayoutIndex].AssocForm.ContainsFocus || pbIcon.AssocApp.Layouts[pbIcon.FocusedLayoutIndex].AssocForm.Focused)
+                    var layout = pbIcon.AssocApp.Layouts[pbIcon.FocusedLayoutIndex] as WinAppLayout;
+                    if (layout.AssocForm.ContainsFocus || layout.AssocForm.Focused)
                     {
                         // shift between sessions
                         pbIcon.FocusedLayoutIndex = pbIcon.FocusedLayoutIndex < pbIcon.AssocApp.Layouts.Count - 1 ? pbIcon.FocusedLayoutIndex + 1 : 0;
 
                     }
-                    var fapp = pbIcon.AssocApp.Layouts[pbIcon.FocusedLayoutIndex].AssocForm;
+                    var fapp = layout.AssocForm;
                     if (fapp.freeMode)
                     {
                         fapp.Show();
@@ -640,7 +641,7 @@ namespace Yorot
                     var settingApp = YorotGlobal.Settings.AppMan.FindByAppCN("com.haltroy.settings");
                     if (settingApp.Layouts.Count > 0)
                     {
-                        var layout = settingApp.Layouts[0];
+                        var layout = settingApp.Layouts[0] as WinAppLayout;
                         TabControl tabc = layout.AssocTab.Parent as TabControl;
                         if (tabc.InvokeRequired)
                         {
@@ -718,7 +719,8 @@ namespace Yorot
                     YorotAppLayout[] layArray = app.Layouts.ToArray();
                     foreach (YorotAppLayout layout in layArray)
                     {
-                        if (layout.AssocForm.InvokeRequired) { layout.AssocForm.Invoke(new Action(() => layout.AssocForm.Close())); } else { layout.AssocForm.Close(); }
+                        var wl = layout as WinAppLayout;
+                        if (wl.AssocForm.InvokeRequired) { wl.AssocForm.Invoke(new Action(() => wl.AssocForm.Close())); } else { wl.AssocForm.Close(); }
                     }
                 }
             }
@@ -727,7 +729,7 @@ namespace Yorot
                 var settingApp = YorotGlobal.Settings.AppMan.FindByAppCN("com.haltroy.settings");
                 if (settingApp.Layouts.Count > 0)
                 {
-                    var layout = settingApp.Layouts[0];
+                    var layout = settingApp.Layouts[0] as WinAppLayout;
                     if(layout.AssocForm.InvokeRequired) { layout.AssocForm.Invoke(new Action(()=> layout.AssocForm.Close())); } else { layout.AssocForm.Close(); }
                 }
             }
@@ -737,7 +739,8 @@ namespace Yorot
                 YorotAppLayout[] layArray = app.Layouts.ToArray();
                 foreach (YorotAppLayout layout in layArray)
                 {
-                    if (layout.AssocForm.InvokeRequired) { layout.AssocForm.Invoke(new Action(() => layout.AssocForm.Close())); } else { layout.AssocForm.Close(); }
+                    var wl = layout as WinAppLayout;
+                    if (wl.AssocForm.InvokeRequired) { wl.AssocForm.Invoke(new Action(() => wl.AssocForm.Close())); } else { wl.AssocForm.Close(); }
                 }
             }
         }

@@ -11,6 +11,7 @@ using HTAlt;
 
 namespace Yorot
 {
+    // TODO: Add XML descriptions to every property.
     public class ThemeManager
     {
         public ThemeManager(string configFile)
@@ -35,8 +36,8 @@ namespace Yorot
                     try
                     {
                         XmlDocument doc = new XmlDocument();
-                        doc.LoadXml(Tools.ReadFile(configFile, Encoding.Unicode));
-                        XmlNode rootnode = YorotTools.FindRoot(doc);
+                        doc.LoadXml(HTAlt.Tools.ReadFile(configFile, Encoding.Unicode));
+                        XmlNode rootnode = Yorot.Tools.FindRoot(doc);
                         List<string> acceptedSetting = new List<string>();
                         bool ayaj = false;
                         for (int i = 0; i < rootnode.ChildNodes.Count;i++)
@@ -58,14 +59,14 @@ namespace Yorot
                                     }
                                     else
                                     {
-                                        if (Themes.FindAll(t => t.Config == node.InnerXml.InnerXmlToString().FromThemeFolder()).Count > 0)
+                                        if (Themes.FindAll(t => t.Config == node.InnerXml.InnerXmlToString().ShortenPath(Settings.AppPath)).Count > 0)
                                         {
                                             ayaj = false;
-                                            AppliedTheme = Themes.Find(t => t.Config == node.InnerXml.InnerXmlToString().FromThemeFolder());
+                                            AppliedTheme = Themes.Find(t => t.Config == node.InnerXml.InnerXmlToString().ShortenPath(Settings.AppPath));
                                         }
                                         else
                                         {
-                                            AppliedTheme = new YorotTheme(node.InnerText.InnerXmlToString().FromThemeFolder());
+                                            AppliedTheme = new YorotTheme(node.InnerText.InnerXmlToString().ShortenPath(Settings.AppPath));
                                             ayaj = true;
                                         }
                                     }
@@ -94,15 +95,18 @@ namespace Yorot
                                                         Themes.Add(AppliedTheme);
                                                     }else
                                                     {
-                                                        Themes.Add(new YorotTheme(subnode.InnerXml.InnerXmlToString().FromThemeFolder()));
+                                                        Themes.Add(new YorotTheme(subnode.InnerXml.InnerXmlToString().ShortenPath(Settings.AppPath)));
                                                     }
                                                 }else //Applied theme is already in, no need to worry about duplication.
                                                 {
-                                                    Themes.Add(new YorotTheme(subnode.InnerXml.InnerXmlToString().FromThemeFolder()));
+                                                    Themes.Add(new YorotTheme(subnode.InnerXml.InnerXmlToString().ShortenPath(Settings.AppPath)));
                                                 }
                                                 break;
                                             default:
-                                                Output.WriteLine("[ThemeMan] Threw away \"" + subnode.OuterXml + "\". Invalid format.", LogLevel.Warning);
+                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                {
+                                                    Output.WriteLine("[ThemeMan] Threw away \"" + subnode.OuterXml + "\". Invalid format.", LogLevel.Warning);
+                                                }
                                                 break;
                                         }
                                     }
@@ -137,7 +141,16 @@ namespace Yorot
                     AppliedTheme = Themes[0];
                 }
             }
+            ClaimMan();
         }
+        private void ClaimMan()
+        {
+            for(int i = 0;i < Themes.Count;i++)
+            {
+                Themes[i].Manager = this;
+            }
+        }
+        public Settings Settings { get; set; }
         public YorotTheme AppliedTheme { get; set; }
         public List<YorotTheme> Themes { get; set; } = new List<YorotTheme>();
 
@@ -149,21 +162,21 @@ namespace Yorot
                 "This file is used to configure themes." + Environment.NewLine +
                 "Editing this file might cause problems with themes." + Environment.NewLine +
                 "-->" + Environment.NewLine +
-                "<LoadedTheme>" + (AppliedTheme.isDefaultTheme ? AppliedTheme.CodeName : AppliedTheme.Config.ToXML().ToThemeFolder())+ "</LoadedTheme>" + Environment.NewLine +
+                "<LoadedTheme>" + (AppliedTheme.isDefaultTheme ? AppliedTheme.CodeName : AppliedTheme.Config.ToXML().ShortenPath(Settings.AppPath))+ "</LoadedTheme>" + Environment.NewLine +
                 "<Themes>" + Environment.NewLine;
             for(int i = 0; i < Themes.Count;i++)
             {
                 var theme = Themes[i];
                 if (!theme.isDefaultTheme)
                 {
-                    x += "<Theme>" + theme.Config.ToThemeFolder() + "</Theme>" + Environment.NewLine;
+                    x += "<Theme>" + theme.Config.ShortenPath(Settings.AppPath) + "</Theme>" + Environment.NewLine;
                 }
             }
-            return YorotTools.PrintXML(x + "</Themes>" + Environment.NewLine + "</root>");
+            return Yorot.Tools.PrintXML(x + "</Themes>" + Environment.NewLine + "</root>");
         }
         public void Save()
         {
-            ToXml().WriteToFile(YorotGlobal.Settings.UserTheme,Encoding.Unicode);
+            ToXml().WriteToFile(Settings.UserTheme,Encoding.Unicode);
         }
     }
 
@@ -272,34 +285,14 @@ namespace Yorot
                 ArtColor = ArtColor
             };
         }
+        public ThemeManager Manager { get; set; }
         public string Name { get; set; }
         public string Author { get; set; }
         public string CodeName { get; set; }
         public string HTUPDATE { get; set; }
         public int Version { get; set; }
         public string ThumbLoc { get; set; }
-        public Image Thumbnail
-        {
-            get
-            {
-                if (isDefaultTheme)
-                {
-                    switch (ThumbLoc)
-                    {
-                        default:  case "YorotLight.png": return Properties.Resources.YorotLight;
-                        case "YorotStone.png": return Properties.Resources.YorotStone;
-                        case "YorotRazor.png": return Properties.Resources.YorotRazor;
-                        case "YorotDark.png": return Properties.Resources.YorotDark;
-                        case "YorotShadow.png": return Properties.Resources.YorotShadow;
-                        case "YorotDeepBlue.png": return Properties.Resources.YorotDeepBlue;
-                    }
-                }
-                else
-                {
-                    return HTAlt.Tools.ReadFile(YorotGlobal.Settings.ThemesLoc + CodeName + @"\" + ThumbLoc, ImageFormat.Png);
-                }
-            }
-        }
+
         public string Config { get; set; }
         public bool isDefaultTheme { get; set; } = false;
         public System.Drawing.Color BackColor { get; set; }

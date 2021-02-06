@@ -251,7 +251,7 @@ namespace Yorot
                 float _plusOffset = 8F;
 
                 // Draw Circle behind plus
-                graphicsContext.FillEllipse(new SolidBrush(Tools.ShiftBrightness(BackColor, cursorOverAddButton ? 60 : 40, false)), _addButtonArea);
+                graphicsContext.FillEllipse(new SolidBrush(HTAlt.Tools.ShiftBrightness(BackColor, cursorOverAddButton ? 60 : 40, false)), _addButtonArea);
 
                 // Draw horizontal line of plus
                 graphicsContext.DrawLine(new Pen(ForeColor, 1F),
@@ -333,7 +333,7 @@ namespace Yorot
             if (tab.TabImage == null)
             {
                 frmTab cefform = tab.Content as frmTab;
-                Color tabColor = cefform.AutoTabColor ? (tab.Active ? Tools.ShiftBrightness(BackColor, 40, false) : Tools.ShiftBrightness(BackColor, 20, false)) : cefform.TabColor;
+                Color tabColor = cefform.AutoTabColor ? (tab.Active ? HTAlt.Tools.ShiftBrightness(BackColor, 40, false) : HTAlt.Tools.ShiftBrightness(BackColor, 20, false)) : cefform.TabColor;
                 // We render the tab to an internal property so that we don't necessarily have to redraw it in every rendering pass, only if its width or
                 // status have changed
                 tab.TabImage = new Bitmap(area.Width <= 0 ? 1 : area.Width, tabCenterImage.Height <= 0 ? 1 : tabCenterImage.Height);
@@ -377,7 +377,7 @@ namespace Yorot
                             closeButtonImage.Height);
 
                         // Draw Circle behind plus
-                        tabGraphicsContext.FillEllipse(new SolidBrush(Tools.ShiftBrightness(tabColor, IsOverCloseButton(tab, cursor) ? 60 : 40, false)), tab.CloseButtonArea);
+                        tabGraphicsContext.FillEllipse(new SolidBrush(HTAlt.Tools.ShiftBrightness(tabColor, IsOverCloseButton(tab, cursor) ? 60 : 40, false)), tab.CloseButtonArea);
                         int _closeOffsetSize = 10;
                         int _closeOffsetLoc = 5;
 
@@ -467,8 +467,8 @@ namespace Yorot
             YorotTabRenderer tRender = _parentWindow.TabRenderer as YorotTabRenderer;
             Color inactiveColor = tRender.BackColor;
             Color activeColor = tRender.OverlayColor;
-            Color fColor1 = Tools.AutoWhiteBlack(inactiveColor);
-            Color fColor2 = Tools.AutoWhiteBlack(activeColor);
+            Color fColor1 = HTAlt.Tools.AutoWhiteBlack(inactiveColor);
+            Color fColor2 = HTAlt.Tools.AutoWhiteBlack(activeColor);
 
             _minimizeButtonArea.X = right - 135;
             _maximizeRestoreButtonArea.X = right - 90;

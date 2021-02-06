@@ -13,7 +13,7 @@ namespace Yorot.UI.SystemApp
         public calc()
         {
             InitializeComponent();
-            Icon = YorotTools.IconFromImage(Properties.Resources.calc);
+            Icon = Yorot.Tools.IconFromImage(Properties.Resources.calc);
             panel1.AutoScroll = false;
             pbHamMenu.Location = new Point(panel1.Width - (pbHamMenu.Width + 7), pbHamMenu.Location.Y);
             panel1.Invalidate();

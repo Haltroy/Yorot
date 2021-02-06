@@ -15,7 +15,7 @@ namespace Yorot.UI.SystemApp
         public settings()
         {
             InitializeComponent();
-            Icon = YorotTools.IconFromImage(Properties.Resources.Settings);
+            Icon = Yorot.Tools.IconFromImage(Properties.Resources.Settings);
             panel1.AutoScroll = false;
             pbHamMenu.Location = new Point(panel1.Width - (pbHamMenu.Width + 7), pbHamMenu.Location.Y);
             panel1.Invalidate();
@@ -118,8 +118,10 @@ namespace Yorot.UI.SystemApp
         private void lbThemes_Click(object sender, EventArgs e) => switchTab(lbThemes, tpThemes);
         private void lbHakkinda_Click(object sender, EventArgs e) => switchTab(lbHakkinda, tpAbout);
 
+#pragma warning disable IDE0044 // TODO: Use this
         string lastupdate = "";
-        // TODO: Generate App Settings page on demand for apps with this
+#pragma warning restore IDE0044
+                               // TODO: Generate App Settings page on demand for apps with this
         void GenerateAppTap(YorotApp app)
         {
             string randomAppID = HTAlt.Tools.GenerateRandomText(17);
@@ -197,7 +199,7 @@ namespace Yorot.UI.SystemApp
             pbAppIcon.Size = new System.Drawing.Size(64, 64);
             pbAppIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pbAppIcon.TabIndex = 4;
-            pbAppIcon.Image = app.GetAppIcon();
+            pbAppIcon.Image = YorotTools.GetAppIcon(app);
             pbAppIcon.TabStop = false;
             // 
             // pbASBack

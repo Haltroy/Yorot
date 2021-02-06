@@ -9,32 +9,56 @@ namespace Yorot
 {
     public class Settings
     {
-        public Settings()
+        // TODO: Add more managers.
+        public Settings(string appPath)
         {
+            if (string.IsNullOrWhiteSpace(appPath)) { throw new ArgumentNullException("\"aappPath\" cannot be empty."); };
+            if (!Directory.Exists(appPath)) { Directory.CreateDirectory(appPath); }
+            if (!Yorot.Tools.HasWriteAccess(appPath)) { throw new FileLoadException("Cannot access to path \"" + appPath + "\"."); }
+            
+            // Set paths.
+            AppPath = appPath;
+            UserLoc = AppPath + @"usr\";
+            CacheLoc = UserLoc + @"cache\";
+            LangLoc = UserLoc + @"lang\";
+            ExtLoc = UserLoc + @"ext\";
+            EngineLoc = UserLoc + @"engines\";
+            ThemesLoc = UserLoc + @"themes\";
+            UserSettings = UserLoc + @"usr.ycf";
+            UserHistory = UserLoc + @"history.ycf";
+            UserFavorites = UserLoc + @"favorites.ycf";
+            UserDownloads = UserLoc + @"downloads.ycf";
+            UserTheme = UserLoc + @"tman.ycf";
+            UserExt = UserLoc + @"extman.ycf";
+            UserApp = UserLoc + @"yam.ycf";
+            UserApps = UserLoc + @"apps\";
+            UserProfiles = UserLoc + @"profiles\";
+            UserProfile = UserLoc + @"profiles.ycf";
+
             // Detect if Yorot Users folder is moved. If then, move info to new app path.
-            if (File.Exists(YorotGlobal.YorotAppPath + @"\yorot.moved"))
+            if (File.Exists(appPath + @"\yorot.moved"))
             {
-                var MOVED = HTAlt.Tools.ReadFile(YorotGlobal.YorotAppPath + @"\yorot.moved",Encoding.Unicode);
+                var MOVED = HTAlt.Tools.ReadFile(appPath + @"\yorot.moved",Encoding.Unicode);
                 if (!string.IsNullOrWhiteSpace(MOVED))
                 {
-                    if (YorotTools.HasWriteAccess(MOVED))
+                    if (Yorot.Tools.HasWriteAccess(MOVED))
                     {
                         UserLoc = MOVED + @"usr\";
-                        CacheLoc = MOVED + @"usr\\cache\";
-                        ThemesLoc = MOVED + @"usr\\themes\";
-                        UserSettings = MOVED + @"usr\usr.ycf";
-                        UserHistory = MOVED + @"usr\history.ycf";
-                        UserFavorites = MOVED + @"usr\favorites.ycf";
-                        UserDownloads = MOVED + @"usr\downloads.ycf";
-                        UserTheme = MOVED + @"usr\tman.ycf";
-                        UserExt = MOVED + @"usr\extman.ycf";
-                        UserApp = MOVED + @"usr\yam.ycf";
-                        UserApps = MOVED + @"usr\apps\";
-                        LangLoc = MOVED + @"usr\lang\";
-                        ExtLoc = MOVED + @"usr\ext\";
-                        EngineLoc = MOVED + @"usr\engines\";
-                        UserProfile = MOVED + @"usr\profiles.ycf";
-                        UserProfiles = MOVED + @"usr\profiles\";
+                        CacheLoc = UserLoc + @"\cache\";
+                        ThemesLoc = UserLoc + @"\themes\";
+                        UserSettings = UserLoc + @"usr.ycf";
+                        UserHistory = UserLoc + @"history.ycf";
+                        UserFavorites = UserLoc + @"favorites.ycf";
+                        UserDownloads = UserLoc + @"downloads.ycf";
+                        UserTheme = UserLoc + @"tman.ycf";
+                        UserExt = UserLoc + @"extman.ycf";
+                        UserApp = UserLoc + @"yam.ycf";
+                        UserApps = UserLoc + @"apps\";
+                        LangLoc = UserLoc + @"lang\";
+                        ExtLoc = UserLoc + @"ext\";
+                        EngineLoc = UserLoc + @"engines\";
+                        UserProfile = UserLoc + @"profiles.ycf";
+                        UserProfiles = UserLoc + @"profiles\";
                     }else
                     {
                         Output.WriteLine("[Settings] Ignoring yorot.moved file. Cannot use path given in this file.", LogLevel.Warning);
@@ -65,7 +89,7 @@ namespace Yorot
                     {
                         XmlDocument doc = new XmlDocument();
                         doc.LoadXml(HTAlt.Tools.ReadFile(UserSettings,Encoding.Unicode));
-                        XmlNode root = YorotTools.FindRoot(doc);
+                        XmlNode root = Yorot.Tools.FindRoot(doc);
                         List<string> appliedSettings = new List<string>();
                         for(int i = 0; i< root.ChildNodes.Count; i++)
                         {
@@ -117,18 +141,76 @@ namespace Yorot
                                                     SearchEngines.Add(new YorotSearchEngine(subnode.Attributes["Name"].Value, subnode.Attributes["Url"].Value));
                                                 }else
                                                 {
-                                                    Output.WriteLine("[Search Engine] Threw away \"" + subnode.OuterXml + "\". Search Engine already exists.", LogLevel.Warning);
+                                                    if (!subnode.OuterXml.StartsWith("<!--"))
+                                                    {
+                                                        Output.WriteLine("[Search Engine] Threw away \"" + subnode.OuterXml + "\". Search Engine already exists.", LogLevel.Warning);
+                                                    }
                                                 }
                                             }else
                                             {
-                                                Output.WriteLine("[Search Engine] Threw away \"" + subnode.OuterXml + "\". Invalid format.", LogLevel.Warning);
+                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                {
+                                                    Output.WriteLine("[Search Engine] Threw away \"" + subnode.OuterXml + "\". Invalid format.", LogLevel.Warning);
+                                                }
                                             }
                                         }
                                         else
                                         {
-                                            Output.WriteLine("[Search Engine] Threw away \"" + subnode.OuterXml + "\". Invalid format.", LogLevel.Warning);
+                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            {
+                                                Output.WriteLine("[Search Engine] Threw away \"" + subnode.OuterXml + "\". Invalid format.", LogLevel.Warning);
+                                            }
                                         }
                                     }
+                                    break;
+                                case "WebEngines":
+                                    if (appliedSettings.Contains(node.Name))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name);
+                                    for (int ı = 0; ı < node.ChildNodes.Count;ı++)
+                                    {
+                                        var subnode = node.ChildNodes[ı];
+                                        if (subnode.Name == "Engine")
+                                        {
+                                            if (subnode.Attributes["Name"] != null && subnode.Attributes["Url"] != null)
+                                            {
+                                                if (!SearchEngineExists(subnode.Attributes["Name"].Value, subnode.Attributes["Url"].Value))
+                                                {
+                                                    WebEngines.Add(new YorotWebEngine(EngineLoc + subnode.Attributes["Name"].Value + @"\engine.ycf"));
+                                                }
+                                                else
+                                                {
+                                                    Output.WriteLine("[Web Engine] Threw away \"" + subnode.OuterXml + "\". Web Engine already exists.", LogLevel.Warning);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                {
+                                                    Output.WriteLine("[Web Engine] Threw away \"" + subnode.OuterXml + "\". Invalid format.", LogLevel.Warning);
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            {
+                                                Output.WriteLine("[Web Engine] Threw away \"" + subnode.OuterXml + "\". Invalid format.", LogLevel.Warning);
+                                            }
+                                        }
+                                    }
+                                    break;
+                                case "Lang":
+                                    if (appliedSettings.Contains(node.Name))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name);
+                                    LangManager.LoadFromFile(node.InnerXml.InnerXmlToString().GetPath(AppPath));
                                     break;
                                 case "RestoreOldSessions":
                                     if (appliedSettings.Contains(node.Name))
@@ -164,7 +246,7 @@ namespace Yorot
                                         break;
                                     }
                                     appliedSettings.Add(node.Name);
-                                    ShowFavorites = node.InnerXml.InnerXmlToString() == "true";
+                                    FavManager.ShowFavorites = node.InnerXml.InnerXmlToString() == "true";
                                     break;
                                 case "StartWithFullScreen":
                                     if (appliedSettings.Contains(node.Name))
@@ -182,7 +264,7 @@ namespace Yorot
                                         break;
                                     }
                                     appliedSettings.Add(node.Name);
-                                    OpenFilesAfterDownload = node.InnerXml.InnerXmlToString() == "true";
+                                    DownloadManager.OpenFilesAfterDownload = node.InnerXml.InnerXmlToString() == "true";
                                     break;
                                 case "AutoDownload":
                                     if (appliedSettings.Contains(node.Name))
@@ -191,7 +273,7 @@ namespace Yorot
                                         break;
                                     }
                                     appliedSettings.Add(node.Name);
-                                    AutoDownload = node.InnerXml.InnerXmlToString() == "true";
+                                    DownloadManager.AutoDownload = node.InnerXml.InnerXmlToString() == "true";
                                     break;
                                 case "DownloadFolder":
                                     if (appliedSettings.Contains(node.Name))
@@ -200,7 +282,7 @@ namespace Yorot
                                         break;
                                     }
                                     appliedSettings.Add(node.Name);
-                                    DownloadFolder = node.InnerXml.InnerXmlToString();
+                                    DownloadManager.DownloadFolder = node.InnerXml.InnerXmlToString();
                                     break;
                                 case "AlwaysCheckDefaultBrowser":
                                     if (appliedSettings.Contains(node.Name))
@@ -297,41 +379,49 @@ namespace Yorot
                 "-->" + Environment.NewLine;
             x += "<HomePage>" + HomePage.ToXML() + "</HomePage>" + Environment.NewLine;
             x += "<SearchEngine Name=\"" + SearchEngine.Name.ToXML() + "\" Url=\"" + SearchEngine.Url.ToXML() + "\" />" + Environment.NewLine;
-            x += "<SearchEngines>" + Environment.NewLine;
-            for(int i = 0; i < SearchEngines.Count;i++)
+            if (SearchEngines.Count > 0)
             {
-                if (!SearchEngines[i].comesWithYorot)
+                x += "<SearchEngines>" + Environment.NewLine;
+                for (int i = 0; i < SearchEngines.Count; i++)
                 {
-                    x += "<Engine Name=\"" + SearchEngines[i].Name.ToXML() + "\" Url=\"" + SearchEngines[i].Url.ToXML() + "\" />" + Environment.NewLine;
+                    if (!SearchEngines[i].comesWithYorot)
+                    {
+                        x += "<Engine Name=\"" + SearchEngines[i].Name.ToXML() + "\" Url=\"" + SearchEngines[i].Url.ToXML() + "\" />" + Environment.NewLine;
+                    }
                 }
+                x += "</SearchEngines>" + Environment.NewLine;
             }
-            x += "</SearchEngines>" + Environment.NewLine;
-            x += "<WebEngines>" + Environment.NewLine;
-            for (int i = 0; i < WebEngines.Count; i++)
+            if (WebEngines.Count > 0)
             {
-                x += "<Engine Name=\"" + WebEngines[i].CodeName.ToXML() + "\" />" + Environment.NewLine;
+                x += "<WebEngines>" + Environment.NewLine;
+                for (int i = 0; i < WebEngines.Count; i++)
+                {
+                    x += "<Engine Name=\"" + WebEngines[i].CodeName.ToXML() + "\" />" + Environment.NewLine;
+                }
+                x += "</WebEngines>" + Environment.NewLine;
             }
-            x += "</WebEngines>" + Environment.NewLine;
             x += "<RestoreOldSessions>" + (RestoreOldSessions ? "true" : "false") + "</RestoreOldSessions>" + Environment.NewLine;
             x += "<RememberLastProxy>" + (RememberLastProxy ? "true" : "false") + "</RememberLastProxy>" + Environment.NewLine;
+            x += "<Lang>" + LangManager.LoadedLangFile.ToXML().ShortenPath(AppPath) + "</Lang>" + Environment.NewLine;
             x += "<DoNotTrack>" + (DoNotTrack ? "true" : "false") + "</DoNotTrack>" + Environment.NewLine;
-            x += "<ShowFavorites>" + (ShowFavorites ? "true" : "false") + "</ShowFavorites>" + Environment.NewLine;
+            x += "<ShowFavorites>" + (FavManager.ShowFavorites ? "true" : "false") + "</ShowFavorites>" + Environment.NewLine;
             x += "<StartWithFullScreen>" + (StartWithFullScreen ? "true" : "false") + "</StartWithFullScreen>" + Environment.NewLine;
-            x += "<OpenFilesAfterDownload>" + (OpenFilesAfterDownload ? "true" : "false") + "</OpenFilesAfterDownload>" + Environment.NewLine;
-            x += "<AutoDownload>" + (AutoDownload ? "true" : "false") + "</AutoDownload>" + Environment.NewLine;
+            x += "<OpenFilesAfterDownload>" + (DownloadManager.OpenFilesAfterDownload ? "true" : "false") + "</OpenFilesAfterDownload>" + Environment.NewLine;
+            x += "<AutoDownload>" + (DownloadManager.AutoDownload ? "true" : "false") + "</AutoDownload>" + Environment.NewLine;
             x += "<AlwaysCheckDefaultBrowser>" + (AlwaysCheckDefaultBrowser ? "true" : "false") + "</AlwaysCheckDefaultBrowser>" + Environment.NewLine;
             x += "<StartOnBoot>" + (StartOnBoot ? "true" : "false") + "</StartOnBoot>" + Environment.NewLine;
             x += "<StartInSystemTray>" + (StartInSystemTray ? "true" : "false") + "</StartInSystemTray>" + Environment.NewLine;
             x += "<NotifPlaySound>" + (NotifPlaySound ? "true" : "false") + "</NotifPlaySound>" + Environment.NewLine;
             x += "<NotifUseDefault>" + (NotifUseDefault ? "true" : "false") + "</NotifUseDefault>" + Environment.NewLine;
             x += "<NotifSilent>" + (NotifSilent ? "true" : "false") + "</NotifSilent>" + Environment.NewLine;
-            x += "<DownloadFolder>" + DownloadFolder.ToXML() + "</DownloadFolder>" + Environment.NewLine;
+            x += "<DownloadFolder>" + DownloadManager.DownloadFolder.ToXML() + "</DownloadFolder>" + Environment.NewLine;
             x += "<NotifSoundLoc>" + NotifSoundLoc.ToXML() + "</NotifSoundLoc>" + Environment.NewLine;
-            return YorotTools.PrintXML(x + Environment.NewLine + "</root>");
+            return Yorot.Tools.PrintXML(x + Environment.NewLine + "</root>");
         }
 
         public void LoadDefaults()
         {
+
             if (!Directory.Exists(UserLoc))
             {
                 Directory.CreateDirectory(UserLoc);
@@ -360,8 +450,14 @@ namespace Yorot
             {
                 Directory.CreateDirectory(EngineLoc);
             }
-            AppMan = new AppMan(UserApp);
-            ThemeMan = new ThemeManager(UserTheme);
+            AppMan = new AppManager(UserApp) { Settings = this};
+            ThemeMan = new ThemeManager(UserTheme) { Settings = this };
+            DownloadManager = new DownloadManager { Settings = this };
+            HistoryManager = new HistoryManager { Settings = this };
+            FavManager = new FavMan() { Settings = this };
+            LangManager = new LangManager() { Settings = this };
+            ProfileManager = new ProfileManager() { Settings = this };
+            Extensions = new Extensions() { Settings = this };
             HomePage = "yorot://newtab";
             // BEGIN: Search Engines
             SearchEngines.Clear();
@@ -381,28 +477,40 @@ namespace Yorot
             RestoreOldSessions = false;
             RememberLastProxy = false;
             DoNotTrack = true;
-            ShowFavorites = true;
+            FavManager.ShowFavorites = true;
             StartWithFullScreen = false;
-            OpenFilesAfterDownload = false;
-            AutoDownload = true;
-            DownloadFolder = UserLoc + @"Downloads\";
+            DownloadManager.OpenFilesAfterDownload = false;
+            DownloadManager.AutoDownload = true;
+            DownloadManager.DownloadFolder = UserLoc + @"Downloads\";
             AlwaysCheckDefaultBrowser = true;
             StartOnBoot = false;
             StartInSystemTray = false;
             NotifPlaySound = true;
             NotifSilent = false;
             NotifUseDefault = true;
-            NotifSoundLoc = UserLoc + @"n.ogg";
+            NotifSoundLoc =  @"RES\n.ogg";
         }
 
         public void Save()
         {
             ThemeMan.Save();
+            AppMan.Save();
+            HistoryManager.Save();
+            FavManager.Save();
+            ProfileManager.Save();
+            Extensions.Save();
+            DownloadManager.Save();
             HTAlt.Tools.WriteFile(UserSettings, ToXml(), Encoding.Unicode);
         }
 
-        public AppMan AppMan { get; set; }
+        public AppManager AppMan { get; set; }
         public ThemeManager ThemeMan { get; set; }
+        public DownloadManager DownloadManager { get; set; }
+        public HistoryManager HistoryManager { get; set; }
+        public FavMan FavManager { get; set; }
+        public LangManager LangManager { get; set; }
+        public ProfileManager ProfileManager { get; set; }
+        public Extensions Extensions { get; set; }
         public bool SearchEngineExists(string name, string url)
         {
             return SearchEngines.FindAll(i => i.Name == name && i.Url == url).Count > 0;
@@ -414,11 +522,7 @@ namespace Yorot
         public bool RestoreOldSessions { get; set; } = false;
         public bool RememberLastProxy { get; set; } = false;
         public bool DoNotTrack { get; set; } = true;
-        public bool ShowFavorites { get; set; } = true;
         public bool StartWithFullScreen { get; set; } = false;
-        public bool OpenFilesAfterDownload { get; set; } = false;
-        public bool AutoDownload { get; set; } = true;
-        public string DownloadFolder { get; set; } = "";
         public bool AlwaysCheckDefaultBrowser { get; set; } = true;
         public bool StartOnBoot { get; set; } = false;
         public bool StartInSystemTray { get; set; } = true;
@@ -427,69 +531,73 @@ namespace Yorot
         public string NotifSoundLoc { get; set; } = "";
         public bool NotifSilent { get; set; } = false;
         /// <summary>
+        /// Location of application files.
+        /// </summary>
+        public string AppPath { get; set; }
+        /// <summary>
         /// User Files location.
         /// </summary>
-        public string UserLoc = YorotGlobal.YorotAppPath + @"usr\";
+        public string UserLoc { get; set; }
         /// <summary>
         /// User Cache location.
         /// </summary>
-        public  string CacheLoc = YorotGlobal.YorotAppPath + @"usr\cache\";
+        public  string CacheLoc { get; set; }
         /// <summary>
         /// User Language folder
         /// </summary>
-        public string LangLoc = YorotGlobal.YorotAppPath + @"usr\lang\";
+        public string LangLoc { get; set; }
         /// <summary>
         /// User Extensions folder
         /// </summary>
-        public string ExtLoc = YorotGlobal.YorotAppPath + @"usr\ext\";
+        public string ExtLoc { get; set; }
         /// <summary>
         /// User Web Engines folder
         /// </summary>
-        public string EngineLoc = YorotGlobal.YorotAppPath + @"usr\engines\";
+        public string EngineLoc { get; set; }
         /// <summary>
         /// User Themes location.
         /// </summary>
-        public string ThemesLoc = YorotGlobal.YorotAppPath + @"usr\themes\";
+        public string ThemesLoc { get; set; }
         /// <summary>
         /// User settings location.
         /// </summary>
-        public string UserSettings = YorotGlobal.YorotAppPath + @"usr\usr.ycf";
+        public string UserSettings { get; set; }
         /// <summary>
         /// History Manager configuration file location.
         /// </summary>
-        public string UserHistory = YorotGlobal.YorotAppPath + @"usr\history.ycf";
+        public string UserHistory { get; set; }
         /// <summary>
         /// Favorites Manager configuration file location.
         /// </summary>
-        public string UserFavorites = YorotGlobal.YorotAppPath + @"usr\favorites.ycf";
+        public string UserFavorites { get; set; }
         /// <summary>
         /// Downloads Manager configuration file location.
         /// </summary>
-        public string UserDownloads = YorotGlobal.YorotAppPath + @"usr\downloads.ycf";
+        public string UserDownloads { get; set; }
         /// <summary>
         /// Themes Manager configuration file location.
         /// </summary>
-        public string UserTheme = YorotGlobal.YorotAppPath + @"usr\tman.ycf";
+        public string UserTheme { get; set; }
         /// <summary>
         /// Extension Manager configuration file location.
         /// </summary>
-        public string UserExt = YorotGlobal.YorotAppPath + @"usr\extman.ycf";
+        public string UserExt { get; set; }
         /// <summary>
         /// Yorot App Manager configuration file location.
         /// </summary>
-        public string UserApp = YorotGlobal.YorotAppPath + @"usr\yam.ycf";
+        public string UserApp { get; set; }
         /// <summary>
         /// Yorot App Manager Application storage.
         /// </summary>
-        public string UserApps = YorotGlobal.YorotAppPath + @"usr\apps\";
+        public string UserApps { get; set; }
         /// <summary>
         /// User profiles folder.
         /// </summary>
-        public string UserProfiles = YorotGlobal.YorotAppPath + @"\usr\profiles\";
+        public string UserProfiles { get; set; }
         /// <summary>
         /// User profiles configuration file.
         /// </summary>
-        public string UserProfile = YorotGlobal.YorotAppPath + @"\usr\profiles.ycf";
+        public string UserProfile { get; set; }
 
     }
     public class YorotSearchEngine
@@ -508,6 +616,14 @@ namespace Yorot
     /// </summary>
     public class YorotWebEngine
     {
+        /// <summary>
+        /// Creates a new <see cref="YorotWebEngine"/>.
+        /// </summary>
+        /// <param name="configFile">Location of configuration file for this engine.</param>
+        public YorotWebEngine(string configFile)
+        {
+            // TODO:
+        }
         /// <summary>
         /// HTUPDATE address of this engine.
         /// </summary>

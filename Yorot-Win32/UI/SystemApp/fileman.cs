@@ -15,7 +15,7 @@ namespace Yorot.UI.SystemApp
         public fileman()
         {
             InitializeComponent();
-            Icon = YorotTools.IconFromImage(Properties.Resources.fileman);
+            Icon = Yorot.Tools.IconFromImage(Properties.Resources.fileman);
         }
     }
 }

@@ -76,10 +76,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Managers\AppMan.cs" />
-    <Compile Include="Managers\Extension.cs" />
-    <Compile Include="Managers\Settings.cs" />
-    <Compile Include="Managers\ThemeManager.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -266,6 +262,12 @@
     <None Include="Resources\hamburger-w.png" />
     <None Include="Resources\trash.png" />
     <None Include="Resources\trash-w.png" />
+    <None Include="Resources\YorotLight.png" />
+    <None Include="Resources\YorotStone.png" />
+    <None Include="Resources\YorotRazor.png" />
+    <None Include="Resources\YorotDark.png" />
+    <None Include="Resources\YorotShadow.png" />
+    <None Include="Resources\YorotDeepBlue.png" />
     <Content Include="Yorot.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

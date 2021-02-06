@@ -34,7 +34,7 @@ namespace Yorot
         }
         private System.Drawing.Color bc2 => BackColor.ShiftBrightness(20, false);
         private System.Drawing.Color oc2 => OverlayColor.ShiftBrightness(20, false);
-        public bool HasFocus => assocApp == null ? true : (AssocApp.Layouts.FindAll(i => i.AssocForm.Focused || i.AssocForm.ContainsFocus).Count > 0);
+        public bool HasFocus => assocApp == null ? true : (AssocApp.Layouts.FindAll(i => i is WinAppLayout && ((i as WinAppLayout).AssocForm.Focused || (i as WinAppLayout).AssocForm.ContainsFocus)).Count > 0);
         public YorotApp AssocApp
         {
             get => assocApp; set
@@ -56,7 +56,7 @@ namespace Yorot
             e.Graphics.FillRectangle(new System.Drawing.SolidBrush(HasFocus ? bc2 : BackColor), Bounds);
 
             // Draw Icon
-            e.Graphics.DrawImage(HTAlt.Tools.ResizeImage(assocApp == null ? Properties.Resources.Yorot : assocApp.GetAppIcon(), 32, 32), new Rectangle(5,5,32,32));
+            e.Graphics.DrawImage(HTAlt.Tools.ResizeImage(assocApp == null ? Properties.Resources.Yorot : YorotTools.GetAppIcon(assocApp), 32, 32), new Rectangle(5,5,32,32));
 
             if (assocApp != null)
             {
@@ -86,6 +86,25 @@ namespace Yorot
                 e.Graphics.FillRectangle(new System.Drawing.SolidBrush(OverlayColor), new System.Drawing.Rectangle(0, 0, 3, Height / 2));
                 e.Graphics.FillRectangle(new System.Drawing.SolidBrush(OverlayColor.ShiftBrightness(20, false)), new System.Drawing.Rectangle(0, Height / 2, 4, Height / 2));
             }
+        }
+    }
+    public class WinAppLayout : YorotAppLayout
+    {
+        /// <summary>
+        /// Gets associated <see cref="UI.frmApp"/> of this <see cref="YorotApp"/>. <see cref="null"/> if no forms are associated.
+        /// </summary>
+        public UI.frmApp AssocForm { get; set; }
+        /// <summary>
+        /// Gets associated <see cref="System.Windows.Forms.TabPage"/> of this <see cref="YorotApp"/>. <see cref="null"/> if no tabs are associated.
+        /// </summary>
+        public System.Windows.Forms.TabPage AssocTab { get; set; }
+        /// <summary>
+        /// Gets associated <see cref="YAMItem"/> of this <see cref="YorotApp"/>. <see cref="null"/> if no YAMIs are associated.
+        /// </summary>
+        public YAMItem AssocItem { get; set; }
+        public new bool hasSessions
+        {
+            get => AssocForm != null;
         }
     }
 }
