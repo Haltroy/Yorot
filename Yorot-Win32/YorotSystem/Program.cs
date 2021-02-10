@@ -15,7 +15,8 @@ namespace Yorot
             bool exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
             YorotGlobal.Wolfhook = new Wolfhook() { WhFolder = YorotGlobal.YorotAppPath + "\\wolfhook\\", };
             YorotGlobal.Y1 = new YorotSpecial();
-            Output.LogDirPath = YorotGlobal.YorotAppPath + "\\logs\\";
+            YorotGlobal.Settings = new Settings(YorotGlobal.YorotAppPath);
+            Output.LogDirPath = YorotGlobal.Settings.AppPath + "\\logs\\";
             if (exists)
             {
                 Output.WriteLine("<Yorot.Program> App already running. Passing arguments...", LogLevel.Warning);

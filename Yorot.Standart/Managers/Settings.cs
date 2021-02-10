@@ -9,7 +9,7 @@ namespace Yorot
 {
     public class Settings
     {
-        // TODO: Add more managers.
+        // TODO: Add XML desc to empty ones
         public Settings(string appPath)
         {
             if (string.IsNullOrWhiteSpace(appPath)) { throw new ArgumentNullException("\"aappPath\" cannot be empty."); };
@@ -43,6 +43,7 @@ namespace Yorot
                 {
                     if (Yorot.Tools.HasWriteAccess(MOVED))
                     {
+                        AppPath = MOVED;
                         UserLoc = MOVED + @"usr\";
                         CacheLoc = UserLoc + @"\cache\";
                         ThemesLoc = UserLoc + @"\themes\";

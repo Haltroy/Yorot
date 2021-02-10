@@ -234,7 +234,25 @@ namespace Yorot
         /// <returns><see cref="string"/></returns>
         public static string ShortenPath(this string path,string appPath)
         {
-            throw new NotImplementedException(); //TODO
+            var UserLoc = appPath + @"usr\";
+            var LogPath = appPath + @"log\";
+            var CacheLoc = UserLoc + @"\cache\";
+            var ThemesLoc = UserLoc + @"\themes\";
+            var UserApps = UserLoc + @"apps\";
+            var LangLoc = UserLoc + @"lang\";
+            var ExtLoc = UserLoc + @"ext\";
+            var EngineLoc = UserLoc + @"engines\";
+            var UserProfiles = UserLoc + @"profiles\";
+            return path.Replace(UserProfiles, "[USERPROF]")
+                .Replace(EngineLoc, "[WEBENG]")
+                .Replace(ExtLoc, "[USEREXT]")
+                .Replace(LangLoc, "[USERLANG]")
+                .Replace(UserApps, "[USERAPPS]")
+                .Replace(ThemesLoc, "[USERTHEME]")
+                .Replace(CacheLoc, "[USERCACHE]")
+                .Replace(LogPath, "[LOGS]")
+                .Replace(UserLoc, "[USR]")
+                .Replace(appPath,"[APPPATH]");
         }
         /// <summary>
         /// Unshortens the path.
@@ -244,7 +262,25 @@ namespace Yorot
         /// <returns><see cref="string"/></returns>
         public static string GetPath(this string path, string appPath)
         {
-            throw new NotImplementedException(); //TODO
+            var UserLoc = appPath + @"usr\";
+            var LogPath = appPath + @"log\";
+            var CacheLoc = UserLoc + @"\cache\";
+            var ThemesLoc = UserLoc + @"\themes\";
+            var UserApps = UserLoc + @"apps\";
+            var LangLoc = UserLoc + @"lang\";
+            var ExtLoc = UserLoc + @"ext\";
+            var EngineLoc = UserLoc + @"engines\";
+            var UserProfiles = UserLoc + @"profiles\";
+            return path.Replace("[USERPROF]", UserProfiles)
+                .Replace("[WEBENG]", EngineLoc)
+                .Replace("[USEREXT]", ExtLoc)
+                .Replace("[USERLANG]", LangLoc)
+                .Replace("[USERAPPS]", UserApps)
+                .Replace("[USERTHEME]", ThemesLoc)
+                .Replace("[USERCACHE]", CacheLoc)
+                .Replace("[LOGS]", LogPath)
+                .Replace("[USR]", UserLoc)
+                .Replace("[APPPATH]", appPath);
         }
     }
 }

@@ -513,7 +513,6 @@ namespace Yorot
                 Error = new ArgumentNullException("Cone name string was empty.");
                 Output.WriteLine("[YorotApp] Cannot load app, codename was empty.", LogLevel.Error);
             }
-            // Todo: Loaad config
         }
         /// <summary>
         /// Determines if this application had error(s) while loading.
