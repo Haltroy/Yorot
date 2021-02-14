@@ -37,9 +37,9 @@ To see supported versions list, refer to [SECURITY](https://github.com/Haltroy/Y
 
 To see roadmap, refer to [ROADMAP](https://github.com/Haltroy/Yorot/blob/master/ROADMAP.md) file.
 
- | Branch                                                              | Engine Version | VC++ Version | .Net | HTAlt  | Status | Release Time |
-|----------------------------------------------------------------------|------|------|-------|-----------------|-----|-------------------|
-| [`master`](https://github.com/haltroy/Yorot)                      | null | null | Framework 4.6.1 | b1.6.3 | Master | 30 Dec 2020 |
-| `0.0.0.1` | null | null | Framework 4.6.1 | b1.6.3 | Developing | 2021 |
+ | Branch                                                              | Engine Version | HTAlt  | Status | Release Time |
+|----------------------------------------------------------------------|----------------|--------|--------|--------------|
+| [`master`](https://github.com/haltroy/Yorot)                         | null           | b1.6.4 | Master | 30 Dec 2020  |
+| `0.0.0.1`                                                            | null           | b1.6.4 | Developing | 2021     |
 
 
