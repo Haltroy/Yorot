@@ -6,6 +6,10 @@ namespace Yorot
 {
     public class DownloadManager
     {
+        public DownloadManager(string configFile)
+        {
+
+        }
         public Settings Settings { get; set; }
         public bool OpenFilesAfterDownload { get; set; } = false;
         public bool AutoDownload { get; set; } = true;

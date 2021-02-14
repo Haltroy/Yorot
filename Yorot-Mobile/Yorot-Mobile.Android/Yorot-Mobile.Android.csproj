@@ -93,6 +93,10 @@
     <AndroidResource Include="Resources\drawable\icon_feed.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Yorot.Standart\Yorot.Standart.csproj">
+      <Project>{eb0007e0-4e58-431f-91f8-e20c991cdae4}</Project>
+      <Name>Yorot.Standart</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Yorot-Mobile\Yorot-Mobile.csproj">
       <Project>{58B3DA80-45EF-41E8-B490-1E7E20B73DAB}</Project>
       <Name>Yorot-Mobile</Name>

@@ -8,10 +8,11 @@
     <Description>Standart library for all Yorot flavors.</Description>
     <PackageProjectUrl>https://github.com/Haltroy/Yorot</PackageProjectUrl>
     <OutputType>Library</OutputType>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HTAlt.Standart" Version="0.1.6.3" />
+    <PackageReference Include="HTAlt.Standart" Version="0.1.6.4" />
   </ItemGroup>
 
 </Project>

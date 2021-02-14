@@ -14,7 +14,7 @@ namespace Yorot
         {
             if (string.IsNullOrWhiteSpace(appPath)) { throw new ArgumentNullException("\"aappPath\" cannot be empty."); };
             if (!Directory.Exists(appPath)) { Directory.CreateDirectory(appPath); }
-            if (!Yorot.Tools.HasWriteAccess(appPath)) { throw new FileLoadException("Cannot access to path \"" + appPath + "\"."); }
+            if (!appPath.HasWriteAccess()) { throw new FileLoadException("Cannot access to path \"" + appPath + "\"."); }
             
             // Set paths.
             AppPath = appPath;
@@ -41,7 +41,7 @@ namespace Yorot
                 var MOVED = HTAlt.Tools.ReadFile(appPath + @"\yorot.moved",Encoding.Unicode);
                 if (!string.IsNullOrWhiteSpace(MOVED))
                 {
-                    if (Yorot.Tools.HasWriteAccess(MOVED))
+                    if (MOVED.HasWriteAccess())
                     {
                         AppPath = MOVED;
                         UserLoc = MOVED + @"usr\";
@@ -417,7 +417,7 @@ namespace Yorot
             x += "<NotifSilent>" + (NotifSilent ? "true" : "false") + "</NotifSilent>" + Environment.NewLine;
             x += "<DownloadFolder>" + DownloadManager.DownloadFolder.ToXML() + "</DownloadFolder>" + Environment.NewLine;
             x += "<NotifSoundLoc>" + NotifSoundLoc.ToXML() + "</NotifSoundLoc>" + Environment.NewLine;
-            return Yorot.Tools.PrintXML(x + Environment.NewLine + "</root>");
+            return (x + Environment.NewLine + "</root>").BeautifyXML();
         }
 
         public void LoadDefaults()
@@ -453,8 +453,8 @@ namespace Yorot
             }
             AppMan = new AppManager(UserApp) { Settings = this};
             ThemeMan = new ThemeManager(UserTheme) { Settings = this };
-            DownloadManager = new DownloadManager { Settings = this };
-            HistoryManager = new HistoryManager { Settings = this };
+            DownloadManager = new DownloadManager(UserDownloads) { Settings = this };
+            HistoryManager = new HistoryManager(UserHistory) { Settings = this };
             FavManager = new FavMan() { Settings = this };
             LangManager = new LangManager() { Settings = this };
             ProfileManager = new ProfileManager() { Settings = this };

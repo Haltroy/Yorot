@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HTAlt;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Xml;
@@ -10,6 +11,10 @@ namespace Yorot
     /// </summary>
     public class AppManager
     {
+        /// <summary>
+        /// Creates a new App manager.
+        /// </summary>
+        /// <param name="configFile">Location of the configuration file on drive.</param>
         public AppManager(string configFile)
         {
             if (!string.IsNullOrWhiteSpace(configFile)) 
@@ -109,6 +114,9 @@ namespace Yorot
             ClaimMan();
             UpdateCount++;
         }
+        /// <summary>
+        /// Claims management for all applications that are loaded.
+        /// </summary>
         private void ClaimMan()
         {
             for(int i =0;i < Apps.Count;i++)
@@ -137,7 +145,7 @@ namespace Yorot
                     x += "<App CodeName=\"" + app.AppCodeName + "\" Origin=\"" + app.AppOrigin.ToString() + "\" OriginInfo=\"" + app.AppOriginInfo.Replace(Environment.NewLine,"[NEWLINE]") + "\" />" + Environment.NewLine;
                 }
             }
-            return Yorot.Tools.PrintXML(x + "</Apps>" + Environment.NewLine + "</root>");
+            return (x + "</Apps>" + Environment.NewLine + "</root>").BeautifyXML();
         }
         /// <summary>
         /// Saves configuration.
@@ -594,9 +602,14 @@ namespace Yorot
         {
             get
             {
-                return Yorot.Tools.DirSize(new System.IO.DirectoryInfo(Manager.Settings.UserApps + AppCodeName));
+                return (Manager.Settings.UserApps + AppCodeName).GetDirectorySize();
             }
         }
+        /// <summary>
+        /// Gets size of app.
+        /// </summary>
+        /// <param name="bytes">Translation of word "bytes".</param>
+        /// <returns><see cref="string"/></returns>
         public string GetAppSizeInfo(string bytes)
         {
             var size = AppSize;
@@ -657,6 +670,9 @@ namespace Yorot
         /// <see cref="true"/> to ask this layout to reload app, otherwise <see cref="false"/>
         /// </summary>
         public bool waitLayoutRestart { get; set; } = false;
+        /// <summary>
+        /// <see cref="true"/> if this layout has a session. This bool is mostly customized for each other layout that inherit this class.
+        /// </summary>
         public bool hasSessions { get; set; } = false;
     }
     public enum YorotAppOrigin

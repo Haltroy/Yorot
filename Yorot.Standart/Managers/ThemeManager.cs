@@ -172,7 +172,7 @@ namespace Yorot
                     x += "<Theme>" + theme.Config.ShortenPath(Settings.AppPath) + "</Theme>" + Environment.NewLine;
                 }
             }
-            return Yorot.Tools.PrintXML(x + "</Themes>" + Environment.NewLine + "</root>");
+            return (x + "</Themes>" + Environment.NewLine + "</root>").BeautifyXML();
         }
         public void Save()
         {
