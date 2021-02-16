@@ -458,7 +458,7 @@ namespace Yorot
             FavManager = new FavMan() { Settings = this };
             LangManager = new LangManager() { Settings = this };
             ProfileManager = new ProfileManager() { Settings = this };
-            Extensions = new Extensions() { Settings = this };
+            Extensions = new ExtensionManager(UserExt) { Settings = this };
             HomePage = "yorot://newtab";
             // BEGIN: Search Engines
             SearchEngines.Clear();
@@ -511,7 +511,7 @@ namespace Yorot
         public FavMan FavManager { get; set; }
         public LangManager LangManager { get; set; }
         public ProfileManager ProfileManager { get; set; }
-        public Extensions Extensions { get; set; }
+        public ExtensionManager Extensions { get; set; }
         public bool SearchEngineExists(string name, string url)
         {
             return SearchEngines.FindAll(i => i.Name == name && i.Url == url).Count > 0;
