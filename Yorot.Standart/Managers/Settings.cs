@@ -455,7 +455,7 @@ namespace Yorot
             ThemeMan = new ThemeManager(UserTheme) { Settings = this };
             DownloadManager = new DownloadManager(UserDownloads) { Settings = this };
             HistoryManager = new HistoryManager(UserHistory) { Settings = this };
-            FavManager = new FavMan() { Settings = this };
+            FavManager = new FavMan(UserFavorites) { Settings = this };
             LangManager = new LangManager() { Settings = this };
             ProfileManager = new ProfileManager() { Settings = this };
             Extensions = new ExtensionManager(UserExt) { Settings = this };

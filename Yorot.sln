@@ -42,7 +42,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yorot-Mobile.Android", "Yor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yorot-Mobile.iOS", "Yorot-Mobile\Yorot-Mobile.iOS\Yorot-Mobile.iOS.csproj", "{D1CFC43C-DD10-46B4-B761-3696DA3F0713}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yorot-Mobile", "Yorot-Mobile\Yorot-Mobile\Yorot-Mobile.csproj", "{F820605C-F4C8-4CE4-BEBC-CBF484F975A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yorot-Mobile", "Yorot-Mobile\Yorot-Mobile\Yorot-Mobile.csproj", "{F820605C-F4C8-4CE4-BEBC-CBF484F975A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
