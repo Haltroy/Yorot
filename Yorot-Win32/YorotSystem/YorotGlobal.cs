@@ -43,11 +43,11 @@ namespace Yorot
         /// <summary>
         /// Codename of current Yorot version.
         /// </summary>
-        public static string CodeName = "Hamantha"; 
+        public static string CodeName = "Hamantha"; // "HAMANTHA" "FLOWER BAZAAR" "Tropic" "Emerald Fastline" 
         /// <summary>
         /// Placeholder text used by default apps. 
         /// </summary>
-        public static string DefaultaAppOriginPlaceHolder = "8 February 2021 00:19:00 GMT+3:00" + Environment.NewLine + "https://github.com/Haltroy/Yorot" + Environment.NewLine + "Yorot C# Embedded Code" + Environment.NewLine + "(<Source>/Yorot-Win32/UI/"; // LONG-TERM TODO: Change date on releases.
+        public static string DefaultaAppOriginPlaceHolder = "8 February 2021 00:19:00 GMT+3:00" + Environment.NewLine + "https://github.com/Haltroy/Yorot" + Environment.NewLine + "Yorot C# Embedded Code" + Environment.NewLine + "(<Source>)"; // LONG-TERM TODO: Change date on releases.
         /// <summary>
         /// Version Control (HTUPDATE) URL.
         /// </summary>

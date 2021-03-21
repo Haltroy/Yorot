@@ -1,0 +1,720 @@
+﻿using HTAlt;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Xml;
+
+namespace Yorot
+{
+    /// <summary>
+    /// Yorot User Settings Class
+    /// </summary>
+    public class Settings
+    {
+        /// <summary>
+        /// Creates a new Settings instance
+        /// </summary>
+        /// <param name="profile"><see cref="YorotProfile"/></param>
+        public Settings(YorotProfile profile)
+        {
+            Profile = profile;
+            LoadDefaults();
+            LoadFromFile(profile.UserSettings);
+        }
+        /// <summary>
+        /// Loads configuration.
+        /// </summary>
+        /// <param name="fileLocation">Location of the settings configuration file on drive.</param>
+        private void LoadFromFile(string fileLocation)
+        {
+            if (string.IsNullOrWhiteSpace(fileLocation))
+            {
+                Output.WriteLine("[Settings] Loaded default settings because file location is in unsupported.", LogLevel.Warning);
+            }
+            else
+            {
+                if (!File.Exists(fileLocation))
+                {
+                    Output.WriteLine("[Settings] Loaded default settings because file is empty.", LogLevel.Warning);
+                }
+                else
+                {
+                    try
+                    {
+                        XmlDocument doc = new XmlDocument();
+                        doc.LoadXml(HTAlt.Tools.ReadFile(fileLocation,Encoding.Unicode));
+                        XmlNode root = Yorot.Tools.FindRoot(doc);
+                        List<string> appliedSettings = new List<string>();
+                        for(int i = 0; i< root.ChildNodes.Count; i++)
+                        {
+                            var node = root.ChildNodes[i];
+                            switch(node.Name.ToLowerEnglish())
+                            {
+                                case "homepage":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    HomePage = node.InnerXml.InnerXmlToString();
+                                    break;
+                                case "searchengines":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    for (int ı = 0; ı < node.ChildNodes.Count;ı++)
+                                    {
+                                        var subnode = node.ChildNodes[ı];
+                                        if (subnode.Name.ToLowerEnglish() == "engine")
+                                        {
+                                            if (subnode.Attributes["Name"] != null && subnode.Attributes["Url"] != null)
+                                            {
+                                                if (!SearchEngineExists(subnode.Attributes["Name"].Value, subnode.Attributes["Url"].Value))
+                                                {
+                                                    SearchEngines.Add(new YorotSearchEngine(subnode.Attributes["Name"].Value, subnode.Attributes["Url"].Value));
+                                                }else
+                                                {
+                                                    if (!subnode.OuterXml.StartsWith("<!--"))
+                                                    {
+                                                        Output.WriteLine("[SearchEngine] Threw away \"" + subnode.OuterXml + "\". Search Engine already exists.", LogLevel.Warning);
+                                                    }
+                                                }
+                                            }else
+                                            {
+                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                {
+                                                    Output.WriteLine("[SearchEngine] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            {
+                                                Output.WriteLine("[SearchEngine] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
+                                            }
+                                        }
+                                    }
+                                    if(node.Attributes["Selected"] != null)
+                                    {
+                                        SearchEngine = SearchEngines[int.Parse(node.Attributes["Selected"].Value.InnerXmlToString())];
+                                    }
+                                    else
+                                    {
+                                        SearchEngine = SearchEngines[0];
+                                    }
+                                    break;
+                                case "webengines":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    for (int ı = 0; ı < node.ChildNodes.Count;ı++)
+                                    {
+                                        var subnode = node.ChildNodes[ı];
+                                        if (subnode.Name.ToLowerEnglish() == "engine")
+                                        {
+                                            if (subnode.Attributes["Name"] != null && subnode.Attributes["Url"] != null)
+                                            {
+                                                if (!Profile.Manager.Main.WebEngineMan.WEExists(subnode.Attributes["Name"].Value))
+                                                {
+                                                    Profile.Manager.Main.WebEngineMan.Enable(subnode.Attributes["Name"].Value);
+                                                }
+                                                else
+                                                {
+                                                    Output.WriteLine("[Web Engine] Threw away \"" + subnode.OuterXml + "\". Web Engine already exists.", LogLevel.Warning);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                {
+                                                    Output.WriteLine("[Web Engine] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            {
+                                                Output.WriteLine("[Web Engine] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
+                                            }
+                                        }
+                                    }
+                                    break;
+                                case "extensions":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    for (int ı = 0; ı < node.ChildNodes.Count; ı++)
+                                    {
+                                        var subnode = node.ChildNodes[ı];
+                                        if (subnode.Name.ToLowerEnglish() == "ext")
+                                        {
+                                            if (subnode.Attributes["Name"] != null)
+                                            {
+                                                var subnodeName = subnode.Attributes["Name"].Value.InnerXmlToString();
+                                                if (!Profile.Manager.Main.Extensions.ExtExists(subnodeName))
+                                                {
+                                                    Profile.Manager.Main.Extensions.Enable(subnodeName);
+                                                    if (subnode.Attributes["allowInIncognito"] != null)
+                                                    {
+                                                        Profile.Manager.Main.Extensions.GetExtByCN(subnodeName).AllowInIncognito = subnode.Attributes["allowInIncognito"].Value == "true";
+                                                    }
+                                                    if (subnode.Attributes["isPinned"] != null)
+                                                    {
+                                                        Profile.Manager.Main.Extensions.GetExtByCN(subnodeName).isPinned = subnode.Attributes["isPinned"].Value == "true";
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". Web Engine already exists.", LogLevel.Warning);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                {
+                                                    Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            {
+                                                Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
+                                            }
+                                        }
+                                    }
+                                    break;
+                                case "themes":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    for (int ı = 0; ı < node.ChildNodes.Count; ı++)
+                                    {
+                                        var subnode = node.ChildNodes[ı];
+                                        if (subnode.Name.ToLowerEnglish() == "theme")
+                                        {
+                                            if (subnode.Attributes["Name"] != null)
+                                            {
+                                                if (!Profile.Manager.Main.ThemeMan.ThemeExists(subnode.Attributes["Name"].Value))
+                                                {
+                                                    Profile.Manager.Main.ThemeMan.Enable(subnode.Attributes["Name"].Value);
+                                                }
+                                                else
+                                                {
+                                                    Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". Web Engine already exists.", LogLevel.Warning);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                {
+                                                    Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            {
+                                                Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
+                                            }
+                                        }
+                                    }
+                                    if (node.Attributes["Selected"] != null)
+                                    {
+                                        currentTheme = Profile.Manager.Main.ThemeMan.GetThemeByCN(node.Attributes["Seelcted"].Value.InnerXmlToString());
+                                    }else
+                                    {
+                                        currentTheme = Profile.Manager.Main.ThemeMan.GetThemeByCN(DefaultThemes.YorotLight.CodeName);
+                                    }
+                                    break;
+                                case "langs":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    for (int ı = 0; ı < node.ChildNodes.Count; ı++)
+                                    {
+                                        var subnode = node.ChildNodes[ı];
+                                        if (subnode.Name == "Lang")
+                                        {
+                                            if (subnode.Attributes["Name"] != null)
+                                            {
+                                                if (!Profile.Manager.Main.LangMan.LangExists(subnode.Attributes["Name"].Value))
+                                                {
+                                                    Profile.Manager.Main.LangMan.Enable(subnode.Attributes["Name"].Value);
+                                                }
+                                                else
+                                                {
+                                                    Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". Web Engine already exists.", LogLevel.Warning);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                {
+                                                    Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            {
+                                                Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
+                                            }
+                                        }
+                                    }
+                                    if (node.Attributes["Selected"] != null)
+                                    {
+                                        CurrentLanguage = Profile.Manager.Main.LangMan.GetLangByCN(node.Attributes["Selected"].Value.InnerXmlToString());
+                                    }else
+                                    {
+                                        CurrentLanguage = Profile.Manager.Main.LangMan.GetLangByCN("com.haltroy.english");
+                                    }
+                                    break;
+                                case "apps":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    for (int ı = 0; ı < node.ChildNodes.Count; ı++)
+                                    {
+                                        var subnode = node.ChildNodes[ı];
+                                        if (subnode.Name.ToLowerEnglish() == "app")
+                                        {
+                                            if (subnode.Attributes["Name"] != null)
+                                            {
+                                                if (!Profile.Manager.Main.AppMan.AppExists(subnode.Attributes["Name"].Value))
+                                                {
+                                                    Profile.Manager.Main.AppMan.Enable(subnode.Attributes["Name"].Value);
+                                                    if (subnode.Attributes["isPinned"] != null)
+                                                    {
+                                                        Profile.Manager.Main.AppMan.SetPinStatus(subnode.Attributes["Name"].Value, subnode.Attributes["isPinned"].Value == "true");
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    Output.WriteLine("[Apps] Threw away \"" + subnode.OuterXml + "\". Web Engine already exists.", LogLevel.Warning);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                {
+                                                    Output.WriteLine("[Apps] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            {
+                                                Output.WriteLine("[Apps] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
+                                            }
+                                        }
+                                    }
+                                    break;
+                                case "restoreoldsessions":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    RestoreOldSessions = node.InnerXml.InnerXmlToString() == "true";
+                                    break;
+                                case "rememberlastproxy":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    RememberLastProxy = node.InnerXml.InnerXmlToString() == "true";
+                                    break;
+                                case "donottrack":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    DoNotTrack = node.InnerXml.InnerXmlToString() == "true";
+                                    break;
+                                case "showfavorites":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    FavManager.ShowFavorites = node.InnerXml.InnerXmlToString() == "true";
+                                    break;
+                                case "startwithfullscreen":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    StartWithFullScreen = node.InnerXml.InnerXmlToString() == "true";
+                                    break;
+                                case "openfilesafterdownload":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    DownloadManager.OpenFilesAfterDownload = node.InnerXml.InnerXmlToString() == "true";
+                                    break;
+                                case "autodownload":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    DownloadManager.AutoDownload = node.InnerXml.InnerXmlToString() == "true";
+                                    break;
+                                case "downloadfolder":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    DownloadManager.DownloadFolder = node.InnerXml.InnerXmlToString();
+                                    break;
+                                case "alwayscheckdefaultbrowser":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    AlwaysCheckDefaultBrowser = node.InnerXml.InnerXmlToString() == "true";
+                                    break;
+                                case "startonboot":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    StartOnBoot = node.InnerXml.InnerXmlToString() == "true";
+                                    break;
+                                case "startinsystemtray":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    StartInSystemTray = node.InnerXml.InnerXmlToString() == "true";
+                                    break;
+                                case "notifplaysound":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    NotifPlaySound = node.InnerXml.InnerXmlToString() == "true";
+                                    break;
+                                case "notifusedefault":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    NotifUseDefault = node.InnerXml.InnerXmlToString() == "true";
+                                    break;
+                                case "notifsoundloc":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    NotifSoundLoc = node.InnerXml.InnerXmlToString();
+                                    break;
+                                case "notifsilent":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    NotifSilent = node.InnerXml.InnerXmlToString() == "true";
+                                    break;
+                                default:
+                                    if (!node.OuterXml.StartsWith("<!--"))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning);
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                    catch (XmlException)
+                    {
+                        Output.WriteLine("[Settings] Loaded default settings because file is in unsupported.", LogLevel.Warning);
+                    }
+                    catch (Exception ex)
+                    {
+                        Output.WriteLine("[Settings] Loaded default settings because of this exception:" + Environment.NewLine + ex.ToString(), LogLevel.Warning);
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Current loaded language by user.
+        /// </summary>
+        public YorotLanguage CurrentLanguage { get; set; }
+        /// <summary>
+        /// Current theme loaded by user.
+        /// </summary>
+        public YorotTheme currentTheme { get; set; } = DefaultThemes.YorotLight;
+        /// <summary>
+        /// Retrieves configuration in XML format.
+        /// </summary>
+        /// <returns><see cref="string"/></returns>
+        public string ToXml() // TODO: Rewrite this entire section since we enable all other things inside here
+        {
+            string x = "<?xml version=\"1.0\" encoding=\"utf-16\"?>" + Environment.NewLine +
+                "<root>" + Environment.NewLine +
+                "<!-- Yorot User File" + Environment.NewLine + Environment.NewLine +
+                "This file is used by Yorot to get user information." + Environment.NewLine +
+                "Editing this file might cause problems within Yorot and" + Environment.NewLine +
+                "other apps and extensions." + Environment.NewLine +
+                "-->" + Environment.NewLine;
+            x += "<HomePage>" + HomePage.ToXML() + "</HomePage>" + Environment.NewLine;
+            x += "<SearchEngine Name=\"" + SearchEngine.Name.ToXML() + "\" Url=\"" + SearchEngine.Url.ToXML() + "\" />" + Environment.NewLine;
+            if (SearchEngines.Count > 0)
+            {
+                x += "<SearchEngines>" + Environment.NewLine;
+                for (int i = 0; i < SearchEngines.Count; i++)
+                {
+                    if (!SearchEngines[i].comesWithYorot)
+                    {
+                        x += "<Engine Name=\"" + SearchEngines[i].Name.ToXML() + "\" Url=\"" + SearchEngines[i].Url.ToXML() + "\" />" + Environment.NewLine;
+                    }
+                }
+                x += "</SearchEngines>" + Environment.NewLine;
+            }
+            x += "<RestoreOldSessions>" + (RestoreOldSessions ? "true" : "false") + "</RestoreOldSessions>" + Environment.NewLine;
+            x += "<RememberLastProxy>" + (RememberLastProxy ? "true" : "false") + "</RememberLastProxy>" + Environment.NewLine;
+            x += "<Lang>" + Main.LangMan.LoadedLangFile.ToXML().ShortenPath(Main.AppPath) + "</Lang>" + Environment.NewLine;
+            x += "<DoNotTrack>" + (DoNotTrack ? "true" : "false") + "</DoNotTrack>" + Environment.NewLine;
+            x += "<ShowFavorites>" + (FavManager.ShowFavorites ? "true" : "false") + "</ShowFavorites>" + Environment.NewLine;
+            x += "<StartWithFullScreen>" + (StartWithFullScreen ? "true" : "false") + "</StartWithFullScreen>" + Environment.NewLine;
+            x += "<OpenFilesAfterDownload>" + (DownloadManager.OpenFilesAfterDownload ? "true" : "false") + "</OpenFilesAfterDownload>" + Environment.NewLine;
+            x += "<AutoDownload>" + (DownloadManager.AutoDownload ? "true" : "false") + "</AutoDownload>" + Environment.NewLine;
+            x += "<AlwaysCheckDefaultBrowser>" + (AlwaysCheckDefaultBrowser ? "true" : "false") + "</AlwaysCheckDefaultBrowser>" + Environment.NewLine;
+            x += "<StartOnBoot>" + (StartOnBoot ? "true" : "false") + "</StartOnBoot>" + Environment.NewLine;
+            x += "<StartInSystemTray>" + (StartInSystemTray ? "true" : "false") + "</StartInSystemTray>" + Environment.NewLine;
+            x += "<NotifPlaySound>" + (NotifPlaySound ? "true" : "false") + "</NotifPlaySound>" + Environment.NewLine;
+            x += "<NotifUseDefault>" + (NotifUseDefault ? "true" : "false") + "</NotifUseDefault>" + Environment.NewLine;
+            x += "<NotifSilent>" + (NotifSilent ? "true" : "false") + "</NotifSilent>" + Environment.NewLine;
+            x += "<DownloadFolder>" + DownloadManager.DownloadFolder.ToXML() + "</DownloadFolder>" + Environment.NewLine;
+            x += "<NotifSoundLoc>" + NotifSoundLoc.ToXML() + "</NotifSoundLoc>" + Environment.NewLine;
+            return (x + Environment.NewLine + "</root>").BeautifyXML();
+        }
+        /// <summary>
+        /// Loads default configurations.
+        /// </summary>
+        public void LoadDefaults()
+        {
+            DownloadManager = new DownloadManager(Profile.UserDownloads, Profile.Manager.Main);
+            HistoryManager = new HistoryManager(Profile.UserHistory, Profile.Manager.Main);
+            FavManager = new FavMan(Profile.UserFavorites, Profile.Manager.Main);
+            HomePage = "yorot://newtab";
+            // BEGIN: Search Engines
+            SearchEngines.Clear();
+            SearchEngine = new YorotSearchEngine("Google", "https://www.google.com/search?q=") { comesWithYorot = true };
+            SearchEngines.Add(SearchEngine);
+            SearchEngines.Add(new YorotSearchEngine("Yandex", "https://yandex.com.tr/search/?lr=103873&text=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Bing", "https://www.bing.com/search?q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Yaani", "https://www.yaani.com/#q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("DuckDuckGo", "https://duckduckgo.com/?q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Baidu", "https://www.baidu.com/s?&wd=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("WolframAlpha", "https://www.wolframalpha.com/input/?i=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("AOL", "https://search.aol.com/aol/search?&q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Yahoo", "https://search.yahoo.com/search?p=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Ask", "https://www.ask.com/web?q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Archive.org", "https://web.archive.org/web/*/") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Wikipedia", "https://en.wikipedia.org/w/index.php?search=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Mojeek", "https://www.mojeek.com/search?q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Qwant", "https://www.qwant.com/?q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Naver", "https://search.naver.com/search.naver?query=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Sogou", "https://www.sogou.com/web?query=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Gigablast", "https://www.gigablast.com/search?q=") { comesWithYorot = true });
+            // END: Search Engines
+            RestoreOldSessions = false;
+            RememberLastProxy = false;
+            DoNotTrack = true;
+            FavManager.ShowFavorites = true;
+            StartWithFullScreen = false;
+            DownloadManager.OpenFilesAfterDownload = false;
+            DownloadManager.AutoDownload = true;
+            DownloadManager.DownloadFolder = Profile.Path + @"Downloads\";
+            AlwaysCheckDefaultBrowser = true;
+            StartOnBoot = false;
+            StartInSystemTray = false;
+            NotifPlaySound = true;
+            NotifSilent = false;
+            NotifUseDefault = true;
+            NotifSoundLoc =  @"RES\n.ogg";
+        }
+        /// <summary>
+        /// Saves configuration to drive.
+        /// </summary>
+        public void Save()
+        {
+            HistoryManager.Save();
+            FavManager.Save();
+            DownloadManager.Save();
+            HTAlt.Tools.WriteFile(Profile.Manager.Main.Profiles.Current.UserSettings, ToXml(), Encoding.Unicode);
+        } 
+        /// <summary>
+        /// The profile that this settings are associated with.
+        /// </summary>
+        public YorotProfile Profile { get; set; }
+        /// <summary>
+        /// user downloads manager
+        /// </summary>
+        public DownloadManager DownloadManager { get; set; }
+        /// <summary>
+        /// User history manager
+        /// </summary>
+        public HistoryManager HistoryManager { get; set; }
+        /// <summary>
+        /// User favorites manager
+        /// </summary>
+        public FavMan FavManager { get; set; }
+        /// <summary>
+        /// Determines if a search engine exists.
+        /// </summary>
+        /// <param name="name">Name of the engine</param>
+        /// <param name="url">URI of the engine</param>
+        /// <returns><see cref="bool"/></returns>
+        public bool SearchEngineExists(string name, string url)
+        {
+            return SearchEngines.FindAll(i => i.Name == name && i.Url == url).Count > 0;
+        }
+        /// <summary>
+        /// URI that loads when user clicks on the home button.
+        /// </summary>
+        public string HomePage { get; set; } = "";
+        /// <summary>
+        /// Current search engine selected by user.
+        /// </summary>
+        public YorotSearchEngine SearchEngine { get; set; } = null;
+        /// <summary>
+        /// A list of search engines.
+        /// </summary>
+        public List<YorotSearchEngine> SearchEngines { get; set; } = new List<YorotSearchEngine>();
+        /// <summary>
+        /// Determines if old sessions should resotre on startup.
+        /// </summary>
+        public bool RestoreOldSessions { get; set; } = false;
+        /// <summary>
+        /// Determines to remeber last proxy on either Yorot or extension restart.
+        /// </summary>
+        public bool RememberLastProxy { get; set; } = false;
+        /// <summary>
+        /// Determines to sending DoNotTrack information to websites.
+        /// </summary>
+        public bool DoNotTrack { get; set; } = true;
+        /// <summary>
+        /// Determinbes if the app drawer should start full screen or not.
+        /// </summary>
+        public bool StartWithFullScreen { get; set; } = false;
+        /// <summary>
+        /// Determines to check if Yorot is the default on startup.
+        /// </summary>
+        public bool AlwaysCheckDefaultBrowser { get; set; } = true;
+        /// <summary>
+        /// Determines to start Yorot on operating system boot.
+        /// </summary>
+        public bool StartOnBoot { get; set; } = false;
+        /// <summary>
+        /// Determines to start and quickly hide Yorot to system tray on bootup start.
+        /// </summary>
+        public bool StartInSystemTray { get; set; } = true;
+        /// <summary>
+        /// Determines if notifications should play sound.
+        /// </summary>
+        public bool NotifPlaySound { get; set; } = true;
+        /// <summary>
+        /// Determines if notification sound should be the default one.
+        /// </summary>
+        public bool NotifUseDefault { get; set; } = true;
+        /// <summary>
+        /// Determines the location of notificatio sound on drive.
+        /// </summary>
+        public string NotifSoundLoc { get; set; } = "";
+        /// <summary>
+        /// Determines if the notification should play a sound.
+        /// </summary>
+        public bool NotifSilent { get; set; } = false;
+    }
+    /// <summary>
+    /// Search engine class
+    /// </summary>
+    public class YorotSearchEngine
+    {
+        /// <summary>
+        /// Creates a new search engine.
+        /// </summary>
+        /// <param name="name">Name of the engine.</param>
+        /// <param name="url">URI of the engine.</param>
+        public YorotSearchEngine(string name,string url)
+        {
+            Name = name;
+            Url = url;
+        }
+        /// <summary>
+        /// Name of the search engine.
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// URI of the search engine.
+        /// </summary>
+        public string Url { get; set; }
+        /// <summary>
+        /// Determines if this engine comes with Yorot.
+        /// </summary>
+        public bool comesWithYorot { get; set; } = false;
+        /// <summary>
+        /// Searches text with this engine.
+        /// </summary>
+        /// <param name="x"><see cref="string"/></param>
+        /// <returns><see cref="string"/></returns>
+        public string Search(string x) => Url.Contains("%s%") ? Url.Replace("%s%", x) : Url + x;
+    }
+}

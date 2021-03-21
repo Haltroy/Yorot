@@ -36,11 +36,11 @@ namespace Yorot
         /// Finds the root node of <paramref name="doc"/>.
         /// </summary>
         /// <param name="doc">the <see cref="XmlNode"/> (probably <seealso cref="XmlDocument.DocumentElement"/>) to search on.</param>
-        /// <returnsa <see cref="XmlNode"/> which represents as the root node.></returns>
+        /// <returns>a <see cref="System.Xml.XmlNode"/> which represents as the root node.</returns>
         public static System.Xml.XmlNode FindRoot(System.Xml.XmlNode doc)
         {
             System.Xml.XmlNode found = null;
-            if (doc.Name.ToLower() == "root")
+            if (doc.Name.ToLowerEnglish() == "root")
             {
                 found = doc;
             }
@@ -49,13 +49,38 @@ namespace Yorot
                 for (int i = 0; i < doc.ChildNodes.Count; i++)
                 {
                     var node = doc.ChildNodes[i];
-                    if (node.Name.ToLower() == "root")
+                    if (node.Name.ToLowerEnglish() == "root")
                     {
                         found = node;
                     }
                 }
             }
             return found;
+        }
+        /// <summary>
+        /// Turns all characters to lowercase, using en-US culture information to avoid language-specific ToLower() errors such as:
+        /// <para>Turkish: I -&gt; ı İ -&gt; i</para>
+        /// <para>English I &lt;-&gt; i</para>
+        /// </summary>
+        /// <param name="s"><see cref="string"/></param>
+        /// <returns><see cref="string"/></returns>
+        public static string ToLowerEnglish(this string s)
+        {
+            // USE TRANSLATOR
+            // MS ToLower() fonksiyonunu açıklarken biraz ters örnek kullanmış, bu da hafif kafa karışıklığı oluşturmuş olabilir.
+            // Gene de Türkçe'yi örnek olarak göstermeleri iyi olmuş. Malum İngilizce'de "İ" (Büyük i) ve "ı" (Küçük ı) yok.
+            // Daha da kafa karışsın diye üstüne "İ" yi Unicode ile yazmışlar, ilk bakışta görmek biraz zor.
+            // Bu da küçük bir "rant" olsun. Hem ToLowerInvariant() bir boka yaramıyor.
+            return s.ToLower(new System.Globalization.CultureInfo("en-US", false));
+        }
+        /// <summary>
+        /// Finds the root node of <paramref name="doc"/>.
+        /// </summary>
+        /// <param name="doc">The XML document.</param>
+        /// <returns>a <see cref="System.Xml.XmlNode"/> which represents as the root node.</returns>
+        public static System.Xml.XmlNode FindRoot(System.Xml.XmlDocument doc)
+        {
+            return FindRoot(doc.DocumentElement);
         }
         /// <summary>
         /// Converts <see cref="XmlNode.InnerXml"/> to formatted <seealso cref="string"/>.
@@ -79,57 +104,39 @@ namespace Yorot
         /// Shortens the path.
         /// </summary>
         /// <param name="path">Path</param>
-        /// <param name="appPath">Application path used by Yorot.</param>
+        /// <param name="main"><see cref="YorotMain"/></param>
         /// <returns><see cref="string"/></returns>
-        public static string ShortenPath(this string path,string appPath)
+        public static string ShortenPath(this string path,YorotMain main)
         {
-            var UserLoc = appPath + @"usr\";
-            var LogPath = appPath + @"log\";
-            var CacheLoc = UserLoc + @"\cache\";
-            var ThemesLoc = UserLoc + @"\themes\";
-            var UserApps = UserLoc + @"apps\";
-            var LangLoc = UserLoc + @"lang\";
-            var ExtLoc = UserLoc + @"ext\";
-            var EngineLoc = UserLoc + @"engines\";
-            var UserProfiles = UserLoc + @"profiles\";
-            return path.Replace(UserProfiles, "[USERPROF]")
-                .Replace(EngineLoc, "[WEBENG]")
-                .Replace(ExtLoc, "[USEREXT]")
-                .Replace(LangLoc, "[USERLANG]")
-                .Replace(UserApps, "[USERAPPS]")
-                .Replace(ThemesLoc, "[USERTHEME]")
-                .Replace(CacheLoc, "[USERCACHE]")
-                .Replace(LogPath, "[LOGS]")
-                .Replace(UserLoc, "[USR]")
-                .Replace(appPath,"[APPPATH]");
+            return path.Replace(main.ProfilesFolder, "[PROFILES]")
+                .Replace(main.WEFolder, "[WEBENG]")
+                .Replace(main.ExtFolder, "[USEREXT]")
+                .Replace(main.LangFolder, "[USERLANG]")
+                .Replace(main.AppsFolder, "[USERAPPS]")
+                .Replace(main.ThemesFolder, "[USERTHEME]")
+                .Replace(main.Profiles.Current.CacheLoc, "[USERCACHE]")
+                .Replace(main.LogFolder, "[LOGS]")
+                .Replace(main.Profiles.Current.Path, "[USER]")
+                .Replace(main.AppPath,"[APPPATH]");
         }
         /// <summary>
         /// Unshortens the path.
         /// </summary>
         /// <param name="path">Path</param>
-        /// <param name="appPath">Application path used by Yorot.</param>
+        /// <param name="main"><see cref="YorotMain"/></param>
         /// <returns><see cref="string"/></returns>
-        public static string GetPath(this string path, string appPath)
+        public static string GetPath(this string path, YorotMain main)
         {
-            var UserLoc = appPath + @"usr\";
-            var LogPath = appPath + @"log\";
-            var CacheLoc = UserLoc + @"\cache\";
-            var ThemesLoc = UserLoc + @"\themes\";
-            var UserApps = UserLoc + @"apps\";
-            var LangLoc = UserLoc + @"lang\";
-            var ExtLoc = UserLoc + @"ext\";
-            var EngineLoc = UserLoc + @"engines\";
-            var UserProfiles = UserLoc + @"profiles\";
-            return path.Replace("[USERPROF]", UserProfiles)
-                .Replace("[WEBENG]", EngineLoc)
-                .Replace("[USEREXT]", ExtLoc)
-                .Replace("[USERLANG]", LangLoc)
-                .Replace("[USERAPPS]", UserApps)
-                .Replace("[USERTHEME]", ThemesLoc)
-                .Replace("[USERCACHE]", CacheLoc)
-                .Replace("[LOGS]", LogPath)
-                .Replace("[USR]", UserLoc)
-                .Replace("[APPPATH]", appPath);
+            return path.Replace("[PROFILES]", main.ProfilesFolder)
+                .Replace("[WEBENG]", main.WEFolder)
+                .Replace("[USEREXT]", main.ExtFolder)
+                .Replace("[USERLANG]", main.LangFolder)
+                .Replace("[USERAPPS]", main.AppsFolder)
+                .Replace("[USERTHEME]", main.ThemesFolder)
+                .Replace("[USERCACHE]", main.Profiles.Current.CacheLoc)
+                .Replace("[LOGS]",main.LogFolder)
+                .Replace("[USER]",main.Profiles.Current.Path)
+                .Replace("[APPPATH]",main.AppPath);
         }
     }
 }

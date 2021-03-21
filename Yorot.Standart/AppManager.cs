@@ -9,98 +9,14 @@ namespace Yorot
     /// <summary>
     /// Yorot App Manager
     /// </summary>
-    public class AppManager
+    public class AppManager : YorotManager
     {
         /// <summary>
         /// Creates a new App manager.
         /// </summary>
         /// <param name="configFile">Location of the configuration file on drive.</param>
-        public AppManager(string configFile)
+        public AppManager(YorotMain main) : base(main.AppsConfig,main)
         {
-            if (!string.IsNullOrWhiteSpace(configFile)) 
-            {
-                if (System.IO.File.Exists(configFile))
-                {
-                    try
-                    {
-                        XmlDocument doc = new XmlDocument();
-                        doc.LoadXml(HTAlt.Tools.ReadFile(configFile, System.Text.Encoding.Unicode));
-                        XmlNode rootNode = Yorot.Tools.FindRoot(doc.DocumentElement);
-                        List<string> appliedSettings = new List<string>();
-                        for (int i = 0;i < rootNode.ChildNodes.Count;i++)
-                        {
-                            var node = rootNode.ChildNodes[i];
-                            switch(node.Name)
-                            {
-                                case "Apps":
-                                    if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                                    {
-                                        Output.WriteLine("[AppMan] Threw away \"" + node.OuterXml + "\". Configurtion already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name);
-                                    for(int ı = 0; ı < node.ChildNodes.Count;ı++)
-                                    {
-                                        var subnode = node.ChildNodes[ı];
-                                        if (subnode.Name == "App" && subnode.Attributes["CodeName"] != null)
-                                        {
-                                            if (Apps.FindAll(it => it.AppCodeName == subnode.Attributes["CodeName"].Value).Count > 0) 
-                                            {
-                                                Output.WriteLine("[AppMan] Threw away \"" + subnode.OuterXml + "\". App already installed.", LogLevel.Warning);
-                                            }
-                                            else
-                                            {
-                                                YorotApp app = new YorotApp(subnode.Attributes["CodeName"].Value,this);
-                                                if (subnode.Attributes["Pinned"] != null)
-                                                {
-                                                    app.isPinned = subnode.Attributes["Pinned"].Value == "true";
-                                                }
-                                                if (subnode.Attributes["Origin"] != null && subnode.Attributes["OriginInfo"] != null)
-                                                {
-                                                    app.AppOrigin = (YorotAppOrigin)(int.Parse(subnode.Attributes["Origin"].Value));
-                                                    app.AppOriginInfo = subnode.Attributes["OriginInfo"].Value.Replace("[NEWLINE]",Environment.NewLine);
-                                                }
-                                                else
-                                                {
-                                                    app.AppOrigin = YorotAppOrigin.Unknown;
-                                                    app.AppOriginInfo = "Xml node responsible for this app did not include \"Origin\" and \"OriginInfo\" attributes in config file \"" + configFile + "\".";
-                                                }
-                                                Apps.Add(app);
-                                            }
-                                        }else
-                                        {
-                                            if (!subnode.OuterXml.StartsWith("<!--"))
-                                            {
-                                                Output.WriteLine("[AppMan] Threw away \"" + subnode.OuterXml + "\". Invalid format.", LogLevel.Warning);
-                                            }
-                                        }
-                                    }
-                                    break;
-                                default:
-                                    if (!node.OuterXml.StartsWith("<!--"))
-                                    {
-                                        Output.WriteLine("[AppMan] Threw away \"" + node.OuterXml + "\". Invalid configurtion.", LogLevel.Warning);
-                                    }
-                                    break;
-                            }
-                        }
-                    }catch (XmlException)
-                    {
-                        Output.WriteLine("[AppMan] Loaded defaults because configuration file has error(s).", LogLevel.Warning);
-                    }
-                    catch(Exception ex)
-                    {
-                        Output.WriteLine("[AppMan] Loaded defaults because of this error: " + Environment.NewLine + ex.ToString(), LogLevel.Warning);
-                    }
-                }else
-                {
-                    Output.WriteLine("[AppMan] Loaded defaults, cannot access configuration file.", LogLevel.Warning);
-                }
-            }else
-            {
-                Output.WriteLine("[AppMan] Loaded defaults because configuration file path was empty.", LogLevel.Warning);
-            }
-            
             Apps.Add(DefaultApps.Calculator.CreateCarbonCopy());
             Apps.Add(DefaultApps.Collections.CreateCarbonCopy());
             Apps.Add(DefaultApps.Console.CreateCarbonCopy());
@@ -124,11 +40,7 @@ namespace Yorot
                 Apps[i].Manager = this;
             }
         }
-        /// <summary>
-        /// Retrieves configuration file content
-        /// </summary>
-        /// <returns></returns>
-        public string ToXml()
+        public override string ToXml()
         {
             string x = "<?xml version=\"1.0\" encoding=\"utf-16\"?>" + Environment.NewLine +
                 "<root>" + Environment.NewLine +
@@ -148,17 +60,6 @@ namespace Yorot
             return (x + "</Apps>" + Environment.NewLine + "</root>").BeautifyXML();
         }
         /// <summary>
-        /// Saves configuration.
-        /// </summary>
-        public void Save()
-        {
-            HTAlt.Tools.WriteFile(Settings.UserApp, ToXml(), System.Text.Encoding.Unicode);
-        }
-         /// <summary>
-        /// Main settings for Yorot.
-        /// </summary>
-        public Settings Settings { get; set; }
-        /// <summary>
         /// Serves information of update count. Used in App menu refreshment
         /// </summary>
         public int UpdateCount { get; set; } = 0;
@@ -174,6 +75,84 @@ namespace Yorot
         public YorotApp FindByAppCN(string appcn)
         {
             return Apps.Find(i => string.Equals(i.AppCodeName, appcn));
+        }
+
+        public override void ExtractXml(XmlNode rootNode)
+        {
+            List<string> appliedSettings = new List<string>();
+            for (int i = 0; i < rootNode.ChildNodes.Count; i++)
+            {
+                var node = rootNode.ChildNodes[i];
+                switch (node.Name)
+                {
+                    case "Apps":
+                        if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
+                        {
+                            Output.WriteLine("[AppMan] Threw away \"" + node.OuterXml + "\". Configurtion already applied.", LogLevel.Warning);
+                            break;
+                        }
+                        appliedSettings.Add(node.Name);
+                        for (int ı = 0; ı < node.ChildNodes.Count; ı++)
+                        {
+                            var subnode = node.ChildNodes[ı];
+                            if (subnode.Name == "App" && subnode.Attributes["CodeName"] != null)
+                            {
+                                if (Apps.FindAll(it => it.AppCodeName == subnode.Attributes["CodeName"].Value).Count > 0)
+                                {
+                                    Output.WriteLine("[AppMan] Threw away \"" + subnode.OuterXml + "\". App already installed.", LogLevel.Warning);
+                                }
+                                else
+                                {
+                                    YorotApp app = new YorotApp(subnode.Attributes["CodeName"].Value, this);
+                                    if (subnode.Attributes["Pinned"] != null)
+                                    {
+                                        app.isPinned = subnode.Attributes["Pinned"].Value == "true";
+                                    }
+                                    if (subnode.Attributes["Origin"] != null && subnode.Attributes["OriginInfo"] != null)
+                                    {
+                                        app.AppOrigin = (YorotAppOrigin)(int.Parse(subnode.Attributes["Origin"].Value));
+                                        app.AppOriginInfo = subnode.Attributes["OriginInfo"].Value.Replace("[NEWLINE]", Environment.NewLine);
+                                    }
+                                    else
+                                    {
+                                        app.AppOrigin = YorotAppOrigin.Unknown;
+                                        app.AppOriginInfo = "Xml node responsible for this app did not include \"Origin\" and \"OriginInfo\" attributes in config file \"" + ConfigFile + "\".";
+                                    }
+                                    Apps.Add(app);
+                                }
+                            }
+                            else
+                            {
+                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                {
+                                    Output.WriteLine("[AppMan] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
+                                }
+                            }
+                        }
+                        break;
+                    default:
+                        if (!node.OuterXml.StartsWith("<!--"))
+                        {
+                            Output.WriteLine("[AppMan] Threw away \"" + node.OuterXml + "\". Invalid configurtion.", LogLevel.Warning);
+                        }
+                        break;
+                }
+            }
+        }
+
+        internal void SetPinStatus(string value, bool v)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void Enable(string value)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal bool AppExists(string value)
+        {
+            throw new NotImplementedException();
         }
     }
     /// <summary>
@@ -404,7 +383,7 @@ namespace Yorot
         {
             AppCodeName = appCodeName;
             Manager = manager;
-            string configFile = Manager.Settings.UserApps + appCodeName + "\\app.ycf";
+            string configFile = Manager.Main.AppsFolder + appCodeName + "\\app.ycf";
             if (!string.IsNullOrWhiteSpace(configFile))
             {
                 if (System.IO.File.Exists(configFile))
@@ -602,7 +581,7 @@ namespace Yorot
         {
             get
             {
-                return (Manager.Settings.UserApps + AppCodeName).GetDirectorySize();
+                return (Manager.Main.AppsFolder + AppCodeName).GetDirectorySize();
             }
         }
         /// <summary>

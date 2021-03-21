@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HTAlt;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -16,7 +17,7 @@ namespace Yorot
             YorotGlobal.Wolfhook = new Wolfhook() { WhFolder = YorotGlobal.YorotAppPath + "\\wolfhook\\", };
             YorotGlobal.Y1 = new YorotSpecial();
             YorotGlobal.Settings = new Settings(YorotGlobal.YorotAppPath);
-            Output.LogDirPath = YorotGlobal.Settings.AppPath + "\\logs\\";
+            Output.LogDirPath = YorotGlobal.Settings.Main.AppPath + "\\logs\\";
             if (exists)
             {
                 Output.WriteLine("<Yorot.Program> App already running. Passing arguments...", LogLevel.Warning);

@@ -9,85 +9,12 @@ namespace Yorot
     /// <summary>
     /// Yorot Favorites Manager.
     /// </summary>
-    public class FavMan
+    public class FavMan : YorotManager
     {
-        /// <summary>
-        /// Creates a new Favorites manager.
-        /// </summary>
-        /// <param name="configFile">Location of the configuration file on drive.</param>
-        public FavMan(string configFile)
+        public FavMan(string configFile,YorotMain main) : base(configFile,main)
         {
-            if (!string.IsNullOrWhiteSpace(configFile))
-            {
-                if (System.IO.File.Exists(configFile))
-                {
-                    try
-                    {
-                        XmlDocument doc = new XmlDocument();
-                        doc.LoadXml(HTAlt.Tools.ReadFile(configFile, Encoding.Unicode));
-                        XmlNode rootNode = Yorot.Tools.FindRoot(doc.DocumentElement);
-                        List<string> appliedSettings = new List<string>();
-                        for (int ı = 0; ı < rootNode.ChildNodes.Count; ı++)
-                        {
-                            var node = rootNode.ChildNodes[ı];
-                            switch (node.Name)
-                            {
-                                case "Favorites":
-                                    if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                                    {
-                                        Output.WriteLine("[FavMan] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name);
-                                    for (int i = 0; i < node.ChildNodes.Count; i++)
-                                    {
-                                        var subnode = node.ChildNodes[i];
-                                        switch(subnode.Name)
-                                        {
-                                            case "Favorite":
-                                                Favorites.Add(new YorotFavorite(node) { Manager = this});
-                                                break;
-                                            case "Folder":
-                                                Favorites.Add(new YorotFavFolder(node) { Manager = this });
-                                                break;
-                                            default:
-                                                if (!subnode.OuterXml.StartsWith("<!--")) { Output.WriteLine("[FavMan] Threw away \"" + subnode.OuterXml + "\", unsupported."); }
-                                                break;
-                                        }
-                                    }
-                                    break;
-                                default:
-                                    if (!node.OuterXml.StartsWith("<!--"))
-                                    {
-                                        Output.WriteLine("[FavMan] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning);
-                                    }
-                                    break;
-                            }
-                        }
-                    }
-                    catch (XmlException)
-                    {
-                        Output.WriteLine("[FavMan] Loaded default configuration, configuration file in \"" + configFile + "\" has XML error(s).", LogLevel.Warning);
-                    }
-                    catch (Exception ex)
-                    {
-                        Output.WriteLine("[FavMan] Loaded default configuration because of this error: " + ex.ToString(), LogLevel.Warning);
-                    }
-                }
-                else
-                {
-                    Output.WriteLine("[FavMan] Cannot load configuration, configuration file in \"" + configFile + "\" does not exists.", LogLevel.Warning);
-                }
-            }
-            else
-            {
-                Output.WriteLine("[FavMan] Cannot load configuration, \"configFile\" was empty.", LogLevel.Warning);
-            }
         }
-        /// <summary>
-        /// Yorot Settings used in this manager.
-        /// </summary>
-        public Settings Settings { get; set; }
+
         /// <summary>
         /// <see cref="true"/> to show favorites bar, otherwise <seealso cref="false"/>.
         /// </summary>
@@ -96,33 +23,6 @@ namespace Yorot
         /// A list contains loaded favorites.
         /// </summary>
         public List<YorotFavFolder> Favorites { get; set; } = new List<YorotFavFolder>();
-        /// <summary>
-        /// Retrieves current configuration is XML format.
-        /// </summary>
-        /// <returns><see cref="string"/></returns>
-        public string ToXml()
-        {
-            string x = "<?xml version=\"1.0\" encoding=\"utf-16\"?>" + Environment.NewLine +
-          "<root>" + Environment.NewLine +
-          "<!-- Yorot Favorites Config File" + Environment.NewLine + Environment.NewLine +
-           "This file is used to save browser favorites." + Environment.NewLine +
-          "Editing this file might cause problems with Yorot." + Environment.NewLine +
-          "-->" + Environment.NewLine +
-          "<Favorites>" + Environment.NewLine;
-            for (int i = 0; i < Favorites.Count; i++)
-            {
-                var site = Favorites[i];
-                x += site.ToXml() + Environment.NewLine;
-            }
-            return (x + "</Favorites>" + Environment.NewLine + "</root>").BeautifyXML();
-        }
-        /// <summary>
-        /// Saves current configuration to drive.
-        /// </summary>
-        public void Save()
-        {
-            HTAlt.Tools.WriteFile(Settings.UserFavorites, ToXml(), Encoding.Unicode);
-        }
         /// <summary>
         /// Recursively gets all URLs of every favorite of <paramref name="list"/>.
         /// </summary>
@@ -154,6 +54,65 @@ namespace Yorot
         /// <param name="url">String</param>
         /// <returns><see cref="bool"/></returns>
         public bool isFavorited(string url) => GetAllURLs(Favorites).FindAll(i => i == url).Count > 0;
+
+        public override string ToXml()
+        {
+            string x = "<?xml version=\"1.0\" encoding=\"utf-16\"?>" + Environment.NewLine +
+          "<root>" + Environment.NewLine +
+          "<!-- Yorot Favorites Config File" + Environment.NewLine + Environment.NewLine +
+           "This file is used to save browser favorites." + Environment.NewLine +
+          "Editing this file might cause problems with Yorot." + Environment.NewLine +
+          "-->" + Environment.NewLine +
+          "<Favorites>" + Environment.NewLine;
+            for (int i = 0; i < Favorites.Count; i++)
+            {
+                var site = Favorites[i];
+                x += site.ToXml() + Environment.NewLine;
+            }
+            return (x + "</Favorites>" + Environment.NewLine + "</root>").BeautifyXML();
+        }
+
+        public override void ExtractXml(XmlNode rootNode)
+        {
+            List<string> appliedSettings = new List<string>();
+            for (int ı = 0; ı < rootNode.ChildNodes.Count; ı++)
+            {
+                var node = rootNode.ChildNodes[ı];
+                switch (node.Name.ToLowerEnglish())
+                {
+                    case "favorites":
+                        if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
+                        {
+                            Output.WriteLine("[FavMan] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
+                            break;
+                        }
+                        appliedSettings.Add(node.Name);
+                        for (int i = 0; i < node.ChildNodes.Count; i++)
+                        {
+                            var subnode = node.ChildNodes[i];
+                            switch (subnode.Name.ToLowerEnglish())
+                            {
+                                case "Favorite":
+                                    Favorites.Add(new YorotFavorite(node) { Manager = this });
+                                    break;
+                                case "folder":
+                                    Favorites.Add(new YorotFavFolder(node) { Manager = this });
+                                    break;
+                                default:
+                                    if (!subnode.OuterXml.StartsWith("<!--")) { Output.WriteLine("[FavMan] Threw away \"" + subnode.OuterXml + "\", unsupported."); }
+                                    break;
+                            }
+                        }
+                        break;
+                    default:
+                        if (!node.OuterXml.StartsWith("<!--"))
+                        {
+                            Output.WriteLine("[FavMan] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning);
+                        }
+                        break;
+                }
+            }
+        }
     }
     /// <summary>
     /// Favorites folder (in Favorites). Also works as skeleton class for Yorot Favorites.
@@ -246,7 +205,7 @@ namespace Yorot
         /// <summary>
         /// Easy-to-read version of icon.
         /// </summary>
-        public string IconLoc { get => iconLoc.ShortenPath(Manager.Settings.AppPath); set => iconLoc = value.GetPath(Manager.Settings.AppPath); }
+        public string IconLoc { get => iconLoc.ShortenPath(Manager.Main); set => iconLoc = value.GetPath(Manager.Main); }
         /// <summary>
         /// Gets folder/favorite icon.
         /// </summary>

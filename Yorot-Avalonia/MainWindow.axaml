@@ -5,5 +5,6 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Yorot_Avalonia.MainWindow"
         Title="Yorot_Avalonia">
-    Welcome to Avalonia!
+    Welcome to Yorot-Avalonia!
+    Currently, I'm focused on Yorot-Win32 and I will work on this package after developing it.
 </Window>

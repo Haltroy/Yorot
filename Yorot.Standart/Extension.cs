@@ -8,82 +8,50 @@ namespace Yorot
     /// <summary>
     /// Yorot Extension Manager
     /// </summary>
-    public class ExtensionManager
+    public class ExtensionManager : YorotManager
     {
+        public ExtensionManager(YorotMain main) : base(main.ExtConfig,main)
+        {}
         /// <summary>
-        /// Creates a new Extension manager.
+        /// A list of loaded Yorot extensions.
         /// </summary>
-        /// <param name="configFile">Location of the configuration file in drive.</param>
-        public ExtensionManager(string configFile)
+        public List<YorotExtension> Extensions { get; set; } = new List<YorotExtension>();
+
+        public override void ExtractXml(XmlNode rootNode)
         {
-            if(!string.IsNullOrWhiteSpace(configFile))
+            for (int i = 0; i < rootNode.ChildNodes.Count; i++)
             {
-                if (System.IO.File.Exists(configFile))
+                var node = rootNode.ChildNodes[i];
+                if (node.Name.ToLowerEnglish() == "extension")
                 {
-                    try
+                    if (node.Attributes["CodeName"] != null)
                     {
-                        XmlDocument doc = new XmlDocument();
-                        doc.LoadXml(HTAlt.Tools.ReadFile(configFile, System.Text.Encoding.Unicode));
-                        XmlNode rootNode = Yorot.Tools.FindRoot(doc.DocumentElement);
-                        for(int i = 0; i < rootNode.ChildNodes.Count;i++)
+                        try
                         {
-                            var node = rootNode.ChildNodes[i];
-                            if (node.Name == "Extension")
-                            {
-                                if (node.Attributes["CodeName"] != null)
-                                {
-                                    try
-                                    {
-                                        YorotExtension ext = new YorotExtension(node.Attributes["CodeName"].Value.InnerXmlToString(), this);
-                                        if (node.Attributes["isPinned"] != null)
-                                        {
-                                            ext.isPinned = node.Attributes["isPinned"].Value.InnerXmlToString() == "true";
-                                        }
-                                        Extensions.Add(ext);
-                                    }catch (Exception e)
-                                    {
-                                        Output.WriteLine("[ExtMan] Threw away \"" + node.OuterXml + "\", exception caught: " + e.ToString(), LogLevel.Warning);
-                                    }
-                                }
-                                else
-                                {
-                                    Output.WriteLine("[ExtMan] Threw away \"" + node.OuterXml + "\", configuration does not includes \"CodeName\" attribute.", LogLevel.Warning);
-                                }
-                            }else
-                            {
-                                if (!node.OuterXml.StartsWith("<!--"))
-                                {
-                                    Output.WriteLine("[ExtMan] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning);
-                                }
-                            }
+                            YorotExtension ext = new YorotExtension(node.Attributes["CodeName"].Value.InnerXmlToString(), this);
+                            Extensions.Add(ext);
                         }
-                    }catch (XmlException)
-                    {
-                        Output.WriteLine("[ExtMan] Loaded default configurations, configuration file has XML error(s).", LogLevel.Warning);
+                        catch (Exception e)
+                        {
+                            Output.WriteLine("[ExtMan] Threw away \"" + node.OuterXml + "\", exception caught: " + e.ToString(), LogLevel.Warning);
+                        }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Output.WriteLine("[ExtMan] Loaded default configurations, exception caught: " + ex.ToString(), LogLevel.Warning);
+                        Output.WriteLine("[ExtMan] Threw away \"" + node.OuterXml + "\", configuration does not includes \"CodeName\" attribute.", LogLevel.Warning);
                     }
-                }else
-                {
-                    Output.WriteLine("[ExtMan] Loaded default configurations, configuration file does not exists.", LogLevel.Warning);
                 }
-            }else
-            {
-                Output.WriteLine("[ExtMan] Loaded default configurations, configuration file path was empty.",LogLevel.Warning);
+                else
+                {
+                    if (!node.OuterXml.StartsWith("<!--"))
+                    {
+                        Output.WriteLine("[ExtMan] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning);
+                    }
+                }
             }
         }
-        /// <summary>
-        /// Settings used by this manager.
-        /// </summary>
-        public Settings Settings { get; set; }
-        public List<YorotExtension> Extensions { get; set; } = new List<YorotExtension>();
-        /// <summary>
-        /// Prints the current configuration as XML.
-        /// </summary>
-        /// <returns><see cref="string"/></returns>
-        public string ToXml()
+
+        public override string ToXml()
         {
             string x = "<?xml version=\"1.0\" encoding=\"utf-16\"?>" + Environment.NewLine +
                 "<root>" + Environment.NewLine +
@@ -94,16 +62,50 @@ namespace Yorot
             for (int i = 0; i < Extensions.Count; i++)
             {
                 var ext = Extensions[i];
-                x += "<Extension CodeName=\"" + ext.CodeName.ToXML() + "\" isPinned=\"" + (ext.isPinned ? "true" : "false") + "\" />" + Environment.NewLine;
+                x += "<Extension CodeName=\"" + ext.CodeName.ToXML() + "\" />" + Environment.NewLine;
             }
             return (x + "</root>").BeautifyXML();
         }
         /// <summary>
-        /// Saves 
+        /// Checks if extension exists.
         /// </summary>
-        public void Save()
+        /// <param name="value">Code name of the extension.</param>
+        /// <returns><see cref="bool"/></returns>
+        public bool ExtExists(string value)
         {
-            HTAlt.Tools.WriteFile(Settings.UserExt, ToXml(), System.Text.Encoding.Unicode);
+            return Extensions.FindAll(i => i.CodeName == value).Count > 0;
+        }
+        /// <summary>
+        /// Enables extension.
+        /// </summary>
+        /// <param name="value"></param>
+        public void Enable(string value)
+        {
+            var l = Extensions.FindAll(i => i.CodeName == value);
+            if (l.Count > 0)
+            {
+                l[0].Enabled = true;
+            }
+            else
+            {
+                throw new ArgumentException("Cannot find extension with code name \"" + value + "\".");
+            }
+        }
+        /// <summary>
+        /// Finds extension by code name.
+        /// </summary>
+        /// <param name="codeName">Code name of the extension.</param>
+        /// <returns><see cref="YorotExtension"/></returns>
+        public YorotExtension GetExtByCN(string codeName)
+        {
+            var l = Extensions.FindAll(i => i.CodeName == codeName);
+            if (l.Count > 0)
+            {
+                return l[0];
+            }else
+            {
+                return null;
+            }
         }
     }
     /// <summary>
@@ -121,10 +123,11 @@ namespace Yorot
             {
                 throw new ArgumentNullException("Extension Manager cannot be null.");
             }
+            Manager = extman;
             if (!string.IsNullOrWhiteSpace(codeName))
             {
                 CodeName = codeName;
-                ManifestFile = extman.Settings.ExtLoc + codeName + "\\ext.yem";
+                ManifestFile = extman.Main.ExtFolder + codeName + "\\ext.yem";
                 if (System.IO.File.Exists(ManifestFile))
                 {
                     XmlDocument doc = new XmlDocument();
@@ -134,13 +137,7 @@ namespace Yorot
                     for(int i =0; i < rootNode.ChildNodes.Count;i++)
                     {
                         var node = rootNode.ChildNodes[i];
-                        // TODO: Use this info
-                        // To avoid language alphabets not suiting English lowercase one such as  
-                        // Turkish I -> ı i -> İ  
-                        // English I <-> i
-                        // always use an English culture info (like here, I used English (United States) culture)
-                        // also MS sucks at showing this example so don't bother looking for ToLower() func. documentation.
-                        string nodeName = node.Name.ToLower(new System.Globalization.CultureInfo("en-US", false));
+                        var nodeName = node.Name.ToLowerEnglish();
                         switch (nodeName) 
                         {
                             case "name":
@@ -228,7 +225,7 @@ namespace Yorot
                                 for(int ı = 0; ı < node.ChildNodes.Count;ı++)
                                 {
                                     var subnode = node.ChildNodes[ı];
-                                    if (subnode.Name.ToLower(new System.Globalization.CultureInfo("en-US",false)) == "file")
+                                    if (subnode.Name.ToLowerEnglish() == "file")
                                     {
                                         Files.Add(subnode.InnerXml.InnerXmlToString());
                                     }else
@@ -304,7 +301,7 @@ namespace Yorot
                                 for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                                 {
                                     var subnode = node.ChildNodes[ı];
-                                    if (subnode.Name.ToLower(new System.Globalization.CultureInfo("en-US", false)) == "page")
+                                    if (subnode.Name.ToLowerEnglish() == "page")
                                     {
                                         PageList.Add(subnode.InnerXml.InnerXmlToString());
                                     }
@@ -324,9 +321,45 @@ namespace Yorot
                                 for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                                 {
                                     var subnode = node.ChildNodes[ı];
-                                    if (subnode.Name.ToLower(new System.Globalization.CultureInfo("en-US", false)) == "rcoption")
+                                    if (subnode.Name.ToLowerEnglish() == "rcoption")
                                     {
-                                        // TODO 
+                                        if (subnode.Attributes["Script"] != null && subnode.Attributes["Type"] != null)
+                                        {
+                                            YorotExtensionRCOption rcoption = new YorotExtensionRCOption()
+                                            {
+                                                Script = subnode.Attributes["Script"].Value.InnerXmlToString(),
+                                                Text = subnode.InnerXml.InnerXmlToString(),
+                                            };
+                                            switch (subnode.Attributes["Type"].Value.ToLowerEnglish())
+                                            {
+                                                case "none":
+                                                    rcoption.Option = RightClickOptionStyle.None;
+                                                    break;
+                                                case "link":
+                                                    rcoption.Option = RightClickOptionStyle.Link;
+                                                    break;
+                                                case "image":
+                                                    rcoption.Option = RightClickOptionStyle.Image;
+                                                    break;
+                                                case "text":
+                                                    rcoption.Option = RightClickOptionStyle.Text;
+                                                    break;
+                                                case "edit":
+                                                    rcoption.Option = RightClickOptionStyle.Edit;
+                                                    break;
+                                                case "always":
+                                                    rcoption.Option = RightClickOptionStyle.Always;
+                                                    break;
+                                                default:
+                                                    Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\", unsupported Right-Click Option.");
+                                                    continue;
+                                            }
+                                            if (subnode.Attributes["Icon"] != null)
+                                            {
+                                                rcoption.Icon = subnode.Attributes["Icon"].Value.InnerXmlToString().GetPath(Manager.Main);
+                                            }
+                                            RCOptions.Add(rcoption);
+                                        }
                                     }
                                     else
                                     {
@@ -415,6 +448,14 @@ namespace Yorot
         /// Right-click options for this extension.
         /// </summary>
         public List<YorotExtensionRCOption> RCOptions { get; set; } = new List<YorotExtensionRCOption>();
+        /// <summary>
+        /// Deternines if this extension is enabled or not.
+        /// </summary>
+        public bool Enabled { get; set; }
+        /// <summary>
+        /// Determine sif this extension is allowed in Incognito mode.
+        /// </summary>
+        public bool AllowInIncognito { get; set; }
     }
     /// <summary>
     /// Right-click options.
