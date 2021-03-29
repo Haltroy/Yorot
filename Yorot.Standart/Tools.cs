@@ -59,7 +59,7 @@ namespace Yorot
         }
         /// <summary>
         /// Turns all characters to lowercase, using en-US culture information to avoid language-specific ToLower() errors such as:
-        /// <para>Turkish: I -&gt; ı İ -&gt; i</para>
+        /// <para>Turkish: I &lt;-&gt; ı , İ &lt;-&gt; i</para>
         /// <para>English I &lt;-&gt; i</para>
         /// </summary>
         /// <param name="s"><see cref="string"/></param>

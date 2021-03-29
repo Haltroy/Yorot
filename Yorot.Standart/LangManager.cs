@@ -162,8 +162,11 @@ namespace Yorot
         /// </summary>
         private void AddDefaultVars()
         {
-            // LONG-TERM TODO: ADD MORE VARIABLES
             LangVars.Add(new YorotLangVar("NEWLINE", Environment.NewLine));
+            LangVars.Add(new YorotLangVar("APPNAME", Manager.Main.Name));
+            LangVars.Add(new YorotLangVar("APPCODENAME", Manager.Main.CodeName));
+            LangVars.Add(new YorotLangVar("APPVER", Manager.Main.VersionText));
+            LangVars.Add(new YorotLangVar("APPVERNO", "" + Manager.Main.Version));
         }
         /// <summary>
         /// Manager associated with this language.

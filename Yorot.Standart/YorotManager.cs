@@ -21,45 +21,53 @@ namespace Yorot
         public YorotManager(string configFile,YorotMain main)
         {
             if (main is null) { throw new ArgumentNullException("\"main\" cannot be null."); } Main = main;
-            if (!string.IsNullOrWhiteSpace(configFile))
+            if (!main.Incognito)
             {
-                if (System.IO.File.Exists(configFile))
+                if (!string.IsNullOrWhiteSpace(configFile))
                 {
-                    try
+                    if (System.IO.File.Exists(configFile))
                     {
-                        ConfigFile = configFile;
-                        string xml = HTAlt.Tools.ReadFile(configFile, Encoding.Unicode);
-                        if (!string.IsNullOrWhiteSpace(xml))
+                        try
                         {
-                            try
+                            ConfigFile = configFile;
+                            string xml = HTAlt.Tools.ReadFile(configFile, Encoding.Unicode);
+                            if (!string.IsNullOrWhiteSpace(xml))
                             {
-                                XmlDocument doc = new XmlDocument();
-                                doc.LoadXml(xml);
-                                XmlNode rootNode = Yorot.Tools.FindRoot(doc);
-                                ExtractXml(rootNode);
-                            }catch (XmlException xe)
-                            {
-                                Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, configuration file has XML error(s): " + xe.Message, LogLevel.Warning);
+                                try
+                                {
+                                    XmlDocument doc = new XmlDocument();
+                                    doc.LoadXml(xml);
+                                    XmlNode rootNode = Yorot.Tools.FindRoot(doc);
+                                    ExtractXml(rootNode);
+                                }
+                                catch (XmlException xe)
+                                {
+                                    Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, configuration file has XML error(s): " + xe.Message, LogLevel.Warning);
+                                }
+                                catch (Exception e)
+                                {
+                                    Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, exception caught: " + e.Message, LogLevel.Warning);
+                                }
                             }
-                            catch (Exception e)
+                            else
                             {
-                                Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, exception caught: " + e.Message, LogLevel.Warning);
+                                Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, configuration file was empty.", LogLevel.Warning);
                             }
-                        }else
-                        {
-                            Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, configuration file was empty.", LogLevel.Warning);
                         }
-                    }catch (Exception ex)
-                    {
-                        Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, exception caught: " + ex.Message, LogLevel.Warning);
+                        catch (Exception ex)
+                        {
+                            Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, exception caught: " + ex.Message, LogLevel.Warning);
+                        }
                     }
-                }else
-                {
-                    Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, configuration file does not exists.", LogLevel.Warning);
+                    else
+                    {
+                        Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, configuration file does not exists.", LogLevel.Warning);
+                    }
                 }
-            }else
-            {
-                Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, configuration file location was empty.", LogLevel.Warning);
+                else
+                {
+                    Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, configuration file location was empty.", LogLevel.Warning);
+                }
             }
         }
         /// <summary>

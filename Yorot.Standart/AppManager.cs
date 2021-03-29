@@ -27,6 +27,7 @@ namespace Yorot
             Apps.Add(DefaultApps.Settings.CreateCarbonCopy());
             Apps.Add(DefaultApps.Store.CreateCarbonCopy());
             Apps.Add(DefaultApps.WebBrowser.CreateCarbonCopy());
+            Apps.Add(DefaultApps.OOBE.CreateCarbonCopy());
             ClaimMan();
             UpdateCount++;
         }
@@ -139,20 +140,46 @@ namespace Yorot
                 }
             }
         }
-
-        internal void SetPinStatus(string value, bool v)
+        /// <summary>
+        /// Changes the pinned status of an app.
+        /// </summary>
+        /// <param name="value">Codename of the app.</param>
+        /// <param name="v">A <see cref="bool"/> representing the isPinned status.</param>
+        public void SetPinStatus(string value, bool v)
         {
-            throw new NotImplementedException();
+            var l = Apps.FindAll(it => it.AppCodeName == value);
+            if (l.Count > 0)
+            {
+                l[0].isPinned = v;
+            }else
+            {
+                throw new ArgumentException("Cannot find \"" + value + "\" in apps list.");
+            }
         }
-
-        internal void Enable(string value)
+        /// <summary>
+        /// Enables an app.
+        /// </summary>
+        /// <param name="value">Codename of the app.</param>
+        public void Enable(string value)
         {
-            throw new NotImplementedException();
+            var l = Apps.FindAll(it => it.AppCodeName == value);
+            if (l.Count > 0)
+            {
+                l[0].isEnabled = true;
+            }
+            else
+            {
+                throw new ArgumentException("Cannot find \"" + value + "\" in apps list.");
+            }
         }
-
-        internal bool AppExists(string value)
+        /// <summary>
+        /// Checks if an app is loaded into system.
+        /// </summary>
+        /// <param name="value">COde name of the app.</param>
+        /// <returns><see cref="bool"/></returns>
+        public bool AppExists(string value)
         {
-            throw new NotImplementedException();
+            return Apps.FindAll(it => it.AppCodeName == value).Count > 0;
         }
     }
     /// <summary>
@@ -178,6 +205,27 @@ namespace Yorot
             AppOrigin = YorotAppOrigin.Embedded,
             Author = "Haltroy",
             AppOriginInfo = "frmMain*.cs",
+            isEnabled = true,
+        };
+        /// <summary>
+        /// Out-of-box Experience Application
+        /// </summary>
+        public static YorotApp OOBE => new YorotApp()
+        {
+            AppName = "Yorot",
+            AppCodeName = "com.yorot.oobe",
+            AppIcon = "yorot.png",
+            isLocal = true,
+            HTUPDATE = null,
+            isSystemApp = true,
+            StartFile = null,
+            Version = "1",
+            VersionNo = 1,
+            MultipleSession = true,
+            AppOrigin = YorotAppOrigin.Embedded,
+            Author = "Haltroy",
+            AppOriginInfo = "frmOOBE*.cs",
+            isEnabled = true,
         };
         /// <summary>
         /// Yorot Settings
@@ -197,6 +245,7 @@ namespace Yorot
             AppOrigin = YorotAppOrigin.Embedded,
             Author = "Haltroy",
             AppOriginInfo = "SystemApps/settings*.cs",
+            isEnabled = true,
         };
         /// <summary>
         /// Haltroy Web Store
@@ -216,6 +265,7 @@ namespace Yorot
             AppOrigin = YorotAppOrigin.Embedded,
             Author = "Haltroy",
             AppOriginInfo = "SystemApps/store*.cs",
+            isEnabled = true,
         };
         /// <summary>
         /// Calculator
@@ -235,6 +285,7 @@ namespace Yorot
             AppOrigin = YorotAppOrigin.Embedded,
             Author = "Haltroy",
             AppOriginInfo = "SystemApps/calc*.cs",
+            isEnabled = true,
         };
         /// <summary>
         /// Calendar
@@ -254,6 +305,7 @@ namespace Yorot
             AppOrigin = YorotAppOrigin.Embedded,
             Author = "Haltroy",
             AppOriginInfo = "SystemApps/calendar*.cs",
+            isEnabled = true,
         };
         /// <summary>
         /// Text altering program.
@@ -273,6 +325,7 @@ namespace Yorot
             AppOrigin = YorotAppOrigin.Embedded,
             Author = "Haltroy",
             AppOriginInfo = "SystemApps/notepad*.cs",
+            isEnabled = true,
         };
         /// <summary>
         /// Console
@@ -292,6 +345,7 @@ namespace Yorot
             AppOrigin = YorotAppOrigin.Embedded,
             Author = "Haltroy",
             AppOriginInfo = "SystemApps/console*.cs",
+            isEnabled = true,
         };
         /// <summary>
         /// Collection management application.
@@ -311,6 +365,7 @@ namespace Yorot
             AppOrigin = YorotAppOrigin.Embedded,
             Author = "Haltroy",
             AppOriginInfo = "SystemApps/colman*.cs",
+            isEnabled = true,
         };
         /// <summary>
         /// File exploration app.
@@ -330,6 +385,7 @@ namespace Yorot
             AppOrigin = YorotAppOrigin.Embedded,
             Author = "Haltroy",
             AppOriginInfo = "SystemApps/fileman*.cs",
+            isEnabled = true,
         };
         /// <summary>
         /// Yorot Package Distrubiton system.
@@ -349,6 +405,7 @@ namespace Yorot
             AppOrigin = YorotAppOrigin.Embedded,
             Author = "Haltroy",
             AppOriginInfo = "SystemApps/yopad*.cs",
+            isEnabled = true,
         };
         /// <summary>
         /// App that handles Space Pass stuff.
@@ -368,6 +425,7 @@ namespace Yorot
             AppOrigin = YorotAppOrigin.Embedded,
             Author = "Haltroy",
             AppOriginInfo = "SystemApps/spacepass*.cs",
+            isEnabled = true,
         };
     }
     /// <summary>
@@ -638,6 +696,10 @@ namespace Yorot
         /// List of layouts (sessions) for this app.
         /// </summary>
         public List<YorotAppLayout> Layouts { get; set; } = new List<YorotAppLayout>();
+        /// <summary>
+        /// Determines if the application is enabled.
+        /// </summary>
+        public bool isEnabled { get; set; } = false;
     }
     public abstract class YorotAppLayout
     {

@@ -19,8 +19,16 @@ namespace Yorot
         public Settings(YorotProfile profile)
         {
             Profile = profile;
-            LoadDefaults();
-            LoadFromFile(profile.UserSettings);
+            switch (profile.Name)
+            {
+                case "root":
+                    LoadDefaults(true);
+                    break;
+                default:
+                    LoadDefaults(false);
+                    LoadFromFile(profile.UserSettings);
+                    break;
+            }
         }
         /// <summary>
         /// Loads configuration.
@@ -121,7 +129,7 @@ namespace Yorot
                                         var subnode = node.ChildNodes[ı];
                                         if (subnode.Name.ToLowerEnglish() == "engine")
                                         {
-                                            if (subnode.Attributes["Name"] != null && subnode.Attributes["Url"] != null)
+                                            if (subnode.Attributes["Name"] != null)
                                             {
                                                 if (!Profile.Manager.Main.WebEngineMan.WEExists(subnode.Attributes["Name"].Value))
                                                 {
@@ -255,7 +263,7 @@ namespace Yorot
                                     for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                                     {
                                         var subnode = node.ChildNodes[ı];
-                                        if (subnode.Name == "Lang")
+                                        if (subnode.Name.ToLowerEnglish() == "lang")
                                         {
                                             if (subnode.Attributes["Name"] != null)
                                             {
@@ -503,8 +511,12 @@ namespace Yorot
         /// Retrieves configuration in XML format.
         /// </summary>
         /// <returns><see cref="string"/></returns>
-        public string ToXml() // TODO: Rewrite this entire section since we enable all other things inside here
+        public string ToXml()
         {
+            var langList = Profile.Manager.Main.LangMan.Languages.FindAll(it => it.Enabled);
+            var extList = Profile.Manager.Main.Extensions.Extensions.FindAll(it => it.Enabled);
+            var themeList = Profile.Manager.Main.ThemeMan.Themes.FindAll(it => it.Enabled);
+            var appList = Profile.Manager.Main.AppMan.Apps.FindAll(it => it.isEnabled);
             string x = "<?xml version=\"1.0\" encoding=\"utf-16\"?>" + Environment.NewLine +
                 "<root>" + Environment.NewLine +
                 "<!-- Yorot User File" + Environment.NewLine + Environment.NewLine +
@@ -513,10 +525,9 @@ namespace Yorot
                 "other apps and extensions." + Environment.NewLine +
                 "-->" + Environment.NewLine;
             x += "<HomePage>" + HomePage.ToXML() + "</HomePage>" + Environment.NewLine;
-            x += "<SearchEngine Name=\"" + SearchEngine.Name.ToXML() + "\" Url=\"" + SearchEngine.Url.ToXML() + "\" />" + Environment.NewLine;
+            x += "<SearchEngines Selected=\"" + SearchEngines.IndexOf(SearchEngine) + "\"" + (SearchEngines.Count > 0 ? "" : "/") + ">" + Environment.NewLine;
             if (SearchEngines.Count > 0)
             {
-                x += "<SearchEngines>" + Environment.NewLine;
                 for (int i = 0; i < SearchEngines.Count; i++)
                 {
                     if (!SearchEngines[i].comesWithYorot)
@@ -528,8 +539,47 @@ namespace Yorot
             }
             x += "<RestoreOldSessions>" + (RestoreOldSessions ? "true" : "false") + "</RestoreOldSessions>" + Environment.NewLine;
             x += "<RememberLastProxy>" + (RememberLastProxy ? "true" : "false") + "</RememberLastProxy>" + Environment.NewLine;
-            x += "<Lang>" + Main.LangMan.LoadedLangFile.ToXML().ShortenPath(Main.AppPath) + "</Lang>" + Environment.NewLine;
-            x += "<DoNotTrack>" + (DoNotTrack ? "true" : "false") + "</DoNotTrack>" + Environment.NewLine;
+            x += "<Langs Selected=\"" + CurrentLanguage.CodeName + "\" >" + Environment.NewLine;
+            foreach(YorotLanguage lang in Profile.Manager.Main.LangMan.Languages)
+            {
+                if(lang.Enabled)
+                {
+                    x += "<Lang Name=\"" + lang.CodeName + "\" />" + Environment.NewLine;
+                }
+            }
+            x += "</Lang>" + Environment.NewLine +  "<Themes Selected=\"" + currentTheme.CodeName + "\" >" + Environment.NewLine;
+            foreach (YorotTheme theme in Profile.Manager.Main.ThemeMan.Themes)
+            {
+                if (theme.Enabled)
+                {
+                    x += "<Theme Name=\"" + theme.CodeName + "\" />" + Environment.NewLine;
+                }
+            }
+            x += "</Themes>" + Environment.NewLine + "<Extensions>" + Environment.NewLine;
+            foreach (YorotExtension ext in Profile.Manager.Main.Extensions.Extensions)
+            {
+                if (ext.Enabled)
+                {
+                    x += "<Ext Name=\"" + ext.CodeName + "\" " + (ext.AllowInIncognito ? "allowInIncognito=\"true\" " : "") + (ext.isPinned ? "isPinned=\"true\" " : "") + "/>" + Environment.NewLine;
+                }
+            }
+            x += "</Extensions>" + Environment.NewLine + "<WebEngines>" + Environment.NewLine;
+            foreach (YorotWebEngine engine in Profile.Manager.Main.WebEngineMan.Engines)
+            {
+                if (engine.isEnabled)
+                {
+                    x += "<Engine Name=\"" + engine.CodeName + "\" />" + Environment.NewLine;
+                }
+            }
+            x += "</WebEngines>" + Environment.NewLine + "<Apps>" + Environment.NewLine;
+            foreach (YorotApp app in Profile.Manager.Main.AppMan.Apps)
+            {
+                if (app.isEnabled)
+                {
+                    x += "<App Name=\"" + app.AppCodeName + "\" " + (app.isPinned ? "isPinned=\"true\" " : "") + "/>" + Environment.NewLine;
+                }
+            }
+            x += "</Apps>" + Environment.NewLine +"<DoNotTrack>" + (DoNotTrack ? "true" : "false") + "</DoNotTrack>" + Environment.NewLine;
             x += "<ShowFavorites>" + (FavManager.ShowFavorites ? "true" : "false") + "</ShowFavorites>" + Environment.NewLine;
             x += "<StartWithFullScreen>" + (StartWithFullScreen ? "true" : "false") + "</StartWithFullScreen>" + Environment.NewLine;
             x += "<OpenFilesAfterDownload>" + (DownloadManager.OpenFilesAfterDownload ? "true" : "false") + "</OpenFilesAfterDownload>" + Environment.NewLine;
@@ -547,11 +597,12 @@ namespace Yorot
         /// <summary>
         /// Loads default configurations.
         /// </summary>
-        public void LoadDefaults()
+        /// <param name="profileName">This arguyment is for detecting both incognito and root user.</param>
+        public void LoadDefaults(bool root)
         {
-            DownloadManager = new DownloadManager(Profile.UserDownloads, Profile.Manager.Main);
-            HistoryManager = new HistoryManager(Profile.UserHistory, Profile.Manager.Main);
-            FavManager = new FavMan(Profile.UserFavorites, Profile.Manager.Main);
+            DownloadManager = new DownloadManager(root ? "" : Profile.UserDownloads, Profile.Manager.Main);
+            HistoryManager = new HistoryManager(root ? "" : Profile.UserHistory, Profile.Manager.Main);
+            FavManager = new FavMan(root ? "" : Profile.UserFavorites, Profile.Manager.Main);
             HomePage = "yorot://newtab";
             // BEGIN: Search Engines
             SearchEngines.Clear();
@@ -576,19 +627,19 @@ namespace Yorot
             // END: Search Engines
             RestoreOldSessions = false;
             RememberLastProxy = false;
-            DoNotTrack = true;
-            FavManager.ShowFavorites = true;
+            DoNotTrack = false;
+            FavManager.ShowFavorites = !root;
             StartWithFullScreen = false;
             DownloadManager.OpenFilesAfterDownload = false;
-            DownloadManager.AutoDownload = true;
-            DownloadManager.DownloadFolder = Profile.Path + @"Downloads\";
+            DownloadManager.AutoDownload = !root;
+            DownloadManager.DownloadFolder = root ? Profile.Manager.Main.AppPath : Profile.Path + @"Downloads\";
             AlwaysCheckDefaultBrowser = true;
             StartOnBoot = false;
             StartInSystemTray = false;
             NotifPlaySound = true;
             NotifSilent = false;
             NotifUseDefault = true;
-            NotifSoundLoc =  @"RES\n.ogg";
+            NotifSoundLoc = @"RES\n.ogg";
         }
         /// <summary>
         /// Saves configuration to drive.

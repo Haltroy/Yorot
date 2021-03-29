@@ -15,16 +15,22 @@ namespace Yorot
         /// Creates a new Yorot Main.
         /// </summary>
         /// <param name="appPath">Path of the application, mostly &quot;.yorot&quot; folder</param>
-        public YorotMain(string appPath)
+        /// <param name="codename">Codename of the Yorot or the flavor.</param>
+        /// <param name="isIncognito"><see cref="true"/> to start Yorot in incognito mode, otherwise <seealso cref="false"/>.</param>
+        /// <param name="version">Version of the Yorot or the flavor.</param>
+        /// <param name="name">Name of the Yorot or the flavor.</param>
+        /// <param name="verno">Version number of the Yorot or the flavor.</param>
+        public YorotMain(string appPath,string name,string codename,string version,int verno,bool isIncognito = false)
         {
+            if(string.IsNullOrWhiteSpace(name)) { throw new ArgumentException("\"name\" caanot be empty."); } Name = name;
+            if(string.IsNullOrWhiteSpace(codename)) { throw new ArgumentException("\"codename\" caanot be empty."); } CodeName = codename;
+            if(string.IsNullOrWhiteSpace(version)) { throw new ArgumentException("\"version\" caanot be empty."); } VersionText = version;
+            if(verno <= 0) { throw new ArgumentException("\"verno}\" must be bigger than zero."); } Version = verno;
             if (string.IsNullOrWhiteSpace(appPath)) { throw new ArgumentNullException("\"appPath\" cannot be empty."); };
             if (!System.IO.Directory.Exists(appPath)) { System.IO.Directory.CreateDirectory(appPath); }
             if (!appPath.HasWriteAccess()) { throw new System.IO.FileLoadException("Cannot access to path \"" + appPath + "\"."); }
-
-            // Set Application path
-
+            Incognito = isIncognito;
             AppPath = appPath;
-
             LangConfig = AppPath + @"lang.ycf";
             LangFolder = AppPath + @"lang\";
             ExtFolder = AppPath + @"ext\";
@@ -40,10 +46,8 @@ namespace Yorot
             LogFolder = AppPath + @"logs\";
             HTAlt.Output.LogDirPath = LogFolder;
             Wolfhook.WhFolder = AppPath + @"wh\";
-
             if (!System.IO.Directory.Exists(LogFolder)) { System.IO.Directory.CreateDirectory(LogFolder); }
             if (!System.IO.Directory.Exists(Wolfhook.WhFolder)) { System.IO.Directory.CreateDirectory(Wolfhook.WhFolder); }
-
             if (System.IO.File.Exists(appPath + @"\yorot.moved")) // Detect if Yorot Users folder is moved. If then, move info to new app path.
             {
                 var MOVED = HTAlt.Tools.ReadFile(appPath + @"\yorot.moved", Encoding.Unicode);
@@ -52,7 +56,6 @@ namespace Yorot
                     if (MOVED.HasWriteAccess())
                     {
                         AppPath = MOVED;
-
                         LangConfig = AppPath + @"lang.ycf";
                         LangFolder = AppPath + @"lang\";
                         ExtFolder = AppPath + @"ext\";
@@ -68,6 +71,8 @@ namespace Yorot
                         LogFolder = AppPath + @"logs\";
                         Output.LogDirPath = LogFolder;
                         Wolfhook.WhFolder = AppPath + @"wh\";
+                        if (!System.IO.Directory.Exists(LogFolder)) { System.IO.Directory.CreateDirectory(LogFolder); }
+                        if (!System.IO.Directory.Exists(Wolfhook.WhFolder)) { System.IO.Directory.CreateDirectory(Wolfhook.WhFolder); }
                     }
                     else
                     {
@@ -91,6 +96,10 @@ namespace Yorot
             LangMan = new YorotLangManager(this);
             Extensions = new ExtensionManager(this);
         }
+        /// <summary>
+        /// Determines if this session is Incognito mode.
+        /// </summary>
+        public bool Incognito { get; set; }
         /// <summary>
         /// Profiles Manager
         /// </summary>
@@ -128,14 +137,17 @@ namespace Yorot
         /// </summary>
         public void Shutdown()
         {
-            Settings.Save();
-            Profiles.Save();
-            AppMan.Save();
-            ThemeMan.Save();
-            LangMan.Save();
-            Extensions.Save();
-            WebEngineMan.Save();
-            Wolfhook.StopSearch();
+            if (!Incognito)
+            {
+                Settings.Save();
+                Profiles.Save();
+                AppMan.Save();
+                ThemeMan.Save();
+                LangMan.Save();
+                Extensions.Save();
+                WebEngineMan.Save();
+                Wolfhook.StopSearch();
+            }
         }
         /// <summary>
         /// Location of application files.
@@ -193,5 +205,21 @@ namespace Yorot
         /// Logs folder.
         /// </summary>
         public string LogFolder { get; set; }
+        /// <summary>
+        /// Name of your application. Ex.: Yorot
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// Codename of your application. Ex.: indev1
+        /// </summary>
+        public string CodeName { get; set; }
+        /// <summary>
+        /// Version text of your application. Ex.: 1.0.0.0
+        /// </summary>
+        public string VersionText { get; set; }
+        /// <summary>
+        /// Version number of your application. Ex.: 1
+        /// </summary>
+        public int Version { get; set; }
     }
 }
