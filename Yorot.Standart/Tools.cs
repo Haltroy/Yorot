@@ -33,6 +33,37 @@ namespace Yorot
             return bm;
         }
         /// <summary>
+        /// Uploads a file to server
+        /// </summary>
+        /// <param name="url">Address of the server.</param>
+        /// <param name="filePath">Path of the file that is going to be sent.</param>
+        /// <param name="username">FTP Username</param>
+        /// <param name="password">FTP Password</param>
+        public static void UploadFileToFtp(string url, string filePath, string username, string password)
+        {
+            var fileName = System.IO.Path.GetFileName(filePath);
+            var request = (System.Net.FtpWebRequest)System.Net.WebRequest.Create(url + fileName);
+
+            request.Method = System.Net.WebRequestMethods.Ftp.UploadFile;
+            request.Credentials = new System.Net.NetworkCredential(username, password);
+            request.UsePassive = true;
+            request.UseBinary = true;
+            request.KeepAlive = false;
+
+            using (var fileStream = System.IO.File.OpenRead(filePath))
+            {
+                using (var requestStream = request.GetRequestStream())
+                {
+                    fileStream.CopyTo(requestStream);
+                    requestStream.Close();
+                }
+            }
+
+            var response = (System.Net.FtpWebResponse)request.GetResponse();
+            Console.WriteLine("Upload done: {0}", response.StatusDescription);
+            response.Close();
+        }
+        /// <summary>
         /// Finds the root node of <paramref name="doc"/>.
         /// </summary>
         /// <param name="doc">the <see cref="XmlNode"/> (probably <seealso cref="XmlDocument.DocumentElement"/>) to search on.</param>

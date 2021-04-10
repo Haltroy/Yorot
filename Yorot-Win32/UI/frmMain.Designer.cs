@@ -158,7 +158,7 @@ namespace Yorot
             this.htButton1.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton1.DrawImage = false;
             this.htButton1.Enabled = false;
-            this.htButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.htButton1.Font = new System.Drawing.Font("Ubuntu", 12F);
             this.htButton1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton1.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton1.Location = new System.Drawing.Point(6, 203);
@@ -175,7 +175,7 @@ namespace Yorot
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.Enabled = false;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.label2.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.label2.Location = new System.Drawing.Point(6, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(530, 125);
@@ -328,7 +328,6 @@ namespace Yorot
         }
 
         #endregion
-        private System.Windows.Forms.Panel pAppDrawer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TabControl tcAppMan;
@@ -351,6 +350,7 @@ namespace Yorot
         private ToolStripMenuItem reloadToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private Timer tmrAppSync;
+        public Panel pAppDrawer;
     }
 }
 

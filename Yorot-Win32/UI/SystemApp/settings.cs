@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HTAlt;
+using HTAlt.WinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,112 +17,166 @@ namespace Yorot.UI.SystemApp
         public settings()
         {
             InitializeComponent();
-            Icon = Yorot.Tools.IconFromImage(Properties.Resources.Settings);
-            panel1.AutoScroll = false;
-            pbHamMenu.Location = new Point(panel1.Width - (pbHamMenu.Width + 7), pbHamMenu.Location.Y);
-            panel1.Invalidate();
-            tmrAnimate.Start();
+            Icon = HTAlt.Tools.IconFromImage(Properties.Resources.Settings);
         }
 
-        private void tmrAnimate_Tick(object sender, EventArgs e)
-        {
-            switch (panel1.AutoScroll)
-            {
-                case true: // Show menu
-                    panel1.Location = new Point(panel1.Location.X + (panel1.Location.X < 0 ? 20 : 0), panel1.Location.Y);
-                    if (panel1.Location.X >= 0)
-                    {
-                        panel1.Location = new Point(0, panel1.Location.Y);
-                        panel1.Invalidate();
-                        tmrAnimate.Stop();
-                    }
-                    break;
-                case false: // Hide menu
-                    panel1.Location = new Point(panel1.Location.X - (panel1.Location.X > (Math.Abs(panel1.Width - 39) * (-1)) ? 20 : 0), panel1.Location.Y);
-                    if (panel1.Location.X <= (Math.Abs(panel1.Width - 39) * (-1)))
-                    {
-                        panel1.Location = new Point((Math.Abs(panel1.Width - 39) * (-1)), panel1.Location.Y);
-                        panel1.Invalidate();
-                        tmrAnimate.Stop();
-                    }
-                    break;
-            }
-            tabControl1.Width = (Width + 6) - (panel1.Width + panel1.Location.X);
-            tabControl1.Location = new Point(((panel1.Width + panel1.Location.X) - 3), tabControl1.Location.Y);
-        }
-        bool allowSwitch = false;
+        /// <summary>
+        /// tabControl1
+        /// </summary>
+        bool _s1 = false;
+        /// <summary>
+        /// tabControl2
+        /// </summary>
+        bool _s2 = false;
 
-        private void switchTab(Label senderLB, TabPage tp)
-        {
+        private void switchTab2(Control sender, TabPage tp)
+        { 
             // Switch tab
-            allowSwitch = true;
-            tabControl1.SelectedTab = tp;
+            _s2 = true;
+            tabControl2.SelectedTab = tp;
             // Set fonts
-            lbSettings.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbThemes.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbApps.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbAdvanced.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbHakkinda.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
+            for (int i = 0; i < flpSidebar.Controls.Count;i++)
+            {
+                flpSidebar.Controls[i].Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            }
             // Make label bold
-            senderLB.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold);
-            pbHamMenu_Click(senderLB, new EventArgs());
+            sender.Font = new Font("Ubuntu", 15F, FontStyle.Bold);
         }
 
-        private void pbHamMenu_Click(object sender, EventArgs e)
+        private void switch1(sbyte type)
         {
-            if (panel1.AutoScroll)
+            // Hide all
+            btGeneralSettings.Enabled = false;
+            btLanguages.Enabled = false;
+            btNotifications.Enabled = false;
+            btAccessSettings.Enabled = false;
+            btDownloads.Enabled = false;
+            btHistory.Enabled = false;
+            btProfiles.Enabled = false;
+            btSync.Enabled = false;
+            btSecuritySettings.Enabled = false;
+            btSites.Enabled = false;
+            btProxies.Enabled = false;
+            btExtensions.Enabled = false;
+            btApps.Enabled = false;
+            btWE.Enabled = false;
+            btThemes.Enabled = false;
+            btAppearance.Enabled = false;
+            btUpdates.Enabled = false;
+            btAbout.Enabled = false;
+            btLogs.Enabled = false;
+            btGeneralSettings.Visible = false;
+            btLanguages.Visible = false;
+            btNotifications.Visible = false;
+            btAccessSettings.Visible = false;
+            btDownloads.Visible = false;
+            btHistory.Visible = false;
+            btProfiles.Visible = false;
+            btSync.Visible = false;
+            btSecuritySettings.Visible = false;
+            btSites.Visible = false;
+            btProxies.Visible = false;
+            btExtensions.Visible = false;
+            btApps.Visible = false;
+            btWE.Visible = false;
+            btThemes.Visible = false;
+            btAppearance.Visible = false;
+            btUpdates.Visible = false;
+            btAbout.Visible = false;
+            btLogs.Visible = false;
+            // Set needed ones
+            _s1 = true;
+            
+            switch (type)
             {
-                panel1.AutoScroll = false;
-                pbHamMenu.Location = new Point(panel1.Width - (pbHamMenu.Width + 5), pbHamMenu.Location.Y);
+                case 0:
+                    btGeneralSettings_Click(btGeneralSettings, new EventArgs());
+                    btGeneralSettings.Visible = true;
+                    btLanguages.Visible = true;
+                    btNotifications.Visible = true;
+                    btAccessSettings.Visible = true;
+                    btGeneralSettings.Enabled = true;
+                    btLanguages.Enabled = true;
+                    btNotifications.Enabled = true;
+                    btAccessSettings.Enabled = true;
+                    tabControl1.SelectedTab = tp1Settings;
+                    pContainer.Controls.Clear();
+                    break;
+                case 1:
+                    btSHistory_Click(btHistory, new EventArgs());
+                    btDownloads.Visible = true;
+                    btHistory.Visible = true;
+                    btDownloads.Enabled = true;
+                    btHistory.Enabled = true;
+                    tabControl1.SelectedTab = tp1Settings;
+                    pContainer.Controls.Clear();
+                    break;
+                case 2:
+                    btProfiles_Click(btProfiles, new EventArgs());
+                    btProfiles.Visible = true;
+                    btSync.Visible = true;
+                    btProfiles.Enabled = true;
+                    btSync.Enabled = true;
+                    tabControl1.SelectedTab = tp1Settings;
+                    pContainer.Controls.Clear();
+                    break;
+                case 3:
+                    btSecuritySettings_Click(btSecuritySettings, new EventArgs());
+                    btSecuritySettings.Enabled = true;
+                    btSites.Enabled = true;
+                    btProxies.Enabled = true;
+                    btSecuritySettings.Visible = true;
+                    btSites.Visible = true;
+                    btProxies.Visible = true;
+                    tabControl1.SelectedTab = tp1Settings;
+                    pContainer.Controls.Clear();
+                    break;
+                case 4:
+                    btAppearance_Click(btAppearance, new EventArgs());
+                    btThemes.Visible = true;
+                    btAppearance.Visible = true;
+                    btThemes.Enabled = true;
+                    btAppearance.Enabled = true;
+                    tabControl1.SelectedTab = tp1Settings;
+                    pContainer.Controls.Clear();
+                    break;
+                case 5:
+                    btExtensions_Click(btExtensions, new EventArgs());
+                    btExtensions.Enabled = true;
+                    btApps.Enabled = true;
+                    btWE.Enabled = true;
+                    btExtensions.Visible = true;
+                    btApps.Visible = true;
+                    btWE.Visible = true;
+                    tabControl1.SelectedTab = tp1Settings;
+                    pContainer.Controls.Clear();
+                    break;
+                case 6:
+                    btUpdates_Click(btUpdates, new EventArgs());
+                    btUpdates.Visible = true;
+                    btAbout.Visible = true;
+                    btLogs.Visible = true;
+                    btUpdates.Enabled = true;
+                    btAbout.Enabled = true;
+                    btLogs.Enabled = true;
+                    tabControl1.SelectedTab = tp1Settings;
+                    pContainer.Controls.Clear();
+                    break;
+                case 7:
+                    tabControl1.SelectedTab = tp1Main;
+                    pContainer.Controls.Clear();
+                    break;
+                case 8:
+                    tabControl1.SelectedTab = tp1Container;
+                    break;
             }
-            else
-            {
-                panel1.AutoScroll = true;
-
-
-                // Sidebar
-                int[] biggestpp = new int[] {
-                    lbSettings.Location.X + lbSettings.Width + 5,
-                    lbApps.Location.X + lbApps.Width + 5,
-                    lbThemes.Location.X + lbThemes.Width + 5,
-                    lbHakkinda.Location.X + lbHakkinda.Width + 5,
-                };
-                int? maxVal = null;
-                int index = -1;
-                for (int i = 0; i < biggestpp.Length; i++)
-                {
-                    int thisNum = biggestpp[i];
-                    if (!maxVal.HasValue || thisNum > maxVal.Value)
-                    {
-                        maxVal = thisNum;
-                        index = i;
-                    }
-                }
-                if (maxVal != null && maxVal > 0)
-                {
-                    panel1.Width = (int)maxVal + 52;
-                    tabControl1.Width = Width - (panel1.Width + 6);
-                }
-                pbHamMenu.Location = new Point(panel1.Width - (25 + pbHamMenu.Width), pbHamMenu.Location.Y);
-            }
-            panel1.Invalidate();
-            tmrAnimate.Start();
         }
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            if (allowSwitch) { allowSwitch = false; } else { e.Cancel = true; }
+            if (_s1) { _s1 = false; } else { e.Cancel = true; }
         }
 
-        private void lbSettings_Click(object sender, EventArgs e) => switchTab(lbSettings, tpSettings);
-        private void lbApps_Click(object sender, EventArgs e) => switchTab(lbApps, tpApps);
-        private void lbAdvanced_Click(object sender, EventArgs e) => switchTab(lbAdvanced, tpAdvanced);
-        private void lbThemes_Click(object sender, EventArgs e) => switchTab(lbThemes, tpThemes);
-        private void lbHakkinda_Click(object sender, EventArgs e) => switchTab(lbHakkinda, tpAbout);
-
-#pragma warning disable IDE0044 // TODO: Use this
-        string lastupdate = "";
-#pragma warning restore IDE0044
                                // TODO: Generate App Settings page on demand for apps with this
         void GenerateAppTap(YorotApp app)
         {
@@ -215,7 +271,7 @@ namespace Yorot.UI.SystemApp
             // lbAppCName
             // 
             lbAppCName.AutoSize = true;
-            lbAppCName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            lbAppCName.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbAppCName.Location = new System.Drawing.Point(89, 101);
             lbAppCName.Name = "lbAppCName_" + randomAppID;
             lbAppCName.Size = new System.Drawing.Size(121, 20);
@@ -225,7 +281,7 @@ namespace Yorot.UI.SystemApp
             // lbAppVer
             // 
             lbAppVer.AutoSize = true;
-            lbAppVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            lbAppVer.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbAppVer.Location = new System.Drawing.Point(194, 50);
             lbAppVer.Name = "lbAppVer_" + randomAppID;
             lbAppVer.Size = new System.Drawing.Size(64, 20);
@@ -235,7 +291,7 @@ namespace Yorot.UI.SystemApp
             // lbAppAuthor
             // 
             lbAppAuthor.AutoSize = true;
-            lbAppAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            lbAppAuthor.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbAppAuthor.Location = new System.Drawing.Point(89, 81);
             lbAppAuthor.Name = "lbAppAuthor_" + randomAppID;
             lbAppAuthor.Size = new System.Drawing.Size(87, 20);
@@ -245,7 +301,7 @@ namespace Yorot.UI.SystemApp
             // lbAppName
             // 
             lbAppName.AutoSize = true;
-            lbAppName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            lbAppName.Font = new System.Drawing.Font("Ubuntu", 15F);
             lbAppName.Location = new System.Drawing.Point(88, 56);
             lbAppName.Name = "lbAppName_" + randomAppID;
             lbAppName.Size = new System.Drawing.Size(100, 25);
@@ -255,7 +311,7 @@ namespace Yorot.UI.SystemApp
             // lbAppSettings
             // 
             lbAppSettings.AutoSize = true;
-            lbAppSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            lbAppSettings.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             lbAppSettings.Location = new System.Drawing.Point(49, 14);
             lbAppSettings.Name = "lbAppSettings_" + randomAppID;
             lbAppSettings.Size = new System.Drawing.Size(136, 25);
@@ -297,7 +353,7 @@ namespace Yorot.UI.SystemApp
             // lbSizeOnDisk
             // 
             lbSizeOnDisk.AutoSize = true;
-            lbSizeOnDisk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            lbSizeOnDisk.Font = new System.Drawing.Font("Ubuntu", 12F);
             lbSizeOnDisk.Location = new System.Drawing.Point(14, 185);
             lbSizeOnDisk.Name = "lbSizeOnDisk_" + randomAppID;
             lbSizeOnDisk.Size = new System.Drawing.Size(98, 20);
@@ -314,7 +370,7 @@ namespace Yorot.UI.SystemApp
             // lbNotifications
             // 
             lbNotifications.AutoSize = true;
-            lbNotifications.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            lbNotifications.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbNotifications.Location = new System.Drawing.Point(74, 355);
             lbNotifications.Name = "lbNotifications_" + randomAppID;
             lbNotifications.Size = new System.Drawing.Size(102, 20);
@@ -324,7 +380,7 @@ namespace Yorot.UI.SystemApp
             // lbPrioritize
             // 
             lbPrioritize.AutoSize = true;
-            lbPrioritize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            lbPrioritize.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbPrioritize.Location = new System.Drawing.Point(134, 431);
             lbPrioritize.Name = "lbPrioritize_" + randomAppID;
             lbPrioritize.Size = new System.Drawing.Size(76, 20);
@@ -341,7 +397,7 @@ namespace Yorot.UI.SystemApp
             // lbRunOnStartup
             // 
             lbRunOnStartup.AutoSize = true;
-            lbRunOnStartup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            lbRunOnStartup.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbRunOnStartup.Location = new System.Drawing.Point(74, 587);
             lbRunOnStartup.Name = "lbRunOnStartup_" + randomAppID;
             lbRunOnStartup.Size = new System.Drawing.Size(119, 20);
@@ -357,7 +413,7 @@ namespace Yorot.UI.SystemApp
             // 
             // lbNotificationsInfo
             // 
-            lbNotificationsInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            lbNotificationsInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
             lbNotificationsInfo.Location = new System.Drawing.Point(75, 378);
             lbNotificationsInfo.Name = "lbNotificationsInfo_" + randomAppID;
             lbNotificationsInfo.Size = new System.Drawing.Size(478, 35);
@@ -367,7 +423,7 @@ namespace Yorot.UI.SystemApp
             // lbNotifListener
             // 
             lbNotifListener.AutoSize = true;
-            lbNotifListener.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            lbNotifListener.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbNotifListener.Location = new System.Drawing.Point(134, 497);
             lbNotifListener.Name = "lbNotifListener_" + randomAppID;
             lbNotifListener.Size = new System.Drawing.Size(295, 20);
@@ -383,7 +439,7 @@ namespace Yorot.UI.SystemApp
             // 
             // lbPrioritieInfo
             // 
-            lbPrioritieInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            lbPrioritieInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
             lbPrioritieInfo.Location = new System.Drawing.Point(135, 451);
             lbPrioritieInfo.Name = "lbPrioritieInfo_" + randomAppID;
             lbPrioritieInfo.Size = new System.Drawing.Size(418, 35);
@@ -392,7 +448,7 @@ namespace Yorot.UI.SystemApp
             // 
             // lbNotifListenerInfo
             // 
-            lbNotifListenerInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            lbNotifListenerInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
             lbNotifListenerInfo.Location = new System.Drawing.Point(135, 525);
             lbNotifListenerInfo.Name = "lbNotifListenerInfo_" + randomAppID;
             lbNotifListenerInfo.Size = new System.Drawing.Size(418, 35);
@@ -401,7 +457,7 @@ namespace Yorot.UI.SystemApp
             // 
             // lbRunOnStartupInfo
             // 
-            lbRunOnStartupInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            lbRunOnStartupInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
             lbRunOnStartupInfo.Location = new System.Drawing.Point(75, 612);
             lbRunOnStartupInfo.Name = "lbRunOnStartupInfo_" + randomAppID;
             lbRunOnStartupInfo.Size = new System.Drawing.Size(478, 35);
@@ -411,7 +467,7 @@ namespace Yorot.UI.SystemApp
             // lbOrigin
             // 
             lbOrigin.AutoSize = true;
-            lbOrigin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            lbOrigin.Font = new System.Drawing.Font("Ubuntu", 12F);
             lbOrigin.Location = new System.Drawing.Point(14, 220);
             lbOrigin.Name = "lbOrigin_" + randomAppID;
             lbOrigin.Size = new System.Drawing.Size(58, 20);
@@ -421,7 +477,7 @@ namespace Yorot.UI.SystemApp
             // lbAppOrigin
             // 
             lbAppOrigin.AutoSize = true;
-            lbAppOrigin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            lbAppOrigin.Font = new System.Drawing.Font("Ubuntu", 12F);
             lbAppOrigin.Location = new System.Drawing.Point(78, 220);
             lbAppOrigin.Name = "lbAppOrigin_" + randomAppID;
             lbAppOrigin.Size = new System.Drawing.Size(48, 20);
@@ -431,7 +487,7 @@ namespace Yorot.UI.SystemApp
             // lbAppOriginInfo
             // 
             lbAppOriginInfo.AutoSize = true;
-            lbAppOriginInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            lbAppOriginInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
             lbAppOriginInfo.Location = new System.Drawing.Point(79, 240);
             lbAppOriginInfo.Name = "lbAppOriginInfo_" + randomAppID;
             lbAppOriginInfo.Size = new System.Drawing.Size(330, 68);
@@ -440,7 +496,7 @@ namespace Yorot.UI.SystemApp
             // 
             // lbRunOnIncognitoInfo
             // 
-            lbRunOnIncognitoInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            lbRunOnIncognitoInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
             lbRunOnIncognitoInfo.Location = new System.Drawing.Point(75, 689);
             lbRunOnIncognitoInfo.Name = "lbRunOnIncognitoInfo_" + randomAppID;
             lbRunOnIncognitoInfo.Size = new System.Drawing.Size(478, 35);
@@ -450,7 +506,7 @@ namespace Yorot.UI.SystemApp
             // lbRunOnIncognito
             // 
             lbRunOnIncognito.AutoSize = true;
-            lbRunOnIncognito.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            lbRunOnIncognito.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbRunOnIncognito.Location = new System.Drawing.Point(74, 665);
             lbRunOnIncognito.Name = "lbRunOnIncognito_" + randomAppID;
             lbRunOnIncognito.Size = new System.Drawing.Size(180, 20);
@@ -467,7 +523,7 @@ namespace Yorot.UI.SystemApp
             // lbAppSize
             // 
             lbAppSize.AutoSize = true;
-            lbAppSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            lbAppSize.Font = new System.Drawing.Font("Ubuntu", 12F);
             lbAppSize.Location = new System.Drawing.Point(118, 185);
             lbAppSize.Name = "lbAppSize_" + randomAppID;
             lbAppSize.Size = new System.Drawing.Size(176, 20);
@@ -476,9 +532,171 @@ namespace Yorot.UI.SystemApp
             //
             // tcApps
             //
-            this.tcApps.Controls.Add(tpAppPage);
+            
+            /* this.tcApps.Controls.Add(tpAppPage); */
 
         }
         public string SizeInfoBytes = "bytes";
+
+        private void tabControl2_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (_s2) { _s2 = false; } else { e.Cancel = true; }
+        }
+
+        private void btGeneralSettings_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpGeneral);
+        private void btLanguages_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpLanguage);
+        private void btDownloads_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpDownloads);
+        private void btNotifications_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpNotifications);
+        private void btAccessSettings_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpAccessibility);
+        private void btAppearance_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpAppearance);
+        private void btProfiles_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpProfiles);
+        private void btSecuritySettings_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpSecurity);
+        private void btSites_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpSites);
+        private void btProxies_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpProxies);
+        private void btExtensions_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpExtensions);
+        private void btApps_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpApps);
+        private void btWE_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpWE);
+        private void btThemes_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpThemes);
+        private void btUpdates_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpUpdates);
+        private void btAbout_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpAbout);
+        private void btLogs_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpLogs);
+        private void btSync_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpSync);
+        private void btSHistory_Click(object sender, EventArgs e) => switchTab2(sender as Control, tpHistory);
+
+        private void btContainerBack_Click(object sender, EventArgs e) => switch1(btContainerBack.Tag != null ? (sbyte)btContainerBack.Tag : (sbyte)7);
+
+        private void button1_Click(object sender, EventArgs e) => switch1(7);
+
+        private void btGeneral_Click(object sender, EventArgs e) => switch1(0);
+
+        private void btHistoryDownloads_Click(object sender, EventArgs e) => switch1(1);
+
+        private void button2_Click(object sender, EventArgs e) => switch1(2);
+
+        private void btSecurity_Click(object sender, EventArgs e) => switch1(3);
+
+        private void btAddons_Click(object sender, EventArgs e) => switch1(5);
+
+        private void btCustomization_Click(object sender, EventArgs e) => switch1(4);
+
+        private void btUpdatesAbout_Click(object sender, EventArgs e) => switch1(6);
+
+        private void settings_Load(object sender, EventArgs e)
+        {
+            // Load User Image
+            if (System.IO.File.Exists(YorotGlobal.Main.Profiles.Current.Path + "picture.png"))
+            {
+                var img = YorotGlobal.Main.Profiles.Current.Picture;
+                pbHomeUser.Image = YorotTools.ClipToCircle(img, new PointF(img.Width / 2, img.Height / 2), img.Width / 2);
+            }else
+            {
+                // TODO: Set to default user logo
+            }
+            ApplyLanguage(true);
+            ApplyTheme(true);
+            
+        }
+        private string appliedLang = string.Empty;
+        private void ApplyLanguage(bool force = false)
+        {
+            if (force || appliedLang != YorotGlobal.Main.Profiles.Current.Settings.CurrentLanguage.CodeName)
+            {
+                appliedLang = YorotGlobal.Main.Profiles.Current.Settings.CurrentLanguage.CodeName;
+                // TODO: Load Language
+            }
+        }
+        private string appliedTheme = string.Empty;
+        private void ApplyTheme(bool force = false)
+        {
+            var theme = YorotGlobal.Main.CurrentTheme;
+            var themeid = theme.BackColor.ToHex() + "-" + theme.ForeColor.ToHex() + "-" + theme.OverlayColor.ToHex() + "-" + theme.ArtColor.ToHex();
+            if (force || appliedTheme != themeid)
+            {
+                appliedTheme = themeid;
+                var isDark = !HTAlt.Tools.IsBright(theme.BackColor);
+                BackColor = theme.BackColor;
+                ForeColor = theme.ForeColor;
+                panel1.BackColor = theme.BackColor2;
+                panel1.ForeColor = theme.ForeColor;
+                tp1Main.BackColor = theme.BackColor;
+                tp1Main.ForeColor = theme.ForeColor;
+                tp1Settings.BackColor = theme.BackColor;
+                tp1Settings.ForeColor = theme.ForeColor;
+                flpSidebar.BackColor = theme.BackColor2;
+                flpSidebar.ForeColor = theme.ForeColor;
+                for (int i = 0; i < tabControl2.TabPages.Count;i++)
+                {
+                    var tp = tabControl2.TabPages[i];
+                    tp.BackColor = theme.BackColor;
+                    tp.ForeColor = theme.ForeColor;
+                    for(int ı = 0; ı < tp.Controls.Count; ı++)
+                    {
+                        var c = tp.Controls[ı];
+                        switch (c)
+                        {
+                            case HTSwitch _:
+                                var s = c as HTSwitch;
+                                s.BackColor = theme.BackColor2;
+                                s.ForeColor = theme.ForeColor;
+                                s.OverlayColor = theme.OverlayColor;
+                                s.ButtonColor = theme.BackColor2;
+                                s.ButtonHoverColor = theme.BackColor3;
+                                s.ButtonPressedColor = theme.BackColor4;
+                                break;
+                            case HTListView _:
+                                var l = c as HTListView;
+                                l.HeaderBackColor = theme.BackColor3;
+                                l.OverlayColor = theme.OverlayColor;
+                                l.BackColor = theme.BackColor2;
+                                l.ForeColor = theme.ForeColor;
+                                break;
+                            case HTSlider _:
+                                var sl = c as HTSlider;
+                                sl.BackColor = theme.BackColor2;
+                                sl.ForeColor = theme.ForeColor;
+                                sl.OverlayColor = theme.OverlayColor;
+                                break;
+                            case HTButton _:
+                                var b = c as HTButton;
+                                b.BackColor = theme.BackColor2;
+                                b.ForeColor = theme.ForeColor;
+                                if (!b.AutoColor)
+                                {
+                                    b.ClickColor = theme.BackColor4.ShiftBrightness(20);
+                                    b.HoverColor = theme.BackColor4;
+                                    b.NormalColor = theme.BackColor3;
+                                    b.ForeColor = theme.ForeColor;
+                                }
+                                break;
+                            case LinkLabel _:
+                                var ll = c as LinkLabel;
+                                ll.BackColor = theme.BackColor;
+                                ll.ForeColor = theme.ForeColor;
+                                ll.ActiveLinkColor = theme.OverlayColor;
+                                ll.DisabledLinkColor = theme.OverlayColor;
+                                ll.LinkColor = theme.OverlayColor;
+                                ll.VisitedLinkColor = theme.OverlayColor;
+                                break;
+                            case PictureBox _:
+                            case Label _:
+                                c.BackColor = theme.BackColor;
+                                c.ForeColor = theme.ForeColor;
+                                break;
+                            case TextBox _:
+                                var t = c as TextBox;
+                                t.BackColor = t.ReadOnly && t.BorderStyle == BorderStyle.None ? theme.BackColor : theme.BackColor2;
+                                t.ForeColor = theme.ForeColor;
+                                break;
+                            default:
+                                c.BackColor = theme.BackColor2;
+                                c.ForeColor = theme.ForeColor;
+                                break;
+                        }
+                    }
+                }
+                btHome.Image = isDark ? Properties.Resources.back_w : Properties.Resources.back_b;
+                btContainerBack.Image = isDark ? Properties.Resources.back_w : Properties.Resources.back_b;
+            }
+        }
     }
 }

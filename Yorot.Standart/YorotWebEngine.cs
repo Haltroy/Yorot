@@ -27,7 +27,7 @@ namespace Yorot
                     {
                         try
                         {
-                            YorotWebEngine engine = new YorotWebEngine(Main.WEFolder + node.Attributes["CodeName"].Value + ".ycf".InnerXmlToString(), this);
+                            YorotWebEngine engine = new YorotWebEngine(Main.WEFolder + node.Attributes["CodeName"].Value + "\\engine.ycf".InnerXmlToString(), this);
                             Engines.Add(engine);
                         }
                         catch (Exception e)
@@ -186,7 +186,7 @@ namespace Yorot
                                     break;
                                 }
                                 appliedC.Add(name);
-                                IconLoc = node.InnerXml.InnerXmlToString();
+                                IconLoc = node.InnerXml.InnerXmlToString().GetPath(Manager.Main);
                                 break;
                             default:
                                 if (!node.OuterXml.StartsWith("<!--"))

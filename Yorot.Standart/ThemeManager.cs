@@ -153,7 +153,7 @@ namespace Yorot
         /// <summary>
         /// Light theme
         /// </summary>
-        public static YorotTheme YorotLight => new YorotTheme(null)
+        public static YorotTheme YorotLight => new YorotTheme()
         {
             Name = "Yorot Light",
             Author = "Haltroy",
@@ -170,7 +170,7 @@ namespace Yorot
         /// <summary>
         /// Light gray theme, looks like it's made in early 90's
         /// </summary>
-        public static YorotTheme YorotStone => new YorotTheme(null)
+        public static YorotTheme YorotStone => new YorotTheme()
         {
             Name = "Yorot Stone",
             Author = "Haltroy",
@@ -187,7 +187,7 @@ namespace Yorot
         /// <summary>
         /// Razor theme
         /// </summary>
-        public static YorotTheme YorotRazor => new YorotTheme(null)
+        public static YorotTheme YorotRazor => new YorotTheme()
         {
             Name = "Yorot Razor",
             Author = "Haltroy",
@@ -204,7 +204,7 @@ namespace Yorot
         /// <summary>
         /// The "Dark mode"
         /// </summary>
-        public static YorotTheme YorotDark => new YorotTheme(null)
+        public static YorotTheme YorotDark => new YorotTheme()
         {
             Name = "Yorot Dark",
             Author = "Haltroy",
@@ -221,7 +221,7 @@ namespace Yorot
         /// <summary>
         /// A little brighter than <see cref="YorotDark"/>
         /// </summary>
-        public static YorotTheme YorotShadow => new YorotTheme(null)
+        public static YorotTheme YorotShadow => new YorotTheme()
         {
             Name = "Yorot Shadow",
             Author = "Haltroy",
@@ -238,7 +238,7 @@ namespace Yorot
         /// <summary>
         /// Theme used in Haltroy's website
         /// </summary>
-        public static YorotTheme YorotDeepBlue => new YorotTheme(null)
+        public static YorotTheme YorotDeepBlue => new YorotTheme()
         {
             Name = "Yorot Deep Blue",
             Author = "Haltroy",
@@ -259,7 +259,11 @@ namespace Yorot
     public class YorotTheme
     {
         /// <summary>
-        /// Creates a new Yorot theme.
+        /// Creates a new Yorot theme. This constructor does not initializes the theme.
+        /// </summary>
+        public YorotTheme() { }
+        /// <summary>
+        /// Creates a new Yorot theme and initializes it.
         /// </summary>
         /// <param name="fileLoc">Location of the theme file on disk.</param>
         public YorotTheme(string fileLoc)
@@ -384,7 +388,7 @@ namespace Yorot
                 }
             }else
             {
-                throw new ArgumentNullException("Argument \"fileLoc\" was empty.");
+                throw new ArgumentNullException("fileLoc");
             }
         }
         /// <summary>
@@ -393,7 +397,7 @@ namespace Yorot
         /// <returns><see cref="YorotTheme"/></returns>
         public YorotTheme CarbonCopy()
         {
-            return new YorotTheme(null)
+            return new YorotTheme()
             {
                 Name = Name,
                 Author = Author,

@@ -15,7 +15,7 @@ namespace Yorot.UI.SystemApp
         public store()
         {
             InitializeComponent();
-            Icon = Yorot.Tools.IconFromImage(Properties.Resources.store);
+            Icon = HTAlt.Tools.IconFromImage(Properties.Resources.store);
         }
     }
 }

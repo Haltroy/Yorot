@@ -15,7 +15,7 @@ namespace Yorot.UI.SystemApp
         public spacepass()
         {
             InitializeComponent();
-            Icon = Yorot.Tools.IconFromImage(Properties.Resources.spacepass);
+            Icon = HTAlt.Tools.IconFromImage(Properties.Resources.spacepass);
         }
     }
 }

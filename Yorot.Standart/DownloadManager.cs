@@ -16,7 +16,7 @@ namespace Yorot
         /// <summary>
         /// A List of previous downloads.
         /// </summary>
-        public List<YorotSite> Downloads { get; set; }
+        public List<YorotSite> Downloads { get; set; } = new List<YorotSite>();
         /// <summary>
         /// If <see cref="true"/>, opens files after they were downloaded.
         /// </summary>

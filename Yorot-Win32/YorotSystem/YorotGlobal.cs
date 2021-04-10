@@ -17,13 +17,9 @@ namespace Yorot
         /// </summary>
         public static string YorotAppPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.yorot\\";
         /// <summary>
-        /// Application Settings.
+        /// Yorot Main
         /// </summary>
-        public static Settings Settings = null;
-        /// <summary>
-        /// Wolfhook management.
-        /// </summary>
-        public static Wolfhook Wolfhook = null;
+        public static YorotMain Main;
         /// <summary>
         /// Yorot Special class for this type of executable (In this case, Win32).
         /// </summary>
@@ -39,7 +35,7 @@ namespace Yorot
         /// <summary>
         /// Version Number of this Yorot version.
         /// </summary>
-        public static int VersionNo = 0;
+        public static int VersionNo = 1;
         /// <summary>
         /// Codename of current Yorot version.
         /// </summary>

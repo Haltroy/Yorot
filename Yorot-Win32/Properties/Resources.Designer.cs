@@ -63,6 +63,26 @@ namespace Yorot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap back_b {
+            get {
+                object obj = ResourceManager.GetObject("back-b", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap back_w {
+            get {
+                object obj = ResourceManager.GetObject("back-w", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap calc {
             get {
                 object obj = ResourceManager.GetObject("calc", resourceCulture);
@@ -113,6 +133,26 @@ namespace Yorot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap forward_b {
+            get {
+                object obj = ResourceManager.GetObject("forward-b", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap forward_w {
+            get {
+                object obj = ResourceManager.GetObject("forward-w", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap hamburger {
             get {
                 object obj = ResourceManager.GetObject("hamburger", resourceCulture);
@@ -146,6 +186,16 @@ namespace Yorot.Properties {
         internal static System.Drawing.Bitmap notepad {
             get {
                 object obj = ResourceManager.GetObject("notepad", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap profiles {
+            get {
+                object obj = ResourceManager.GetObject("profiles", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -206,6 +256,16 @@ namespace Yorot.Properties {
         internal static System.Drawing.Bitmap unmute {
             get {
                 object obj = ResourceManager.GetObject("unmute", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap update_and_about {
+            get {
+                object obj = ResourceManager.GetObject("update_and_about", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -13,15 +13,16 @@ namespace Yorot
         [STAThread]
         private static void Main(string[] args)
         {
+            bool _i = args.Contains("-i") || args.Contains("--incognito");
             bool exists = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1;
-            YorotGlobal.Wolfhook = new Wolfhook() { WhFolder = YorotGlobal.YorotAppPath + "\\wolfhook\\", };
+            YorotGlobal.Main = new YorotMain(YorotGlobal.YorotAppPath, "Yorot", YorotGlobal.CodeName, YorotGlobal.Version, YorotGlobal.VersionNo);
+            YorotGlobal.Main.Wolfhook = new Wolfhook() { WhFolder = YorotGlobal.YorotAppPath + "\\wolfhook\\", };
             YorotGlobal.Y1 = new YorotSpecial();
-            YorotGlobal.Settings = new Settings(YorotGlobal.YorotAppPath);
-            Output.LogDirPath = YorotGlobal.Settings.Main.AppPath + "\\logs\\";
-            if (exists)
+            Output.LogDirPath = YorotGlobal.Main.AppPath + "\\logs\\";
+            if (exists && !_i)
             {
                 Output.WriteLine("<Yorot.Program> App already running. Passing arguments...", LogLevel.Warning);
-                YorotGlobal.Wolfhook.SendWolf(string.Join("§", args));
+                YorotGlobal.Main.Wolfhook.SendWolf(string.Join("§", args));
             }
             else
             {

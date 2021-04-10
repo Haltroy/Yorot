@@ -121,7 +121,7 @@ namespace Yorot
         {
             if (extman == null)
             {
-                throw new ArgumentNullException("Extension Manager cannot be null.");
+                throw new ArgumentNullException("extman");
             }
             Manager = extman;
             if (!string.IsNullOrWhiteSpace(codeName))

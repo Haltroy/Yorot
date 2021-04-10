@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HTAlt;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -13,7 +14,7 @@ namespace Yorot.UI.SystemApp
         public calc()
         {
             InitializeComponent();
-            Icon = Yorot.Tools.IconFromImage(Properties.Resources.calc);
+            Icon = HTAlt.Tools.IconFromImage(Properties.Resources.calc);
             panel1.AutoScroll = false;
             pbHamMenu.Location = new Point(panel1.Width - (pbHamMenu.Width + 7), pbHamMenu.Location.Y);
             panel1.Invalidate();
@@ -210,25 +211,25 @@ namespace Yorot.UI.SystemApp
             allowSwitch = true;
             tabControl1.SelectedTab = tp;
             // Set fonts
-            lbTemel.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbTarih.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbProgramlama.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbZaman.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbBilimsel.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbYas.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbYatirim.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbSicaklik.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbVeri.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbKredi.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbHiz.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbBoyut.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbKutle.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbParaBirimi.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbIndirim.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbUzunluk.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
-            lbHakkinda.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular);
+            lbTemel.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbTarih.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbProgramlama.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbZaman.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbBilimsel.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbYas.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbYatirim.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbSicaklik.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbVeri.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbKredi.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbHiz.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbBoyut.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbKutle.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbParaBirimi.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbIndirim.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbUzunluk.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
+            lbHakkinda.Font = new Font("Ubuntu", 15F, FontStyle.Regular);
             // Make label bold
-            senderLB.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold);
+            senderLB.Font = new Font("Ubuntu", 15F, FontStyle.Bold);
             pbHamMenu_Click(senderLB, new EventArgs());
         }
 

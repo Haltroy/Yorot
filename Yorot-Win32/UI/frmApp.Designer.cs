@@ -152,7 +152,7 @@ namespace Yorot.UI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pApp.Location = new System.Drawing.Point(1, 44);
             this.pApp.Name = "pApp";
-            this.pApp.Size = new System.Drawing.Size(300, 454);
+            this.pApp.Size = new System.Drawing.Size(600, 454);
             this.pApp.TabIndex = 0;
             // 
             // pTitle
@@ -163,7 +163,7 @@ namespace Yorot.UI
             this.pTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.pTitle.Location = new System.Drawing.Point(0, 0);
             this.pTitle.Name = "pTitle";
-            this.pTitle.Size = new System.Drawing.Size(300, 44);
+            this.pTitle.Size = new System.Drawing.Size(600, 44);
             this.pTitle.TabIndex = 1;
             // 
             // flowLayoutPanel1
@@ -174,46 +174,46 @@ namespace Yorot.UI
             this.flowLayoutPanel1.Controls.Add(this.btPopOut);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(191, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(476, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(109, 44);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(124, 44);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // btClose
             // 
-            this.btClose.AutoColor = true;
+            this.btClose.AutoColor = false;
             this.btClose.ButtonImage = null;
-            this.btClose.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            this.btClose.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Ellipse;
             this.btClose.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btClose.DrawImage = false;
-            this.btClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btClose.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.btClose.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btClose.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.btClose.Location = new System.Drawing.Point(81, 9);
+            this.btClose.Location = new System.Drawing.Point(93, 9);
             this.btClose.Margin = new System.Windows.Forms.Padding(0, 9, 3, 0);
             this.btClose.Name = "btClose";
             this.btClose.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.btClose.Size = new System.Drawing.Size(25, 25);
+            this.btClose.Size = new System.Drawing.Size(28, 28);
             this.btClose.TabIndex = 0;
             this.btClose.Text = "X";
             this.btClose.Click += new System.EventHandler(this.htButton1_Click);
             // 
             // btMaximize
             // 
-            this.btMaximize.AutoColor = true;
+            this.btMaximize.AutoColor = false;
             this.btMaximize.ButtonImage = null;
-            this.btMaximize.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            this.btMaximize.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Ellipse;
             this.btMaximize.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btMaximize.DrawImage = false;
             this.btMaximize.Enabled = false;
-            this.btMaximize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btMaximize.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.btMaximize.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btMaximize.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.btMaximize.Location = new System.Drawing.Point(56, 9);
+            this.btMaximize.Location = new System.Drawing.Point(65, 9);
             this.btMaximize.Margin = new System.Windows.Forms.Padding(0, 9, 0, 0);
             this.btMaximize.Name = "btMaximize";
             this.btMaximize.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.btMaximize.Size = new System.Drawing.Size(25, 25);
+            this.btMaximize.Size = new System.Drawing.Size(28, 28);
             this.btMaximize.TabIndex = 0;
             this.btMaximize.Text = "□";
             this.btMaximize.Visible = false;
@@ -221,20 +221,20 @@ namespace Yorot.UI
             // 
             // btMinimize
             // 
-            this.btMinimize.AutoColor = true;
+            this.btMinimize.AutoColor = false;
             this.btMinimize.ButtonImage = null;
-            this.btMinimize.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            this.btMinimize.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Ellipse;
             this.btMinimize.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btMinimize.DrawImage = false;
             this.btMinimize.Enabled = false;
-            this.btMinimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btMinimize.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.btMinimize.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btMinimize.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.btMinimize.Location = new System.Drawing.Point(31, 9);
+            this.btMinimize.Location = new System.Drawing.Point(37, 9);
             this.btMinimize.Margin = new System.Windows.Forms.Padding(0, 9, 0, 0);
             this.btMinimize.Name = "btMinimize";
             this.btMinimize.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.btMinimize.Size = new System.Drawing.Size(25, 25);
+            this.btMinimize.Size = new System.Drawing.Size(28, 28);
             this.btMinimize.TabIndex = 0;
             this.btMinimize.Text = "-";
             this.btMinimize.Visible = false;
@@ -242,30 +242,30 @@ namespace Yorot.UI
             // 
             // btPopOut
             // 
-            this.btPopOut.AutoColor = true;
+            this.btPopOut.AutoColor = false;
             this.btPopOut.ButtonImage = null;
-            this.btPopOut.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            this.btPopOut.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Ellipse;
             this.btPopOut.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btPopOut.DrawImage = false;
-            this.btPopOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btPopOut.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.btPopOut.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btPopOut.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.btPopOut.Location = new System.Drawing.Point(6, 9);
+            this.btPopOut.Location = new System.Drawing.Point(9, 9);
             this.btPopOut.Margin = new System.Windows.Forms.Padding(0, 9, 0, 0);
             this.btPopOut.Name = "btPopOut";
             this.btPopOut.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.btPopOut.Size = new System.Drawing.Size(25, 25);
+            this.btPopOut.Size = new System.Drawing.Size(28, 28);
             this.btPopOut.TabIndex = 0;
-            this.btPopOut.Text = "□";
+            this.btPopOut.Text = "◊";
             this.btPopOut.Click += new System.EventHandler(this.htButton4_Click);
             // 
             // lbTitle
             // 
             this.lbTitle.AutoSize = true;
-            this.lbTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            this.lbTitle.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             this.lbTitle.Location = new System.Drawing.Point(43, 13);
             this.lbTitle.Name = "lbTitle";
-            this.lbTitle.Size = new System.Drawing.Size(70, 20);
+            this.lbTitle.Size = new System.Drawing.Size(74, 21);
             this.lbTitle.TabIndex = 1;
             this.lbTitle.Text = "AppTitle";
             // 
@@ -289,14 +289,17 @@ namespace Yorot.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 500);
+            this.ClientSize = new System.Drawing.Size(600, 500);
             this.Controls.Add(this.pApp);
             this.Controls.Add(this.pTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MinimumSize = new System.Drawing.Size(250, 500);
+            this.KeyPreview = true;
+            this.MinimumSize = new System.Drawing.Size(600, 500);
             this.Name = "frmApp";
             this.Text = "frmApp";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmApp_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmApp_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmApp_KeyUp);
             this.pTitle.ResumeLayout(false);
             this.pTitle.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);

@@ -25,7 +25,7 @@ namespace Yorot
             if(string.IsNullOrWhiteSpace(name)) { throw new ArgumentException("\"name\" caanot be empty."); } Name = name;
             if(string.IsNullOrWhiteSpace(codename)) { throw new ArgumentException("\"codename\" caanot be empty."); } CodeName = codename;
             if(string.IsNullOrWhiteSpace(version)) { throw new ArgumentException("\"version\" caanot be empty."); } VersionText = version;
-            if(verno <= 0) { throw new ArgumentException("\"verno}\" must be bigger than zero."); } Version = verno;
+            if(verno <= 0) { throw new ArgumentException("\"verno\" must be bigger than zero."); } Version = verno;
             if (string.IsNullOrWhiteSpace(appPath)) { throw new ArgumentNullException("\"appPath\" cannot be empty."); };
             if (!System.IO.Directory.Exists(appPath)) { System.IO.Directory.CreateDirectory(appPath); }
             if (!appPath.HasWriteAccess()) { throw new System.IO.FileLoadException("Cannot access to path \"" + appPath + "\"."); }
@@ -95,7 +95,21 @@ namespace Yorot
             ThemeMan = new ThemeManager(this);
             LangMan = new YorotLangManager(this);
             Extensions = new ExtensionManager(this);
+            Profiles = new ProfileManager(this);
+            WebEngineMan = new YorotWEManager(this);
         }
+        /// <summary>
+        /// Gets the current theme applied by user.
+        /// </summary>
+        public YorotTheme CurrentTheme => Profiles.Current.Settings.CurrentTheme;
+        /// <summary>
+        /// Gets the current settings applied by user.
+        /// </summary>
+        public Settings CurrentSettings => Profiles.Current.Settings;
+        /// <summary>
+        /// Gets the current language applied by user.
+        /// </summary>
+        public YorotLanguage CurrentLanguage => Profiles.Current.Settings.CurrentLanguage;
         /// <summary>
         /// Determines if this session is Incognito mode.
         /// </summary>
@@ -125,10 +139,6 @@ namespace Yorot
         /// </summary>
         public YorotWEManager WebEngineMan { get; set; }
         /// <summary>
-        /// Current User Settings
-        /// </summary>
-        public Settings Settings { get => Profiles.Current.Settings; set => Profiles.Current.Settings = value; }
-        /// <summary>
         /// Wolfhook Content Delivery System
         /// </summary>
         public Wolfhook Wolfhook { get; set; } = new Wolfhook();
@@ -139,7 +149,7 @@ namespace Yorot
         {
             if (!Incognito)
             {
-                Settings.Save();
+                Profiles.Current.Settings.Save();
                 Profiles.Save();
                 AppMan.Save();
                 ThemeMan.Save();

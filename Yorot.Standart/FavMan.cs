@@ -236,15 +236,15 @@ namespace Yorot
         {
             if (f == null)
             {
-                throw new ArgumentNullException("\"f\" was null.");
+                throw new ArgumentNullException("f");
             }
             if (!Favorites.Contains(f))
             {
-                throw new ArgumentOutOfRangeException("Favorites list does not includes \"f\".");
+                throw new ArgumentOutOfRangeException("f");
             }
             if (i < 0 || i > Favorites.Count)
             {
-                throw new ArgumentOutOfRangeException("\"i\" was out of the bounds.");
+                throw new ArgumentOutOfRangeException("i");
             }
             Favorites.Remove(f);
             Favorites.Insert(i, f);
@@ -257,7 +257,7 @@ namespace Yorot
         {
             if (i < 1)
             {
-                throw new ArgumentOutOfRangeException("\"i\" was out of the bounds.");
+                throw new ArgumentOutOfRangeException("i");
             }
             Move(Favorites[i], i - 1);
         }
@@ -270,7 +270,7 @@ namespace Yorot
             int i = Favorites.IndexOf(f);
             if (i < 1)
             {
-                throw new ArgumentOutOfRangeException("Index of \"f\" would end up on out of the bound.");
+                throw new ArgumentOutOfRangeException("f");
             }
             Move(f, i - 1);
         }
@@ -282,7 +282,7 @@ namespace Yorot
         {
             if (i > Favorites.Count)
             {
-                throw new ArgumentOutOfRangeException("\"i\" was out of the bounds.");
+                throw new ArgumentOutOfRangeException("i");
             }
             Move(Favorites[i], i + 1);
         }
@@ -295,7 +295,7 @@ namespace Yorot
             int i = Favorites.IndexOf(f);
             if (i > Favorites.Count)
             {
-                throw new ArgumentOutOfRangeException("Index of \"f\" would end up on out of the bound.");
+                throw new ArgumentOutOfRangeException("f");
             }
             Move(f, i + 1);
         }

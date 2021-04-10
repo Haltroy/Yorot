@@ -247,10 +247,10 @@ namespace Yorot
                                     }
                                     if (node.Attributes["Selected"] != null)
                                     {
-                                        currentTheme = Profile.Manager.Main.ThemeMan.GetThemeByCN(node.Attributes["Seelcted"].Value.InnerXmlToString());
+                                        CurrentTheme = Profile.Manager.Main.ThemeMan.GetThemeByCN(node.Attributes["Selected"].Value.InnerXmlToString());
                                     }else
                                     {
-                                        currentTheme = Profile.Manager.Main.ThemeMan.GetThemeByCN(DefaultThemes.YorotLight.CodeName);
+                                        CurrentTheme = Profile.Manager.Main.ThemeMan.GetThemeByCN(DefaultThemes.YorotLight.CodeName);
                                     }
                                     break;
                                 case "langs":
@@ -297,7 +297,7 @@ namespace Yorot
                                         CurrentLanguage = Profile.Manager.Main.LangMan.GetLangByCN(node.Attributes["Selected"].Value.InnerXmlToString());
                                     }else
                                     {
-                                        CurrentLanguage = Profile.Manager.Main.LangMan.GetLangByCN("com.haltroy.english");
+                                        CurrentLanguage = Profile.Manager.Main.LangMan.GetLangByCN("com.haltroy.english-us");
                                     }
                                     break;
                                 case "apps":
@@ -506,7 +506,7 @@ namespace Yorot
         /// <summary>
         /// Current theme loaded by user.
         /// </summary>
-        public YorotTheme currentTheme { get; set; } = DefaultThemes.YorotLight;
+        public YorotTheme CurrentTheme { get; set; }
         /// <summary>
         /// Retrieves configuration in XML format.
         /// </summary>
@@ -539,7 +539,7 @@ namespace Yorot
             }
             x += "<RestoreOldSessions>" + (RestoreOldSessions ? "true" : "false") + "</RestoreOldSessions>" + Environment.NewLine;
             x += "<RememberLastProxy>" + (RememberLastProxy ? "true" : "false") + "</RememberLastProxy>" + Environment.NewLine;
-            x += "<Langs Selected=\"" + CurrentLanguage.CodeName + "\" >" + Environment.NewLine;
+            x += "<Langs" + (CurrentLanguage != null ? " Selected=\"" + CurrentLanguage.CodeName + "\" " : "") + ">" + Environment.NewLine;
             foreach(YorotLanguage lang in Profile.Manager.Main.LangMan.Languages)
             {
                 if(lang.Enabled)
@@ -547,7 +547,7 @@ namespace Yorot
                     x += "<Lang Name=\"" + lang.CodeName + "\" />" + Environment.NewLine;
                 }
             }
-            x += "</Lang>" + Environment.NewLine +  "<Themes Selected=\"" + currentTheme.CodeName + "\" >" + Environment.NewLine;
+            x += "</Langs>" + Environment.NewLine +  "<Themes Selected=\"" + CurrentTheme.CodeName + "\" >" + Environment.NewLine;
             foreach (YorotTheme theme in Profile.Manager.Main.ThemeMan.Themes)
             {
                 if (theme.Enabled)
@@ -625,6 +625,8 @@ namespace Yorot
             SearchEngines.Add(new YorotSearchEngine("Sogou", "https://www.sogou.com/web?query=") { comesWithYorot = true });
             SearchEngines.Add(new YorotSearchEngine("Gigablast", "https://www.gigablast.com/search?q=") { comesWithYorot = true });
             // END: Search Engines
+            CurrentLanguage = Profile.Manager.Main.LangMan.GetLangByCN("com.haltroy.english-us");
+            CurrentTheme = Profile.Manager.Main.ThemeMan.GetThemeByCN("com.haltroy.yorotlight");
             RestoreOldSessions = false;
             RememberLastProxy = false;
             DoNotTrack = false;
@@ -640,16 +642,20 @@ namespace Yorot
             NotifSilent = false;
             NotifUseDefault = true;
             NotifSoundLoc = @"RES\n.ogg";
+            
         }
         /// <summary>
         /// Saves configuration to drive.
         /// </summary>
         public void Save()
         {
-            HistoryManager.Save();
-            FavManager.Save();
-            DownloadManager.Save();
-            HTAlt.Tools.WriteFile(Profile.Manager.Main.Profiles.Current.UserSettings, ToXml(), Encoding.Unicode);
+            if (Profile.Name != "root")
+            {
+                HistoryManager.Save();
+                FavManager.Save();
+                DownloadManager.Save();
+                HTAlt.Tools.WriteFile(Profile.Manager.Main.Profiles.Current.UserSettings, ToXml(), Encoding.Unicode);
+            }
         } 
         /// <summary>
         /// The profile that this settings are associated with.

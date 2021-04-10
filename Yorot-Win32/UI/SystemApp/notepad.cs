@@ -15,7 +15,7 @@ namespace Yorot.UI.SystemApp
         public notepad()
         {
             InitializeComponent();
-            Icon = Yorot.Tools.IconFromImage(Properties.Resources.notepad);
+            Icon = HTAlt.Tools.IconFromImage(Properties.Resources.notepad);
         }
     }
 }

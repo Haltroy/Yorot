@@ -14,7 +14,7 @@ namespace Yorot
         /// <summary>
         /// Creates a new Language manager.
         /// </summary>
-        public YorotLangManager(YorotMain main) : base(main.LangConfig,main)        {        }
+        public YorotLangManager(YorotMain main) : base(main.LangConfig,main)        { for (int i = 0; i < YorotDefaultLangs.DefaultLangList.Length; i++) { Languages.Add(new YorotLanguage(YorotDefaultLangs.DefaultLangList[i], this)); }    }
 
         /// <summary>
         /// A list of loaded languages.
@@ -72,7 +72,10 @@ namespace Yorot
                 "<Langs>" + Environment.NewLine;
             for (int i = 0; i < Languages.Count; i++)
             {
-                x += "<Lang CodeName=\"" + Languages[i].CodeName + "\" />" + Environment.NewLine;
+                if (!Languages[i].isDefaultLang)
+                {
+                    x += "<Lang CodeName=\"" + Languages[i].CodeName + "\" />" + Environment.NewLine;
+                }
             }
             return (x + "</Langs>" + Environment.NewLine + "</root>").BeautifyXML();
         }
@@ -95,10 +98,17 @@ namespace Yorot
                         for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                         {
                             var subnode = node.ChildNodes[ı];
-                            if (subnode.Name == "lang" && subnode.Attributes["CodeName"] != null)
+                            if (subnode.Name.ToLowerEnglish() == "lang")
                             {
-                                YorotLanguage lang = new YorotLanguage(Main.LangFolder + subnode.Attributes["CodeName"].Value.InnerXmlToString(),this);
-                                Languages.Add(lang);                                
+                                if (subnode.Attributes["CodeName"] != null)
+                                {
+                                    var s = subnode.Attributes["CodeName"].Value.InnerXmlToString();
+                                    YorotLanguage lang = new YorotLanguage(s.StartsWith("com.haltroy") ? s : Main.LangFolder + s + ".ylf", this);
+                                    Languages.Add(lang);
+                                }else
+                                {
+                                    Output.WriteLine("[LangMan] Threw away \"" + subnode.OuterXml + "\". missing required atrributes.", LogLevel.Warning);
+                                }
                             }
                             else
                             {
@@ -131,25 +141,41 @@ namespace Yorot
         /// <param name="manager">Manager</param>
         public YorotLanguage(string configFile,YorotLangManager manager)
         {
-            if (manager is null) { throw new ArgumentNullException("\"manager\" cannot be null."); } Manager = manager;
+            if (manager is null) { throw new ArgumentNullException("manager"); } Manager = manager;
             if (!string.IsNullOrWhiteSpace(configFile))
             {
-                if (System.IO.File.Exists(configFile))
+                if (configFile.ToLowerEnglish().StartsWith("com.haltroy"))
                 {
                     AddDefaultVars();
                     LangFile = configFile;
+                    isDefaultLang = true;
                     LoadedRoot = false;
                     XmlDocument doc = new XmlDocument();
-                    doc.LoadXml(HTAlt.Tools.ReadFile(configFile, Encoding.Unicode));
+                    var xml = YorotDefaultLangs.GetDefaultLang(configFile);
+                    doc.LoadXml(xml);
                     XmlNode rootNode = Yorot.Tools.FindRoot(doc);
                     RecursiveAdd(rootNode);
-                }else
+                }
+                else
                 {
-                    throw new ArgumentNullException("File \"" + configFile + "\" does not exists.");
+                    if (System.IO.File.Exists(configFile))
+                    {
+                        AddDefaultVars();
+                        LangFile = configFile;
+                        LoadedRoot = false;
+                        XmlDocument doc = new XmlDocument();
+                        doc.LoadXml(HTAlt.Tools.ReadFile(configFile, Encoding.Unicode));
+                        XmlNode rootNode = Yorot.Tools.FindRoot(doc);
+                        RecursiveAdd(rootNode);
+                    }
+                    else
+                    {
+                        throw new ArgumentException("File \"" + configFile + "\" does not exists.");
+                    }
                 }
             }else
             {
-                throw new ArgumentNullException("\"configFile\" cannot be empty.");
+                throw new ArgumentNullException("configFile");
             }
         }
         /// <summary>
@@ -186,6 +212,10 @@ namespace Yorot
                 .Replace("[" + langVar.Name.ToUpper() + "]", string.IsNullOrEmpty(langVar.Text) ? "" : langVar.Text)
                 .Replace(ignored, "[" + langVar.Name.ToUpper() + "]");
         }
+        /// <summary>
+        /// Determines if this language is bundled with Yorot.
+        /// </summary>
+        public bool isDefaultLang { get; set; }
         /// <summary>
         /// HTUPDATE of this language.
         /// </summary>
@@ -260,9 +290,9 @@ namespace Yorot
             for (int i = 0; i < rootNode.ChildNodes.Count; i++)
             {
                 var node = rootNode.ChildNodes[i];
-                switch (node.Name)
+                switch (node.Name.ToLowerEnglish())
                 {
-                    case "Var":
+                    case "var":
                         {
                             if (node.Attributes["ID"] != null && node.Attributes["Text"] != null)
                             {
@@ -281,7 +311,7 @@ namespace Yorot
                             }
                             break;
                         }
-                    case "Translate":
+                    case "translation":
                         {
                             string id = node.Attributes["ID"] != null ? node.Attributes["ID"].Value.InnerXmlToString() : HTAlt.Tools.GenerateRandomText(12);
                             string text = node.Attributes["Text"] != null ? node.Attributes["Text"].Value.InnerXmlToString() : id;
@@ -302,7 +332,7 @@ namespace Yorot
                             }
                             break;
                         }
-                    case "Group":
+                    case "group":
                         {
                             if (node.Attributes["Name"] != null)
                             {
@@ -334,6 +364,15 @@ namespace Yorot
                                                     }
                                                     appliedSettings.Add(subnode.Name);
                                                     Author = subnode.InnerXml.InnerXmlToString();
+                                                    break;
+                                                case "htupdate":
+                                                    if (appliedSettings.FindAll(it => it == subnode.Name).Count > 0)
+                                                    {
+                                                        Output.WriteLine("[LangManager] Threw away \"" + node.OuterXml + "\", #YOROT-ROOT configuration already loaded.", LogLevel.Warning);
+                                                        break;
+                                                    }
+                                                    appliedSettings.Add(subnode.Name);
+                                                    HTUPDATE = subnode.InnerXml.InnerXmlToString();
                                                     break;
                                                 case "codename":
                                                     if (appliedSettings.FindAll(it => it == subnode.Name).Count > 0)
@@ -375,9 +414,15 @@ namespace Yorot
                                     {
                                         Output.WriteLine("[LangManager] Threw away \"" + node.OuterXml + "\", #YOROT-ROOT already loaded.", LogLevel.Warning);
                                     }
+                                }else
+                                {
+                                    RecursiveAdd(node);
                                 }
                             }
-                            RecursiveAdd(node);
+                            else
+                            {
+                                RecursiveAdd(node);
+                            }
                             break;
                         }
                     default:
@@ -418,16 +463,12 @@ namespace Yorot
             Name = name;
         }
         /// <summary>
-        /// nbame of <see cref="LanguageGlobalVar"/>.
+        /// nbame of <see cref="YorotLangVar"/>.
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// Text or value of <see cref="LanguageGlobalVar"/>.
+        /// Text or value of <see cref="YorotLangVar"/>.
         /// </summary>
         public string Text { get; set; }
-        /// <summary>
-        /// Condition of <see cref="LanguageGlobalVar"/>. Used by <see cref="Condition"/>.
-        /// </summary>
-        public string ConditionString { get; set; }
     }
 }

@@ -27,7 +27,6 @@ namespace Yorot
             Apps.Add(DefaultApps.Settings.CreateCarbonCopy());
             Apps.Add(DefaultApps.Store.CreateCarbonCopy());
             Apps.Add(DefaultApps.WebBrowser.CreateCarbonCopy());
-            Apps.Add(DefaultApps.OOBE.CreateCarbonCopy());
             ClaimMan();
             UpdateCount++;
         }
@@ -205,26 +204,6 @@ namespace Yorot
             AppOrigin = YorotAppOrigin.Embedded,
             Author = "Haltroy",
             AppOriginInfo = "frmMain*.cs",
-            isEnabled = true,
-        };
-        /// <summary>
-        /// Out-of-box Experience Application
-        /// </summary>
-        public static YorotApp OOBE => new YorotApp()
-        {
-            AppName = "Yorot",
-            AppCodeName = "com.yorot.oobe",
-            AppIcon = "yorot.png",
-            isLocal = true,
-            HTUPDATE = null,
-            isSystemApp = true,
-            StartFile = null,
-            Version = "1",
-            VersionNo = 1,
-            MultipleSession = true,
-            AppOrigin = YorotAppOrigin.Embedded,
-            Author = "Haltroy",
-            AppOriginInfo = "frmOOBE*.cs",
             isEnabled = true,
         };
         /// <summary>
@@ -550,12 +529,12 @@ namespace Yorot
                     }
                 }else
                 {
-                    Error = new ArgumentNullException("Configuration file does not exists.");
+                    Error = new ArgumentException("Configuration file does not exists.");
                     Output.WriteLine("[YorotApp] Cannot load app \"" + appCodeName + "\", configuration file does not exists.",LogLevel.Error);
                 }
             }else
             {
-                Error = new ArgumentNullException("Cone name string was empty.");
+                Error = new ArgumentNullException("appCodeName");
                 Output.WriteLine("[YorotApp] Cannot load app, codename was empty.", LogLevel.Error);
             }
         }
@@ -715,6 +694,10 @@ namespace Yorot
         /// <see cref="true"/> if this layout has a session. This bool is mostly customized for each other layout that inherit this class.
         /// </summary>
         public bool hasSessions { get; set; } = false;
+        /// <summary>
+        /// Arguments of this layout.
+        /// </summary>
+        public string[] Args { get; set; } = new string[] { };
     }
     public enum YorotAppOrigin
     {

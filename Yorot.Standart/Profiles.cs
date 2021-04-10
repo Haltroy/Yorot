@@ -15,7 +15,14 @@ namespace Yorot
         /// Creates a new Profile Manager.
         /// </summary>
         /// <param name="main"><see cref="YorotMain"/></param>
-        public ProfileManager(YorotMain main) : base(main.ProfileConfig,main) { Profiles.Add(DefaultProfiles.Root(this).CreateCarbonCopy()); }
+        public ProfileManager(YorotMain main) : base(main.ProfileConfig,main) 
+        { 
+            Profiles.Add(DefaultProfiles.Root(this).CreateCarbonCopy()); 
+            if (Current is null)
+            {
+                Current = Profiles.FindAll(it => it.Name == "root")[0];
+            }
+        }
         /// <summary>
         /// A list of loaded profiles.
         /// </summary>
@@ -128,10 +135,8 @@ namespace Yorot
         /// </summary>
         /// <param name="man">Manager</param>
         /// <returns><see cref="YorotProfile"/></returns>
-        public static YorotProfile Root(ProfileManager man) => new YorotProfile(man)
+        public static YorotProfile Root(ProfileManager man) => new YorotProfile("root", "Root", man)
         {
-            Name = "root",
-            Text = "Root",
             Path = "",
             CacheLoc = "",
             UserSettings = "",
@@ -163,14 +168,15 @@ namespace Yorot
         {
             if (string.IsNullOrWhiteSpace(name)) { throw new ArgumentNullException(nameof(name)); } Name = name;
             if (string.IsNullOrWhiteSpace(text)) { throw new ArgumentNullException(nameof(text)); } Text = text;
-            Path = Manager.Main.ProfilesFolder + Name + "\\";
-            CacheLoc = Path + "cache\\";
-            if (!System.IO.Directory.Exists(CacheLoc)) { System.IO.Directory.CreateDirectory(CacheLoc); }
-            UserSettings = Path + "settings.ycf";
-            UserHistory = Path + "history.ycf";
-            UserFavorites = Path + "favorites.ycf";
-            UserDownloads = Path + "downloads.ycf";
-            if (!System.IO.Directory.Exists(Path))
+            var isroot = name == "root";
+            Path = isroot ? "" : Manager.Main.ProfilesFolder + Name + "\\";
+            CacheLoc = isroot ? "" : Path + "cache\\";
+            if (!isroot && !System.IO.Directory.Exists(CacheLoc)) { System.IO.Directory.CreateDirectory(CacheLoc); }
+            UserSettings = isroot ? "" : Path + "settings.ycf";
+            UserHistory = isroot ? "" : Path + "history.ycf";
+            UserFavorites = isroot ? "" : Path + "favorites.ycf";
+            UserDownloads = isroot ? "" : Path + "downloads.ycf";
+            if (!isroot && !System.IO.Directory.Exists(Path))
             {
                 System.IO.Directory.CreateDirectory(Path);
                 Output.WriteLine("[Profile:\"" + name + "\"] Profile directory does not exists. Created directory.");

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HTAlt;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -13,7 +14,7 @@ namespace Yorot.UI
         public frmApp(string appcn)
         {
             InitializeComponent();
-            assocAppAndForm(YorotGlobal.Settings.AppMan.FindByAppCN(appcn));
+            assocAppAndForm(YorotGlobal.Main.AppMan.FindByAppCN(appcn));
         }
         public frmApp(YorotApp app)
         {
@@ -87,7 +88,7 @@ namespace Yorot.UI
             Text = app.AppName;
             lbTitle.Text = app.AppName;
             pbIcon.Image = YorotTools.GetAppIcon(app);
-            Icon = Yorot.Tools.IconFromImage(pbIcon.Image);
+            Icon = HTAlt.Tools.IconFromImage(pbIcon.Image);
         }
 
         public bool freeMode { get; set; } = false;
@@ -150,7 +151,6 @@ namespace Yorot.UI
             {
                 Hide();
                 TopMost = false;
-                btPopOut.Text = "▌";
                 btMaximize.Visible = true;
                 assocForm.loadMainTab();
                 btMaximize.Enabled = true;
@@ -175,7 +175,6 @@ namespace Yorot.UI
                 fmSize = Size;
                 TopMost = false;
                 TopLevel = false;
-                btPopOut.Text = "□";
                 assocForm.loadSpecificTab(assocLayout.AssocTab);
                 btMaximize.Visible = false;
                 btMaximize.Enabled = false;
@@ -191,6 +190,13 @@ namespace Yorot.UI
                 assocLayout.AssocTab.Controls.Add(this);
                 Show();
                 freeMode = false;
+                if (assocForm.InvokeRequired)
+                {
+                    assocForm.Invoke(new Action(() => assocForm.openDrawer()));
+                }else
+                {
+                    assocForm.openDrawer();
+                }
             }
         }
 
@@ -206,6 +212,7 @@ namespace Yorot.UI
 
         private void htButton2_Click(object sender, EventArgs e)
         {
+            MaximizedBounds = shiftFS ? Screen.FromHandle(Handle).Bounds : Screen.FromHandle(Handle).WorkingArea;
             WindowState = WindowState == FormWindowState.Maximized ? FormWindowState.Normal : FormWindowState.Maximized;
         }
 
@@ -218,8 +225,44 @@ namespace Yorot.UI
                 lbTitle.Text = frm.Text;
                 Icon = frm.Icon;
             }
+            LoadTheme();
         }
-
+        private string syncedTheme = string.Empty;
+        private void LoadTheme(bool force = false)
+        {
+            var theme = YorotGlobal.Main.CurrentTheme;
+            var themeid = theme.BackColor.ToHex() + "-" + theme.ForeColor.ToHex() + "-" + theme.OverlayColor.ToHex() + "-" + theme.ArtColor.ToHex();
+            if (force || syncedTheme != themeid)
+            {
+                syncedTheme = themeid;
+                BackColor = theme.BackColor;
+                ForeColor = theme.ForeColor;
+                pTitle.BackColor = theme.BackColor2;
+                pTitle.ForeColor = theme.ForeColor;
+                flowLayoutPanel1.BackColor = theme.BackColor2;
+                flowLayoutPanel1.ForeColor = theme.ForeColor;
+                btClose.BackColor = theme.BackColor2;
+                btClose.ClickColor = theme.OverlayColor3;
+                btClose.HoverColor = theme.OverlayColor2;
+                btClose.NormalColor = theme.OverlayColor;
+                btClose.ForeColor = HTAlt.Tools.AutoWhiteBlack(theme.OverlayColor);
+                btMaximize.BackColor = theme.BackColor2;
+                btMaximize.ClickColor = theme.OverlayColor3;
+                btMaximize.HoverColor = theme.OverlayColor2;
+                btMaximize.NormalColor = theme.OverlayColor;
+                btMaximize.ForeColor = HTAlt.Tools.AutoWhiteBlack(theme.OverlayColor);
+                btMinimize.BackColor = theme.BackColor2;
+                btMinimize.ClickColor = theme.OverlayColor3;
+                btMinimize.HoverColor = theme.OverlayColor2;
+                btMinimize.NormalColor = theme.OverlayColor;
+                btMinimize.ForeColor = HTAlt.Tools.AutoWhiteBlack(theme.OverlayColor);
+                btPopOut.BackColor = theme.BackColor2;
+                btPopOut.ClickColor = theme.OverlayColor3;
+                btPopOut.HoverColor = theme.OverlayColor2;
+                btPopOut.NormalColor = theme.OverlayColor;
+                btPopOut.ForeColor = HTAlt.Tools.AutoWhiteBlack(theme.OverlayColor);
+            }
+        }
         private void pbIcon_Click(object sender, EventArgs e)
         {
             if (freeMode)
@@ -227,6 +270,16 @@ namespace Yorot.UI
                 TopMost = !TopMost;
                 pbIcon.BorderStyle = TopMost ? BorderStyle.FixedSingle: BorderStyle.None;
             }
+        }
+        private bool shiftFS = false; 
+        private void frmApp_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Shift || e.KeyCode == Keys.ShiftKey || e.Shift || e.KeyCode == Keys.LShiftKey || e.KeyCode == Keys.RShiftKey) { shiftFS = true; }
+        }
+
+        private void frmApp_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Shift || e.KeyCode == Keys.ShiftKey || e.Shift || e.KeyCode == Keys.LShiftKey || e.KeyCode == Keys.RShiftKey) { shiftFS = false; }
         }
     }
 }

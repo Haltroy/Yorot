@@ -291,7 +291,7 @@ namespace Yorot.UI.SystemApp
             // lbTemel
             // 
             this.lbTemel.AutoSize = true;
-            this.lbTemel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbTemel.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lbTemel.Location = new System.Drawing.Point(3, 42);
             this.lbTemel.Name = "lbTemel";
             this.lbTemel.Size = new System.Drawing.Size(65, 25);
@@ -302,7 +302,7 @@ namespace Yorot.UI.SystemApp
             // lbBilimsel
             // 
             this.lbBilimsel.AutoSize = true;
-            this.lbBilimsel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbBilimsel.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbBilimsel.Location = new System.Drawing.Point(3, 92);
             this.lbBilimsel.Name = "lbBilimsel";
             this.lbBilimsel.Size = new System.Drawing.Size(90, 25);
@@ -313,7 +313,7 @@ namespace Yorot.UI.SystemApp
             // lbProgramlama
             // 
             this.lbProgramlama.AutoSize = true;
-            this.lbProgramlama.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbProgramlama.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbProgramlama.Location = new System.Drawing.Point(3, 67);
             this.lbProgramlama.Name = "lbProgramlama";
             this.lbProgramlama.Size = new System.Drawing.Size(128, 25);
@@ -324,7 +324,7 @@ namespace Yorot.UI.SystemApp
             // lbParaBirimi
             // 
             this.lbParaBirimi.AutoSize = true;
-            this.lbParaBirimi.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbParaBirimi.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbParaBirimi.Location = new System.Drawing.Point(3, 367);
             this.lbParaBirimi.Name = "lbParaBirimi";
             this.lbParaBirimi.Size = new System.Drawing.Size(92, 25);
@@ -335,7 +335,7 @@ namespace Yorot.UI.SystemApp
             // lbKutle
             // 
             this.lbKutle.AutoSize = true;
-            this.lbKutle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbKutle.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbKutle.Location = new System.Drawing.Point(3, 192);
             this.lbKutle.Name = "lbKutle";
             this.lbKutle.Size = new System.Drawing.Size(74, 25);
@@ -346,7 +346,7 @@ namespace Yorot.UI.SystemApp
             // lbUzunluk
             // 
             this.lbUzunluk.AutoSize = true;
-            this.lbUzunluk.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbUzunluk.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbUzunluk.Location = new System.Drawing.Point(3, 167);
             this.lbUzunluk.Name = "lbUzunluk";
             this.lbUzunluk.Size = new System.Drawing.Size(72, 25);
@@ -357,7 +357,7 @@ namespace Yorot.UI.SystemApp
             // lbVeri
             // 
             this.lbVeri.AutoSize = true;
-            this.lbVeri.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbVeri.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbVeri.Location = new System.Drawing.Point(3, 117);
             this.lbVeri.Name = "lbVeri";
             this.lbVeri.Size = new System.Drawing.Size(53, 25);
@@ -368,7 +368,7 @@ namespace Yorot.UI.SystemApp
             // lbTarih
             // 
             this.lbTarih.AutoSize = true;
-            this.lbTarih.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbTarih.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbTarih.Location = new System.Drawing.Point(3, 242);
             this.lbTarih.Name = "lbTarih";
             this.lbTarih.Size = new System.Drawing.Size(53, 25);
@@ -379,7 +379,7 @@ namespace Yorot.UI.SystemApp
             // lbIndirim
             // 
             this.lbIndirim.AutoSize = true;
-            this.lbIndirim.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbIndirim.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbIndirim.Location = new System.Drawing.Point(3, 342);
             this.lbIndirim.Name = "lbIndirim";
             this.lbIndirim.Size = new System.Drawing.Size(88, 25);
@@ -390,7 +390,7 @@ namespace Yorot.UI.SystemApp
             // lbYas
             // 
             this.lbYas.AutoSize = true;
-            this.lbYas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbYas.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbYas.Location = new System.Drawing.Point(3, 217);
             this.lbYas.Name = "lbYas";
             this.lbYas.Size = new System.Drawing.Size(48, 25);
@@ -401,7 +401,7 @@ namespace Yorot.UI.SystemApp
             // lbBoyut
             // 
             this.lbBoyut.AutoSize = true;
-            this.lbBoyut.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbBoyut.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbBoyut.Location = new System.Drawing.Point(3, 142);
             this.lbBoyut.Name = "lbBoyut";
             this.lbBoyut.Size = new System.Drawing.Size(51, 25);
@@ -412,7 +412,7 @@ namespace Yorot.UI.SystemApp
             // lbSicaklik
             // 
             this.lbSicaklik.AutoSize = true;
-            this.lbSicaklik.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbSicaklik.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbSicaklik.Location = new System.Drawing.Point(3, 292);
             this.lbSicaklik.Name = "lbSicaklik";
             this.lbSicaklik.Size = new System.Drawing.Size(124, 25);
@@ -423,7 +423,7 @@ namespace Yorot.UI.SystemApp
             // lbHiz
             // 
             this.lbHiz.AutoSize = true;
-            this.lbHiz.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbHiz.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbHiz.Location = new System.Drawing.Point(3, 317);
             this.lbHiz.Name = "lbHiz";
             this.lbHiz.Size = new System.Drawing.Size(70, 25);
@@ -434,7 +434,7 @@ namespace Yorot.UI.SystemApp
             // lbZaman
             // 
             this.lbZaman.AutoSize = true;
-            this.lbZaman.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbZaman.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbZaman.Location = new System.Drawing.Point(3, 267);
             this.lbZaman.Name = "lbZaman";
             this.lbZaman.Size = new System.Drawing.Size(56, 25);
@@ -445,7 +445,7 @@ namespace Yorot.UI.SystemApp
             // lbYatirim
             // 
             this.lbYatirim.AutoSize = true;
-            this.lbYatirim.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbYatirim.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbYatirim.Location = new System.Drawing.Point(3, 417);
             this.lbYatirim.Name = "lbYatirim";
             this.lbYatirim.Size = new System.Drawing.Size(90, 25);
@@ -456,7 +456,7 @@ namespace Yorot.UI.SystemApp
             // lbKredi
             // 
             this.lbKredi.AutoSize = true;
-            this.lbKredi.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbKredi.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbKredi.Location = new System.Drawing.Point(3, 392);
             this.lbKredi.Name = "lbKredi";
             this.lbKredi.Size = new System.Drawing.Size(64, 25);
@@ -506,7 +506,7 @@ namespace Yorot.UI.SystemApp
             // lbHakkinda
             // 
             this.lbHakkinda.AutoSize = true;
-            this.lbHakkinda.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbHakkinda.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.lbHakkinda.Location = new System.Drawing.Point(3, 442);
             this.lbHakkinda.Name = "lbHakkinda";
             this.lbHakkinda.Size = new System.Drawing.Size(64, 25);
@@ -610,7 +610,7 @@ namespace Yorot.UI.SystemApp
             this.btHisClear.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btHisClear.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btHisClear.DrawImage = true;
-            this.btHisClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.btHisClear.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.btHisClear.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btHisClear.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.Zoom;
             this.btHisClear.Location = new System.Drawing.Point(160, 466);
@@ -629,7 +629,7 @@ namespace Yorot.UI.SystemApp
             this.btHisRemove.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btHisRemove.DrawImage = false;
             this.btHisRemove.Enabled = false;
-            this.btHisRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.btHisRemove.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.btHisRemove.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btHisRemove.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btHisRemove.Location = new System.Drawing.Point(119, 467);
@@ -671,7 +671,7 @@ namespace Yorot.UI.SystemApp
             // lbCalc
             // 
             this.lbCalc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbCalc.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
+            this.lbCalc.Font = new System.Drawing.Font("Ubuntu", 25F);
             this.lbCalc.Location = new System.Drawing.Point(3, 84);
             this.lbCalc.Name = "lbCalc";
             this.lbCalc.Size = new System.Drawing.Size(194, 85);
@@ -682,7 +682,7 @@ namespace Yorot.UI.SystemApp
             // lbPrevCalc
             // 
             this.lbPrevCalc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbPrevCalc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lbPrevCalc.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.lbPrevCalc.Location = new System.Drawing.Point(3, 0);
             this.lbPrevCalc.Name = "lbPrevCalc";
             this.lbPrevCalc.Size = new System.Drawing.Size(194, 84);
@@ -697,7 +697,7 @@ namespace Yorot.UI.SystemApp
             this.btNumX.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNumX.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNumX.DrawImage = false;
-            this.btNumX.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNumX.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNumX.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNumX.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNumX.Location = new System.Drawing.Point(167, 396);
@@ -716,7 +716,7 @@ namespace Yorot.UI.SystemApp
             this.btNumDiv.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNumDiv.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNumDiv.DrawImage = false;
-            this.btNumDiv.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNumDiv.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNumDiv.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNumDiv.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNumDiv.Location = new System.Drawing.Point(167, 448);
@@ -735,7 +735,7 @@ namespace Yorot.UI.SystemApp
             this.btNumMinus.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNumMinus.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNumMinus.DrawImage = false;
-            this.btNumMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNumMinus.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNumMinus.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNumMinus.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNumMinus.Location = new System.Drawing.Point(167, 345);
@@ -754,7 +754,7 @@ namespace Yorot.UI.SystemApp
             this.btNumPlus.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNumPlus.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNumPlus.DrawImage = false;
-            this.btNumPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNumPlus.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNumPlus.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNumPlus.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNumPlus.Location = new System.Drawing.Point(167, 294);
@@ -773,7 +773,7 @@ namespace Yorot.UI.SystemApp
             this.btNumCOMMA.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNumCOMMA.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNumCOMMA.DrawImage = false;
-            this.btNumCOMMA.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNumCOMMA.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNumCOMMA.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNumCOMMA.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNumCOMMA.Location = new System.Drawing.Point(14, 447);
@@ -792,7 +792,7 @@ namespace Yorot.UI.SystemApp
             this.btNumBack.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNumBack.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNumBack.DrawImage = false;
-            this.btNumBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNumBack.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNumBack.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNumBack.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNumBack.Location = new System.Drawing.Point(167, 192);
@@ -811,7 +811,7 @@ namespace Yorot.UI.SystemApp
             this.btNumCE.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNumCE.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNumCE.DrawImage = false;
-            this.btNumCE.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNumCE.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNumCE.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNumCE.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNumCE.Location = new System.Drawing.Point(116, 194);
@@ -830,7 +830,7 @@ namespace Yorot.UI.SystemApp
             this.btNumPlusMinus.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNumPlusMinus.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNumPlusMinus.DrawImage = false;
-            this.btNumPlusMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNumPlusMinus.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNumPlusMinus.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNumPlusMinus.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNumPlusMinus.Location = new System.Drawing.Point(14, 194);
@@ -849,7 +849,7 @@ namespace Yorot.UI.SystemApp
             this.btNum1Div.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNum1Div.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNum1Div.DrawImage = false;
-            this.btNum1Div.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNum1Div.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNum1Div.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNum1Div.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNum1Div.Location = new System.Drawing.Point(14, 243);
@@ -868,7 +868,7 @@ namespace Yorot.UI.SystemApp
             this.btNumSQ.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNumSQ.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNumSQ.DrawImage = false;
-            this.btNumSQ.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNumSQ.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNumSQ.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNumSQ.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNumSQ.Location = new System.Drawing.Point(65, 243);
@@ -887,7 +887,7 @@ namespace Yorot.UI.SystemApp
             this.btNumRT.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNumRT.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNumRT.DrawImage = false;
-            this.btNumRT.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNumRT.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNumRT.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNumRT.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNumRT.Location = new System.Drawing.Point(116, 243);
@@ -906,7 +906,7 @@ namespace Yorot.UI.SystemApp
             this.btNumP.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNumP.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNumP.DrawImage = false;
-            this.btNumP.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNumP.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNumP.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNumP.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNumP.Location = new System.Drawing.Point(167, 243);
@@ -925,7 +925,7 @@ namespace Yorot.UI.SystemApp
             this.btNumC.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNumC.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNumC.DrawImage = false;
-            this.btNumC.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNumC.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNumC.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNumC.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNumC.Location = new System.Drawing.Point(65, 194);
@@ -944,7 +944,7 @@ namespace Yorot.UI.SystemApp
             this.btNumEQ.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNumEQ.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNumEQ.DrawImage = false;
-            this.btNumEQ.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNumEQ.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNumEQ.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNumEQ.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNumEQ.Location = new System.Drawing.Point(116, 447);
@@ -963,7 +963,7 @@ namespace Yorot.UI.SystemApp
             this.btNum0.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNum0.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNum0.DrawImage = false;
-            this.btNum0.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNum0.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNum0.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNum0.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNum0.Location = new System.Drawing.Point(65, 447);
@@ -982,7 +982,7 @@ namespace Yorot.UI.SystemApp
             this.btNum9.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNum9.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNum9.DrawImage = false;
-            this.btNum9.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNum9.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNum9.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNum9.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNum9.Location = new System.Drawing.Point(116, 396);
@@ -1001,7 +1001,7 @@ namespace Yorot.UI.SystemApp
             this.btNum6.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNum6.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNum6.DrawImage = false;
-            this.btNum6.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNum6.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNum6.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNum6.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNum6.Location = new System.Drawing.Point(116, 345);
@@ -1020,7 +1020,7 @@ namespace Yorot.UI.SystemApp
             this.btNum8.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNum8.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNum8.DrawImage = false;
-            this.btNum8.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNum8.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNum8.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNum8.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNum8.Location = new System.Drawing.Point(65, 396);
@@ -1039,7 +1039,7 @@ namespace Yorot.UI.SystemApp
             this.btNum3.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNum3.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNum3.DrawImage = false;
-            this.btNum3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNum3.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNum3.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNum3.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNum3.Location = new System.Drawing.Point(116, 294);
@@ -1058,7 +1058,7 @@ namespace Yorot.UI.SystemApp
             this.btNum5.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNum5.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNum5.DrawImage = false;
-            this.btNum5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNum5.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNum5.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNum5.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNum5.Location = new System.Drawing.Point(65, 345);
@@ -1077,7 +1077,7 @@ namespace Yorot.UI.SystemApp
             this.btNum7.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNum7.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNum7.DrawImage = false;
-            this.btNum7.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNum7.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNum7.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNum7.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNum7.Location = new System.Drawing.Point(14, 396);
@@ -1096,7 +1096,7 @@ namespace Yorot.UI.SystemApp
             this.btNum2.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNum2.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNum2.DrawImage = false;
-            this.btNum2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNum2.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNum2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNum2.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNum2.Location = new System.Drawing.Point(65, 294);
@@ -1115,7 +1115,7 @@ namespace Yorot.UI.SystemApp
             this.btNum4.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNum4.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNum4.DrawImage = false;
-            this.btNum4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNum4.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNum4.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNum4.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNum4.Location = new System.Drawing.Point(14, 345);
@@ -1134,7 +1134,7 @@ namespace Yorot.UI.SystemApp
             this.btNum1.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.btNum1.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.btNum1.DrawImage = false;
-            this.btNum1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.btNum1.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.btNum1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.btNum1.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.btNum1.Location = new System.Drawing.Point(14, 294);
@@ -1180,7 +1180,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox16.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox16.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.comboBox16.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.comboBox16.FormattingEnabled = true;
             this.comboBox16.Items.AddRange(new object[] {
             "HEX",
@@ -1196,7 +1196,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox15.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.comboBox15.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.comboBox15.FormattingEnabled = true;
             this.comboBox15.Items.AddRange(new object[] {
             "HEX",
@@ -1210,7 +1210,7 @@ namespace Yorot.UI.SystemApp
             // 
             // label14
             // 
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
+            this.label14.Font = new System.Drawing.Font("Ubuntu", 25F);
             this.label14.Location = new System.Drawing.Point(93, 72);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(184, 66);
@@ -1220,7 +1220,7 @@ namespace Yorot.UI.SystemApp
             // 
             // label13
             // 
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
+            this.label13.Font = new System.Drawing.Font("Ubuntu", 25F);
             this.label13.Location = new System.Drawing.Point(93, 172);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(184, 66);
@@ -1236,7 +1236,7 @@ namespace Yorot.UI.SystemApp
             this.htButton48.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton48.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton48.DrawImage = false;
-            this.htButton48.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton48.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton48.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton48.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton48.Location = new System.Drawing.Point(68, 297);
@@ -1254,7 +1254,7 @@ namespace Yorot.UI.SystemApp
             this.htButton49.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton49.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton49.DrawImage = false;
-            this.htButton49.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton49.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton49.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton49.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton49.Location = new System.Drawing.Point(17, 297);
@@ -1272,7 +1272,7 @@ namespace Yorot.UI.SystemApp
             this.htButton47.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton47.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton47.DrawImage = false;
-            this.htButton47.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton47.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton47.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton47.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton47.Location = new System.Drawing.Point(68, 348);
@@ -1290,7 +1290,7 @@ namespace Yorot.UI.SystemApp
             this.htButton50.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton50.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton50.DrawImage = false;
-            this.htButton50.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton50.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton50.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton50.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton50.Location = new System.Drawing.Point(17, 399);
@@ -1308,7 +1308,7 @@ namespace Yorot.UI.SystemApp
             this.htButton46.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton46.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton46.DrawImage = false;
-            this.htButton46.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton46.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton46.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton46.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton46.Location = new System.Drawing.Point(119, 297);
@@ -1326,7 +1326,7 @@ namespace Yorot.UI.SystemApp
             this.htButton39.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton39.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton39.DrawImage = false;
-            this.htButton39.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton39.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton39.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton39.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton39.Location = new System.Drawing.Point(170, 450);
@@ -1344,7 +1344,7 @@ namespace Yorot.UI.SystemApp
             this.htButton51.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton51.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton51.DrawImage = false;
-            this.htButton51.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton51.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton51.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton51.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton51.Location = new System.Drawing.Point(17, 348);
@@ -1362,7 +1362,7 @@ namespace Yorot.UI.SystemApp
             this.htButton45.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton45.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton45.DrawImage = false;
-            this.htButton45.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton45.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton45.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton45.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton45.Location = new System.Drawing.Point(68, 399);
@@ -1380,7 +1380,7 @@ namespace Yorot.UI.SystemApp
             this.htButton40.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton40.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton40.DrawImage = false;
-            this.htButton40.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton40.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton40.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton40.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton40.Location = new System.Drawing.Point(170, 399);
@@ -1398,7 +1398,7 @@ namespace Yorot.UI.SystemApp
             this.htButton52.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton52.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton52.DrawImage = false;
-            this.htButton52.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton52.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton52.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton52.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton52.Location = new System.Drawing.Point(119, 450);
@@ -1416,7 +1416,7 @@ namespace Yorot.UI.SystemApp
             this.htButton41.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton41.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton41.DrawImage = false;
-            this.htButton41.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton41.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton41.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton41.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton41.Location = new System.Drawing.Point(170, 348);
@@ -1434,7 +1434,7 @@ namespace Yorot.UI.SystemApp
             this.htButton31.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton31.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton31.DrawImage = false;
-            this.htButton31.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton31.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton31.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton31.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton31.Location = new System.Drawing.Point(170, 246);
@@ -1452,7 +1452,7 @@ namespace Yorot.UI.SystemApp
             this.htButton44.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton44.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton44.DrawImage = false;
-            this.htButton44.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton44.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton44.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton44.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton44.Location = new System.Drawing.Point(119, 348);
@@ -1470,7 +1470,7 @@ namespace Yorot.UI.SystemApp
             this.htButton54.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton54.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton54.DrawImage = false;
-            this.htButton54.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton54.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton54.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton54.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton54.Location = new System.Drawing.Point(68, 450);
@@ -1488,7 +1488,7 @@ namespace Yorot.UI.SystemApp
             this.htButton30.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton30.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton30.DrawImage = false;
-            this.htButton30.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton30.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton30.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton30.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton30.Location = new System.Drawing.Point(119, 246);
@@ -1506,7 +1506,7 @@ namespace Yorot.UI.SystemApp
             this.htButton53.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton53.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton53.DrawImage = false;
-            this.htButton53.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton53.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton53.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton53.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton53.Location = new System.Drawing.Point(17, 450);
@@ -1524,7 +1524,7 @@ namespace Yorot.UI.SystemApp
             this.htButton42.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton42.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton42.DrawImage = false;
-            this.htButton42.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton42.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton42.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton42.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton42.Location = new System.Drawing.Point(119, 399);
@@ -1542,7 +1542,7 @@ namespace Yorot.UI.SystemApp
             this.htButton43.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
             this.htButton43.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.htButton43.DrawImage = false;
-            this.htButton43.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.htButton43.Font = new System.Drawing.Font("Ubuntu", 20F);
             this.htButton43.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.htButton43.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
             this.htButton43.Location = new System.Drawing.Point(170, 297);
@@ -1581,7 +1581,7 @@ namespace Yorot.UI.SystemApp
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label9.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label9.Location = new System.Drawing.Point(19, 146);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(147, 17);
@@ -1640,7 +1640,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox7.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox7.FormattingEnabled = true;
             this.comboBox7.Items.AddRange(new object[] {
             "bit",
@@ -1678,7 +1678,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox8.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox8.FormattingEnabled = true;
             this.comboBox8.Items.AddRange(new object[] {
             "bit",
@@ -1715,7 +1715,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown7
             // 
             this.numericUpDown7.DecimalPlaces = 17;
-            this.numericUpDown7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown7.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown7.Location = new System.Drawing.Point(22, 112);
             this.numericUpDown7.Maximum = new decimal(new int[] {
             -1,
@@ -1739,7 +1739,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown8
             // 
             this.numericUpDown8.DecimalPlaces = 17;
-            this.numericUpDown8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown8.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown8.Location = new System.Drawing.Point(22, 33);
             this.numericUpDown8.Maximum = new decimal(new int[] {
             -1,
@@ -1780,7 +1780,7 @@ namespace Yorot.UI.SystemApp
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label11.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label11.Location = new System.Drawing.Point(12, 146);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(157, 17);
@@ -1839,7 +1839,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox11.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox11.FormattingEnabled = true;
             this.comboBox11.Items.AddRange(new object[] {
             "carat",
@@ -1866,7 +1866,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox12.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox12.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox12.FormattingEnabled = true;
             this.comboBox12.Items.AddRange(new object[] {
             "carat",
@@ -1892,7 +1892,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown11
             // 
             this.numericUpDown11.DecimalPlaces = 17;
-            this.numericUpDown11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown11.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown11.Location = new System.Drawing.Point(15, 112);
             this.numericUpDown11.Maximum = new decimal(new int[] {
             -1,
@@ -1916,7 +1916,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown12
             // 
             this.numericUpDown12.DecimalPlaces = 17;
-            this.numericUpDown12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown12.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown12.Location = new System.Drawing.Point(15, 33);
             this.numericUpDown12.Maximum = new decimal(new int[] {
             -1,
@@ -1957,7 +1957,7 @@ namespace Yorot.UI.SystemApp
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label8.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label8.Location = new System.Drawing.Point(13, 146);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(157, 17);
@@ -2016,7 +2016,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox5.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox5.FormattingEnabled = true;
             this.comboBox5.Items.AddRange(new object[] {
             "carat",
@@ -2043,7 +2043,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox6.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox6.FormattingEnabled = true;
             this.comboBox6.Items.AddRange(new object[] {
             "carat",
@@ -2069,7 +2069,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown5
             // 
             this.numericUpDown5.DecimalPlaces = 17;
-            this.numericUpDown5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown5.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown5.Location = new System.Drawing.Point(16, 112);
             this.numericUpDown5.Maximum = new decimal(new int[] {
             -1,
@@ -2093,7 +2093,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown6
             // 
             this.numericUpDown6.DecimalPlaces = 17;
-            this.numericUpDown6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown6.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown6.Location = new System.Drawing.Point(16, 33);
             this.numericUpDown6.Maximum = new decimal(new int[] {
             -1,
@@ -2134,7 +2134,7 @@ namespace Yorot.UI.SystemApp
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label5.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label5.Location = new System.Drawing.Point(12, 166);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(157, 17);
@@ -2193,7 +2193,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.cbMass2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMass2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbMass2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.cbMass2.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.cbMass2.FormattingEnabled = true;
             this.cbMass2.Items.AddRange(new object[] {
             "milligram",
@@ -2220,7 +2220,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.cbMass1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMass1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbMass1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.cbMass1.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.cbMass1.FormattingEnabled = true;
             this.cbMass1.Items.AddRange(new object[] {
             "milligram",
@@ -2246,7 +2246,7 @@ namespace Yorot.UI.SystemApp
             // nudMass2
             // 
             this.nudMass2.DecimalPlaces = 17;
-            this.nudMass2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.nudMass2.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.nudMass2.Location = new System.Drawing.Point(15, 132);
             this.nudMass2.Maximum = new decimal(new int[] {
             -1,
@@ -2271,7 +2271,7 @@ namespace Yorot.UI.SystemApp
             // nudMass1
             // 
             this.nudMass1.DecimalPlaces = 17;
-            this.nudMass1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.nudMass1.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.nudMass1.Location = new System.Drawing.Point(15, 53);
             this.nudMass1.Maximum = new decimal(new int[] {
             -1,
@@ -2340,7 +2340,7 @@ namespace Yorot.UI.SystemApp
             // 
             // label15
             // 
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.label15.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.label15.Location = new System.Drawing.Point(15, 204);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(262, 268);
@@ -2352,7 +2352,7 @@ namespace Yorot.UI.SystemApp
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label10.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label10.Location = new System.Drawing.Point(15, 146);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(144, 17);
@@ -2411,7 +2411,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox9.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox9.FormattingEnabled = true;
             this.comboBox9.Items.AddRange(new object[] {
             "nanosecond",
@@ -2435,7 +2435,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox10.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox10.FormattingEnabled = true;
             this.comboBox10.Items.AddRange(new object[] {
             "nanosecond",
@@ -2458,7 +2458,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown9
             // 
             this.numericUpDown9.DecimalPlaces = 17;
-            this.numericUpDown9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown9.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown9.Location = new System.Drawing.Point(18, 112);
             this.numericUpDown9.Maximum = new decimal(new int[] {
             -1,
@@ -2482,7 +2482,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown10
             // 
             this.numericUpDown10.DecimalPlaces = 17;
-            this.numericUpDown10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown10.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown10.Location = new System.Drawing.Point(18, 33);
             this.numericUpDown10.Maximum = new decimal(new int[] {
             -1,
@@ -2523,7 +2523,7 @@ namespace Yorot.UI.SystemApp
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label7.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label7.Location = new System.Drawing.Point(14, 146);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(167, 17);
@@ -2582,7 +2582,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox3.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Items.AddRange(new object[] {
             "Celcius (°C)",
@@ -2599,7 +2599,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox4.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Items.AddRange(new object[] {
             "Celcius (°C)",
@@ -2615,7 +2615,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown3
             // 
             this.numericUpDown3.DecimalPlaces = 17;
-            this.numericUpDown3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown3.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown3.Location = new System.Drawing.Point(17, 112);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             -1,
@@ -2639,7 +2639,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown4
             // 
             this.numericUpDown4.DecimalPlaces = 17;
-            this.numericUpDown4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown4.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown4.Location = new System.Drawing.Point(17, 33);
             this.numericUpDown4.Maximum = new decimal(new int[] {
             -1,
@@ -2680,7 +2680,7 @@ namespace Yorot.UI.SystemApp
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label12.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label12.Location = new System.Drawing.Point(19, 146);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(157, 17);
@@ -2739,7 +2739,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox13.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox13.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox13.FormattingEnabled = true;
             this.comboBox13.Items.AddRange(new object[] {
             "meter per second (m/s)",
@@ -2760,7 +2760,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox14.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox14.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox14.FormattingEnabled = true;
             this.comboBox14.Items.AddRange(new object[] {
             "meter per second (m/s)",
@@ -2780,7 +2780,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown13
             // 
             this.numericUpDown13.DecimalPlaces = 17;
-            this.numericUpDown13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown13.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown13.Location = new System.Drawing.Point(22, 112);
             this.numericUpDown13.Maximum = new decimal(new int[] {
             -1,
@@ -2804,7 +2804,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown14
             // 
             this.numericUpDown14.DecimalPlaces = 17;
-            this.numericUpDown14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown14.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown14.Location = new System.Drawing.Point(22, 33);
             this.numericUpDown14.Maximum = new decimal(new int[] {
             -1,
@@ -2854,7 +2854,7 @@ namespace Yorot.UI.SystemApp
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label6.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label6.Location = new System.Drawing.Point(13, 146);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 17);
@@ -2913,7 +2913,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox1.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(142, 112);
             this.comboBox1.Name = "comboBox1";
@@ -2924,7 +2924,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBox2.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(142, 33);
             this.comboBox2.Name = "comboBox2";
@@ -2934,7 +2934,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown1
             // 
             this.numericUpDown1.DecimalPlaces = 17;
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown1.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown1.Location = new System.Drawing.Point(16, 112);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             -1,
@@ -2958,7 +2958,7 @@ namespace Yorot.UI.SystemApp
             // numericUpDown2
             // 
             this.numericUpDown2.DecimalPlaces = 17;
-            this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown2.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown2.Location = new System.Drawing.Point(16, 33);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             -1,
@@ -3021,7 +3021,7 @@ namespace Yorot.UI.SystemApp
             // 
             // numericUpDown19
             // 
-            this.numericUpDown19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown19.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown19.Location = new System.Drawing.Point(140, 211);
             this.numericUpDown19.Name = "numericUpDown19";
             this.numericUpDown19.Size = new System.Drawing.Size(51, 23);
@@ -3029,7 +3029,7 @@ namespace Yorot.UI.SystemApp
             // 
             // numericUpDown20
             // 
-            this.numericUpDown20.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown20.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown20.Location = new System.Drawing.Point(18, 136);
             this.numericUpDown20.Name = "numericUpDown20";
             this.numericUpDown20.Size = new System.Drawing.Size(253, 23);
@@ -3037,7 +3037,7 @@ namespace Yorot.UI.SystemApp
             // 
             // numericUpDown21
             // 
-            this.numericUpDown21.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown21.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown21.Location = new System.Drawing.Point(18, 61);
             this.numericUpDown21.Name = "numericUpDown21";
             this.numericUpDown21.Size = new System.Drawing.Size(253, 23);
@@ -3045,7 +3045,7 @@ namespace Yorot.UI.SystemApp
             // 
             // numericUpDown22
             // 
-            this.numericUpDown22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown22.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown22.Location = new System.Drawing.Point(23, 211);
             this.numericUpDown22.Name = "numericUpDown22";
             this.numericUpDown22.Size = new System.Drawing.Size(51, 23);
@@ -3054,7 +3054,7 @@ namespace Yorot.UI.SystemApp
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label37.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label37.Location = new System.Drawing.Point(197, 213);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(47, 17);
@@ -3064,7 +3064,7 @@ namespace Yorot.UI.SystemApp
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label38.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label38.Location = new System.Drawing.Point(80, 213);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(38, 17);
@@ -3074,7 +3074,7 @@ namespace Yorot.UI.SystemApp
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label39.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label39.Location = new System.Drawing.Point(17, 181);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(39, 17);
@@ -3084,7 +3084,7 @@ namespace Yorot.UI.SystemApp
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label40.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label40.Location = new System.Drawing.Point(17, 106);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(81, 17);
@@ -3095,7 +3095,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.label48.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.label48.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.label48.Location = new System.Drawing.Point(18, 338);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(248, 25);
@@ -3107,7 +3107,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.label41.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.label41.Location = new System.Drawing.Point(17, 286);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(249, 25);
@@ -3118,7 +3118,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label42.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label42.ForeColor = System.Drawing.Color.Orange;
             this.label42.Location = new System.Drawing.Point(20, 441);
             this.label42.Name = "label42";
@@ -3131,7 +3131,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.label43.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label43.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label43.Location = new System.Drawing.Point(18, 466);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(248, 17);
@@ -3143,7 +3143,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.label44.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label44.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label44.Location = new System.Drawing.Point(18, 391);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(248, 17);
@@ -3154,7 +3154,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.label45.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label45.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label45.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label45.Location = new System.Drawing.Point(15, 366);
             this.label45.Name = "label45";
@@ -3166,7 +3166,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.label49.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label49.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label49.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label49.Location = new System.Drawing.Point(18, 313);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(248, 17);
@@ -3178,7 +3178,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.label46.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label46.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label46.Location = new System.Drawing.Point(16, 256);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(250, 17);
@@ -3188,7 +3188,7 @@ namespace Yorot.UI.SystemApp
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label47.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label47.Location = new System.Drawing.Point(15, 31);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(86, 17);
@@ -3237,7 +3237,7 @@ namespace Yorot.UI.SystemApp
             // 
             // numericUpDown16
             // 
-            this.numericUpDown16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown16.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown16.Location = new System.Drawing.Point(146, 238);
             this.numericUpDown16.Name = "numericUpDown16";
             this.numericUpDown16.Size = new System.Drawing.Size(51, 23);
@@ -3245,7 +3245,7 @@ namespace Yorot.UI.SystemApp
             // 
             // numericUpDown18
             // 
-            this.numericUpDown18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown18.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown18.Location = new System.Drawing.Point(24, 163);
             this.numericUpDown18.Name = "numericUpDown18";
             this.numericUpDown18.Size = new System.Drawing.Size(253, 23);
@@ -3253,7 +3253,7 @@ namespace Yorot.UI.SystemApp
             // 
             // numericUpDown17
             // 
-            this.numericUpDown17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown17.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown17.Location = new System.Drawing.Point(24, 88);
             this.numericUpDown17.Name = "numericUpDown17";
             this.numericUpDown17.Size = new System.Drawing.Size(253, 23);
@@ -3261,7 +3261,7 @@ namespace Yorot.UI.SystemApp
             // 
             // numericUpDown15
             // 
-            this.numericUpDown15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown15.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown15.Location = new System.Drawing.Point(29, 238);
             this.numericUpDown15.Name = "numericUpDown15";
             this.numericUpDown15.Size = new System.Drawing.Size(51, 23);
@@ -3270,7 +3270,7 @@ namespace Yorot.UI.SystemApp
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label30.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label30.Location = new System.Drawing.Point(203, 240);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(47, 17);
@@ -3280,7 +3280,7 @@ namespace Yorot.UI.SystemApp
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label29.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label29.Location = new System.Drawing.Point(86, 240);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(38, 17);
@@ -3290,7 +3290,7 @@ namespace Yorot.UI.SystemApp
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label28.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label28.Location = new System.Drawing.Point(23, 208);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(39, 17);
@@ -3300,7 +3300,7 @@ namespace Yorot.UI.SystemApp
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label27.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label27.Location = new System.Drawing.Point(23, 133);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(81, 17);
@@ -3310,7 +3310,7 @@ namespace Yorot.UI.SystemApp
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.label32.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.label32.Location = new System.Drawing.Point(23, 313);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(89, 25);
@@ -3321,7 +3321,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label34.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label34.ForeColor = System.Drawing.Color.Orange;
             this.label34.Location = new System.Drawing.Point(25, 426);
             this.label34.Name = "label34";
@@ -3334,7 +3334,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label36.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label36.Location = new System.Drawing.Point(23, 451);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(248, 17);
@@ -3346,7 +3346,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label35.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label35.Location = new System.Drawing.Point(23, 376);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(248, 17);
@@ -3357,7 +3357,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label33.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label33.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label33.Location = new System.Drawing.Point(20, 351);
             this.label33.Name = "label33";
@@ -3368,7 +3368,7 @@ namespace Yorot.UI.SystemApp
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label31.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label31.Location = new System.Drawing.Point(22, 283);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(80, 17);
@@ -3378,7 +3378,7 @@ namespace Yorot.UI.SystemApp
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label26.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label26.Location = new System.Drawing.Point(21, 58);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(100, 17);
@@ -3389,7 +3389,7 @@ namespace Yorot.UI.SystemApp
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Checked = true;
-            this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.radioButton2.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.radioButton2.Location = new System.Drawing.Point(106, 17);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(88, 21);
@@ -3401,7 +3401,7 @@ namespace Yorot.UI.SystemApp
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.radioButton1.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.radioButton1.Location = new System.Drawing.Point(25, 17);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(60, 21);
@@ -3437,7 +3437,7 @@ namespace Yorot.UI.SystemApp
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label4.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label4.Location = new System.Drawing.Point(172, 14);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 17);
@@ -3447,7 +3447,7 @@ namespace Yorot.UI.SystemApp
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label3.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label3.Location = new System.Drawing.Point(6, 76);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(202, 34);
@@ -3457,7 +3457,7 @@ namespace Yorot.UI.SystemApp
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label2.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label2.Location = new System.Drawing.Point(65, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(110, 17);
@@ -3467,7 +3467,7 @@ namespace Yorot.UI.SystemApp
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label1.Location = new System.Drawing.Point(63, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 25);
@@ -3496,7 +3496,7 @@ namespace Yorot.UI.SystemApp
             // 
             // numericUpDown23
             // 
-            this.numericUpDown23.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown23.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown23.Location = new System.Drawing.Point(21, 197);
             this.numericUpDown23.Name = "numericUpDown23";
             this.numericUpDown23.Size = new System.Drawing.Size(256, 23);
@@ -3504,7 +3504,7 @@ namespace Yorot.UI.SystemApp
             // 
             // numericUpDown24
             // 
-            this.numericUpDown24.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDown24.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.numericUpDown24.Location = new System.Drawing.Point(21, 45);
             this.numericUpDown24.Name = "numericUpDown24";
             this.numericUpDown24.Size = new System.Drawing.Size(256, 23);
@@ -3513,7 +3513,7 @@ namespace Yorot.UI.SystemApp
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label16.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label16.Location = new System.Drawing.Point(18, 163);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(33, 17);
@@ -3523,7 +3523,7 @@ namespace Yorot.UI.SystemApp
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label17.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label17.Location = new System.Drawing.Point(18, 14);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(38, 17);
@@ -3533,7 +3533,7 @@ namespace Yorot.UI.SystemApp
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.label19.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.label19.Location = new System.Drawing.Point(19, 260);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(54, 25);
@@ -3543,7 +3543,7 @@ namespace Yorot.UI.SystemApp
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label20.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label20.Location = new System.Drawing.Point(18, 230);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(33, 17);
@@ -3553,7 +3553,7 @@ namespace Yorot.UI.SystemApp
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label21.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label21.Location = new System.Drawing.Point(22, 292);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(174, 17);
@@ -3586,7 +3586,7 @@ namespace Yorot.UI.SystemApp
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label18.Font = new System.Drawing.Font("Ubuntu", 10F);
             this.label18.Location = new System.Drawing.Point(18, 97);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(47, 17);

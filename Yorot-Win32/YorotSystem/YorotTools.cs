@@ -8,11 +8,11 @@ namespace Yorot
     {
         public static string FromThemeFolder(this string x)
         {
-            return x.Replace("[THEMES]", YorotGlobal.Settings.ThemesLoc);
+            return x.Replace("[THEMES]", YorotGlobal.Main.ThemesFolder);
         }
         public static string ToThemeFolder(this string x)
         {
-            return x.Replace(YorotGlobal.Settings.ThemesLoc, "[THEMES]");
+            return x.Replace(YorotGlobal.Main.ThemesFolder, "[THEMES]");
         }
         public static System.Drawing.Image GetAppIcon(YorotApp app)
         {
@@ -47,12 +47,11 @@ namespace Yorot
             }
             else
             {
-                return HTAlt.Tools.ReadFile(YorotGlobal.Settings.UserApps + app.AppCodeName + "\\" + app.AppIcon, System.Drawing.Imaging.ImageFormat.Png);
+                return HTAlt.Tools.ReadFile(YorotGlobal.Main.ExtFolder + app.AppCodeName + "\\" + app.AppIcon, System.Drawing.Imaging.ImageFormat.Png);
             }
         }
         public static System.Drawing.Image ThemeThumbnail(YorotTheme theme)
         {
-
             if (theme.isDefaultTheme)
             {
                 switch (theme.ThumbLoc)
@@ -67,7 +66,36 @@ namespace Yorot
             }
             else
             {
-                return HTAlt.Tools.ReadFile(YorotGlobal.Settings.ThemesLoc + theme.CodeName + @"\" + theme.ThumbLoc, System.Drawing.Imaging.ImageFormat.Png);
+                return HTAlt.Tools.ReadFile(YorotGlobal.Main.ThemesFolder + theme.CodeName + @"\" + theme.ThumbLoc, System.Drawing.Imaging.ImageFormat.Png);
+            }
+        }
+
+        // Thanks to Tempuslight & krlzlx from StackOwerflow https://stackoverflow.com/a/47205281
+        public static System.Drawing.Image ClipToCircle(System.Drawing.Image srcImage, System.Drawing.PointF center, float radius)
+        {
+            System.Drawing.Image dstImage = new System.Drawing.Bitmap(srcImage.Width, srcImage.Height, srcImage.PixelFormat);
+
+            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(dstImage))
+            {
+                System.Drawing.RectangleF r = new System.Drawing.RectangleF(center.X - radius, center.Y - radius,
+                                                         radius * 2, radius * 2);
+
+                // enables smoothing of the edge of the circle (less pixelated)
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+                // fills background color
+                using (System.Drawing.Brush br = new System.Drawing.SolidBrush(System.Drawing.Color.Transparent))
+                {
+                    g.FillRectangle(br, 0, 0, dstImage.Width, dstImage.Height);
+                }
+
+                // adds the new ellipse & draws the image again 
+                System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+                path.AddEllipse(r);
+                g.SetClip(path);
+                g.DrawImage(srcImage, 0, 0);
+
+                return dstImage;
             }
         }
     }
