@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<root>
+  <Group Name="#YOROT-ROOT">
+    <Name>English (United Kingdom)</Name>
+    <Author>Haltroy</Author>
+    <CodeName>com.haltroy.english-gb</CodeName>
+    <CompatibleVersion>1</CompatibleVersion>
+    <Version>1</Version>
+    <HTUPDATE></HTUPDATE>
+  </Group>
+  <Group Name="Win32">
+    <Group Name="DefaultApps">
+      <Translation ID="Settings" Text ="Settings" />
+      <Translation ID="Yopad" Text ="Yopad" />
+      <Translation ID="Calendar" Text ="Calendar" />
+      <Translation ID="Calculator" Text ="Calculator" />
+      <Translation ID="FileMan" Text ="Files" />
+      <Translation ID="ColMan" Text ="Collections" />
+      <Translation ID="SpacePass" Text ="Space Pass" />
+      <Translation ID="Console" Text ="Console" />
+      <Translation ID="Notepad" Text ="Notepad" />
+      <Translation ID="Store" Text ="Store" />
+    </Group>
+    <Group Name="Settings">
+      <Translation ID="HelloUser" Text="Hello, [USERNAME]!" />
+      <Translation ID="ManageAcc" Text="Manage your account" />
+      <Translation ID="Home" Text="Home" />
+      <Translation ID="Back" Text="Back" />
+      <Translation ID="About" Text="About" />
+      <Translation ID="Clear" Text="Clear" />
+      <Translation ID="RemSelected" Text="Remove Selected" />
+      <Translation ID="AboutInfo" Text="by Haltroy[NEWLINE][VERSIONINFO][NEWLINE]Copyright © 2021 Haltroy[NEWLINE]Usage of this product is free for all uses.[NEWLINE]Usage of the source code of this product is governed by MIT License.[NEWLINE]Yorot uses Chromium Embedded Famework. © 2021 CEF Authors[NEWLINE]Yorot uses CefSharp. © 2021 CefSharp Authors[NEWLINE]Yorot uses EasyTabs. © 2021 Luke Stratman[NEWLINE]Yorot uses HTAlt. © 2021 Haltroy[NEWLINE]Yorot is written in C# with Visual Studio 2019. © 2021 Microsoft Corp.[NEWLINE]Yorot uses Newtonsoft.JSON. © 2021 Newtonsoft[NEWLINE]More of this list and all licenses are located in the licenses page." />
+      <Translation ID="AboutEULA" Text="End-User License Aggreement" />
+      <Translation ID="AboutLicenses" Text="Licenses" />
+      <Translation ID="Updates" Text="Updates" />
+      <Translation ID="Logs" Text="Logs" />
+      <Translation ID="General" Text="General" />
+      <Translation ID="Homepage" Text="Home page:" />
+      <Translation ID="NewTab" Text="New Tab" />
+      <Translation ID="DefaultSE" Text="Default Search Engine: [E]" />
+      <Translation ID="SearchEngines" Text="Search Engines..." />
+      <Translation ID="AtStartup" Text="At Startup:" />
+      <Translation ID="ASNewTab" Text="Load New Tab" />
+      <Translation ID="ASHome" Text="Load Home" />
+      <Translation ID="ASURL" Text="Load Url" />
+      <Translation ID="ResoterOld" Text="Restore old sessions" />
+      <Translation ID="DefaultBrowser" Text="Always check for the default browser" />
+      <Translation ID="StartYorot" Text="Start Yorot on boot" />
+      <Translation ID="StartTray" Text="Start in system tray" />
+      <Translation ID="Languages" Text="Languages" />
+      <Translation ID="History" Text="History" />
+      <Translation ID="Downloads" Text="Downloads" />
+      <Translation ID="DowOpenFile" Text="Open files after downloading" />
+      <Translation ID="DowAutoD" Text="Auto-download to a folder" />
+      <Translation ID="DowAutoDInfo" Text="Download to this folder:" />
+      <Translation ID="Notifications" Text="Notifications" />
+      <Translation ID="NotPlaySound" Text="Play notification sound" />
+      <Translation ID="NotSueDefault" Text="Use the default sound" />
+      <Translation ID="NotSoundLoc" Text="Notification sound location:" />
+      <Translation ID="NotSilentMode" Text="Silent mode" />
+      <Translation ID="NotSilentInfo" Text="You can schedule silent mode in the Calendar app." />
+      <Translation ID="NotCalendar" Text="Open Calendar..." />
+      <Translation ID="Accessibility" Text="Accessibility" />
+      <Translation ID="AccSynthRate" Text="Speech Sytnh Rate:" />
+      <Translation ID="AccSynthVol" Text="Speech Sytnh Volume:" />
+      <Translation ID="Appearance" Text="Appearance" />
+      <Translation ID="ApShowFav" Text="Show Favorites" />
+      <Translation ID="ApShowApp" Text="Open app manager on start" />
+      <Translation ID="Profiles" Text="Profiles" />
+      <Translation ID="Sync" Text="Sync" />
+      <Translation ID="Security" Text="Security" />
+      <Translation ID="DoNotTrack" Text="Enable DoNotTrack" />
+      <Translation ID="DoNotTrackInfo" Text="Enabling this feature sends DoNotTrack signal to websites. This means that it can tell some trackers to stop but also can also encourage some others." />
+      <Translation ID="Sites" Text="Sites" />
+      <Translation ID="SiteSearch" Text="Search a site..." />
+      <Translation ID="Proxies" Text="Proxies" />
+      <Translation ID="ProxyRemember" Text="Remember the last proxy at start" />
+      <Translation ID="Extensions" Text="Extensions" />
+      <Translation ID="ExtSearch" Text="Search an extension..." />
+      <Translation ID="Apps" Text="Apps" />
+      <Translation ID="AppsSearch" Text="Search an app..." />
+      <Translation ID="WebEngines" Text="Web Engines" />
+      <Translation ID="WESearch" Text="Search a web engine..." />
+      <Translation ID="Themes" Text="Themes" />
+    </Group>
+    <Group Name="MainForm">
+      <Translation ID="NotLoadedApps" Text="Yorot did not loaded your apps to save memory and power." />
+      <Translation ID="LoadAppButton" Text="Click here to load apps" />
+      <Translation ID="UnpinApp" Text="Unpin this app" />
+      <Translation ID="PinApp" Text="Pin this app" />
+      <Translation ID="OpenNewSession" Text="Open a new session" />
+      <Translation ID="CloseAllSessions" Text="Close all sessions" />
+      <Translation ID="AppSettings" Text="App settings" />
+      <Translation ID="AppListReload" Text="Reload" />
+      <Translation ID="ListSettings" Text="Settings" />
+    </Group>
+  </Group>
+</root>

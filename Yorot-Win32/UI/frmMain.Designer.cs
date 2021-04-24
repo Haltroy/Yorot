@@ -202,7 +202,7 @@ namespace Yorot
             // 
             // ilAppMan
             // 
-            this.ilAppMan.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.ilAppMan.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.ilAppMan.ImageSize = new System.Drawing.Size(64, 64);
             this.ilAppMan.TransparentColor = System.Drawing.Color.Transparent;
             // 

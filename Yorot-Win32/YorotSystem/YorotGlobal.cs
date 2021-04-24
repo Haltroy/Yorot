@@ -1,6 +1,5 @@
 ﻿using HTAlt;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,11 +18,7 @@ namespace Yorot
         /// <summary>
         /// Yorot Main
         /// </summary>
-        public static YorotMain Main;
-        /// <summary>
-        /// Yorot Special class for this type of executable (In this case, Win32).
-        /// </summary>
-        public static YorotSpecial Y1 = null;
+        public static YorotSpecial Main;
         /// <summary>
         /// <c>true</c> if this session is a PreOut, otherwise <c>false</c>.
         /// </summary>
@@ -48,10 +43,5 @@ namespace Yorot
         /// Version Control (HTUPDATE) URL.
         /// </summary>
         public static string HTULoc = "https://raw.githubusercontent.com/Haltroy/Yorot/main/Yorot.htupdate";
-    }
-    public class YorotSpecial
-    {
-        public List<frmMain> MainForms { get; set; } = new List<frmMain>();
-        public frmMain MainForm { get => MainForms[0]; }
     }
 }

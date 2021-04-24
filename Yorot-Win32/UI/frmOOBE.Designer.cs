@@ -30,61 +30,60 @@ namespace Yorot
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOOBE));
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Localization", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("User", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Web Sync", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Switch", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("Localization", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("User", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup11 = new System.Windows.Forms.ListViewGroup("Web Sync", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup12 = new System.Windows.Forms.ListViewGroup("Switch", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem33 = new System.Windows.Forms.ListViewItem(new string[] {
             "Location",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem34 = new System.Windows.Forms.ListViewItem(new string[] {
             "Language",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem35 = new System.Windows.Forms.ListViewItem(new string[] {
             "Locale",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem36 = new System.Windows.Forms.ListViewItem(new string[] {
             "Format",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem37 = new System.Windows.Forms.ListViewItem(new string[] {
             "Account type",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem38 = new System.Windows.Forms.ListViewItem(new string[] {
             "User",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem39 = new System.Windows.Forms.ListViewItem(new string[] {
             "Username",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem40 = new System.Windows.Forms.ListViewItem(new string[] {
             "Yorot Location",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem41 = new System.Windows.Forms.ListViewItem(new string[] {
             "Browsers",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem42 = new System.Windows.Forms.ListViewItem(new string[] {
             "Chromium-based",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem43 = new System.Windows.Forms.ListViewItem(new string[] {
             "URL type",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem44 = new System.Windows.Forms.ListViewItem(new string[] {
             "Upload URL",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem45 = new System.Windows.Forms.ListViewItem(new string[] {
             "Download URL",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem46 = new System.Windows.Forms.ListViewItem(new string[] {
             "Enable Credentials?",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem47 = new System.Windows.Forms.ListViewItem(new string[] {
             "Name",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem48 = new System.Windows.Forms.ListViewItem(new string[] {
             "Password",
             ""}, -1);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpLocale = new System.Windows.Forms.TabPage();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.htButton1 = new HTAlt.WinForms.HTButton();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -92,7 +91,6 @@ namespace Yorot
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.pbCountrySelect = new System.Windows.Forms.PictureBox();
             this.tpWelcome = new System.Windows.Forms.TabPage();
             this.htButton7 = new HTAlt.WinForms.HTButton();
             this.htButton2 = new HTAlt.WinForms.HTButton();
@@ -161,43 +159,43 @@ namespace Yorot
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.tpSync = new System.Windows.Forms.TabPage();
-            this.tpChromium = new System.Windows.Forms.TabPage();
-            this.tpFinal = new System.Windows.Forms.TabPage();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.htSwitch11 = new HTAlt.WinForms.HTSwitch();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
+            this.radioButton10 = new System.Windows.Forms.RadioButton();
             this.htButton12 = new HTAlt.WinForms.HTButton();
             this.htButton13 = new HTAlt.WinForms.HTButton();
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
-            this.radioButton10 = new System.Windows.Forms.RadioButton();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
-            this.label31 = new System.Windows.Forms.Label();
-            this.htSwitch11 = new HTAlt.WinForms.HTSwitch();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label36 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.tpChromium = new System.Windows.Forms.TabPage();
+            this.textBox8 = new System.Windows.Forms.TextBox();
             this.htButton14 = new HTAlt.WinForms.HTButton();
+            this.htButton16 = new HTAlt.WinForms.HTButton();
             this.htButton15 = new HTAlt.WinForms.HTButton();
             this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.htButton16 = new HTAlt.WinForms.HTButton();
+            this.tpFinal = new System.Windows.Forms.TabPage();
+            this.htListView1 = new HTAlt.WinForms.HTListView();
+            this.chSetting = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.htButton17 = new HTAlt.WinForms.HTButton();
             this.htButton18 = new HTAlt.WinForms.HTButton();
             this.label39 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
-            this.htListView1 = new HTAlt.WinForms.HTListView();
-            this.chSetting = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tpLocale.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCountrySelect)).BeginInit();
             this.tpWelcome.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tpImport.SuspendLayout();
@@ -210,9 +208,9 @@ namespace Yorot
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tpProfile.SuspendLayout();
             this.tpSync.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tpChromium.SuspendLayout();
             this.tpFinal.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -246,27 +244,14 @@ namespace Yorot
             this.tpLocale.Controls.Add(this.label3);
             this.tpLocale.Controls.Add(this.comboBox1);
             this.tpLocale.Controls.Add(this.label1);
-            this.tpLocale.Controls.Add(this.pbCountrySelect);
-            this.tpLocale.Location = new System.Drawing.Point(4, 25);
+            this.tpLocale.Location = new System.Drawing.Point(4, 26);
             this.tpLocale.Margin = new System.Windows.Forms.Padding(4);
             this.tpLocale.Name = "tpLocale";
             this.tpLocale.Padding = new System.Windows.Forms.Padding(4);
-            this.tpLocale.Size = new System.Drawing.Size(790, 568);
+            this.tpLocale.Size = new System.Drawing.Size(790, 567);
             this.tpLocale.TabIndex = 0;
             this.tpLocale.Text = "Locale";
             this.tpLocale.UseVisualStyleBackColor = true;
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(608, 406);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(167, 17);
-            this.linkLabel1.TabIndex = 4;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Tag = "https://tr.wikipedia.org/wiki/Dosya:A_large_blank_world_map_with_oceans_marked_in" +
-    "_blue.svg";
-            this.linkLabel1.Text = "World Map Image Source";
             // 
             // htButton1
             // 
@@ -292,7 +277,7 @@ namespace Yorot
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(91, 438);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(213, 24);
+            this.comboBox2.Size = new System.Drawing.Size(213, 25);
             this.comboBox2.TabIndex = 2;
             // 
             // label2
@@ -303,7 +288,7 @@ namespace Yorot
             this.label2.Location = new System.Drawing.Point(8, 441);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 17);
+            this.label2.Size = new System.Drawing.Size(72, 18);
             this.label2.TabIndex = 1;
             this.label2.Text = "Language:";
             // 
@@ -313,7 +298,7 @@ namespace Yorot
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(78, 472);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(213, 24);
+            this.comboBox3.Size = new System.Drawing.Size(213, 25);
             this.comboBox3.TabIndex = 2;
             // 
             // label3
@@ -324,7 +309,7 @@ namespace Yorot
             this.label3.Location = new System.Drawing.Point(8, 475);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 17);
+            this.label3.Size = new System.Drawing.Size(64, 18);
             this.label3.TabIndex = 1;
             this.label3.Text = "Formats:";
             // 
@@ -334,7 +319,7 @@ namespace Yorot
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(102, 406);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(213, 24);
+            this.comboBox1.Size = new System.Drawing.Size(213, 25);
             this.comboBox1.TabIndex = 2;
             // 
             // label1
@@ -345,23 +330,9 @@ namespace Yorot
             this.label1.Location = new System.Drawing.Point(8, 409);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 17);
+            this.label1.Size = new System.Drawing.Size(86, 18);
             this.label1.TabIndex = 1;
             this.label1.Text = "Localization:";
-            // 
-            // pbCountrySelect
-            // 
-            this.pbCountrySelect.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbCountrySelect.Image = global::Yorot.Properties.Resources.wmap_front;
-            this.pbCountrySelect.Location = new System.Drawing.Point(9, 8);
-            this.pbCountrySelect.Margin = new System.Windows.Forms.Padding(4);
-            this.pbCountrySelect.Name = "pbCountrySelect";
-            this.pbCountrySelect.Size = new System.Drawing.Size(772, 391);
-            this.pbCountrySelect.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbCountrySelect.TabIndex = 0;
-            this.pbCountrySelect.TabStop = false;
             // 
             // tpWelcome
             // 
@@ -371,11 +342,11 @@ namespace Yorot
             this.tpWelcome.Controls.Add(this.label6);
             this.tpWelcome.Controls.Add(this.label5);
             this.tpWelcome.Controls.Add(this.label4);
-            this.tpWelcome.Location = new System.Drawing.Point(4, 25);
+            this.tpWelcome.Location = new System.Drawing.Point(4, 26);
             this.tpWelcome.Margin = new System.Windows.Forms.Padding(4);
             this.tpWelcome.Name = "tpWelcome";
             this.tpWelcome.Padding = new System.Windows.Forms.Padding(4);
-            this.tpWelcome.Size = new System.Drawing.Size(790, 568);
+            this.tpWelcome.Size = new System.Drawing.Size(790, 567);
             this.tpWelcome.TabIndex = 1;
             this.tpWelcome.Text = "Welcome";
             this.tpWelcome.UseVisualStyleBackColor = true;
@@ -430,7 +401,7 @@ namespace Yorot
             this.radioButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radioButton1.Location = new System.Drawing.Point(3, 3);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(568, 55);
+            this.radioButton1.Size = new System.Drawing.Size(553, 58);
             this.radioButton1.TabIndex = 2;
             this.radioButton1.Text = "I am new to Yorot.\r\n  This options allows you to create a new account and sets it" +
     " up to be used with Yorot. \r\n   We recommend picking this option if you are unsu" +
@@ -441,9 +412,9 @@ namespace Yorot
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.radioButton2.Location = new System.Drawing.Point(3, 64);
+            this.radioButton2.Location = new System.Drawing.Point(3, 67);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(607, 72);
+            this.radioButton2.Size = new System.Drawing.Size(594, 76);
             this.radioButton2.TabIndex = 2;
             this.radioButton2.Text = resources.GetString("radioButton2.Text");
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -454,9 +425,9 @@ namespace Yorot
             this.radioButton3.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
             this.radioButton3.Checked = true;
             this.radioButton3.Enabled = false;
-            this.radioButton3.Location = new System.Drawing.Point(3, 142);
+            this.radioButton3.Location = new System.Drawing.Point(3, 149);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(623, 55);
+            this.radioButton3.Size = new System.Drawing.Size(609, 58);
             this.radioButton3.TabIndex = 2;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = resources.GetString("radioButton3.Text");
@@ -478,7 +449,7 @@ namespace Yorot
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(50, 120);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(159, 17);
+            this.label5.Size = new System.Drawing.Size(157, 18);
             this.label5.TabIndex = 1;
             this.label5.Text = "Please select an option:";
             // 
@@ -503,9 +474,9 @@ namespace Yorot
             this.tpImport.Controls.Add(this.radioButton6);
             this.tpImport.Controls.Add(this.label12);
             this.tpImport.Controls.Add(this.label13);
-            this.tpImport.Location = new System.Drawing.Point(4, 25);
+            this.tpImport.Location = new System.Drawing.Point(4, 26);
             this.tpImport.Name = "tpImport";
-            this.tpImport.Size = new System.Drawing.Size(790, 568);
+            this.tpImport.Size = new System.Drawing.Size(790, 567);
             this.tpImport.TabIndex = 2;
             this.tpImport.Text = "tabPage3";
             this.tpImport.UseVisualStyleBackColor = true;
@@ -558,7 +529,7 @@ namespace Yorot
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(3, 7);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(103, 17);
+            this.label8.Size = new System.Drawing.Size(100, 18);
             this.label8.TabIndex = 8;
             this.label8.Text = "Yorot Business";
             // 
@@ -589,7 +560,7 @@ namespace Yorot
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(3, 32);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(82, 17);
+            this.label10.Size = new System.Drawing.Size(81, 18);
             this.label10.TabIndex = 8;
             this.label10.Text = "Yorot PlayX";
             // 
@@ -605,7 +576,7 @@ namespace Yorot
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(3, 107);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(44, 17);
+            this.label11.Size = new System.Drawing.Size(46, 18);
             this.label11.TabIndex = 8;
             this.label11.Text = "Other";
             // 
@@ -621,7 +592,7 @@ namespace Yorot
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(3, 57);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(86, 17);
+            this.label23.Size = new System.Drawing.Size(86, 18);
             this.label23.TabIndex = 8;
             this.label23.Text = "Yorot Studio";
             // 
@@ -630,7 +601,7 @@ namespace Yorot
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(3, 82);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(101, 17);
+            this.label24.Size = new System.Drawing.Size(100, 18);
             this.label24.TabIndex = 8;
             this.label24.Text = "Yorot Terminal";
             // 
@@ -658,7 +629,7 @@ namespace Yorot
             this.radioButton4.Enabled = false;
             this.radioButton4.Location = new System.Drawing.Point(74, 270);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(231, 21);
+            this.radioButton4.Size = new System.Drawing.Size(228, 22);
             this.radioButton4.TabIndex = 9;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "Cross-use with another flavor(s).";
@@ -671,7 +642,7 @@ namespace Yorot
             this.radioButton5.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
             this.radioButton5.Location = new System.Drawing.Point(74, 214);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(321, 38);
+            this.radioButton5.Size = new System.Drawing.Size(318, 40);
             this.radioButton5.TabIndex = 10;
             this.radioButton5.Text = "Sync with web.\r\n  Yorot Setup will download your files from web.";
             this.radioButton5.UseVisualStyleBackColor = true;
@@ -682,7 +653,7 @@ namespace Yorot
             this.radioButton6.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
             this.radioButton6.Location = new System.Drawing.Point(74, 153);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(473, 38);
+            this.radioButton6.Size = new System.Drawing.Size(468, 40);
             this.radioButton6.TabIndex = 11;
             this.radioButton6.Text = "Import from a backup.\r\n  Imports the backup you already taken with either Yorot o" +
     "r Backupster.";
@@ -693,7 +664,7 @@ namespace Yorot
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(50, 120);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(159, 17);
+            this.label12.Size = new System.Drawing.Size(157, 18);
             this.label12.TabIndex = 8;
             this.label12.Text = "Please select an option:";
             // 
@@ -717,9 +688,9 @@ namespace Yorot
             this.tpSwitchToYorot.Controls.Add(this.radioButton9);
             this.tpSwitchToYorot.Controls.Add(this.label17);
             this.tpSwitchToYorot.Controls.Add(this.label18);
-            this.tpSwitchToYorot.Location = new System.Drawing.Point(4, 25);
+            this.tpSwitchToYorot.Location = new System.Drawing.Point(4, 26);
             this.tpSwitchToYorot.Name = "tpSwitchToYorot";
-            this.tpSwitchToYorot.Size = new System.Drawing.Size(790, 568);
+            this.tpSwitchToYorot.Size = new System.Drawing.Size(790, 567);
             this.tpSwitchToYorot.TabIndex = 3;
             this.tpSwitchToYorot.Text = "tabPage4";
             this.tpSwitchToYorot.UseVisualStyleBackColor = true;
@@ -781,7 +752,7 @@ namespace Yorot
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(3, 55);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(102, 17);
+            this.label14.Size = new System.Drawing.Size(104, 18);
             this.label14.TabIndex = 8;
             this.label14.Text = "Microsoft Edge";
             // 
@@ -812,7 +783,7 @@ namespace Yorot
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(3, 80);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(107, 17);
+            this.label15.Size = new System.Drawing.Size(109, 18);
             this.label15.TabIndex = 8;
             this.label15.Text = "Google Chrome";
             // 
@@ -828,7 +799,7 @@ namespace Yorot
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(3, 155);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(115, 17);
+            this.label21.Size = new System.Drawing.Size(118, 18);
             this.label21.TabIndex = 8;
             this.label21.Text = "Chromium-based";
             // 
@@ -844,7 +815,7 @@ namespace Yorot
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(3, 105);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(91, 17);
+            this.label16.Size = new System.Drawing.Size(94, 18);
             this.label16.TabIndex = 8;
             this.label16.Text = "Haltroy Korot";
             // 
@@ -853,7 +824,7 @@ namespace Yorot
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(3, 130);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(97, 17);
+            this.label19.Size = new System.Drawing.Size(101, 18);
             this.label19.TabIndex = 8;
             this.label19.Text = "Mozilla Firefox";
             // 
@@ -878,7 +849,7 @@ namespace Yorot
             this.radioButton8.AutoSize = true;
             this.radioButton8.Location = new System.Drawing.Point(68, 195);
             this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(211, 21);
+            this.radioButton8.Size = new System.Drawing.Size(213, 22);
             this.radioButton8.TabIndex = 10;
             this.radioButton8.Text = "Import from these browser(s):";
             this.radioButton8.UseVisualStyleBackColor = true;
@@ -888,7 +859,7 @@ namespace Yorot
             this.radioButton9.AutoSize = true;
             this.radioButton9.Location = new System.Drawing.Point(68, 155);
             this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(303, 21);
+            this.radioButton9.Size = new System.Drawing.Size(306, 22);
             this.radioButton9.TabIndex = 11;
             this.radioButton9.Text = "Do not import anything from other browsers.";
             this.radioButton9.UseVisualStyleBackColor = true;
@@ -898,7 +869,7 @@ namespace Yorot
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(50, 120);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(159, 17);
+            this.label17.Size = new System.Drawing.Size(157, 18);
             this.label17.TabIndex = 8;
             this.label17.Text = "Please select an option:";
             // 
@@ -920,9 +891,9 @@ namespace Yorot
             this.tpThemes.Controls.Add(this.htButton5);
             this.tpThemes.Controls.Add(this.label7);
             this.tpThemes.Controls.Add(this.label25);
-            this.tpThemes.Location = new System.Drawing.Point(4, 25);
+            this.tpThemes.Location = new System.Drawing.Point(4, 26);
             this.tpThemes.Name = "tpThemes";
-            this.tpThemes.Size = new System.Drawing.Size(790, 568);
+            this.tpThemes.Size = new System.Drawing.Size(790, 567);
             this.tpThemes.TabIndex = 4;
             this.tpThemes.Text = "tabPage5";
             this.tpThemes.UseVisualStyleBackColor = true;
@@ -1005,7 +976,7 @@ namespace Yorot
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(50, 120);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(159, 17);
+            this.label7.Size = new System.Drawing.Size(157, 18);
             this.label7.TabIndex = 14;
             this.label7.Text = "Please select an option:";
             // 
@@ -1029,9 +1000,9 @@ namespace Yorot
             this.tpProfile.Controls.Add(this.label28);
             this.tpProfile.Controls.Add(this.label26);
             this.tpProfile.Controls.Add(this.label27);
-            this.tpProfile.Location = new System.Drawing.Point(4, 25);
+            this.tpProfile.Location = new System.Drawing.Point(4, 26);
             this.tpProfile.Name = "tpProfile";
-            this.tpProfile.Size = new System.Drawing.Size(790, 568);
+            this.tpProfile.Size = new System.Drawing.Size(790, 567);
             this.tpProfile.TabIndex = 5;
             this.tpProfile.Text = "tabPage6";
             this.tpProfile.UseVisualStyleBackColor = true;
@@ -1087,7 +1058,7 @@ namespace Yorot
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(50, 184);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(151, 17);
+            this.label28.Size = new System.Drawing.Size(148, 18);
             this.label28.TabIndex = 14;
             this.label28.Text = "Your username will be:";
             // 
@@ -1096,7 +1067,7 @@ namespace Yorot
             this.label26.AutoSize = true;
             this.label26.Location = new System.Drawing.Point(50, 120);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(242, 17);
+            this.label26.Size = new System.Drawing.Size(239, 18);
             this.label26.TabIndex = 14;
             this.label26.Text = "Please enter a name foır your profile:";
             // 
@@ -1132,41 +1103,141 @@ namespace Yorot
             this.tpSync.Controls.Add(this.htButton13);
             this.tpSync.Controls.Add(this.label29);
             this.tpSync.Controls.Add(this.label30);
-            this.tpSync.Location = new System.Drawing.Point(4, 25);
+            this.tpSync.Location = new System.Drawing.Point(4, 26);
             this.tpSync.Name = "tpSync";
-            this.tpSync.Size = new System.Drawing.Size(790, 568);
+            this.tpSync.Size = new System.Drawing.Size(790, 567);
             this.tpSync.TabIndex = 6;
             this.tpSync.Text = "tabPage7";
             this.tpSync.UseVisualStyleBackColor = true;
             // 
-            // tpChromium
+            // pictureBox2
             // 
-            this.tpChromium.Controls.Add(this.textBox8);
-            this.tpChromium.Controls.Add(this.htButton14);
-            this.tpChromium.Controls.Add(this.htButton16);
-            this.tpChromium.Controls.Add(this.htButton15);
-            this.tpChromium.Controls.Add(this.label37);
-            this.tpChromium.Controls.Add(this.label38);
-            this.tpChromium.Location = new System.Drawing.Point(4, 25);
-            this.tpChromium.Name = "tpChromium";
-            this.tpChromium.Size = new System.Drawing.Size(790, 568);
-            this.tpChromium.TabIndex = 7;
-            this.tpChromium.Text = "tabPage8";
-            this.tpChromium.UseVisualStyleBackColor = true;
+            this.pictureBox2.Location = new System.Drawing.Point(752, 470);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(23, 23);
+            this.pictureBox2.TabIndex = 13;
+            this.pictureBox2.TabStop = false;
             // 
-            // tpFinal
+            // textBox6
             // 
-            this.tpFinal.Controls.Add(this.htListView1);
-            this.tpFinal.Controls.Add(this.htButton17);
-            this.tpFinal.Controls.Add(this.htButton18);
-            this.tpFinal.Controls.Add(this.label39);
-            this.tpFinal.Controls.Add(this.label40);
-            this.tpFinal.Location = new System.Drawing.Point(4, 25);
-            this.tpFinal.Name = "tpFinal";
-            this.tpFinal.Size = new System.Drawing.Size(790, 568);
-            this.tpFinal.TabIndex = 8;
-            this.tpFinal.Text = "tabPage9";
-            this.tpFinal.UseVisualStyleBackColor = true;
+            this.textBox6.Location = new System.Drawing.Point(192, 470);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(554, 23);
+            this.textBox6.TabIndex = 12;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(192, 441);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(554, 23);
+            this.textBox5.TabIndex = 12;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(112, 370);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(663, 23);
+            this.textBox7.TabIndex = 12;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(112, 313);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(663, 23);
+            this.textBox4.TabIndex = 12;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(112, 213);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(663, 23);
+            this.textBox3.TabIndex = 12;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(109, 473);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(69, 18);
+            this.label35.TabIndex = 10;
+            this.label35.Text = "Password:";
+            // 
+            // htSwitch11
+            // 
+            this.htSwitch11.Location = new System.Drawing.Point(53, 407);
+            this.htSwitch11.Name = "htSwitch11";
+            this.htSwitch11.Size = new System.Drawing.Size(50, 19);
+            this.htSwitch11.TabIndex = 11;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(109, 444);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(76, 18);
+            this.label34.TabIndex = 10;
+            this.label34.Text = "Username:";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(109, 350);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(248, 18);
+            this.label36.TabIndex = 10;
+            this.label36.Text = "Address of web files to download from:";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(109, 293);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(214, 18);
+            this.label33.TabIndex = 10;
+            this.label33.Text = "Address of web files to upload to:";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(109, 193);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(320, 18);
+            this.label32.TabIndex = 10;
+            this.label32.Text = "Address of web files to upload and download from:";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(109, 408);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(186, 18);
+            this.label31.TabIndex = 10;
+            this.label31.Text = "Login with these credentials:";
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.AutoSize = true;
+            this.radioButton11.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.radioButton11.Location = new System.Drawing.Point(80, 242);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(478, 40);
+            this.radioButton11.TabIndex = 9;
+            this.radioButton11.TabStop = true;
+            this.radioButton11.Text = "Uploading and downloading are located differently.\r\n   Use this option if you wan" +
+    "t to edit download/upload URLs while syncing.";
+            this.radioButton11.UseVisualStyleBackColor = true;
+            // 
+            // radioButton10
+            // 
+            this.radioButton10.AutoSize = true;
+            this.radioButton10.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.radioButton10.Location = new System.Drawing.Point(80, 145);
+            this.radioButton10.Name = "radioButton10";
+            this.radioButton10.Size = new System.Drawing.Size(310, 40);
+            this.radioButton10.TabIndex = 9;
+            this.radioButton10.TabStop = true;
+            this.radioButton10.Text = "Upload to a single folder.\r\n   Use this option if you want to keep it simple.";
+            this.radioButton10.UseVisualStyleBackColor = true;
             // 
             // htButton12
             // 
@@ -1205,7 +1276,7 @@ namespace Yorot
             this.label29.AutoSize = true;
             this.label29.Location = new System.Drawing.Point(50, 116);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(159, 17);
+            this.label29.Size = new System.Drawing.Size(157, 18);
             this.label29.TabIndex = 6;
             this.label29.Text = "Please select an option:";
             // 
@@ -1220,134 +1291,28 @@ namespace Yorot
             this.label30.Text = "Sync";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // radioButton10
+            // tpChromium
             // 
-            this.radioButton10.AutoSize = true;
-            this.radioButton10.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.radioButton10.Location = new System.Drawing.Point(80, 145);
-            this.radioButton10.Name = "radioButton10";
-            this.radioButton10.Size = new System.Drawing.Size(313, 38);
-            this.radioButton10.TabIndex = 9;
-            this.radioButton10.TabStop = true;
-            this.radioButton10.Text = "Upload to a single folder.\r\n   Use this option if you want to keep it simple.";
-            this.radioButton10.UseVisualStyleBackColor = true;
+            this.tpChromium.Controls.Add(this.textBox8);
+            this.tpChromium.Controls.Add(this.htButton14);
+            this.tpChromium.Controls.Add(this.htButton16);
+            this.tpChromium.Controls.Add(this.htButton15);
+            this.tpChromium.Controls.Add(this.label37);
+            this.tpChromium.Controls.Add(this.label38);
+            this.tpChromium.Location = new System.Drawing.Point(4, 26);
+            this.tpChromium.Name = "tpChromium";
+            this.tpChromium.Size = new System.Drawing.Size(790, 567);
+            this.tpChromium.TabIndex = 7;
+            this.tpChromium.Text = "tabPage8";
+            this.tpChromium.UseVisualStyleBackColor = true;
             // 
-            // radioButton11
+            // textBox8
             // 
-            this.radioButton11.AutoSize = true;
-            this.radioButton11.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.radioButton11.Location = new System.Drawing.Point(80, 242);
-            this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(487, 38);
-            this.radioButton11.TabIndex = 9;
-            this.radioButton11.TabStop = true;
-            this.radioButton11.Text = "Uploading and downloading are located differently.\r\n   Use this option if you wan" +
-    "t to edit download/upload URLs while syncing.";
-            this.radioButton11.UseVisualStyleBackColor = true;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(109, 408);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(187, 17);
-            this.label31.TabIndex = 10;
-            this.label31.Text = "Login with these credentials:";
-            // 
-            // htSwitch11
-            // 
-            this.htSwitch11.Location = new System.Drawing.Point(53, 407);
-            this.htSwitch11.Name = "htSwitch11";
-            this.htSwitch11.Size = new System.Drawing.Size(50, 19);
-            this.htSwitch11.TabIndex = 11;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(112, 213);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(663, 23);
-            this.textBox3.TabIndex = 12;
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(109, 193);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(325, 17);
-            this.label32.TabIndex = 10;
-            this.label32.Text = "Address of web files to upload and download from:";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(109, 293);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(217, 17);
-            this.label33.TabIndex = 10;
-            this.label33.Text = "Address of web files to upload to:";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(112, 313);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(663, 23);
-            this.textBox4.TabIndex = 12;
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(109, 444);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(77, 17);
-            this.label34.TabIndex = 10;
-            this.label34.Text = "Username:";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(192, 441);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(554, 23);
-            this.textBox5.TabIndex = 12;
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(109, 473);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(73, 17);
-            this.label35.TabIndex = 10;
-            this.label35.Text = "Password:";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(192, 470);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(554, 23);
-            this.textBox6.TabIndex = 12;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(752, 470);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(23, 23);
-            this.pictureBox2.TabIndex = 13;
-            this.pictureBox2.TabStop = false;
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(109, 350);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(250, 17);
-            this.label36.TabIndex = 10;
-            this.label36.Text = "Address of web files to download from:";
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(112, 370);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(663, 23);
-            this.textBox7.TabIndex = 12;
+            this.textBox8.Location = new System.Drawing.Point(53, 194);
+            this.textBox8.Multiline = true;
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(722, 244);
+            this.textBox8.TabIndex = 9;
             // 
             // htButton14
             // 
@@ -1364,6 +1329,22 @@ namespace Yorot
             this.htButton14.Size = new System.Drawing.Size(89, 24);
             this.htButton14.TabIndex = 7;
             this.htButton14.Text = "< Back";
+            // 
+            // htButton16
+            // 
+            this.htButton16.AutoColor = true;
+            this.htButton16.ButtonImage = null;
+            this.htButton16.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            this.htButton16.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.htButton16.DrawImage = false;
+            this.htButton16.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.htButton16.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
+            this.htButton16.Location = new System.Drawing.Point(53, 158);
+            this.htButton16.Name = "htButton16";
+            this.htButton16.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.htButton16.Size = new System.Drawing.Size(89, 24);
+            this.htButton16.TabIndex = 8;
+            this.htButton16.Text = "Add...";
             // 
             // htButton15
             // 
@@ -1386,7 +1367,7 @@ namespace Yorot
             this.label37.AutoSize = true;
             this.label37.Location = new System.Drawing.Point(50, 116);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(563, 34);
+            this.label37.Size = new System.Drawing.Size(557, 36);
             this.label37.TabIndex = 6;
             this.label37.Text = "Here\'s a list of Chromium-based browser paths to import. Each line represents one" +
     " path.\r\nYou can add paths manually or use \"Add...\" button below to browse and ad" +
@@ -1403,29 +1384,92 @@ namespace Yorot
             this.label38.Text = "Switch from Chromium-based";
             this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox8
+            // tpFinal
             // 
-            this.textBox8.Location = new System.Drawing.Point(53, 194);
-            this.textBox8.Multiline = true;
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(722, 244);
-            this.textBox8.TabIndex = 9;
+            this.tpFinal.Controls.Add(this.htListView1);
+            this.tpFinal.Controls.Add(this.htButton17);
+            this.tpFinal.Controls.Add(this.htButton18);
+            this.tpFinal.Controls.Add(this.label39);
+            this.tpFinal.Controls.Add(this.label40);
+            this.tpFinal.Location = new System.Drawing.Point(4, 26);
+            this.tpFinal.Name = "tpFinal";
+            this.tpFinal.Size = new System.Drawing.Size(790, 567);
+            this.tpFinal.TabIndex = 8;
+            this.tpFinal.Text = "tabPage9";
+            this.tpFinal.UseVisualStyleBackColor = true;
             // 
-            // htButton16
+            // htListView1
             // 
-            this.htButton16.AutoColor = true;
-            this.htButton16.ButtonImage = null;
-            this.htButton16.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
-            this.htButton16.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.htButton16.DrawImage = false;
-            this.htButton16.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
-            this.htButton16.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            this.htButton16.Location = new System.Drawing.Point(53, 158);
-            this.htButton16.Name = "htButton16";
-            this.htButton16.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.htButton16.Size = new System.Drawing.Size(89, 24);
-            this.htButton16.TabIndex = 8;
-            this.htButton16.Text = "Add...";
+            this.htListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chSetting,
+            this.chValue});
+            listViewGroup9.Header = "Localization";
+            listViewGroup9.Name = "listViewGroup1";
+            listViewGroup10.Header = "User";
+            listViewGroup10.Name = "listViewGroup2";
+            listViewGroup11.Header = "Web Sync";
+            listViewGroup11.Name = "listViewGroup3";
+            listViewGroup12.Header = "Switch";
+            listViewGroup12.Name = "listViewGroup4";
+            this.htListView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup9,
+            listViewGroup10,
+            listViewGroup11,
+            listViewGroup12});
+            this.htListView1.HeaderBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
+            this.htListView1.HeaderBorderThickness = 2;
+            this.htListView1.HeaderForeColor = System.Drawing.Color.Black;
+            this.htListView1.HideSelection = false;
+            listViewItem33.Group = listViewGroup9;
+            listViewItem34.Group = listViewGroup9;
+            listViewItem35.Group = listViewGroup9;
+            listViewItem36.Group = listViewGroup9;
+            listViewItem37.Group = listViewGroup10;
+            listViewItem38.Group = listViewGroup10;
+            listViewItem39.Group = listViewGroup10;
+            listViewItem40.Group = listViewGroup10;
+            listViewItem41.Group = listViewGroup12;
+            listViewItem42.Group = listViewGroup12;
+            listViewItem43.Group = listViewGroup11;
+            listViewItem44.Group = listViewGroup12;
+            listViewItem45.Group = listViewGroup11;
+            listViewItem46.Group = listViewGroup11;
+            listViewItem47.Group = listViewGroup11;
+            listViewItem48.Group = listViewGroup11;
+            this.htListView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem33,
+            listViewItem34,
+            listViewItem35,
+            listViewItem36,
+            listViewItem37,
+            listViewItem38,
+            listViewItem39,
+            listViewItem40,
+            listViewItem41,
+            listViewItem42,
+            listViewItem43,
+            listViewItem44,
+            listViewItem45,
+            listViewItem46,
+            listViewItem47,
+            listViewItem48});
+            this.htListView1.Location = new System.Drawing.Point(53, 170);
+            this.htListView1.Name = "htListView1";
+            this.htListView1.OverlayColor = System.Drawing.Color.DodgerBlue;
+            this.htListView1.Size = new System.Drawing.Size(722, 331);
+            this.htListView1.TabIndex = 9;
+            this.htListView1.UseCompatibleStateImageBehavior = false;
+            this.htListView1.View = System.Windows.Forms.View.Details;
+            // 
+            // chSetting
+            // 
+            this.chSetting.Text = "Seting";
+            this.chSetting.Width = 131;
+            // 
+            // chValue
+            // 
+            this.chValue.Text = "Value";
+            this.chValue.Width = 443;
             // 
             // htButton17
             // 
@@ -1464,7 +1508,7 @@ namespace Yorot
             this.label39.AutoSize = true;
             this.label39.Location = new System.Drawing.Point(50, 116);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(432, 51);
+            this.label39.Size = new System.Drawing.Size(430, 54);
             this.label39.TabIndex = 6;
             this.label39.Text = "Please verify your settings below. \r\nIf you need to change something, you can cli" +
     "ck the \"< Back\" button.\r\nIf you are done, please press \"Continue\" button below.";
@@ -1480,82 +1524,22 @@ namespace Yorot
             this.label40.Text = "Setting up...";
             this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // htListView1
+            // linkLabel1
             // 
-            this.htListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chSetting,
-            this.chValue});
-            listViewGroup1.Header = "Localization";
-            listViewGroup1.Name = "listViewGroup1";
-            listViewGroup2.Header = "User";
-            listViewGroup2.Name = "listViewGroup2";
-            listViewGroup3.Header = "Web Sync";
-            listViewGroup3.Name = "listViewGroup3";
-            listViewGroup4.Header = "Switch";
-            listViewGroup4.Name = "listViewGroup4";
-            this.htListView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2,
-            listViewGroup3,
-            listViewGroup4});
-            this.htListView1.HeaderBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
-            this.htListView1.HeaderBorderThickness = 2;
-            this.htListView1.HeaderForeColor = System.Drawing.Color.Black;
-            this.htListView1.HideSelection = false;
-            listViewItem1.Group = listViewGroup1;
-            listViewItem2.Group = listViewGroup1;
-            listViewItem3.Group = listViewGroup1;
-            listViewItem4.Group = listViewGroup1;
-            listViewItem5.Group = listViewGroup2;
-            listViewItem6.Group = listViewGroup2;
-            listViewItem7.Group = listViewGroup2;
-            listViewItem8.Group = listViewGroup2;
-            listViewItem9.Group = listViewGroup4;
-            listViewItem10.Group = listViewGroup4;
-            listViewItem11.Group = listViewGroup3;
-            listViewItem12.Group = listViewGroup4;
-            listViewItem13.Group = listViewGroup3;
-            listViewItem14.Group = listViewGroup3;
-            listViewItem15.Group = listViewGroup3;
-            listViewItem16.Group = listViewGroup3;
-            this.htListView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4,
-            listViewItem5,
-            listViewItem6,
-            listViewItem7,
-            listViewItem8,
-            listViewItem9,
-            listViewItem10,
-            listViewItem11,
-            listViewItem12,
-            listViewItem13,
-            listViewItem14,
-            listViewItem15,
-            listViewItem16});
-            this.htListView1.Location = new System.Drawing.Point(53, 170);
-            this.htListView1.Name = "htListView1";
-            this.htListView1.OverlayColor = System.Drawing.Color.DodgerBlue;
-            this.htListView1.Size = new System.Drawing.Size(722, 331);
-            this.htListView1.TabIndex = 9;
-            this.htListView1.UseCompatibleStateImageBehavior = false;
-            this.htListView1.View = System.Windows.Forms.View.Details;
-            // 
-            // chSetting
-            // 
-            this.chSetting.Text = "Seting";
-            this.chSetting.Width = 131;
-            // 
-            // chValue
-            // 
-            this.chValue.Text = "Value";
-            this.chValue.Width = 443;
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(652, 406);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(123, 18);
+            this.linkLabel1.TabIndex = 4;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Tag = "https://tr.wikipedia.org/wiki/Dosya:A_large_blank_world_map_with_oceans_marked_in" +
+    "_blue.svg";
+            this.linkLabel1.Text = "World Map Source";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // frmOOBE
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.tabControl1);
@@ -1569,7 +1553,6 @@ namespace Yorot
             this.tabControl1.ResumeLayout(false);
             this.tpLocale.ResumeLayout(false);
             this.tpLocale.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCountrySelect)).EndInit();
             this.tpWelcome.ResumeLayout(false);
             this.tpWelcome.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -1591,11 +1574,11 @@ namespace Yorot
             this.tpProfile.PerformLayout();
             this.tpSync.ResumeLayout(false);
             this.tpSync.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tpChromium.ResumeLayout(false);
             this.tpChromium.PerformLayout();
             this.tpFinal.ResumeLayout(false);
             this.tpFinal.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1612,8 +1595,6 @@ namespace Yorot
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pbCountrySelect;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private HTAlt.WinForms.HTButton htButton2;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
@@ -1715,5 +1696,6 @@ namespace Yorot
         private HTAlt.WinForms.HTButton htButton18;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

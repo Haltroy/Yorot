@@ -76,6 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Languages\YorotDefaultLangs.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -172,6 +173,7 @@
     <Compile Include="YorotSystem\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="YorotSystem\YorotGlobal.cs" />
+    <Compile Include="YorotSystem\YorotSpecial.cs" />
     <Compile Include="YorotSystem\YorotTools.cs" />
     <EmbeddedResource Include="UI\frmApp.resx">
       <DependentUpon>frmApp.cs</DependentUpon>
@@ -220,8 +222,9 @@
     <EmbeddedResource Include="UI\SystemApp\yopad.resx">
       <DependentUpon>yopad.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Languages\English-US.ylng" />
-    <None Include="Languages\Turkish.ylng" />
+    <None Include="Languages\English-GB.ylf" />
+    <None Include="Languages\English-US.ylf" />
+    <None Include="Languages\Turkish.ylf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -285,6 +288,15 @@
     <None Include="Resources\back-w.png" />
     <None Include="Resources\forward-b.png" />
     <None Include="Resources\forward-w.png" />
+    <None Include="Resources\default-pofile-pic.png" />
+    <None Include="Resources\download-and-history.png" />
+    <None Include="Resources\addon-settings.png" />
+    <None Include="Resources\customization.png" />
+    <None Include="Resources\general-settings.png" />
+    <None Include="Resources\security-settings.png" />
+    <None Include="Resources\yorot-licenses.html" />
+    <None Include="Resources\map.html" />
+    <None Include="MapConfig.xml" />
     <Content Include="Yorot.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

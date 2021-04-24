@@ -55,8 +55,8 @@ namespace Yorot.UI.SystemApp
             this.btHome = new System.Windows.Forms.Button();
             this.btGeneralSettings = new System.Windows.Forms.Button();
             this.btLanguages = new System.Windows.Forms.Button();
-            this.btDownloads = new System.Windows.Forms.Button();
             this.btHistory = new System.Windows.Forms.Button();
+            this.btDownloads = new System.Windows.Forms.Button();
             this.btNotifications = new System.Windows.Forms.Button();
             this.btAccessSettings = new System.Windows.Forms.Button();
             this.btAppearance = new System.Windows.Forms.Button();
@@ -65,8 +65,8 @@ namespace Yorot.UI.SystemApp
             this.btSecuritySettings = new System.Windows.Forms.Button();
             this.btSites = new System.Windows.Forms.Button();
             this.btProxies = new System.Windows.Forms.Button();
-            this.btExtensions = new System.Windows.Forms.Button();
             this.btApps = new System.Windows.Forms.Button();
+            this.btExtensions = new System.Windows.Forms.Button();
             this.btWE = new System.Windows.Forms.Button();
             this.btThemes = new System.Windows.Forms.Button();
             this.btUpdates = new System.Windows.Forms.Button();
@@ -74,109 +74,134 @@ namespace Yorot.UI.SystemApp
             this.btLogs = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
-            this.htSwitch2 = new HTAlt.WinForms.HTSwitch();
-            this.htSwitch1 = new HTAlt.WinForms.HTSwitch();
+            this.btSearchEngine = new System.Windows.Forms.Button();
+            this.lbAtStartup = new System.Windows.Forms.TextBox();
+            this.lbSearchEngine = new System.Windows.Forms.TextBox();
+            this.lbStartInTray = new System.Windows.Forms.TextBox();
+            this.lbStartOnBoot = new System.Windows.Forms.TextBox();
+            this.lbDefaultBrowser = new System.Windows.Forms.TextBox();
+            this.lbRestore = new System.Windows.Forms.TextBox();
+            this.lbHomePage = new System.Windows.Forms.TextBox();
+            this.hsStartInTray = new HTAlt.WinForms.HTSwitch();
+            this.hsStartOnBoot = new HTAlt.WinForms.HTSwitch();
             this.hsDefaultBrowser = new HTAlt.WinForms.HTSwitch();
             this.hsAutoRestore = new HTAlt.WinForms.HTSwitch();
+            this.rbLoadPage = new System.Windows.Forms.RadioButton();
+            this.rbLoadHome = new System.Windows.Forms.RadioButton();
+            this.rbLoadNewTab = new System.Windows.Forms.RadioButton();
             this.rbNewTab = new System.Windows.Forms.RadioButton();
+            this.tbAtStartup = new System.Windows.Forms.TextBox();
             this.tbHomepage = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbGeneral = new System.Windows.Forms.Label();
             this.tpAppearance = new System.Windows.Forms.TabPage();
-            this.hsFav = new HTAlt.WinForms.HTSwitch();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lbOpenAppDrawer = new System.Windows.Forms.TextBox();
+            this.hsOpenAppDrawer = new HTAlt.WinForms.HTSwitch();
+            this.lbShowFav = new System.Windows.Forms.TextBox();
+            this.hsShowFav = new HTAlt.WinForms.HTSwitch();
+            this.lbAppearance = new System.Windows.Forms.Label();
             this.tpDownloads = new System.Windows.Forms.TabPage();
+            this.lbAutoDownFolder = new System.Windows.Forms.TextBox();
+            this.lbAutoDown = new System.Windows.Forms.TextBox();
+            this.lbOpenAfterDown = new System.Windows.Forms.TextBox();
             this.pDownlaods = new System.Windows.Forms.FlowLayoutPanel();
             this.btDownloadsClear = new System.Windows.Forms.Button();
-            this.hsOpen = new HTAlt.WinForms.HTSwitch();
-            this.hsDownload = new HTAlt.WinForms.HTSwitch();
+            this.hsOpenDown = new HTAlt.WinForms.HTSwitch();
+            this.hsAutoDown = new HTAlt.WinForms.HTSwitch();
             this.tbFolder = new System.Windows.Forms.TextBox();
             this.btDownloadFolder = new HTAlt.WinForms.HTButton();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lbDownloads = new System.Windows.Forms.Label();
             this.tpNotifications = new System.Windows.Forms.TabPage();
+            this.btOpenCalendar = new System.Windows.Forms.Button();
+            this.lbSilentInfo = new System.Windows.Forms.TextBox();
+            this.lbNotifLoc = new System.Windows.Forms.TextBox();
+            this.lbSilentMode = new System.Windows.Forms.TextBox();
+            this.lbDefaultNotif = new System.Windows.Forms.TextBox();
+            this.lbPlayNotifSound = new System.Windows.Forms.TextBox();
             this.btOpenSound = new HTAlt.WinForms.HTButton();
             this.tbSoundLoc = new System.Windows.Forms.TextBox();
             this.hsSilent = new HTAlt.WinForms.HTSwitch();
             this.hsDefaultSound = new HTAlt.WinForms.HTSwitch();
             this.hsNotificationSound = new HTAlt.WinForms.HTSwitch();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lbNotifications = new System.Windows.Forms.Label();
             this.tpAccessibility = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
+            this.hsSynthRate = new HTAlt.WinForms.HTSlider();
+            this.hsSynthVol = new HTAlt.WinForms.HTSlider();
+            this.lbSpeechSynthRate = new System.Windows.Forms.TextBox();
+            this.lbSpeechSynthVol = new System.Windows.Forms.TextBox();
+            this.lbAccess = new System.Windows.Forms.Label();
             this.tpProfiles = new System.Windows.Forms.TabPage();
-            this.label15 = new System.Windows.Forms.Label();
+            this.llChangePic = new System.Windows.Forms.LinkLabel();
+            this.llChangePassword = new System.Windows.Forms.LinkLabel();
+            this.llChangeUserName = new System.Windows.Forms.LinkLabel();
+            this.llChangeUserText = new System.Windows.Forms.LinkLabel();
+            this.lbUsername = new System.Windows.Forms.Label();
+            this.lbUserText = new System.Windows.Forms.Label();
+            this.pbProfile = new System.Windows.Forms.PictureBox();
+            this.pProfiles = new System.Windows.Forms.Panel();
+            this.lbProfiles = new System.Windows.Forms.Label();
             this.tpSecurity = new System.Windows.Forms.TabPage();
-            this.label17 = new System.Windows.Forms.Label();
+            this.lbDoNotTrackInfo = new System.Windows.Forms.TextBox();
+            this.lbDoNotTrack = new System.Windows.Forms.TextBox();
+            this.hsDoNotTrack = new HTAlt.WinForms.HTSwitch();
+            this.lbSecurity = new System.Windows.Forms.Label();
             this.tpProxies = new System.Windows.Forms.TabPage();
-            this.label16 = new System.Windows.Forms.Label();
+            this.lbRememberLastProxy = new System.Windows.Forms.TextBox();
+            this.hsProxy = new HTAlt.WinForms.HTSwitch();
+            this.lbProxies = new System.Windows.Forms.Label();
             this.tpSites = new System.Windows.Forms.TabPage();
-            this.label18 = new System.Windows.Forms.Label();
+            this.lvSites = new System.Windows.Forms.ListView();
+            this.tbSearchSite = new System.Windows.Forms.TextBox();
+            this.lbSites = new System.Windows.Forms.Label();
             this.tpExtensions = new System.Windows.Forms.TabPage();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lvExt = new System.Windows.Forms.ListView();
+            this.tbSearchExt = new System.Windows.Forms.TextBox();
+            this.lbExtensions = new System.Windows.Forms.Label();
             this.tpApps = new System.Windows.Forms.TabPage();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lvApps = new System.Windows.Forms.ListView();
+            this.ilAppMan = new System.Windows.Forms.ImageList(this.components);
+            this.tbSearchApp = new System.Windows.Forms.TextBox();
+            this.lbApps = new System.Windows.Forms.Label();
             this.tpThemes = new System.Windows.Forms.TabPage();
-            this.label20 = new System.Windows.Forms.Label();
+            this.pThemes = new System.Windows.Forms.FlowLayoutPanel();
+            this.lbThemes = new System.Windows.Forms.Label();
             this.tpUpdates = new System.Windows.Forms.TabPage();
-            this.label21 = new System.Windows.Forms.Label();
+            this.pUpdateHistory = new System.Windows.Forms.FlowLayoutPanel();
+            this.btUpdate = new System.Windows.Forms.Button();
+            this.lbUpdateHistory = new System.Windows.Forms.TextBox();
+            this.lbUpdateInfo = new System.Windows.Forms.TextBox();
+            this.lbUpdateStatus = new System.Windows.Forms.Label();
+            this.pbUpdateStatus = new System.Windows.Forms.PictureBox();
+            this.lbUpdate = new System.Windows.Forms.Label();
             this.tpAbout = new System.Windows.Forms.TabPage();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbYorotTitle = new System.Windows.Forms.TextBox();
+            this.lbYorotInfo = new System.Windows.Forms.TextBox();
+            this.llLicenses = new System.Windows.Forms.LinkLabel();
+            this.llEULA = new System.Windows.Forms.LinkLabel();
+            this.lbAboutTitle = new System.Windows.Forms.Label();
+            this.pbYorotLogo = new System.Windows.Forms.PictureBox();
             this.tpLogs = new System.Windows.Forms.TabPage();
-            this.label14 = new System.Windows.Forms.Label();
+            this.lbLogs = new System.Windows.Forms.Label();
             this.tpLanguage = new System.Windows.Forms.TabPage();
-            this.label12 = new System.Windows.Forms.Label();
+            this.cbLocale = new System.Windows.Forms.ComboBox();
+            this.cbDateFormat = new System.Windows.Forms.ComboBox();
+            this.cbLang = new System.Windows.Forms.ComboBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lbLang = new System.Windows.Forms.Label();
             this.tpWE = new System.Windows.Forms.TabPage();
-            this.label22 = new System.Windows.Forms.Label();
+            this.lvWE = new System.Windows.Forms.ListView();
+            this.tbSearchWE = new System.Windows.Forms.TextBox();
+            this.lbWE = new System.Windows.Forms.Label();
             this.tpHistory = new System.Windows.Forms.TabPage();
             this.pHistory = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
+            this.btHistoryClear = new System.Windows.Forms.Button();
+            this.lbHistory = new System.Windows.Forms.Label();
             this.tpSync = new System.Windows.Forms.TabPage();
-            this.label19 = new System.Windows.Forms.Label();
-            this.hsDoNotTrack = new HTAlt.WinForms.HTSwitch();
-            this.lbSpeechSynthVol = new System.Windows.Forms.TextBox();
-            this.lbSpeechSynthRate = new System.Windows.Forms.TextBox();
-            this.htSlider1 = new HTAlt.WinForms.HTSlider();
-            this.htSlider2 = new HTAlt.WinForms.HTSlider();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.htSwitch3 = new HTAlt.WinForms.HTSwitch();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.hsProxy = new HTAlt.WinForms.HTSwitch();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.textBox20 = new System.Windows.Forms.TextBox();
-            this.textBox21 = new System.Windows.Forms.TextBox();
-            this.textBox22 = new System.Windows.Forms.TextBox();
-            this.textBox23 = new System.Windows.Forms.TextBox();
-            this.textBox24 = new System.Windows.Forms.TextBox();
-            this.listView2 = new System.Windows.Forms.ListView();
-            this.textBox25 = new System.Windows.Forms.TextBox();
-            this.listView3 = new System.Windows.Forms.ListView();
-            this.textBox26 = new System.Windows.Forms.TextBox();
-            this.listView4 = new System.Windows.Forms.ListView();
-            this.textBox27 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.lbSync = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.removePictureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setNewOneFromAFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tp1Main.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -192,6 +217,7 @@ namespace Yorot.UI.SystemApp
             this.tpNotifications.SuspendLayout();
             this.tpAccessibility.SuspendLayout();
             this.tpProfiles.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbProfile)).BeginInit();
             this.tpSecurity.SuspendLayout();
             this.tpProxies.SuspendLayout();
             this.tpSites.SuspendLayout();
@@ -199,19 +225,22 @@ namespace Yorot.UI.SystemApp
             this.tpApps.SuspendLayout();
             this.tpThemes.SuspendLayout();
             this.tpUpdates.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUpdateStatus)).BeginInit();
             this.tpAbout.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbYorotLogo)).BeginInit();
             this.tpLogs.SuspendLayout();
             this.tpLanguage.SuspendLayout();
             this.tpWE.SuspendLayout();
             this.tpHistory.SuspendLayout();
             this.tpSync.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tmrAppSync
             // 
             this.tmrAppSync.Enabled = true;
             this.tmrAppSync.Interval = 5000;
+            this.tmrAppSync.Tick += new System.EventHandler(this.tmrAppSync_Tick);
             // 
             // tabControl1
             // 
@@ -261,6 +290,7 @@ namespace Yorot.UI.SystemApp
             this.llHomeManage.TabIndex = 2;
             this.llHomeManage.TabStop = true;
             this.llHomeManage.Text = "Manage account";
+            this.llHomeManage.Click += new System.EventHandler(this.btProfiles_Click);
             // 
             // lbHomeHello
             // 
@@ -274,6 +304,7 @@ namespace Yorot.UI.SystemApp
             // 
             // pbHomeUser
             // 
+            this.pbHomeUser.Image = global::Yorot.Properties.Resources.default_pofile_pic;
             this.pbHomeUser.Location = new System.Drawing.Point(24, 19);
             this.pbHomeUser.Name = "pbHomeUser";
             this.pbHomeUser.Size = new System.Drawing.Size(100, 100);
@@ -304,7 +335,7 @@ namespace Yorot.UI.SystemApp
             this.btGeneral.FlatAppearance.BorderSize = 0;
             this.btGeneral.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btGeneral.Font = new System.Drawing.Font("Ubuntu", 15F);
-            this.btGeneral.Image = global::Yorot.Properties.Resources.profiles;
+            this.btGeneral.Image = global::Yorot.Properties.Resources.general_settings;
             this.btGeneral.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btGeneral.Location = new System.Drawing.Point(3, 3);
             this.btGeneral.Name = "btGeneral";
@@ -321,7 +352,7 @@ namespace Yorot.UI.SystemApp
             this.btHistoryDownloads.FlatAppearance.BorderSize = 0;
             this.btHistoryDownloads.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btHistoryDownloads.Font = new System.Drawing.Font("Ubuntu", 15F);
-            this.btHistoryDownloads.Image = global::Yorot.Properties.Resources.update_and_about;
+            this.btHistoryDownloads.Image = global::Yorot.Properties.Resources.download_and_history;
             this.btHistoryDownloads.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btHistoryDownloads.Location = new System.Drawing.Point(179, 3);
             this.btHistoryDownloads.Name = "btHistoryDownloads";
@@ -338,7 +369,7 @@ namespace Yorot.UI.SystemApp
             this.btSecurity.FlatAppearance.BorderSize = 0;
             this.btSecurity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btSecurity.Font = new System.Drawing.Font("Ubuntu", 15F);
-            this.btSecurity.Image = global::Yorot.Properties.Resources.profiles;
+            this.btSecurity.Image = global::Yorot.Properties.Resources.security_settings;
             this.btSecurity.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btSecurity.Location = new System.Drawing.Point(355, 3);
             this.btSecurity.Name = "btSecurity";
@@ -355,7 +386,7 @@ namespace Yorot.UI.SystemApp
             this.btAddons.FlatAppearance.BorderSize = 0;
             this.btAddons.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btAddons.Font = new System.Drawing.Font("Ubuntu", 15F);
-            this.btAddons.Image = global::Yorot.Properties.Resources.profiles;
+            this.btAddons.Image = global::Yorot.Properties.Resources.addon_settings;
             this.btAddons.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btAddons.Location = new System.Drawing.Point(531, 3);
             this.btAddons.Name = "btAddons";
@@ -372,7 +403,7 @@ namespace Yorot.UI.SystemApp
             this.btCustomization.FlatAppearance.BorderSize = 0;
             this.btCustomization.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btCustomization.Font = new System.Drawing.Font("Ubuntu", 15F);
-            this.btCustomization.Image = global::Yorot.Properties.Resources.profiles;
+            this.btCustomization.Image = global::Yorot.Properties.Resources.customization;
             this.btCustomization.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btCustomization.Location = new System.Drawing.Point(3, 149);
             this.btCustomization.Name = "btCustomization";
@@ -398,7 +429,7 @@ namespace Yorot.UI.SystemApp
             this.button2.Text = "Profiles";
             this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.btProfilesAndSync_Click);
             // 
             // btUpdatesAbout
             // 
@@ -442,6 +473,9 @@ namespace Yorot.UI.SystemApp
             // 
             // pContainer
             // 
+            this.pContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pContainer.AutoScroll = true;
             this.pContainer.Location = new System.Drawing.Point(13, 56);
             this.pContainer.Name = "pContainer";
@@ -494,8 +528,8 @@ namespace Yorot.UI.SystemApp
             this.flpSidebar.Controls.Add(this.btSecuritySettings);
             this.flpSidebar.Controls.Add(this.btSites);
             this.flpSidebar.Controls.Add(this.btProxies);
-            this.flpSidebar.Controls.Add(this.btExtensions);
             this.flpSidebar.Controls.Add(this.btApps);
+            this.flpSidebar.Controls.Add(this.btExtensions);
             this.flpSidebar.Controls.Add(this.btWE);
             this.flpSidebar.Controls.Add(this.btThemes);
             this.flpSidebar.Controls.Add(this.btUpdates);
@@ -564,24 +598,6 @@ namespace Yorot.UI.SystemApp
             this.btLanguages.UseVisualStyleBackColor = true;
             this.btLanguages.Click += new System.EventHandler(this.btLanguages_Click);
             // 
-            // btDownloads
-            // 
-            this.btDownloads.AutoSize = true;
-            this.btDownloads.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btDownloads.FlatAppearance.BorderSize = 0;
-            this.btDownloads.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btDownloads.Font = new System.Drawing.Font("Ubuntu", 15F);
-            this.btDownloads.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btDownloads.Location = new System.Drawing.Point(3, 170);
-            this.btDownloads.Name = "btDownloads";
-            this.btDownloads.Size = new System.Drawing.Size(124, 35);
-            this.btDownloads.TabIndex = 0;
-            this.btDownloads.Text = "Downloads";
-            this.btDownloads.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btDownloads.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btDownloads.UseVisualStyleBackColor = true;
-            this.btDownloads.Click += new System.EventHandler(this.btDownloads_Click);
-            // 
             // btHistory
             // 
             this.btHistory.AutoSize = true;
@@ -599,6 +615,24 @@ namespace Yorot.UI.SystemApp
             this.btHistory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btHistory.UseVisualStyleBackColor = true;
             this.btHistory.Click += new System.EventHandler(this.btSHistory_Click);
+            // 
+            // btDownloads
+            // 
+            this.btDownloads.AutoSize = true;
+            this.btDownloads.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btDownloads.FlatAppearance.BorderSize = 0;
+            this.btDownloads.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btDownloads.Font = new System.Drawing.Font("Ubuntu", 15F);
+            this.btDownloads.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btDownloads.Location = new System.Drawing.Point(3, 170);
+            this.btDownloads.Name = "btDownloads";
+            this.btDownloads.Size = new System.Drawing.Size(124, 35);
+            this.btDownloads.TabIndex = 0;
+            this.btDownloads.Text = "Downloads";
+            this.btDownloads.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btDownloads.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btDownloads.UseVisualStyleBackColor = true;
+            this.btDownloads.Click += new System.EventHandler(this.btDownloads_Click);
             // 
             // btNotifications
             // 
@@ -744,24 +778,6 @@ namespace Yorot.UI.SystemApp
             this.btProxies.UseVisualStyleBackColor = true;
             this.btProxies.Click += new System.EventHandler(this.btProxies_Click);
             // 
-            // btExtensions
-            // 
-            this.btExtensions.AutoSize = true;
-            this.btExtensions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btExtensions.FlatAppearance.BorderSize = 0;
-            this.btExtensions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btExtensions.Font = new System.Drawing.Font("Ubuntu", 15F);
-            this.btExtensions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btExtensions.Location = new System.Drawing.Point(3, 539);
-            this.btExtensions.Name = "btExtensions";
-            this.btExtensions.Size = new System.Drawing.Size(122, 35);
-            this.btExtensions.TabIndex = 0;
-            this.btExtensions.Text = "Extensions";
-            this.btExtensions.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btExtensions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btExtensions.UseVisualStyleBackColor = true;
-            this.btExtensions.Click += new System.EventHandler(this.btExtensions_Click);
-            // 
             // btApps
             // 
             this.btApps.AutoSize = true;
@@ -770,7 +786,7 @@ namespace Yorot.UI.SystemApp
             this.btApps.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btApps.Font = new System.Drawing.Font("Ubuntu", 15F);
             this.btApps.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btApps.Location = new System.Drawing.Point(3, 580);
+            this.btApps.Location = new System.Drawing.Point(3, 539);
             this.btApps.Name = "btApps";
             this.btApps.Size = new System.Drawing.Size(68, 35);
             this.btApps.TabIndex = 0;
@@ -779,6 +795,24 @@ namespace Yorot.UI.SystemApp
             this.btApps.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btApps.UseVisualStyleBackColor = true;
             this.btApps.Click += new System.EventHandler(this.btApps_Click);
+            // 
+            // btExtensions
+            // 
+            this.btExtensions.AutoSize = true;
+            this.btExtensions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btExtensions.FlatAppearance.BorderSize = 0;
+            this.btExtensions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btExtensions.Font = new System.Drawing.Font("Ubuntu", 15F);
+            this.btExtensions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btExtensions.Location = new System.Drawing.Point(3, 580);
+            this.btExtensions.Name = "btExtensions";
+            this.btExtensions.Size = new System.Drawing.Size(122, 35);
+            this.btExtensions.TabIndex = 0;
+            this.btExtensions.Text = "Extensions";
+            this.btExtensions.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btExtensions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btExtensions.UseVisualStyleBackColor = true;
+            this.btExtensions.Click += new System.EventHandler(this.btExtensions_Click);
             // 
             // btWE
             // 
@@ -903,25 +937,25 @@ namespace Yorot.UI.SystemApp
             // 
             // tpGeneral
             // 
-            this.tpGeneral.Controls.Add(this.button3);
-            this.tpGeneral.Controls.Add(this.textBox11);
-            this.tpGeneral.Controls.Add(this.textBox10);
-            this.tpGeneral.Controls.Add(this.textBox17);
-            this.tpGeneral.Controls.Add(this.textBox16);
-            this.tpGeneral.Controls.Add(this.textBox15);
-            this.tpGeneral.Controls.Add(this.textBox13);
-            this.tpGeneral.Controls.Add(this.textBox9);
-            this.tpGeneral.Controls.Add(this.htSwitch2);
-            this.tpGeneral.Controls.Add(this.htSwitch1);
+            this.tpGeneral.Controls.Add(this.btSearchEngine);
+            this.tpGeneral.Controls.Add(this.lbAtStartup);
+            this.tpGeneral.Controls.Add(this.lbSearchEngine);
+            this.tpGeneral.Controls.Add(this.lbStartInTray);
+            this.tpGeneral.Controls.Add(this.lbStartOnBoot);
+            this.tpGeneral.Controls.Add(this.lbDefaultBrowser);
+            this.tpGeneral.Controls.Add(this.lbRestore);
+            this.tpGeneral.Controls.Add(this.lbHomePage);
+            this.tpGeneral.Controls.Add(this.hsStartInTray);
+            this.tpGeneral.Controls.Add(this.hsStartOnBoot);
             this.tpGeneral.Controls.Add(this.hsDefaultBrowser);
             this.tpGeneral.Controls.Add(this.hsAutoRestore);
-            this.tpGeneral.Controls.Add(this.radioButton3);
-            this.tpGeneral.Controls.Add(this.radioButton2);
-            this.tpGeneral.Controls.Add(this.radioButton1);
+            this.tpGeneral.Controls.Add(this.rbLoadPage);
+            this.tpGeneral.Controls.Add(this.rbLoadHome);
+            this.tpGeneral.Controls.Add(this.rbLoadNewTab);
             this.tpGeneral.Controls.Add(this.rbNewTab);
-            this.tpGeneral.Controls.Add(this.textBox12);
+            this.tpGeneral.Controls.Add(this.tbAtStartup);
             this.tpGeneral.Controls.Add(this.tbHomepage);
-            this.tpGeneral.Controls.Add(this.label3);
+            this.tpGeneral.Controls.Add(this.lbGeneral);
             this.tpGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpGeneral.Name = "tpGeneral";
             this.tpGeneral.Padding = new System.Windows.Forms.Padding(3);
@@ -930,21 +964,125 @@ namespace Yorot.UI.SystemApp
             this.tpGeneral.Text = "General";
             this.tpGeneral.UseVisualStyleBackColor = true;
             // 
-            // htSwitch2
+            // btSearchEngine
             // 
-            this.htSwitch2.Checked = true;
-            this.htSwitch2.Location = new System.Drawing.Point(17, 460);
-            this.htSwitch2.Name = "htSwitch2";
-            this.htSwitch2.Size = new System.Drawing.Size(50, 20);
-            this.htSwitch2.TabIndex = 182;
+            this.btSearchEngine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btSearchEngine.FlatAppearance.BorderSize = 0;
+            this.btSearchEngine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btSearchEngine.Location = new System.Drawing.Point(17, 161);
+            this.btSearchEngine.Name = "btSearchEngine";
+            this.btSearchEngine.Size = new System.Drawing.Size(486, 23);
+            this.btSearchEngine.TabIndex = 215;
+            this.btSearchEngine.Text = "Search Engines...";
+            this.btSearchEngine.UseVisualStyleBackColor = true;
             // 
-            // htSwitch1
+            // lbAtStartup
             // 
-            this.htSwitch1.Checked = true;
-            this.htSwitch1.Location = new System.Drawing.Point(17, 426);
-            this.htSwitch1.Name = "htSwitch1";
-            this.htSwitch1.Size = new System.Drawing.Size(50, 20);
-            this.htSwitch1.TabIndex = 183;
+            this.lbAtStartup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbAtStartup.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbAtStartup.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbAtStartup.Location = new System.Drawing.Point(16, 213);
+            this.lbAtStartup.Name = "lbAtStartup";
+            this.lbAtStartup.ReadOnly = true;
+            this.lbAtStartup.Size = new System.Drawing.Size(485, 16);
+            this.lbAtStartup.TabIndex = 198;
+            this.lbAtStartup.Text = "At startup:";
+            // 
+            // lbSearchEngine
+            // 
+            this.lbSearchEngine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbSearchEngine.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbSearchEngine.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbSearchEngine.Location = new System.Drawing.Point(17, 139);
+            this.lbSearchEngine.Name = "lbSearchEngine";
+            this.lbSearchEngine.ReadOnly = true;
+            this.lbSearchEngine.Size = new System.Drawing.Size(485, 16);
+            this.lbSearchEngine.TabIndex = 198;
+            this.lbSearchEngine.Text = "Default Search Engine: Google";
+            // 
+            // lbStartInTray
+            // 
+            this.lbStartInTray.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbStartInTray.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbStartInTray.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbStartInTray.Location = new System.Drawing.Point(73, 461);
+            this.lbStartInTray.Name = "lbStartInTray";
+            this.lbStartInTray.ReadOnly = true;
+            this.lbStartInTray.Size = new System.Drawing.Size(429, 16);
+            this.lbStartInTray.TabIndex = 198;
+            this.lbStartInTray.Text = "Start Yorot in system tray";
+            // 
+            // lbStartOnBoot
+            // 
+            this.lbStartOnBoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbStartOnBoot.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbStartOnBoot.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbStartOnBoot.Location = new System.Drawing.Point(73, 427);
+            this.lbStartOnBoot.Name = "lbStartOnBoot";
+            this.lbStartOnBoot.ReadOnly = true;
+            this.lbStartOnBoot.Size = new System.Drawing.Size(429, 16);
+            this.lbStartOnBoot.TabIndex = 198;
+            this.lbStartOnBoot.Text = "Start Yorot on boot";
+            // 
+            // lbDefaultBrowser
+            // 
+            this.lbDefaultBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbDefaultBrowser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbDefaultBrowser.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbDefaultBrowser.Location = new System.Drawing.Point(73, 394);
+            this.lbDefaultBrowser.Name = "lbDefaultBrowser";
+            this.lbDefaultBrowser.ReadOnly = true;
+            this.lbDefaultBrowser.Size = new System.Drawing.Size(429, 16);
+            this.lbDefaultBrowser.TabIndex = 198;
+            this.lbDefaultBrowser.Text = "Always check if Yorot is the default browser";
+            // 
+            // lbRestore
+            // 
+            this.lbRestore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbRestore.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbRestore.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbRestore.Location = new System.Drawing.Point(73, 361);
+            this.lbRestore.Name = "lbRestore";
+            this.lbRestore.ReadOnly = true;
+            this.lbRestore.Size = new System.Drawing.Size(429, 16);
+            this.lbRestore.TabIndex = 198;
+            this.lbRestore.Text = "Restore old sessions at start";
+            // 
+            // lbHomePage
+            // 
+            this.lbHomePage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbHomePage.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbHomePage.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbHomePage.Location = new System.Drawing.Point(17, 47);
+            this.lbHomePage.Name = "lbHomePage";
+            this.lbHomePage.ReadOnly = true;
+            this.lbHomePage.Size = new System.Drawing.Size(485, 16);
+            this.lbHomePage.TabIndex = 198;
+            this.lbHomePage.Text = "Home page:";
+            // 
+            // hsStartInTray
+            // 
+            this.hsStartInTray.Checked = true;
+            this.hsStartInTray.Location = new System.Drawing.Point(17, 460);
+            this.hsStartInTray.Name = "hsStartInTray";
+            this.hsStartInTray.Size = new System.Drawing.Size(50, 20);
+            this.hsStartInTray.TabIndex = 182;
+            // 
+            // hsStartOnBoot
+            // 
+            this.hsStartOnBoot.Checked = true;
+            this.hsStartOnBoot.Location = new System.Drawing.Point(17, 426);
+            this.hsStartOnBoot.Name = "hsStartOnBoot";
+            this.hsStartOnBoot.Size = new System.Drawing.Size(50, 20);
+            this.hsStartOnBoot.TabIndex = 183;
             // 
             // hsDefaultBrowser
             // 
@@ -961,6 +1099,51 @@ namespace Yorot.UI.SystemApp
             this.hsAutoRestore.Size = new System.Drawing.Size(50, 20);
             this.hsAutoRestore.TabIndex = 186;
             // 
+            // rbLoadPage
+            // 
+            this.rbLoadPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbLoadPage.AutoSize = true;
+            this.rbLoadPage.BackColor = System.Drawing.Color.Transparent;
+            this.rbLoadPage.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.rbLoadPage.Location = new System.Drawing.Point(17, 291);
+            this.rbLoadPage.Name = "rbLoadPage";
+            this.rbLoadPage.Size = new System.Drawing.Size(153, 22);
+            this.rbLoadPage.TabIndex = 176;
+            this.rbLoadPage.TabStop = true;
+            this.rbLoadPage.Tag = "";
+            this.rbLoadPage.Text = "Load a specific page:";
+            this.rbLoadPage.UseVisualStyleBackColor = false;
+            // 
+            // rbLoadHome
+            // 
+            this.rbLoadHome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbLoadHome.AutoSize = true;
+            this.rbLoadHome.BackColor = System.Drawing.Color.Transparent;
+            this.rbLoadHome.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.rbLoadHome.Location = new System.Drawing.Point(16, 263);
+            this.rbLoadHome.Name = "rbLoadHome";
+            this.rbLoadHome.Size = new System.Drawing.Size(155, 22);
+            this.rbLoadHome.TabIndex = 176;
+            this.rbLoadHome.TabStop = true;
+            this.rbLoadHome.Tag = "";
+            this.rbLoadHome.Text = "Load the home page";
+            this.rbLoadHome.UseVisualStyleBackColor = false;
+            // 
+            // rbLoadNewTab
+            // 
+            this.rbLoadNewTab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbLoadNewTab.AutoSize = true;
+            this.rbLoadNewTab.BackColor = System.Drawing.Color.Transparent;
+            this.rbLoadNewTab.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.rbLoadNewTab.Location = new System.Drawing.Point(17, 235);
+            this.rbLoadNewTab.Name = "rbLoadNewTab";
+            this.rbLoadNewTab.Size = new System.Drawing.Size(167, 22);
+            this.rbLoadNewTab.TabIndex = 176;
+            this.rbLoadNewTab.TabStop = true;
+            this.rbLoadNewTab.Tag = "";
+            this.rbLoadNewTab.Text = "Load the new tab page";
+            this.rbLoadNewTab.UseVisualStyleBackColor = false;
+            // 
             // rbNewTab
             // 
             this.rbNewTab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -976,6 +1159,17 @@ namespace Yorot.UI.SystemApp
             this.rbNewTab.Text = "New Tab";
             this.rbNewTab.UseVisualStyleBackColor = false;
             // 
+            // tbAtStartup
+            // 
+            this.tbAtStartup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAtStartup.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.tbAtStartup.Location = new System.Drawing.Point(17, 317);
+            this.tbAtStartup.Name = "tbAtStartup";
+            this.tbAtStartup.Size = new System.Drawing.Size(485, 23);
+            this.tbAtStartup.TabIndex = 175;
+            this.tbAtStartup.Tag = "";
+            // 
             // tbHomepage
             // 
             this.tbHomepage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -987,23 +1181,23 @@ namespace Yorot.UI.SystemApp
             this.tbHomepage.TabIndex = 175;
             this.tbHomepage.Tag = "";
             // 
-            // label3
+            // lbGeneral
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(3, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 26);
-            this.label3.TabIndex = 170;
-            this.label3.Text = "General";
+            this.lbGeneral.AutoSize = true;
+            this.lbGeneral.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbGeneral.Location = new System.Drawing.Point(3, 3);
+            this.lbGeneral.Name = "lbGeneral";
+            this.lbGeneral.Size = new System.Drawing.Size(87, 26);
+            this.lbGeneral.TabIndex = 170;
+            this.lbGeneral.Text = "General";
             // 
             // tpAppearance
             // 
-            this.tpAppearance.Controls.Add(this.textBox5);
-            this.tpAppearance.Controls.Add(this.htSwitch3);
-            this.tpAppearance.Controls.Add(this.textBox4);
-            this.tpAppearance.Controls.Add(this.hsFav);
-            this.tpAppearance.Controls.Add(this.label7);
+            this.tpAppearance.Controls.Add(this.lbOpenAppDrawer);
+            this.tpAppearance.Controls.Add(this.hsOpenAppDrawer);
+            this.tpAppearance.Controls.Add(this.lbShowFav);
+            this.tpAppearance.Controls.Add(this.hsShowFav);
+            this.tpAppearance.Controls.Add(this.lbAppearance);
             this.tpAppearance.Location = new System.Drawing.Point(4, 22);
             this.tpAppearance.Name = "tpAppearance";
             this.tpAppearance.Padding = new System.Windows.Forms.Padding(3);
@@ -1012,36 +1206,70 @@ namespace Yorot.UI.SystemApp
             this.tpAppearance.Text = "Appearance";
             this.tpAppearance.UseVisualStyleBackColor = true;
             // 
-            // hsFav
+            // lbOpenAppDrawer
             // 
-            this.hsFav.Checked = true;
-            this.hsFav.Location = new System.Drawing.Point(12, 47);
-            this.hsFav.Name = "hsFav";
-            this.hsFav.Size = new System.Drawing.Size(50, 20);
-            this.hsFav.TabIndex = 193;
+            this.lbOpenAppDrawer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbOpenAppDrawer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbOpenAppDrawer.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbOpenAppDrawer.Location = new System.Drawing.Point(68, 85);
+            this.lbOpenAppDrawer.Name = "lbOpenAppDrawer";
+            this.lbOpenAppDrawer.ReadOnly = true;
+            this.lbOpenAppDrawer.Size = new System.Drawing.Size(434, 16);
+            this.lbOpenAppDrawer.TabIndex = 196;
+            this.lbOpenAppDrawer.Text = "Open app manager on start";
             // 
-            // label7
+            // hsOpenAppDrawer
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label7.Location = new System.Drawing.Point(6, 3);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(127, 26);
-            this.label7.TabIndex = 191;
-            this.label7.Text = "Appearance";
+            this.hsOpenAppDrawer.Checked = true;
+            this.hsOpenAppDrawer.Location = new System.Drawing.Point(12, 85);
+            this.hsOpenAppDrawer.Name = "hsOpenAppDrawer";
+            this.hsOpenAppDrawer.Size = new System.Drawing.Size(50, 20);
+            this.hsOpenAppDrawer.TabIndex = 193;
+            // 
+            // lbShowFav
+            // 
+            this.lbShowFav.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbShowFav.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbShowFav.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbShowFav.Location = new System.Drawing.Point(68, 47);
+            this.lbShowFav.Name = "lbShowFav";
+            this.lbShowFav.ReadOnly = true;
+            this.lbShowFav.Size = new System.Drawing.Size(434, 16);
+            this.lbShowFav.TabIndex = 196;
+            this.lbShowFav.Text = "Show Favorites Menu";
+            // 
+            // hsShowFav
+            // 
+            this.hsShowFav.Checked = true;
+            this.hsShowFav.Location = new System.Drawing.Point(12, 47);
+            this.hsShowFav.Name = "hsShowFav";
+            this.hsShowFav.Size = new System.Drawing.Size(50, 20);
+            this.hsShowFav.TabIndex = 193;
+            // 
+            // lbAppearance
+            // 
+            this.lbAppearance.AutoSize = true;
+            this.lbAppearance.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbAppearance.Location = new System.Drawing.Point(6, 3);
+            this.lbAppearance.Name = "lbAppearance";
+            this.lbAppearance.Size = new System.Drawing.Size(127, 26);
+            this.lbAppearance.TabIndex = 191;
+            this.lbAppearance.Text = "Appearance";
             // 
             // tpDownloads
             // 
-            this.tpDownloads.Controls.Add(this.textBox8);
-            this.tpDownloads.Controls.Add(this.textBox7);
-            this.tpDownloads.Controls.Add(this.textBox6);
+            this.tpDownloads.Controls.Add(this.lbAutoDownFolder);
+            this.tpDownloads.Controls.Add(this.lbAutoDown);
+            this.tpDownloads.Controls.Add(this.lbOpenAfterDown);
             this.tpDownloads.Controls.Add(this.pDownlaods);
             this.tpDownloads.Controls.Add(this.btDownloadsClear);
-            this.tpDownloads.Controls.Add(this.hsOpen);
-            this.tpDownloads.Controls.Add(this.hsDownload);
+            this.tpDownloads.Controls.Add(this.hsOpenDown);
+            this.tpDownloads.Controls.Add(this.hsAutoDown);
             this.tpDownloads.Controls.Add(this.tbFolder);
             this.tpDownloads.Controls.Add(this.btDownloadFolder);
-            this.tpDownloads.Controls.Add(this.label5);
+            this.tpDownloads.Controls.Add(this.lbDownloads);
             this.tpDownloads.Location = new System.Drawing.Point(4, 22);
             this.tpDownloads.Name = "tpDownloads";
             this.tpDownloads.Padding = new System.Windows.Forms.Padding(3);
@@ -1049,6 +1277,45 @@ namespace Yorot.UI.SystemApp
             this.tpDownloads.TabIndex = 2;
             this.tpDownloads.Text = "Downloads";
             this.tpDownloads.UseVisualStyleBackColor = true;
+            // 
+            // lbAutoDownFolder
+            // 
+            this.lbAutoDownFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbAutoDownFolder.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbAutoDownFolder.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbAutoDownFolder.Location = new System.Drawing.Point(17, 88);
+            this.lbAutoDownFolder.Name = "lbAutoDownFolder";
+            this.lbAutoDownFolder.ReadOnly = true;
+            this.lbAutoDownFolder.Size = new System.Drawing.Size(485, 16);
+            this.lbAutoDownFolder.TabIndex = 219;
+            this.lbAutoDownFolder.Text = "Download to this folder:";
+            // 
+            // lbAutoDown
+            // 
+            this.lbAutoDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbAutoDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbAutoDown.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbAutoDown.Location = new System.Drawing.Point(72, 62);
+            this.lbAutoDown.Name = "lbAutoDown";
+            this.lbAutoDown.ReadOnly = true;
+            this.lbAutoDown.Size = new System.Drawing.Size(430, 16);
+            this.lbAutoDown.TabIndex = 219;
+            this.lbAutoDown.Text = "Auto-download to a folder:";
+            // 
+            // lbOpenAfterDown
+            // 
+            this.lbOpenAfterDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbOpenAfterDown.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbOpenAfterDown.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbOpenAfterDown.Location = new System.Drawing.Point(72, 32);
+            this.lbOpenAfterDown.Name = "lbOpenAfterDown";
+            this.lbOpenAfterDown.ReadOnly = true;
+            this.lbOpenAfterDown.Size = new System.Drawing.Size(430, 16);
+            this.lbOpenAfterDown.TabIndex = 219;
+            this.lbOpenAfterDown.Text = "Open files after download";
             // 
             // pDownlaods
             // 
@@ -1075,19 +1342,19 @@ namespace Yorot.UI.SystemApp
             this.btDownloadsClear.Text = "Clear";
             this.btDownloadsClear.UseVisualStyleBackColor = true;
             // 
-            // hsOpen
+            // hsOpenDown
             // 
-            this.hsOpen.Location = new System.Drawing.Point(16, 32);
-            this.hsOpen.Name = "hsOpen";
-            this.hsOpen.Size = new System.Drawing.Size(50, 20);
-            this.hsOpen.TabIndex = 206;
+            this.hsOpenDown.Location = new System.Drawing.Point(16, 32);
+            this.hsOpenDown.Name = "hsOpenDown";
+            this.hsOpenDown.Size = new System.Drawing.Size(50, 20);
+            this.hsOpenDown.TabIndex = 206;
             // 
-            // hsDownload
+            // hsAutoDown
             // 
-            this.hsDownload.Location = new System.Drawing.Point(16, 62);
-            this.hsDownload.Name = "hsDownload";
-            this.hsDownload.Size = new System.Drawing.Size(50, 20);
-            this.hsDownload.TabIndex = 207;
+            this.hsAutoDown.Location = new System.Drawing.Point(16, 62);
+            this.hsAutoDown.Name = "hsAutoDown";
+            this.hsAutoDown.Size = new System.Drawing.Size(50, 20);
+            this.hsAutoDown.TabIndex = 207;
             // 
             // tbFolder
             // 
@@ -1118,30 +1385,30 @@ namespace Yorot.UI.SystemApp
             this.btDownloadFolder.TabIndex = 209;
             this.btDownloadFolder.Text = "...";
             // 
-            // label5
+            // lbDownloads
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label5.Location = new System.Drawing.Point(6, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(117, 26);
-            this.label5.TabIndex = 205;
-            this.label5.Text = "Downloads";
+            this.lbDownloads.AutoSize = true;
+            this.lbDownloads.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbDownloads.Location = new System.Drawing.Point(6, 3);
+            this.lbDownloads.Name = "lbDownloads";
+            this.lbDownloads.Size = new System.Drawing.Size(117, 26);
+            this.lbDownloads.TabIndex = 205;
+            this.lbDownloads.Text = "Downloads";
             // 
             // tpNotifications
             // 
-            this.tpNotifications.Controls.Add(this.button4);
-            this.tpNotifications.Controls.Add(this.textBox22);
-            this.tpNotifications.Controls.Add(this.textBox21);
-            this.tpNotifications.Controls.Add(this.textBox20);
-            this.tpNotifications.Controls.Add(this.textBox19);
-            this.tpNotifications.Controls.Add(this.textBox18);
+            this.tpNotifications.Controls.Add(this.btOpenCalendar);
+            this.tpNotifications.Controls.Add(this.lbSilentInfo);
+            this.tpNotifications.Controls.Add(this.lbNotifLoc);
+            this.tpNotifications.Controls.Add(this.lbSilentMode);
+            this.tpNotifications.Controls.Add(this.lbDefaultNotif);
+            this.tpNotifications.Controls.Add(this.lbPlayNotifSound);
             this.tpNotifications.Controls.Add(this.btOpenSound);
             this.tpNotifications.Controls.Add(this.tbSoundLoc);
             this.tpNotifications.Controls.Add(this.hsSilent);
             this.tpNotifications.Controls.Add(this.hsDefaultSound);
             this.tpNotifications.Controls.Add(this.hsNotificationSound);
-            this.tpNotifications.Controls.Add(this.label8);
+            this.tpNotifications.Controls.Add(this.lbNotifications);
             this.tpNotifications.Location = new System.Drawing.Point(4, 22);
             this.tpNotifications.Name = "tpNotifications";
             this.tpNotifications.Padding = new System.Windows.Forms.Padding(3);
@@ -1149,6 +1416,84 @@ namespace Yorot.UI.SystemApp
             this.tpNotifications.TabIndex = 3;
             this.tpNotifications.Text = "Notifications";
             this.tpNotifications.UseVisualStyleBackColor = true;
+            // 
+            // btOpenCalendar
+            // 
+            this.btOpenCalendar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btOpenCalendar.FlatAppearance.BorderSize = 0;
+            this.btOpenCalendar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btOpenCalendar.Location = new System.Drawing.Point(11, 252);
+            this.btOpenCalendar.Name = "btOpenCalendar";
+            this.btOpenCalendar.Size = new System.Drawing.Size(492, 23);
+            this.btOpenCalendar.TabIndex = 225;
+            this.btOpenCalendar.Text = "Open Calendar...";
+            this.btOpenCalendar.UseVisualStyleBackColor = true;
+            // 
+            // lbSilentInfo
+            // 
+            this.lbSilentInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbSilentInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbSilentInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbSilentInfo.Location = new System.Drawing.Point(12, 220);
+            this.lbSilentInfo.Name = "lbSilentInfo";
+            this.lbSilentInfo.ReadOnly = true;
+            this.lbSilentInfo.Size = new System.Drawing.Size(491, 16);
+            this.lbSilentInfo.TabIndex = 223;
+            this.lbSilentInfo.Text = "You can schedule silent mode in the Calendar app.";
+            // 
+            // lbNotifLoc
+            // 
+            this.lbNotifLoc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbNotifLoc.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbNotifLoc.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbNotifLoc.Location = new System.Drawing.Point(17, 121);
+            this.lbNotifLoc.Name = "lbNotifLoc";
+            this.lbNotifLoc.ReadOnly = true;
+            this.lbNotifLoc.Size = new System.Drawing.Size(485, 16);
+            this.lbNotifLoc.TabIndex = 223;
+            this.lbNotifLoc.Text = "Notification sound location:";
+            // 
+            // lbSilentMode
+            // 
+            this.lbSilentMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbSilentMode.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbSilentMode.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbSilentMode.Location = new System.Drawing.Point(77, 198);
+            this.lbSilentMode.Name = "lbSilentMode";
+            this.lbSilentMode.ReadOnly = true;
+            this.lbSilentMode.Size = new System.Drawing.Size(426, 16);
+            this.lbSilentMode.TabIndex = 223;
+            this.lbSilentMode.Text = "Silent mode";
+            // 
+            // lbDefaultNotif
+            // 
+            this.lbDefaultNotif.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbDefaultNotif.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbDefaultNotif.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbDefaultNotif.Location = new System.Drawing.Point(72, 90);
+            this.lbDefaultNotif.Name = "lbDefaultNotif";
+            this.lbDefaultNotif.ReadOnly = true;
+            this.lbDefaultNotif.Size = new System.Drawing.Size(431, 16);
+            this.lbDefaultNotif.TabIndex = 223;
+            this.lbDefaultNotif.Text = "Use the default notification sound";
+            // 
+            // lbPlayNotifSound
+            // 
+            this.lbPlayNotifSound.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbPlayNotifSound.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbPlayNotifSound.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbPlayNotifSound.Location = new System.Drawing.Point(72, 49);
+            this.lbPlayNotifSound.Name = "lbPlayNotifSound";
+            this.lbPlayNotifSound.ReadOnly = true;
+            this.lbPlayNotifSound.Size = new System.Drawing.Size(431, 16);
+            this.lbPlayNotifSound.TabIndex = 223;
+            this.lbPlayNotifSound.Text = "Play notification sound";
             // 
             // btOpenSound
             // 
@@ -1199,23 +1544,23 @@ namespace Yorot.UI.SystemApp
             this.hsNotificationSound.Size = new System.Drawing.Size(50, 20);
             this.hsNotificationSound.TabIndex = 216;
             // 
-            // label8
+            // lbNotifications
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label8.Location = new System.Drawing.Point(6, 3);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(135, 26);
-            this.label8.TabIndex = 213;
-            this.label8.Text = "Notifications";
+            this.lbNotifications.AutoSize = true;
+            this.lbNotifications.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbNotifications.Location = new System.Drawing.Point(6, 3);
+            this.lbNotifications.Name = "lbNotifications";
+            this.lbNotifications.Size = new System.Drawing.Size(135, 26);
+            this.lbNotifications.TabIndex = 213;
+            this.lbNotifications.Text = "Notifications";
             // 
             // tpAccessibility
             // 
-            this.tpAccessibility.Controls.Add(this.htSlider2);
-            this.tpAccessibility.Controls.Add(this.htSlider1);
+            this.tpAccessibility.Controls.Add(this.hsSynthRate);
+            this.tpAccessibility.Controls.Add(this.hsSynthVol);
             this.tpAccessibility.Controls.Add(this.lbSpeechSynthRate);
             this.tpAccessibility.Controls.Add(this.lbSpeechSynthVol);
-            this.tpAccessibility.Controls.Add(this.label2);
+            this.tpAccessibility.Controls.Add(this.lbAccess);
             this.tpAccessibility.Location = new System.Drawing.Point(4, 22);
             this.tpAccessibility.Name = "tpAccessibility";
             this.tpAccessibility.Size = new System.Drawing.Size(518, 668);
@@ -1223,19 +1568,95 @@ namespace Yorot.UI.SystemApp
             this.tpAccessibility.Text = "Accessibility";
             this.tpAccessibility.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // hsSynthRate
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(12, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(132, 26);
-            this.label2.TabIndex = 171;
-            this.label2.Text = "Accessibility";
+            this.hsSynthRate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hsSynthRate.BackColor = System.Drawing.Color.White;
+            this.hsSynthRate.BorderRoundRectSize = new System.Drawing.Size(8, 8);
+            this.hsSynthRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F);
+            this.hsSynthRate.ForeColor = System.Drawing.Color.Black;
+            this.hsSynthRate.LargeChange = ((uint)(1u));
+            this.hsSynthRate.Location = new System.Drawing.Point(17, 169);
+            this.hsSynthRate.Maximum = 10;
+            this.hsSynthRate.Minimum = -10;
+            this.hsSynthRate.Name = "hsSynthRate";
+            this.hsSynthRate.OverlayColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(157)))), ((int)(((byte)(204)))));
+            this.hsSynthRate.Size = new System.Drawing.Size(485, 48);
+            this.hsSynthRate.SmallChange = ((uint)(1u));
+            this.hsSynthRate.TabIndex = 174;
+            this.hsSynthRate.Text = "htSlider1";
+            this.hsSynthRate.ThumbRoundRectSize = new System.Drawing.Size(16, 16);
+            this.hsSynthRate.ThumbSize = new System.Drawing.Size(16, 16);
+            this.hsSynthRate.Value = -2;
+            // 
+            // hsSynthVol
+            // 
+            this.hsSynthVol.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hsSynthVol.BackColor = System.Drawing.Color.White;
+            this.hsSynthVol.BorderRoundRectSize = new System.Drawing.Size(8, 8);
+            this.hsSynthVol.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F);
+            this.hsSynthVol.ForeColor = System.Drawing.Color.Black;
+            this.hsSynthVol.LargeChange = ((uint)(5u));
+            this.hsSynthVol.Location = new System.Drawing.Point(17, 81);
+            this.hsSynthVol.Name = "hsSynthVol";
+            this.hsSynthVol.OverlayColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(157)))), ((int)(((byte)(204)))));
+            this.hsSynthVol.Size = new System.Drawing.Size(485, 48);
+            this.hsSynthVol.SmallChange = ((uint)(1u));
+            this.hsSynthVol.TabIndex = 174;
+            this.hsSynthVol.Text = "htSlider1";
+            this.hsSynthVol.ThumbRoundRectSize = new System.Drawing.Size(16, 16);
+            this.hsSynthVol.ThumbSize = new System.Drawing.Size(16, 16);
+            this.hsSynthVol.Value = 50;
+            // 
+            // lbSpeechSynthRate
+            // 
+            this.lbSpeechSynthRate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbSpeechSynthRate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbSpeechSynthRate.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbSpeechSynthRate.Location = new System.Drawing.Point(17, 141);
+            this.lbSpeechSynthRate.Name = "lbSpeechSynthRate";
+            this.lbSpeechSynthRate.ReadOnly = true;
+            this.lbSpeechSynthRate.Size = new System.Drawing.Size(485, 16);
+            this.lbSpeechSynthRate.TabIndex = 172;
+            this.lbSpeechSynthRate.Text = "Speech Synth Rate:";
+            // 
+            // lbSpeechSynthVol
+            // 
+            this.lbSpeechSynthVol.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbSpeechSynthVol.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbSpeechSynthVol.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbSpeechSynthVol.Location = new System.Drawing.Point(17, 59);
+            this.lbSpeechSynthVol.Name = "lbSpeechSynthVol";
+            this.lbSpeechSynthVol.ReadOnly = true;
+            this.lbSpeechSynthVol.Size = new System.Drawing.Size(485, 16);
+            this.lbSpeechSynthVol.TabIndex = 172;
+            this.lbSpeechSynthVol.Text = "Speech Synth Volume:";
+            // 
+            // lbAccess
+            // 
+            this.lbAccess.AutoSize = true;
+            this.lbAccess.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbAccess.Location = new System.Drawing.Point(12, 9);
+            this.lbAccess.Name = "lbAccess";
+            this.lbAccess.Size = new System.Drawing.Size(132, 26);
+            this.lbAccess.TabIndex = 171;
+            this.lbAccess.Text = "Accessibility";
             // 
             // tpProfiles
             // 
-            this.tpProfiles.Controls.Add(this.label15);
+            this.tpProfiles.Controls.Add(this.llChangePic);
+            this.tpProfiles.Controls.Add(this.llChangePassword);
+            this.tpProfiles.Controls.Add(this.llChangeUserName);
+            this.tpProfiles.Controls.Add(this.llChangeUserText);
+            this.tpProfiles.Controls.Add(this.lbUsername);
+            this.tpProfiles.Controls.Add(this.lbUserText);
+            this.tpProfiles.Controls.Add(this.pbProfile);
+            this.tpProfiles.Controls.Add(this.pProfiles);
+            this.tpProfiles.Controls.Add(this.lbProfiles);
             this.tpProfiles.Location = new System.Drawing.Point(4, 22);
             this.tpProfiles.Name = "tpProfiles";
             this.tpProfiles.Size = new System.Drawing.Size(518, 668);
@@ -1243,22 +1664,101 @@ namespace Yorot.UI.SystemApp
             this.tpProfiles.Text = "Profiles";
             this.tpProfiles.UseVisualStyleBackColor = true;
             // 
-            // label15
+            // llChangePic
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label15.Location = new System.Drawing.Point(12, 9);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(86, 26);
-            this.label15.TabIndex = 171;
-            this.label15.Text = "Profiles";
+            this.llChangePic.Font = new System.Drawing.Font("Ubuntu", 12F);
+            this.llChangePic.Location = new System.Drawing.Point(17, 150);
+            this.llChangePic.Name = "llChangePic";
+            this.llChangePic.Size = new System.Drawing.Size(100, 30);
+            this.llChangePic.TabIndex = 203;
+            this.llChangePic.TabStop = true;
+            this.llChangePic.Text = "Change...";
+            this.llChangePic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // llChangePassword
+            // 
+            this.llChangePassword.AutoSize = true;
+            this.llChangePassword.Font = new System.Drawing.Font("Ubuntu", 12F);
+            this.llChangePassword.Location = new System.Drawing.Point(124, 120);
+            this.llChangePassword.Name = "llChangePassword";
+            this.llChangePassword.Size = new System.Drawing.Size(149, 20);
+            this.llChangePassword.TabIndex = 203;
+            this.llChangePassword.TabStop = true;
+            this.llChangePassword.Text = "Change password...";
+            // 
+            // llChangeUserName
+            // 
+            this.llChangeUserName.AutoSize = true;
+            this.llChangeUserName.Font = new System.Drawing.Font("Ubuntu", 12F);
+            this.llChangeUserName.Location = new System.Drawing.Point(181, 88);
+            this.llChangeUserName.Name = "llChangeUserName";
+            this.llChangeUserName.Size = new System.Drawing.Size(76, 20);
+            this.llChangeUserName.TabIndex = 203;
+            this.llChangeUserName.TabStop = true;
+            this.llChangeUserName.Text = "Change...";
+            // 
+            // llChangeUserText
+            // 
+            this.llChangeUserText.AutoSize = true;
+            this.llChangeUserText.Font = new System.Drawing.Font("Ubuntu", 12F);
+            this.llChangeUserText.Location = new System.Drawing.Point(233, 52);
+            this.llChangeUserText.Name = "llChangeUserText";
+            this.llChangeUserText.Size = new System.Drawing.Size(76, 20);
+            this.llChangeUserText.TabIndex = 203;
+            this.llChangeUserText.TabStop = true;
+            this.llChangeUserText.Text = "Change...";
+            // 
+            // lbUsername
+            // 
+            this.lbUsername.AutoSize = true;
+            this.lbUsername.Font = new System.Drawing.Font("Ubuntu", 15F);
+            this.lbUsername.Location = new System.Drawing.Point(123, 83);
+            this.lbUsername.Name = "lbUsername";
+            this.lbUsername.Size = new System.Drawing.Size(52, 25);
+            this.lbUsername.TabIndex = 202;
+            this.lbUsername.Text = "root";
+            // 
+            // lbUserText
+            // 
+            this.lbUserText.AutoSize = true;
+            this.lbUserText.Font = new System.Drawing.Font("Ubuntu", 15F);
+            this.lbUserText.Location = new System.Drawing.Point(123, 47);
+            this.lbUserText.Name = "lbUserText";
+            this.lbUserText.Size = new System.Drawing.Size(104, 25);
+            this.lbUserText.TabIndex = 202;
+            this.lbUserText.Text = "Root User";
+            // 
+            // pbProfile
+            // 
+            this.pbProfile.Location = new System.Drawing.Point(17, 47);
+            this.pbProfile.Name = "pbProfile";
+            this.pbProfile.Size = new System.Drawing.Size(100, 100);
+            this.pbProfile.TabIndex = 201;
+            this.pbProfile.TabStop = false;
+            // 
+            // pProfiles
+            // 
+            this.pProfiles.Location = new System.Drawing.Point(17, 194);
+            this.pProfiles.Name = "pProfiles";
+            this.pProfiles.Size = new System.Drawing.Size(485, 451);
+            this.pProfiles.TabIndex = 172;
+            // 
+            // lbProfiles
+            // 
+            this.lbProfiles.AutoSize = true;
+            this.lbProfiles.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbProfiles.Location = new System.Drawing.Point(12, 9);
+            this.lbProfiles.Name = "lbProfiles";
+            this.lbProfiles.Size = new System.Drawing.Size(86, 26);
+            this.lbProfiles.TabIndex = 171;
+            this.lbProfiles.Text = "Profiles";
             // 
             // tpSecurity
             // 
-            this.tpSecurity.Controls.Add(this.textBox24);
-            this.tpSecurity.Controls.Add(this.textBox23);
+            this.tpSecurity.Controls.Add(this.lbDoNotTrackInfo);
+            this.tpSecurity.Controls.Add(this.lbDoNotTrack);
             this.tpSecurity.Controls.Add(this.hsDoNotTrack);
-            this.tpSecurity.Controls.Add(this.label17);
+            this.tpSecurity.Controls.Add(this.lbSecurity);
             this.tpSecurity.Location = new System.Drawing.Point(4, 22);
             this.tpSecurity.Name = "tpSecurity";
             this.tpSecurity.Size = new System.Drawing.Size(518, 668);
@@ -1266,21 +1766,57 @@ namespace Yorot.UI.SystemApp
             this.tpSecurity.Text = "Security";
             this.tpSecurity.UseVisualStyleBackColor = true;
             // 
-            // label17
+            // lbDoNotTrackInfo
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label17.Location = new System.Drawing.Point(12, 9);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(91, 26);
-            this.label17.TabIndex = 171;
-            this.label17.Text = "Security";
+            this.lbDoNotTrackInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbDoNotTrackInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbDoNotTrackInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbDoNotTrackInfo.Location = new System.Drawing.Point(17, 100);
+            this.lbDoNotTrackInfo.Multiline = true;
+            this.lbDoNotTrackInfo.Name = "lbDoNotTrackInfo";
+            this.lbDoNotTrackInfo.ReadOnly = true;
+            this.lbDoNotTrackInfo.Size = new System.Drawing.Size(485, 64);
+            this.lbDoNotTrackInfo.TabIndex = 200;
+            this.lbDoNotTrackInfo.Text = "Enabling this feature sends DoNotTrack signal to websites. This means that it can" +
+    " tell some trackers to stop but also can also encourage some others.";
+            // 
+            // lbDoNotTrack
+            // 
+            this.lbDoNotTrack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbDoNotTrack.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbDoNotTrack.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbDoNotTrack.Location = new System.Drawing.Point(73, 63);
+            this.lbDoNotTrack.Name = "lbDoNotTrack";
+            this.lbDoNotTrack.ReadOnly = true;
+            this.lbDoNotTrack.Size = new System.Drawing.Size(429, 16);
+            this.lbDoNotTrack.TabIndex = 200;
+            this.lbDoNotTrack.Text = "Enable DoNotTrack";
+            // 
+            // hsDoNotTrack
+            // 
+            this.hsDoNotTrack.Checked = true;
+            this.hsDoNotTrack.Location = new System.Drawing.Point(17, 62);
+            this.hsDoNotTrack.Name = "hsDoNotTrack";
+            this.hsDoNotTrack.Size = new System.Drawing.Size(50, 20);
+            this.hsDoNotTrack.TabIndex = 194;
+            // 
+            // lbSecurity
+            // 
+            this.lbSecurity.AutoSize = true;
+            this.lbSecurity.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbSecurity.Location = new System.Drawing.Point(12, 9);
+            this.lbSecurity.Name = "lbSecurity";
+            this.lbSecurity.Size = new System.Drawing.Size(91, 26);
+            this.lbSecurity.TabIndex = 171;
+            this.lbSecurity.Text = "Security";
             // 
             // tpProxies
             // 
-            this.tpProxies.Controls.Add(this.textBox14);
+            this.tpProxies.Controls.Add(this.lbRememberLastProxy);
             this.tpProxies.Controls.Add(this.hsProxy);
-            this.tpProxies.Controls.Add(this.label16);
+            this.tpProxies.Controls.Add(this.lbProxies);
             this.tpProxies.Location = new System.Drawing.Point(4, 22);
             this.tpProxies.Name = "tpProxies";
             this.tpProxies.Size = new System.Drawing.Size(518, 668);
@@ -1288,21 +1824,41 @@ namespace Yorot.UI.SystemApp
             this.tpProxies.Text = "Proxies";
             this.tpProxies.UseVisualStyleBackColor = true;
             // 
-            // label16
+            // lbRememberLastProxy
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label16.Location = new System.Drawing.Point(12, 9);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(83, 26);
-            this.label16.TabIndex = 171;
-            this.label16.Text = "Proxies";
+            this.lbRememberLastProxy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbRememberLastProxy.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbRememberLastProxy.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbRememberLastProxy.Location = new System.Drawing.Point(82, 50);
+            this.lbRememberLastProxy.Name = "lbRememberLastProxy";
+            this.lbRememberLastProxy.ReadOnly = true;
+            this.lbRememberLastProxy.Size = new System.Drawing.Size(420, 16);
+            this.lbRememberLastProxy.TabIndex = 200;
+            this.lbRememberLastProxy.Text = "Remember the last proxy at start";
+            // 
+            // hsProxy
+            // 
+            this.hsProxy.Location = new System.Drawing.Point(17, 47);
+            this.hsProxy.Name = "hsProxy";
+            this.hsProxy.Size = new System.Drawing.Size(50, 20);
+            this.hsProxy.TabIndex = 199;
+            // 
+            // lbProxies
+            // 
+            this.lbProxies.AutoSize = true;
+            this.lbProxies.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbProxies.Location = new System.Drawing.Point(12, 9);
+            this.lbProxies.Name = "lbProxies";
+            this.lbProxies.Size = new System.Drawing.Size(83, 26);
+            this.lbProxies.TabIndex = 171;
+            this.lbProxies.Text = "Proxies";
             // 
             // tpSites
             // 
-            this.tpSites.Controls.Add(this.listView3);
-            this.tpSites.Controls.Add(this.textBox26);
-            this.tpSites.Controls.Add(this.label18);
+            this.tpSites.Controls.Add(this.lvSites);
+            this.tpSites.Controls.Add(this.tbSearchSite);
+            this.tpSites.Controls.Add(this.lbSites);
             this.tpSites.Location = new System.Drawing.Point(4, 22);
             this.tpSites.Name = "tpSites";
             this.tpSites.Size = new System.Drawing.Size(518, 668);
@@ -1310,21 +1866,44 @@ namespace Yorot.UI.SystemApp
             this.tpSites.Text = "Sites";
             this.tpSites.UseVisualStyleBackColor = true;
             // 
-            // label18
+            // lvSites
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label18.Location = new System.Drawing.Point(12, 9);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(60, 26);
-            this.label18.TabIndex = 171;
-            this.label18.Text = "Sites";
+            this.lvSites.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvSites.HideSelection = false;
+            this.lvSites.Location = new System.Drawing.Point(17, 74);
+            this.lvSites.Name = "lvSites";
+            this.lvSites.Size = new System.Drawing.Size(485, 571);
+            this.lvSites.TabIndex = 175;
+            this.lvSites.UseCompatibleStateImageBehavior = false;
+            this.lvSites.DoubleClick += new System.EventHandler(this.lvSites_DoubleClick);
+            // 
+            // tbSearchSite
+            // 
+            this.tbSearchSite.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSearchSite.Location = new System.Drawing.Point(17, 47);
+            this.tbSearchSite.Name = "tbSearchSite";
+            this.tbSearchSite.Size = new System.Drawing.Size(485, 20);
+            this.tbSearchSite.TabIndex = 174;
+            this.tbSearchSite.Text = "Search a site...";
+            // 
+            // lbSites
+            // 
+            this.lbSites.AutoSize = true;
+            this.lbSites.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbSites.Location = new System.Drawing.Point(12, 9);
+            this.lbSites.Name = "lbSites";
+            this.lbSites.Size = new System.Drawing.Size(60, 26);
+            this.lbSites.TabIndex = 171;
+            this.lbSites.Text = "Sites";
             // 
             // tpExtensions
             // 
-            this.tpExtensions.Controls.Add(this.listView2);
-            this.tpExtensions.Controls.Add(this.textBox25);
-            this.tpExtensions.Controls.Add(this.label6);
+            this.tpExtensions.Controls.Add(this.lvExt);
+            this.tpExtensions.Controls.Add(this.tbSearchExt);
+            this.tpExtensions.Controls.Add(this.lbExtensions);
             this.tpExtensions.Location = new System.Drawing.Point(4, 22);
             this.tpExtensions.Name = "tpExtensions";
             this.tpExtensions.Size = new System.Drawing.Size(518, 668);
@@ -1332,21 +1911,44 @@ namespace Yorot.UI.SystemApp
             this.tpExtensions.Text = "Extensions";
             this.tpExtensions.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // lvExt
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label6.Location = new System.Drawing.Point(12, 9);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(117, 26);
-            this.label6.TabIndex = 171;
-            this.label6.Text = "Extensions";
+            this.lvExt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvExt.HideSelection = false;
+            this.lvExt.Location = new System.Drawing.Point(17, 74);
+            this.lvExt.Name = "lvExt";
+            this.lvExt.Size = new System.Drawing.Size(485, 571);
+            this.lvExt.TabIndex = 175;
+            this.lvExt.UseCompatibleStateImageBehavior = false;
+            this.lvExt.DoubleClick += new System.EventHandler(this.lvExt_DoubleClick);
+            // 
+            // tbSearchExt
+            // 
+            this.tbSearchExt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSearchExt.Location = new System.Drawing.Point(17, 48);
+            this.tbSearchExt.Name = "tbSearchExt";
+            this.tbSearchExt.Size = new System.Drawing.Size(485, 20);
+            this.tbSearchExt.TabIndex = 174;
+            this.tbSearchExt.Text = "Search an extension...";
+            // 
+            // lbExtensions
+            // 
+            this.lbExtensions.AutoSize = true;
+            this.lbExtensions.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbExtensions.Location = new System.Drawing.Point(12, 9);
+            this.lbExtensions.Name = "lbExtensions";
+            this.lbExtensions.Size = new System.Drawing.Size(117, 26);
+            this.lbExtensions.TabIndex = 171;
+            this.lbExtensions.Text = "Extensions";
             // 
             // tpApps
             // 
-            this.tpApps.Controls.Add(this.listView1);
-            this.tpApps.Controls.Add(this.textBox1);
-            this.tpApps.Controls.Add(this.label4);
+            this.tpApps.Controls.Add(this.lvApps);
+            this.tpApps.Controls.Add(this.tbSearchApp);
+            this.tpApps.Controls.Add(this.lbApps);
             this.tpApps.Location = new System.Drawing.Point(4, 22);
             this.tpApps.Name = "tpApps";
             this.tpApps.Size = new System.Drawing.Size(518, 668);
@@ -1354,41 +1956,53 @@ namespace Yorot.UI.SystemApp
             this.tpApps.Text = "Apps";
             this.tpApps.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // lvApps
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvApps.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(17, 74);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(485, 571);
-            this.listView1.TabIndex = 173;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.lvApps.HideSelection = false;
+            this.lvApps.LargeImageList = this.ilAppMan;
+            this.lvApps.Location = new System.Drawing.Point(17, 74);
+            this.lvApps.Name = "lvApps";
+            this.lvApps.Size = new System.Drawing.Size(485, 571);
+            this.lvApps.SmallImageList = this.ilAppMan;
+            this.lvApps.StateImageList = this.ilAppMan;
+            this.lvApps.TabIndex = 173;
+            this.lvApps.UseCompatibleStateImageBehavior = false;
+            this.lvApps.View = System.Windows.Forms.View.Tile;
+            this.lvApps.DoubleClick += new System.EventHandler(this.lvApps_DoubleClick);
             // 
-            // textBox1
+            // ilAppMan
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.ilAppMan.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.ilAppMan.ImageSize = new System.Drawing.Size(64, 64);
+            this.ilAppMan.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // tbSearchApp
+            // 
+            this.tbSearchApp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(17, 47);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(485, 20);
-            this.textBox1.TabIndex = 172;
-            this.textBox1.Text = "Search an app...";
+            this.tbSearchApp.Location = new System.Drawing.Point(17, 47);
+            this.tbSearchApp.Name = "tbSearchApp";
+            this.tbSearchApp.Size = new System.Drawing.Size(485, 20);
+            this.tbSearchApp.TabIndex = 172;
+            this.tbSearchApp.Text = "Search an app...";
             // 
-            // label4
+            // lbApps
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(12, 9);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 26);
-            this.label4.TabIndex = 171;
-            this.label4.Text = "Apps";
+            this.lbApps.AutoSize = true;
+            this.lbApps.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbApps.Location = new System.Drawing.Point(12, 9);
+            this.lbApps.Name = "lbApps";
+            this.lbApps.Size = new System.Drawing.Size(61, 26);
+            this.lbApps.TabIndex = 171;
+            this.lbApps.Text = "Apps";
             // 
             // tpThemes
             // 
-            this.tpThemes.Controls.Add(this.label20);
+            this.tpThemes.Controls.Add(this.pThemes);
+            this.tpThemes.Controls.Add(this.lbThemes);
             this.tpThemes.Location = new System.Drawing.Point(4, 22);
             this.tpThemes.Name = "tpThemes";
             this.tpThemes.Size = new System.Drawing.Size(518, 668);
@@ -1396,19 +2010,32 @@ namespace Yorot.UI.SystemApp
             this.tpThemes.Text = "Themes";
             this.tpThemes.UseVisualStyleBackColor = true;
             // 
-            // label20
+            // pThemes
             // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label20.Location = new System.Drawing.Point(12, 9);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(86, 26);
-            this.label20.TabIndex = 171;
-            this.label20.Text = "Themes";
+            this.pThemes.Location = new System.Drawing.Point(17, 47);
+            this.pThemes.Name = "pThemes";
+            this.pThemes.Size = new System.Drawing.Size(485, 598);
+            this.pThemes.TabIndex = 172;
+            // 
+            // lbThemes
+            // 
+            this.lbThemes.AutoSize = true;
+            this.lbThemes.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbThemes.Location = new System.Drawing.Point(12, 9);
+            this.lbThemes.Name = "lbThemes";
+            this.lbThemes.Size = new System.Drawing.Size(86, 26);
+            this.lbThemes.TabIndex = 171;
+            this.lbThemes.Text = "Themes";
             // 
             // tpUpdates
             // 
-            this.tpUpdates.Controls.Add(this.label21);
+            this.tpUpdates.Controls.Add(this.pUpdateHistory);
+            this.tpUpdates.Controls.Add(this.btUpdate);
+            this.tpUpdates.Controls.Add(this.lbUpdateHistory);
+            this.tpUpdates.Controls.Add(this.lbUpdateInfo);
+            this.tpUpdates.Controls.Add(this.lbUpdateStatus);
+            this.tpUpdates.Controls.Add(this.pbUpdateStatus);
+            this.tpUpdates.Controls.Add(this.lbUpdate);
             this.tpUpdates.Location = new System.Drawing.Point(4, 22);
             this.tpUpdates.Name = "tpUpdates";
             this.tpUpdates.Size = new System.Drawing.Size(518, 668);
@@ -1416,24 +2043,89 @@ namespace Yorot.UI.SystemApp
             this.tpUpdates.Text = "Updates";
             this.tpUpdates.UseVisualStyleBackColor = true;
             // 
-            // label21
+            // pUpdateHistory
             // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label21.Location = new System.Drawing.Point(12, 9);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(93, 26);
-            this.label21.TabIndex = 171;
-            this.label21.Text = "Updates";
+            this.pUpdateHistory.Location = new System.Drawing.Point(17, 170);
+            this.pUpdateHistory.Name = "pUpdateHistory";
+            this.pUpdateHistory.Size = new System.Drawing.Size(485, 475);
+            this.pUpdateHistory.TabIndex = 206;
+            // 
+            // btUpdate
+            // 
+            this.btUpdate.AutoSize = true;
+            this.btUpdate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btUpdate.FlatAppearance.BorderSize = 0;
+            this.btUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btUpdate.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.btUpdate.Location = new System.Drawing.Point(92, 97);
+            this.btUpdate.Name = "btUpdate";
+            this.btUpdate.Size = new System.Drawing.Size(65, 28);
+            this.btUpdate.TabIndex = 205;
+            this.btUpdate.Text = "Update";
+            this.btUpdate.UseVisualStyleBackColor = true;
+            // 
+            // lbUpdateHistory
+            // 
+            this.lbUpdateHistory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbUpdateHistory.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbUpdateHistory.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbUpdateHistory.Location = new System.Drawing.Point(17, 148);
+            this.lbUpdateHistory.Name = "lbUpdateHistory";
+            this.lbUpdateHistory.ReadOnly = true;
+            this.lbUpdateHistory.Size = new System.Drawing.Size(485, 16);
+            this.lbUpdateHistory.TabIndex = 204;
+            this.lbUpdateHistory.Text = "Update history:";
+            // 
+            // lbUpdateInfo
+            // 
+            this.lbUpdateInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbUpdateInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbUpdateInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.lbUpdateInfo.Location = new System.Drawing.Point(92, 75);
+            this.lbUpdateInfo.Name = "lbUpdateInfo";
+            this.lbUpdateInfo.ReadOnly = true;
+            this.lbUpdateInfo.Size = new System.Drawing.Size(410, 16);
+            this.lbUpdateInfo.TabIndex = 204;
+            this.lbUpdateInfo.Text = "Last checked: 11 March 2001 20:00 (GMT+2)";
+            // 
+            // lbUpdateStatus
+            // 
+            this.lbUpdateStatus.AutoSize = true;
+            this.lbUpdateStatus.Font = new System.Drawing.Font("Ubuntu", 15F);
+            this.lbUpdateStatus.Location = new System.Drawing.Point(87, 47);
+            this.lbUpdateStatus.Name = "lbUpdateStatus";
+            this.lbUpdateStatus.Size = new System.Drawing.Size(176, 25);
+            this.lbUpdateStatus.TabIndex = 203;
+            this.lbUpdateStatus.Text = "You\'re up to date.";
+            // 
+            // pbUpdateStatus
+            // 
+            this.pbUpdateStatus.Location = new System.Drawing.Point(17, 47);
+            this.pbUpdateStatus.Name = "pbUpdateStatus";
+            this.pbUpdateStatus.Size = new System.Drawing.Size(64, 64);
+            this.pbUpdateStatus.TabIndex = 172;
+            this.pbUpdateStatus.TabStop = false;
+            // 
+            // lbUpdate
+            // 
+            this.lbUpdate.AutoSize = true;
+            this.lbUpdate.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbUpdate.Location = new System.Drawing.Point(12, 9);
+            this.lbUpdate.Name = "lbUpdate";
+            this.lbUpdate.Size = new System.Drawing.Size(93, 26);
+            this.lbUpdate.TabIndex = 171;
+            this.lbUpdate.Text = "Updates";
             // 
             // tpAbout
             // 
-            this.tpAbout.Controls.Add(this.textBox3);
-            this.tpAbout.Controls.Add(this.textBox2);
-            this.tpAbout.Controls.Add(this.linkLabel2);
-            this.tpAbout.Controls.Add(this.linkLabel1);
-            this.tpAbout.Controls.Add(this.pictureBox1);
-            this.tpAbout.Controls.Add(this.label1);
+            this.tpAbout.Controls.Add(this.lbYorotTitle);
+            this.tpAbout.Controls.Add(this.lbYorotInfo);
+            this.tpAbout.Controls.Add(this.llLicenses);
+            this.tpAbout.Controls.Add(this.llEULA);
+            this.tpAbout.Controls.Add(this.lbAboutTitle);
+            this.tpAbout.Controls.Add(this.pbYorotLogo);
             this.tpAbout.Location = new System.Drawing.Point(4, 22);
             this.tpAbout.Name = "tpAbout";
             this.tpAbout.Size = new System.Drawing.Size(518, 668);
@@ -1441,53 +2133,84 @@ namespace Yorot.UI.SystemApp
             this.tpAbout.Text = "About";
             this.tpAbout.UseVisualStyleBackColor = true;
             // 
-            // linkLabel2
+            // lbYorotTitle
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Font = new System.Drawing.Font("Ubuntu", 15F);
-            this.linkLabel2.Location = new System.Drawing.Point(12, 559);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(105, 25);
-            this.linkLabel2.TabIndex = 173;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Licenses...";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Ubuntu", 15F);
-            this.linkLabel1.Location = new System.Drawing.Point(12, 518);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(291, 25);
-            this.linkLabel1.TabIndex = 173;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "End-User License Aggreement";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lbYorotTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::Yorot.Properties.Resources.Yorot;
-            this.pictureBox1.Location = new System.Drawing.Point(17, 47);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(485, 90);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 172;
-            this.pictureBox1.TabStop = false;
+            this.lbYorotTitle.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbYorotTitle.Font = new System.Drawing.Font("Ubuntu", 25F);
+            this.lbYorotTitle.Location = new System.Drawing.Point(17, 148);
+            this.lbYorotTitle.Name = "lbYorotTitle";
+            this.lbYorotTitle.ReadOnly = true;
+            this.lbYorotTitle.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.lbYorotTitle.Size = new System.Drawing.Size(485, 39);
+            this.lbYorotTitle.TabIndex = 174;
+            this.lbYorotTitle.Text = "Yorot";
+            this.lbYorotTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label1
+            // lbYorotInfo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 26);
-            this.label1.TabIndex = 171;
-            this.label1.Text = "About";
+            this.lbYorotInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbYorotInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbYorotInfo.Font = new System.Drawing.Font("Ubuntu", 12F);
+            this.lbYorotInfo.Location = new System.Drawing.Point(17, 189);
+            this.lbYorotInfo.Multiline = true;
+            this.lbYorotInfo.Name = "lbYorotInfo";
+            this.lbYorotInfo.ReadOnly = true;
+            this.lbYorotInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.lbYorotInfo.Size = new System.Drawing.Size(485, 314);
+            this.lbYorotInfo.TabIndex = 174;
+            this.lbYorotInfo.Text = resources.GetString("lbYorotInfo.Text");
+            this.lbYorotInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // llLicenses
+            // 
+            this.llLicenses.AutoSize = true;
+            this.llLicenses.Font = new System.Drawing.Font("Ubuntu", 15F);
+            this.llLicenses.Location = new System.Drawing.Point(12, 559);
+            this.llLicenses.Name = "llLicenses";
+            this.llLicenses.Size = new System.Drawing.Size(105, 25);
+            this.llLicenses.TabIndex = 173;
+            this.llLicenses.TabStop = true;
+            this.llLicenses.Text = "Licenses...";
+            // 
+            // llEULA
+            // 
+            this.llEULA.AutoSize = true;
+            this.llEULA.Font = new System.Drawing.Font("Ubuntu", 15F);
+            this.llEULA.Location = new System.Drawing.Point(12, 518);
+            this.llEULA.Name = "llEULA";
+            this.llEULA.Size = new System.Drawing.Size(291, 25);
+            this.llEULA.TabIndex = 173;
+            this.llEULA.TabStop = true;
+            this.llEULA.Text = "End-User License Aggreement";
+            // 
+            // lbAboutTitle
+            // 
+            this.lbAboutTitle.AutoSize = true;
+            this.lbAboutTitle.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbAboutTitle.Location = new System.Drawing.Point(12, 9);
+            this.lbAboutTitle.Name = "lbAboutTitle";
+            this.lbAboutTitle.Size = new System.Drawing.Size(72, 26);
+            this.lbAboutTitle.TabIndex = 171;
+            this.lbAboutTitle.Text = "About";
+            // 
+            // pbYorotLogo
+            // 
+            this.pbYorotLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbYorotLogo.Image = global::Yorot.Properties.Resources.Yorot;
+            this.pbYorotLogo.Location = new System.Drawing.Point(17, 47);
+            this.pbYorotLogo.Name = "pbYorotLogo";
+            this.pbYorotLogo.Size = new System.Drawing.Size(485, 90);
+            this.pbYorotLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbYorotLogo.TabIndex = 172;
+            this.pbYorotLogo.TabStop = false;
             // 
             // tpLogs
             // 
-            this.tpLogs.Controls.Add(this.label14);
+            this.tpLogs.Controls.Add(this.lbLogs);
             this.tpLogs.Location = new System.Drawing.Point(4, 22);
             this.tpLogs.Name = "tpLogs";
             this.tpLogs.Size = new System.Drawing.Size(518, 668);
@@ -1495,19 +2218,25 @@ namespace Yorot.UI.SystemApp
             this.tpLogs.Text = "Logs";
             this.tpLogs.UseVisualStyleBackColor = true;
             // 
-            // label14
+            // lbLogs
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label14.Location = new System.Drawing.Point(12, 9);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(57, 26);
-            this.label14.TabIndex = 171;
-            this.label14.Text = "Logs";
+            this.lbLogs.AutoSize = true;
+            this.lbLogs.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbLogs.Location = new System.Drawing.Point(12, 9);
+            this.lbLogs.Name = "lbLogs";
+            this.lbLogs.Size = new System.Drawing.Size(57, 26);
+            this.lbLogs.TabIndex = 171;
+            this.lbLogs.Text = "Logs";
             // 
             // tpLanguage
             // 
-            this.tpLanguage.Controls.Add(this.label12);
+            this.tpLanguage.Controls.Add(this.cbLocale);
+            this.tpLanguage.Controls.Add(this.cbDateFormat);
+            this.tpLanguage.Controls.Add(this.cbLang);
+            this.tpLanguage.Controls.Add(this.textBox6);
+            this.tpLanguage.Controls.Add(this.textBox4);
+            this.tpLanguage.Controls.Add(this.textBox1);
+            this.tpLanguage.Controls.Add(this.lbLang);
             this.tpLanguage.Location = new System.Drawing.Point(4, 22);
             this.tpLanguage.Name = "tpLanguage";
             this.tpLanguage.Size = new System.Drawing.Size(518, 668);
@@ -1515,21 +2244,87 @@ namespace Yorot.UI.SystemApp
             this.tpLanguage.Text = "Language";
             this.tpLanguage.UseVisualStyleBackColor = true;
             // 
-            // label12
+            // cbLocale
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label12.Location = new System.Drawing.Point(12, 9);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(105, 26);
-            this.label12.TabIndex = 171;
-            this.label12.Text = "Language";
+            this.cbLocale.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.cbLocale.FormattingEnabled = true;
+            this.cbLocale.Location = new System.Drawing.Point(17, 182);
+            this.cbLocale.Name = "cbLocale";
+            this.cbLocale.Size = new System.Drawing.Size(485, 25);
+            this.cbLocale.TabIndex = 201;
+            // 
+            // cbDateFormat
+            // 
+            this.cbDateFormat.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.cbDateFormat.FormattingEnabled = true;
+            this.cbDateFormat.Location = new System.Drawing.Point(17, 129);
+            this.cbDateFormat.Name = "cbDateFormat";
+            this.cbDateFormat.Size = new System.Drawing.Size(485, 25);
+            this.cbDateFormat.TabIndex = 201;
+            // 
+            // cbLang
+            // 
+            this.cbLang.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.cbLang.FormattingEnabled = true;
+            this.cbLang.Location = new System.Drawing.Point(17, 69);
+            this.cbLang.Name = "cbLang";
+            this.cbLang.Size = new System.Drawing.Size(485, 25);
+            this.cbLang.TabIndex = 201;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox6.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.textBox6.Location = new System.Drawing.Point(17, 160);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.ReadOnly = true;
+            this.textBox6.Size = new System.Drawing.Size(485, 16);
+            this.textBox6.TabIndex = 200;
+            this.textBox6.Text = "Locale:";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox4.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.textBox4.Location = new System.Drawing.Point(17, 107);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(485, 16);
+            this.textBox4.TabIndex = 200;
+            this.textBox4.Text = "Date format:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.textBox1.Location = new System.Drawing.Point(17, 47);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(485, 16);
+            this.textBox1.TabIndex = 200;
+            this.textBox1.Text = "Current language:";
+            // 
+            // lbLang
+            // 
+            this.lbLang.AutoSize = true;
+            this.lbLang.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbLang.Location = new System.Drawing.Point(12, 9);
+            this.lbLang.Name = "lbLang";
+            this.lbLang.Size = new System.Drawing.Size(105, 26);
+            this.lbLang.TabIndex = 171;
+            this.lbLang.Text = "Language";
             // 
             // tpWE
             // 
-            this.tpWE.Controls.Add(this.listView4);
-            this.tpWE.Controls.Add(this.textBox27);
-            this.tpWE.Controls.Add(this.label22);
+            this.tpWE.Controls.Add(this.lvWE);
+            this.tpWE.Controls.Add(this.tbSearchWE);
+            this.tpWE.Controls.Add(this.lbWE);
             this.tpWE.Location = new System.Drawing.Point(4, 22);
             this.tpWE.Name = "tpWE";
             this.tpWE.Size = new System.Drawing.Size(518, 668);
@@ -1537,22 +2332,46 @@ namespace Yorot.UI.SystemApp
             this.tpWE.Text = "Web Engines";
             this.tpWE.UseVisualStyleBackColor = true;
             // 
-            // label22
+            // lvWE
             // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label22.Location = new System.Drawing.Point(12, 9);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(134, 26);
-            this.label22.TabIndex = 171;
-            this.label22.Text = "Web Engines";
+            this.lvWE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvWE.HideSelection = false;
+            this.lvWE.Location = new System.Drawing.Point(17, 74);
+            this.lvWE.Name = "lvWE";
+            this.lvWE.Size = new System.Drawing.Size(485, 571);
+            this.lvWE.TabIndex = 175;
+            this.lvWE.UseCompatibleStateImageBehavior = false;
+            this.lvWE.DoubleClick += new System.EventHandler(this.lvWE_DoubleClick);
+            // 
+            // tbSearchWE
+            // 
+            this.tbSearchWE.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSearchWE.Location = new System.Drawing.Point(17, 47);
+            this.tbSearchWE.Name = "tbSearchWE";
+            this.tbSearchWE.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbSearchWE.Size = new System.Drawing.Size(485, 20);
+            this.tbSearchWE.TabIndex = 174;
+            this.tbSearchWE.Text = "Search a web engine...";
+            // 
+            // lbWE
+            // 
+            this.lbWE.AutoSize = true;
+            this.lbWE.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbWE.Location = new System.Drawing.Point(12, 9);
+            this.lbWE.Name = "lbWE";
+            this.lbWE.Size = new System.Drawing.Size(134, 26);
+            this.lbWE.TabIndex = 171;
+            this.lbWE.Text = "Web Engines";
             // 
             // tpHistory
             // 
             this.tpHistory.AutoScroll = true;
             this.tpHistory.Controls.Add(this.pHistory);
-            this.tpHistory.Controls.Add(this.button1);
-            this.tpHistory.Controls.Add(this.label11);
+            this.tpHistory.Controls.Add(this.btHistoryClear);
+            this.tpHistory.Controls.Add(this.lbHistory);
             this.tpHistory.Location = new System.Drawing.Point(4, 22);
             this.tpHistory.Name = "tpHistory";
             this.tpHistory.Size = new System.Drawing.Size(518, 668);
@@ -1572,32 +2391,32 @@ namespace Yorot.UI.SystemApp
             this.pHistory.Size = new System.Drawing.Size(486, 579);
             this.pHistory.TabIndex = 217;
             // 
-            // button1
+            // btHistoryClear
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.btHistoryClear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(17, 622);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(486, 23);
-            this.button1.TabIndex = 216;
-            this.button1.Text = "Clear";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btHistoryClear.FlatAppearance.BorderSize = 0;
+            this.btHistoryClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btHistoryClear.Location = new System.Drawing.Point(17, 622);
+            this.btHistoryClear.Name = "btHistoryClear";
+            this.btHistoryClear.Size = new System.Drawing.Size(486, 23);
+            this.btHistoryClear.TabIndex = 216;
+            this.btHistoryClear.Text = "Clear";
+            this.btHistoryClear.UseVisualStyleBackColor = true;
             // 
-            // label11
+            // lbHistory
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label11.Location = new System.Drawing.Point(12, 9);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(83, 26);
-            this.label11.TabIndex = 171;
-            this.label11.Text = "History";
+            this.lbHistory.AutoSize = true;
+            this.lbHistory.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbHistory.Location = new System.Drawing.Point(12, 9);
+            this.lbHistory.Name = "lbHistory";
+            this.lbHistory.Size = new System.Drawing.Size(83, 26);
+            this.lbHistory.TabIndex = 171;
+            this.lbHistory.Text = "History";
             // 
             // tpSync
             // 
-            this.tpSync.Controls.Add(this.label19);
+            this.tpSync.Controls.Add(this.lbSync);
             this.tpSync.Location = new System.Drawing.Point(4, 22);
             this.tpSync.Name = "tpSync";
             this.tpSync.Size = new System.Drawing.Size(518, 668);
@@ -1605,547 +2424,38 @@ namespace Yorot.UI.SystemApp
             this.tpSync.Text = "Sync";
             this.tpSync.UseVisualStyleBackColor = true;
             // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label19.Location = new System.Drawing.Point(12, 9);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(57, 26);
-            this.label19.TabIndex = 171;
-            this.label19.Text = "Sync";
-            // 
-            // hsDoNotTrack
-            // 
-            this.hsDoNotTrack.Checked = true;
-            this.hsDoNotTrack.Location = new System.Drawing.Point(17, 62);
-            this.hsDoNotTrack.Name = "hsDoNotTrack";
-            this.hsDoNotTrack.Size = new System.Drawing.Size(50, 20);
-            this.hsDoNotTrack.TabIndex = 194;
-            // 
-            // lbSpeechSynthVol
-            // 
-            this.lbSpeechSynthVol.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbSpeechSynthVol.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbSpeechSynthVol.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.lbSpeechSynthVol.Location = new System.Drawing.Point(17, 59);
-            this.lbSpeechSynthVol.Name = "lbSpeechSynthVol";
-            this.lbSpeechSynthVol.ReadOnly = true;
-            this.lbSpeechSynthVol.Size = new System.Drawing.Size(485, 16);
-            this.lbSpeechSynthVol.TabIndex = 172;
-            this.lbSpeechSynthVol.Text = "Speech Synth Volume:";
-            // 
-            // lbSpeechSynthRate
-            // 
-            this.lbSpeechSynthRate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbSpeechSynthRate.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbSpeechSynthRate.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.lbSpeechSynthRate.Location = new System.Drawing.Point(17, 141);
-            this.lbSpeechSynthRate.Name = "lbSpeechSynthRate";
-            this.lbSpeechSynthRate.ReadOnly = true;
-            this.lbSpeechSynthRate.Size = new System.Drawing.Size(485, 16);
-            this.lbSpeechSynthRate.TabIndex = 172;
-            this.lbSpeechSynthRate.Text = "Speech Synth Rate:";
-            // 
-            // htSlider1
-            // 
-            this.htSlider1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.htSlider1.BackColor = System.Drawing.Color.White;
-            this.htSlider1.BorderRoundRectSize = new System.Drawing.Size(8, 8);
-            this.htSlider1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F);
-            this.htSlider1.ForeColor = System.Drawing.Color.Black;
-            this.htSlider1.LargeChange = ((uint)(5u));
-            this.htSlider1.Location = new System.Drawing.Point(17, 81);
-            this.htSlider1.Name = "htSlider1";
-            this.htSlider1.OverlayColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(157)))), ((int)(((byte)(204)))));
-            this.htSlider1.Size = new System.Drawing.Size(485, 48);
-            this.htSlider1.SmallChange = ((uint)(1u));
-            this.htSlider1.TabIndex = 174;
-            this.htSlider1.Text = "htSlider1";
-            this.htSlider1.ThumbRoundRectSize = new System.Drawing.Size(16, 16);
-            this.htSlider1.ThumbSize = new System.Drawing.Size(16, 16);
-            this.htSlider1.Value = 50;
-            // 
-            // htSlider2
-            // 
-            this.htSlider2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.htSlider2.BackColor = System.Drawing.Color.White;
-            this.htSlider2.BorderRoundRectSize = new System.Drawing.Size(8, 8);
-            this.htSlider2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F);
-            this.htSlider2.ForeColor = System.Drawing.Color.Black;
-            this.htSlider2.LargeChange = ((uint)(1u));
-            this.htSlider2.Location = new System.Drawing.Point(17, 169);
-            this.htSlider2.Maximum = 10;
-            this.htSlider2.Minimum = -10;
-            this.htSlider2.Name = "htSlider2";
-            this.htSlider2.OverlayColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(157)))), ((int)(((byte)(204)))));
-            this.htSlider2.Size = new System.Drawing.Size(485, 48);
-            this.htSlider2.SmallChange = ((uint)(1u));
-            this.htSlider2.TabIndex = 174;
-            this.htSlider2.Text = "htSlider1";
-            this.htSlider2.ThumbRoundRectSize = new System.Drawing.Size(16, 16);
-            this.htSlider2.ThumbSize = new System.Drawing.Size(16, 16);
-            this.htSlider2.Value = -2;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Ubuntu", 12F);
-            this.textBox2.Location = new System.Drawing.Point(17, 189);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox2.Size = new System.Drawing.Size(485, 314);
-            this.textBox2.TabIndex = 174;
-            this.textBox2.Text = resources.GetString("textBox2.Text");
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Font = new System.Drawing.Font("Ubuntu", 25F);
-            this.textBox3.Location = new System.Drawing.Point(17, 148);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox3.Size = new System.Drawing.Size(485, 39);
-            this.textBox3.TabIndex = 174;
-            this.textBox3.Text = "Yorot";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox4.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox4.Location = new System.Drawing.Point(68, 47);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(434, 16);
-            this.textBox4.TabIndex = 196;
-            this.textBox4.Text = "Show Favorites Menu";
-            // 
-            // htSwitch3
-            // 
-            this.htSwitch3.Checked = true;
-            this.htSwitch3.Location = new System.Drawing.Point(12, 85);
-            this.htSwitch3.Name = "htSwitch3";
-            this.htSwitch3.Size = new System.Drawing.Size(50, 20);
-            this.htSwitch3.TabIndex = 193;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox5.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox5.Location = new System.Drawing.Point(68, 85);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(434, 16);
-            this.textBox5.TabIndex = 196;
-            this.textBox5.Text = "Open app manager on start";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox6.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox6.Location = new System.Drawing.Point(72, 32);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(430, 16);
-            this.textBox6.TabIndex = 219;
-            this.textBox6.Text = "Open files after download";
-            // 
-            // textBox7
-            // 
-            this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox7.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox7.Location = new System.Drawing.Point(72, 62);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(430, 16);
-            this.textBox7.TabIndex = 219;
-            this.textBox7.Text = "Auto-download to a folder:";
-            // 
-            // textBox8
-            // 
-            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox8.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox8.Location = new System.Drawing.Point(17, 88);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(485, 16);
-            this.textBox8.TabIndex = 219;
-            this.textBox8.Text = "Download to this folder:";
-            // 
-            // textBox9
-            // 
-            this.textBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox9.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox9.Location = new System.Drawing.Point(17, 47);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(485, 16);
-            this.textBox9.TabIndex = 198;
-            this.textBox9.Text = "Home page:";
-            // 
-            // textBox10
-            // 
-            this.textBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox10.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox10.Location = new System.Drawing.Point(17, 139);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(485, 16);
-            this.textBox10.TabIndex = 198;
-            this.textBox10.Text = "Default Search Engine: Google";
-            // 
-            // textBox11
-            // 
-            this.textBox11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox11.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox11.Location = new System.Drawing.Point(16, 213);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.ReadOnly = true;
-            this.textBox11.Size = new System.Drawing.Size(485, 16);
-            this.textBox11.TabIndex = 198;
-            this.textBox11.Text = "At startup:";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.BackColor = System.Drawing.Color.Transparent;
-            this.radioButton1.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.radioButton1.Location = new System.Drawing.Point(17, 235);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(167, 22);
-            this.radioButton1.TabIndex = 176;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Tag = "";
-            this.radioButton1.Text = "Load the new tab page";
-            this.radioButton1.UseVisualStyleBackColor = false;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.BackColor = System.Drawing.Color.Transparent;
-            this.radioButton2.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.radioButton2.Location = new System.Drawing.Point(16, 263);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(155, 22);
-            this.radioButton2.TabIndex = 176;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Tag = "";
-            this.radioButton2.Text = "Load the home page";
-            this.radioButton2.UseVisualStyleBackColor = false;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.BackColor = System.Drawing.Color.Transparent;
-            this.radioButton3.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.radioButton3.Location = new System.Drawing.Point(17, 291);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(153, 22);
-            this.radioButton3.TabIndex = 176;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Tag = "";
-            this.radioButton3.Text = "Load a specific page:";
-            this.radioButton3.UseVisualStyleBackColor = false;
-            // 
-            // textBox12
-            // 
-            this.textBox12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox12.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox12.Location = new System.Drawing.Point(17, 317);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(485, 23);
-            this.textBox12.TabIndex = 175;
-            this.textBox12.Tag = "";
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(17, 161);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(486, 23);
-            this.button3.TabIndex = 215;
-            this.button3.Text = "Search Engines...";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // textBox13
-            // 
-            this.textBox13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox13.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox13.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox13.Location = new System.Drawing.Point(73, 361);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.ReadOnly = true;
-            this.textBox13.Size = new System.Drawing.Size(429, 16);
-            this.textBox13.TabIndex = 198;
-            this.textBox13.Text = "Restore old sessions at start";
-            // 
-            // textBox14
-            // 
-            this.textBox14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox14.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox14.Location = new System.Drawing.Point(82, 50);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.ReadOnly = true;
-            this.textBox14.Size = new System.Drawing.Size(420, 16);
-            this.textBox14.TabIndex = 200;
-            this.textBox14.Text = "Remember the last proxy at start";
-            // 
-            // hsProxy
-            // 
-            this.hsProxy.Location = new System.Drawing.Point(17, 47);
-            this.hsProxy.Name = "hsProxy";
-            this.hsProxy.Size = new System.Drawing.Size(50, 20);
-            this.hsProxy.TabIndex = 199;
-            // 
-            // textBox15
-            // 
-            this.textBox15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox15.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox15.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox15.Location = new System.Drawing.Point(73, 394);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.ReadOnly = true;
-            this.textBox15.Size = new System.Drawing.Size(429, 16);
-            this.textBox15.TabIndex = 198;
-            this.textBox15.Text = "Always check if Yorot is the default browser";
-            // 
-            // textBox16
-            // 
-            this.textBox16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox16.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox16.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox16.Location = new System.Drawing.Point(73, 427);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.ReadOnly = true;
-            this.textBox16.Size = new System.Drawing.Size(429, 16);
-            this.textBox16.TabIndex = 198;
-            this.textBox16.Text = "Start Yorot on boot";
-            // 
-            // textBox17
-            // 
-            this.textBox17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox17.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox17.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox17.Location = new System.Drawing.Point(73, 461);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.ReadOnly = true;
-            this.textBox17.Size = new System.Drawing.Size(429, 16);
-            this.textBox17.TabIndex = 198;
-            this.textBox17.Text = "Start Yorot in system tray";
-            // 
-            // textBox18
-            // 
-            this.textBox18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox18.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox18.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox18.Location = new System.Drawing.Point(72, 49);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.ReadOnly = true;
-            this.textBox18.Size = new System.Drawing.Size(431, 16);
-            this.textBox18.TabIndex = 223;
-            this.textBox18.Text = "Play notification sound";
-            // 
-            // textBox19
-            // 
-            this.textBox19.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox19.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox19.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox19.Location = new System.Drawing.Point(72, 90);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.ReadOnly = true;
-            this.textBox19.Size = new System.Drawing.Size(431, 16);
-            this.textBox19.TabIndex = 223;
-            this.textBox19.Text = "Use the default notification sound";
-            // 
-            // textBox20
-            // 
-            this.textBox20.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox20.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox20.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox20.Location = new System.Drawing.Point(77, 198);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.ReadOnly = true;
-            this.textBox20.Size = new System.Drawing.Size(426, 16);
-            this.textBox20.TabIndex = 223;
-            this.textBox20.Text = "Silent mode";
-            // 
-            // textBox21
-            // 
-            this.textBox21.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox21.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox21.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox21.Location = new System.Drawing.Point(17, 121);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.ReadOnly = true;
-            this.textBox21.Size = new System.Drawing.Size(485, 16);
-            this.textBox21.TabIndex = 223;
-            this.textBox21.Text = "Notification sound location:";
-            // 
-            // textBox22
-            // 
-            this.textBox22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox22.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox22.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox22.Location = new System.Drawing.Point(12, 220);
-            this.textBox22.Name = "textBox22";
-            this.textBox22.ReadOnly = true;
-            this.textBox22.Size = new System.Drawing.Size(491, 16);
-            this.textBox22.TabIndex = 223;
-            this.textBox22.Text = "You can schedule silent mode in the Calendar app.";
-            // 
-            // textBox23
-            // 
-            this.textBox23.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox23.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox23.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox23.Location = new System.Drawing.Point(73, 63);
-            this.textBox23.Name = "textBox23";
-            this.textBox23.ReadOnly = true;
-            this.textBox23.Size = new System.Drawing.Size(429, 16);
-            this.textBox23.TabIndex = 200;
-            this.textBox23.Text = "Enable DoNotTrack";
-            // 
-            // textBox24
-            // 
-            this.textBox24.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox24.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox24.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox24.Location = new System.Drawing.Point(17, 100);
-            this.textBox24.Multiline = true;
-            this.textBox24.Name = "textBox24";
-            this.textBox24.ReadOnly = true;
-            this.textBox24.Size = new System.Drawing.Size(485, 64);
-            this.textBox24.TabIndex = 200;
-            this.textBox24.Text = "Enabling this feature sends DoNotTrack signal to websites. This means that it can" +
-    " tell some trackers to stop but also can also encourage some others.";
-            // 
-            // listView2
-            // 
-            this.listView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(17, 74);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(485, 571);
-            this.listView2.TabIndex = 175;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            // 
-            // textBox25
-            // 
-            this.textBox25.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox25.Location = new System.Drawing.Point(17, 48);
-            this.textBox25.Name = "textBox25";
-            this.textBox25.Size = new System.Drawing.Size(485, 20);
-            this.textBox25.TabIndex = 174;
-            this.textBox25.Text = "Search an extension...";
-            // 
-            // listView3
-            // 
-            this.listView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView3.HideSelection = false;
-            this.listView3.Location = new System.Drawing.Point(17, 74);
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(485, 571);
-            this.listView3.TabIndex = 175;
-            this.listView3.UseCompatibleStateImageBehavior = false;
-            // 
-            // textBox26
-            // 
-            this.textBox26.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox26.Location = new System.Drawing.Point(17, 47);
-            this.textBox26.Name = "textBox26";
-            this.textBox26.Size = new System.Drawing.Size(485, 20);
-            this.textBox26.TabIndex = 174;
-            this.textBox26.Text = "Search a site...";
-            // 
-            // listView4
-            // 
-            this.listView4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView4.HideSelection = false;
-            this.listView4.Location = new System.Drawing.Point(17, 74);
-            this.listView4.Name = "listView4";
-            this.listView4.Size = new System.Drawing.Size(485, 571);
-            this.listView4.TabIndex = 175;
-            this.listView4.UseCompatibleStateImageBehavior = false;
-            // 
-            // textBox27
-            // 
-            this.textBox27.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox27.Location = new System.Drawing.Point(17, 47);
-            this.textBox27.Name = "textBox27";
-            this.textBox27.Size = new System.Drawing.Size(485, 20);
-            this.textBox27.TabIndex = 174;
-            this.textBox27.Text = "Search a web engine...";
-            // 
-            // button4
-            // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(11, 252);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(492, 23);
-            this.button4.TabIndex = 225;
-            this.button4.Text = "Open Calendar...";
-            this.button4.UseVisualStyleBackColor = true;
+            // lbSync
+            // 
+            this.lbSync.AutoSize = true;
+            this.lbSync.Font = new System.Drawing.Font("Ubuntu", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbSync.Location = new System.Drawing.Point(12, 9);
+            this.lbSync.Name = "lbSync";
+            this.lbSync.Size = new System.Drawing.Size(57, 26);
+            this.lbSync.TabIndex = 171;
+            this.lbSync.Text = "Sync";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Ubuntu", 10F);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removePictureToolStripMenuItem,
+            this.setNewOneFromAFileToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.contextMenuStrip1.ShowImageMargin = false;
+            this.contextMenuStrip1.Size = new System.Drawing.Size(198, 48);
+            // 
+            // removePictureToolStripMenuItem
+            // 
+            this.removePictureToolStripMenuItem.Name = "removePictureToolStripMenuItem";
+            this.removePictureToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.removePictureToolStripMenuItem.Text = "Remove picture";
+            // 
+            // setNewOneFromAFileToolStripMenuItem
+            // 
+            this.setNewOneFromAFileToolStripMenuItem.Name = "setNewOneFromAFileToolStripMenuItem";
+            this.setNewOneFromAFileToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.setNewOneFromAFileToolStripMenuItem.Text = "Set new one from a file";
             // 
             // settings
             // 
@@ -2180,6 +2490,7 @@ namespace Yorot.UI.SystemApp
             this.tpAccessibility.PerformLayout();
             this.tpProfiles.ResumeLayout(false);
             this.tpProfiles.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbProfile)).EndInit();
             this.tpSecurity.ResumeLayout(false);
             this.tpSecurity.PerformLayout();
             this.tpProxies.ResumeLayout(false);
@@ -2194,9 +2505,10 @@ namespace Yorot.UI.SystemApp
             this.tpThemes.PerformLayout();
             this.tpUpdates.ResumeLayout(false);
             this.tpUpdates.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUpdateStatus)).EndInit();
             this.tpAbout.ResumeLayout(false);
             this.tpAbout.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbYorotLogo)).EndInit();
             this.tpLogs.ResumeLayout(false);
             this.tpLogs.PerformLayout();
             this.tpLanguage.ResumeLayout(false);
@@ -2207,6 +2519,7 @@ namespace Yorot.UI.SystemApp
             this.tpHistory.PerformLayout();
             this.tpSync.ResumeLayout(false);
             this.tpSync.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2219,28 +2532,28 @@ namespace Yorot.UI.SystemApp
         private System.Windows.Forms.TabPage tp1Settings;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tpGeneral;
-        private HTAlt.WinForms.HTSwitch htSwitch2;
-        private HTAlt.WinForms.HTSwitch htSwitch1;
+        private HTAlt.WinForms.HTSwitch hsStartInTray;
+        private HTAlt.WinForms.HTSwitch hsStartOnBoot;
         private HTAlt.WinForms.HTSwitch hsDefaultBrowser;
         private HTAlt.WinForms.HTSwitch hsAutoRestore;
         private System.Windows.Forms.RadioButton rbNewTab;
         private System.Windows.Forms.TextBox tbHomepage;
         private System.Windows.Forms.TabPage tpAppearance;
-        private HTAlt.WinForms.HTSwitch hsFav;
-        private System.Windows.Forms.Label label7;
+        private HTAlt.WinForms.HTSwitch hsShowFav;
+        private System.Windows.Forms.Label lbAppearance;
         private System.Windows.Forms.TabPage tpDownloads;
-        private HTAlt.WinForms.HTSwitch hsOpen;
-        private HTAlt.WinForms.HTSwitch hsDownload;
+        private HTAlt.WinForms.HTSwitch hsOpenDown;
+        private HTAlt.WinForms.HTSwitch hsAutoDown;
         private System.Windows.Forms.TextBox tbFolder;
         private HTAlt.WinForms.HTButton btDownloadFolder;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbDownloads;
         private System.Windows.Forms.TabPage tpNotifications;
         private HTAlt.WinForms.HTButton btOpenSound;
         private System.Windows.Forms.TextBox tbSoundLoc;
         private HTAlt.WinForms.HTSwitch hsSilent;
         private HTAlt.WinForms.HTSwitch hsDefaultSound;
         private HTAlt.WinForms.HTSwitch hsNotificationSound;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lbNotifications;
         private System.Windows.Forms.Button btUpdatesAbout;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -2253,7 +2566,7 @@ namespace Yorot.UI.SystemApp
         private System.Windows.Forms.LinkLabel llHomeManage;
         private System.Windows.Forms.Label lbHomeHello;
         private System.Windows.Forms.PictureBox pbHomeUser;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbGeneral;
         private System.Windows.Forms.TabPage tpAccessibility;
         private System.Windows.Forms.TabPage tpProfiles;
         private System.Windows.Forms.TabPage tpSecurity;
@@ -2293,70 +2606,95 @@ namespace Yorot.UI.SystemApp
         private System.Windows.Forms.Button btSync;
         private System.Windows.Forms.TabPage tpHistory;
         private System.Windows.Forms.TabPage tpSync;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label lbAccess;
+        private System.Windows.Forms.ListView lvApps;
+        private System.Windows.Forms.TextBox tbSearchApp;
+        private System.Windows.Forms.Label lbApps;
+        private System.Windows.Forms.Label lbAboutTitle;
+        private System.Windows.Forms.Label lbProfiles;
+        private System.Windows.Forms.Label lbSecurity;
+        private System.Windows.Forms.Label lbProxies;
+        private System.Windows.Forms.Label lbSites;
+        private System.Windows.Forms.Label lbExtensions;
+        private System.Windows.Forms.Label lbThemes;
+        private System.Windows.Forms.Label lbUpdate;
+        private System.Windows.Forms.Label lbLogs;
+        private System.Windows.Forms.Label lbLang;
+        private System.Windows.Forms.Label lbWE;
+        private System.Windows.Forms.Label lbHistory;
+        private System.Windows.Forms.Label lbSync;
         private System.Windows.Forms.Button btDownloadsClear;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btHistoryClear;
         private System.Windows.Forms.FlowLayoutPanel pDownlaods;
         private System.Windows.Forms.FlowLayoutPanel pHistory;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.PictureBox pbYorotLogo;
+        private System.Windows.Forms.LinkLabel llLicenses;
+        private System.Windows.Forms.LinkLabel llEULA;
         private HTAlt.WinForms.HTSwitch hsDoNotTrack;
         private System.Windows.Forms.TextBox lbSpeechSynthVol;
         private System.Windows.Forms.TextBox lbSpeechSynthRate;
-        private HTAlt.WinForms.HTSlider htSlider2;
-        private HTAlt.WinForms.HTSlider htSlider1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox5;
-        private HTAlt.WinForms.HTSwitch htSwitch3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox14;
+        private HTAlt.WinForms.HTSlider hsSynthRate;
+        private HTAlt.WinForms.HTSlider hsSynthVol;
+        private System.Windows.Forms.TextBox lbYorotInfo;
+        private System.Windows.Forms.TextBox lbYorotTitle;
+        private System.Windows.Forms.TextBox lbOpenAppDrawer;
+        private HTAlt.WinForms.HTSwitch hsOpenAppDrawer;
+        private System.Windows.Forms.TextBox lbShowFav;
+        private System.Windows.Forms.TextBox lbAutoDownFolder;
+        private System.Windows.Forms.TextBox lbAutoDown;
+        private System.Windows.Forms.TextBox lbOpenAfterDown;
+        private System.Windows.Forms.Button btSearchEngine;
+        private System.Windows.Forms.TextBox lbAtStartup;
+        private System.Windows.Forms.TextBox lbSearchEngine;
+        private System.Windows.Forms.TextBox lbHomePage;
+        private System.Windows.Forms.RadioButton rbLoadPage;
+        private System.Windows.Forms.RadioButton rbLoadHome;
+        private System.Windows.Forms.RadioButton rbLoadNewTab;
+        private System.Windows.Forms.TextBox tbAtStartup;
+        private System.Windows.Forms.TextBox lbStartInTray;
+        private System.Windows.Forms.TextBox lbStartOnBoot;
+        private System.Windows.Forms.TextBox lbDefaultBrowser;
+        private System.Windows.Forms.TextBox lbRestore;
+        private System.Windows.Forms.TextBox lbRememberLastProxy;
         private HTAlt.WinForms.HTSwitch hsProxy;
-        private System.Windows.Forms.TextBox textBox22;
-        private System.Windows.Forms.TextBox textBox21;
-        private System.Windows.Forms.TextBox textBox20;
-        private System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.TextBox textBox24;
-        private System.Windows.Forms.TextBox textBox23;
-        private System.Windows.Forms.ListView listView3;
-        private System.Windows.Forms.TextBox textBox26;
-        private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.TextBox textBox25;
-        private System.Windows.Forms.ListView listView4;
-        private System.Windows.Forms.TextBox textBox27;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox lbSilentInfo;
+        private System.Windows.Forms.TextBox lbNotifLoc;
+        private System.Windows.Forms.TextBox lbSilentMode;
+        private System.Windows.Forms.TextBox lbDefaultNotif;
+        private System.Windows.Forms.TextBox lbPlayNotifSound;
+        private System.Windows.Forms.TextBox lbDoNotTrackInfo;
+        private System.Windows.Forms.TextBox lbDoNotTrack;
+        private System.Windows.Forms.ListView lvSites;
+        private System.Windows.Forms.TextBox tbSearchSite;
+        private System.Windows.Forms.ListView lvExt;
+        private System.Windows.Forms.TextBox tbSearchExt;
+        private System.Windows.Forms.ListView lvWE;
+        private System.Windows.Forms.TextBox tbSearchWE;
+        private System.Windows.Forms.Button btOpenCalendar;
+        private System.Windows.Forms.ImageList ilAppMan;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox cbLocale;
+        private System.Windows.Forms.ComboBox cbDateFormat;
+        private System.Windows.Forms.ComboBox cbLang;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.LinkLabel llChangePic;
+        private System.Windows.Forms.LinkLabel llChangePassword;
+        private System.Windows.Forms.LinkLabel llChangeUserName;
+        private System.Windows.Forms.LinkLabel llChangeUserText;
+        private System.Windows.Forms.Label lbUsername;
+        private System.Windows.Forms.Label lbUserText;
+        private System.Windows.Forms.PictureBox pbProfile;
+        private System.Windows.Forms.Panel pProfiles;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem removePictureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setNewOneFromAFileToolStripMenuItem;
+        private System.Windows.Forms.FlowLayoutPanel pThemes;
+        private System.Windows.Forms.FlowLayoutPanel pUpdateHistory;
+        private System.Windows.Forms.Button btUpdate;
+        private System.Windows.Forms.TextBox lbUpdateHistory;
+        private System.Windows.Forms.TextBox lbUpdateInfo;
+        private System.Windows.Forms.Label lbUpdateStatus;
+        private System.Windows.Forms.PictureBox pbUpdateStatus;
     }
 }

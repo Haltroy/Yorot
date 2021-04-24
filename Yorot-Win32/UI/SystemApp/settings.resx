@@ -120,7 +120,10 @@
   <metadata name="tmrAppSync.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>24, 21</value>
   </metadata>
-  <data name="textBox2.Text" xml:space="preserve">
+  <metadata name="ilAppMan.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>208, 17</value>
+  </metadata>
+  <data name="lbYorotInfo.Text" xml:space="preserve">
     <value>by Haltroy
 1.0.0.0 [Hamantha-1] - Yorot-Win32
 Copyright © 2021 Haltroy
@@ -134,4 +137,7 @@ Yorot is written in C# with Visual Studio 2019. © 2021 Microsoft Corp.
 Yorot uses Newtonsoft.JSON. © 2021 Newtonsoft
 More of this list and all licenses are located in the licenses page.</value>
   </data>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>312, 17</value>
+  </metadata>
 </root>

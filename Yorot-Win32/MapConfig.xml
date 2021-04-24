@@ -1,0 +1,210 @@
+<root>
+   <!-- YOROT WORLD MAP CONFIG FILE
+   This file includes details of the countries as the default language, date and time format and CEF locale.
+   End user cannot edit this file.
+   
+   NOTE: Use "com.haltroy.english" language if that country's default language is not added and use "en_US" locale if that's also
+   not present..
+   -->
+   <Countries>
+     // TODO: Add Countrly-specific color to map and here. Also add locales.
+     <Country Name="US" MapColor="#05F245" Text="United States" Lang="com.haltroy.english" Format="MDY" Locale="en_US" />
+		<Country Name="Kenya" MapColor="#61A374" Text="Kenya" Lang="com.haltroy.english" Format="ALL" Locale="en_US" />
+		<Country Name="Ghana" MapColor="#BD55A3" Text="Ghana" Lang="com.haltroy.english" Format="ALL" Locale="en_US" />
+		<Country Name="CN" MapColor="#93BC1F" Text="China" Lang="com.haltroy.chinese" Format="YMD" Locale="ch" />
+		<Country Name="JP" MapColor="#EF6E4E" Text="Japan" Lang="com.haltroy.japanese" Format="YMD" Locale="jp" />
+		<Country Name="KR" MapColor="#C5D5CA" Text="South Korea" Lang="com.haltroy.korean" Format="YMD" Locale="kr-s" />
+		<Country Name="KP" MapColor="#2186F9" Text="North Korea" Lang="com.haltroy.korean" Format="YMD" Locale="kr-n" />
+		<Country Name="Canada" MapColor="#7D3828" Text="Canada" Lang="com.haltroy.english" Format="YMD" Locale="cn" />
+		<Country Name="Hungary" MapColor="#539FA4" Text="Hungary" Lang="com.haltroy.english" Format="YMD" Locale="hg" />
+		<Country Name="Taiwan" MapColor="#AF51D3" Text="Taiwan" Lang="com.haltroy.chinese" Format="YMD" Locale="tw" />
+		<Country Name="Mongolia" MapColor="#0B0303" Text="Mongolia" Lang="com.haltroy.english" Format="YMD" Locale="mg" />
+		<Country Name="Lithuania" MapColor="#E1697F" Text="Lithuania" Lang="com.haltroy.english" Format="YMD" Locale="en_US" />
+		<Country Name="Bhutan" MapColor="#3D1BAE" Text="Bhutan" Lang="com.haltroy.english" Format="YMD" Locale="en_US" />
+		<Country Name="TR" MapColor="#13822A" Text="Turkey" Lang="com.haltroy.turkish" Format="DMY" Locale="tr" />
+		<Country Name="KKTC" MapColor="#6F3459" Text="North Cyprus Turkish Republic" Lang="com.haltroy.turkish" Format="DMY" Locale="tr" />
+		<Country Name="GB" MapColor="#CBE688" Text="United Kingdom" Lang="com.haltroy.english" Format="DMY" Locale="en_GB" />
+		<Country Name="Germany" MapColor="#A14C04" Text="Germany" Lang="com.haltroy.english" Format="DMY" Locale="de" />
+		<Country Name="Afghanistan" MapColor="#FDFE33" Text="Afghanistan" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Albania" MapColor="#58B062" Text="Albania" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Algeria" MapColor="#2F17DE" Text="Algeria" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Andorra" MapColor="#8AC90D" Text="Andorra" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Angola" MapColor="#602F89" Text="Angola" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="AntiguaBarbuda" MapColor="#BCE1B8" Text="Antigua and Barbuda" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Argentina" MapColor="#1893E8" Text="Argentina" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Armenia" MapColor="#EEFA64" Text="Armenia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Australia" MapColor="#4AAC93" Text="Australia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Austria" MapColor="#A65EC2" Text="Austria" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Azerbaijan" MapColor="#7CC43E" Text="Azerbaijan" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Bahamas" MapColor="#D8766D" Text="Bahamas" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Bahrain" MapColor="#AEDDE9" Text="Bahrain" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Bangladesh" MapColor="#0A8F18" Text="Bangladesh" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Barbados" MapColor="#664047" Text="Barbados" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Belarus" MapColor="#3CA7C3" Text="Belarus" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Belgium" MapColor="#9859F2" Text="Belgium" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Belize" MapColor="#F40B21" Text="Belize" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Benin" MapColor="#CA729D" Text="Benin" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Bolivia" MapColor="#2623CD" Text="Bolivia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Bosnia" MapColor="#FC8A49" Text="Bosnia and Herzegovina" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Botswana" MapColor="#583C78" Text="Botswana" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Brazil" MapColor="#B3EEA7" Text="Brazil" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Brunei" MapColor="#8A5523" Text="Brunei" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Bulgaria" MapColor="#E50652" Text="Bulgaria" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="BurkinaFaso" MapColor="#41B881" Text="Burkina Faso" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Burundi" MapColor="#171FFD" Text="Burundi" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="CotedIvoire" MapColor="#73D12C" Text="Côte d'Ivoire" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Cabo Verde" MapColor="#4938A8" Text="Cabo Verde" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Cambodia" MapColor="#A5E9D7" Text="Cambodia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Cameroon" MapColor="#019B06" Text="Cameroon" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="CentralAfrica" MapColor="#D70282" Text="Central African Republic" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Chad" MapColor="#33B4B2" Text="Chad" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Chile" MapColor="#8F66E1" Text="Chile" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Colombia" MapColor="#65CC5D" Text="Colombia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Comoros" MapColor="#C17E8C" Text="Comoros" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="CongoB" MapColor="#97E508" Text="Congo (Congo-Brazzaville)" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="CostaRica" MapColor="#F39737" Text="Costa Rica" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Croatia" MapColor="#4F4966" Text="Croatia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Cuba" MapColor="#25AFE2" Text="Cuba" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="SCyprus" MapColor="#816111" Text="Cyprus" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Czechia" MapColor="#DC1340" Text="Czechia (Czech Republic)" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="CongoR" MapColor="#B37ABC" Text="Democratic Republic of the Congo" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Denmark" MapColor="#0E2CEB" Text="Denmark" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Djibouti" MapColor="#E59267" Text="Djibouti" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Dominica" MapColor="#404497" Text="Dominica" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Dominican Republic" MapColor="#9CF6C6" Text="Dominican Republic" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Ecuador" MapColor="#725D42" Text="Ecuador" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Egypt" MapColor="#CE0F71" Text="Egypt" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="ElSalvador" MapColor="#2AC0A0" Text="El Salvador" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Equatorial Guinea" MapColor="#00271C" Text="Equatorial Guinea" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Eritrea" MapColor="#5CD94B" Text="Eritrea" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Estonia" MapColor="#3240C7" Text="Estonia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Eswatini" MapColor="#8EF2F6" Text="Eswatini (Swaziland)" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Ethiopia" MapColor="#EAA325" Text="Ethiopia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Fiji" MapColor="#C00AA1" Text="Fiji" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Finland" MapColor="#1CBCD0" Text="Finland" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="France" MapColor="#786EFF" Text="France" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Gabon" MapColor="#4ED57C" Text="Gabon" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Gambia" MapColor="#AA86AB" Text="Gambia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Georgia" MapColor="#80ED27" Text="Georgia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Greece" MapColor="#DC9F56" Text="Greece" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Grenada" MapColor="#375185" Text="Grenada" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Guatemala" MapColor="#0EB801" Text="Guatemala" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Guinea" MapColor="#696930" Text="Guinea" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="GBissau" MapColor="#C51B5F" Text="Guinea-Bissau" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Guyana" MapColor="#9B82DB" Text="Guyana" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Haiti" MapColor="#F7340A" Text="Haiti" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Holy See" MapColor="#CD9B86" Text="Holy See" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Honduras" MapColor="#294CB5" Text="Honduras" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Iceland" MapColor="#85FEE4" Text="Iceland" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="India" MapColor="#5B6561" Text="India" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Indonesia" MapColor="#B71790" Text="Indonesia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Iran" MapColor="#13C9BF" Text="Iran" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Iraq" MapColor="#E92F3B" Text="Iraq" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Ireland" MapColor="#45E16A" Text="Ireland" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Israel" MapColor="#1B48E6" Text="Israel" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Italy" MapColor="#77FA15" Text="Italy" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Jamaica" MapColor="#D3AC44" Text="Jamaica" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Jordan" MapColor="#A912C0" Text="Jordan" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Kazakhstan" MapColor="#05C4EF" Text="Kazakhstan" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Kiribati" MapColor="#60761E" Text="Kiribati" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Kuwait" MapColor="#37DD9A" Text="Kuwait" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Kyrgyzstan" MapColor="#928FC9" Text="Kyrgyzstan" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Laos" MapColor="#69F546" Text="Laos" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Latvia" MapColor="#C4A775" Text="Latvia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Lebanon" MapColor="#2059A4" Text="Lebanon" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Lesotho" MapColor="#F6C020" Text="Lesotho" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Liberia" MapColor="#52724F" Text="Liberia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Libya" MapColor="#AE237E" Text="Libya" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Liechtenstein" MapColor="#848AFA" Text="Liechtenstein" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Luxembourg" MapColor="#E03C29" Text="Luxembourg" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Madagascar" MapColor="#B6A3A5" Text="Madagascar" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Malawi" MapColor="#1255D4" Text="Malawi" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Malaysia" MapColor="#6E0603" Text="Malaysia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Maldives" MapColor="#446D7F" Text="Maldives" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Mali" MapColor="#A01FAE" Text="Mali" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Malta" MapColor="#FCD1DE" Text="Malta" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Marshall Islands" MapColor="#D2385A" Text="Marshall Islands" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Mauritania" MapColor="#2EE989" Text="Mauritania" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Mauritius" MapColor="#045005" Text="Mauritius" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Mexico" MapColor="#600234" Text="Mexico" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Micronesia" MapColor="#BCB463" Text="Micronesia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Moldova" MapColor="#921BDF" Text="Moldova" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Monaco" MapColor="#EDCC0E" Text="Monaco" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Montenegro" MapColor="#497E3D" Text="Montenegro" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Morocco" MapColor="#1FE5B9" Text="Morocco" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Mozambique" MapColor="#7B97E8" Text="Mozambique" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Myanmar" MapColor="#51FE64" Text="Myanmar (Burma)" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Namibia" MapColor="#ADAF93" Text="Namibia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Nauru" MapColor="#0961C3" Text="Nauru" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Nepal" MapColor="#DFC83F" Text="Nepal" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Netherlands" MapColor="#3B7A6E" Text="Netherlands" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="NewZealand" MapColor="#972C9D" Text="New Zealand" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Nicaragua" MapColor="#6D9219" Text="Nicaragua" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Niger" MapColor="#C94448" Text="Niger" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Nigeria" MapColor="#9FABC4" Text="Nigeria" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="NMacedonia" MapColor="#FB5DF3" Text="North Macedonia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Norway" MapColor="#570F22" Text="Norway" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Oman" MapColor="#2D759E" Text="Oman" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Pakistan" MapColor="#8927CD" Text="Pakistan" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Palau" MapColor="#E5D9FC" Text="Palau" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Palestine State" MapColor="#BB4078" Text="Palestine State" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Panama" MapColor="#17F2A8" Text="Panama" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Papua New Guinea" MapColor="#ED5824" Text="Papua New Guinea" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Paraguay" MapColor="#480A53" Text="Paraguay" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Peru" MapColor="#A4BC82" Text="Peru" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Philippines" MapColor="#7A23FE" Text="Philippines" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Poland" MapColor="#D6D52D" Text="Poland" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Portugal" MapColor="#32865C" Text="Portugal" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Qatar" MapColor="#08EDD8" Text="Qatar" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Romania" MapColor="#649F07" Text="Romania" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Russia" MapColor="#3A0683" Text="Russia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Rwanda" MapColor="#96B8B2" Text="Rwanda" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Saint Kitts and Nevis" MapColor="#F269E1" Text="Saint Kitts and Nevis" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Saint Lucia" MapColor="#C8D05D" Text="Saint Lucia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="StVincent" MapColor="#24828D" Text="Saint Vincent and the Grenadines" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Samoa" MapColor="#8034BC" Text="Samoa" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="SanMarino" MapColor="#569B38" Text="San Marino" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="SaoTome" MapColor="#B24C67" Text="Sao Tome and Principe" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="SaudiArabia" MapColor="#88B3E3" Text="Saudi Arabia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Senegal" MapColor="#E46512" Text="Senegal" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Serbia" MapColor="#401741" Text="Serbia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Seychelles" MapColor="#167EBD" Text="Seychelles" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="SierraLeone" MapColor="#722FEC" Text="Sierra Leone" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Singapore" MapColor="#CDE11B" Text="Singapore" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Slovakia" MapColor="#A34897" Text="Slovakia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Slovenia" MapColor="#FFFAC6" Text="Slovenia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="SolomonIslands" MapColor="#D56142" Text="Solomon Islands" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Somaliland" MapColor="#311272" Text="Somalia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Somalia" MapColor="#311272" Text="Somalia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="SAfrica" MapColor="#8DC4A1" Text="South Africa" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="SSudan" MapColor="#632B1D" Text="South Sudan" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Spain" MapColor="#BFDD4C" Text="Spain" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="SriLanka" MapColor="#1B8F7B" Text="Sri Lanka" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Sudan" MapColor="#F1F5F7" Text="Sudan" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Suriname" MapColor="#4DA726" Text="Suriname" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Sweden" MapColor="#230EA2" Text="Sweden" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Switzerland" MapColor="#7FC0D1" Text="Switzerland" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Syria" MapColor="#DB7200" Text="Syria" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Tajikistan" MapColor="#B1D87C" Text="Tajikistan" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Tanzania" MapColor="#0D8AAB" Text="Tanzania" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Thailand" MapColor="#693CDA" Text="Thailand" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Timor-Leste" MapColor="#3FA357" Text="Timor-Leste" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Togo" MapColor="#9B5586" Text="Togo" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Tonga" MapColor="#71BB02" Text="Tonga" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Trinidad and Tobago" MapColor="#CD6D31" Text="Trinidad and Tobago" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Tunisia" MapColor="#281F60" Text="Tunisia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Turkmenistan" MapColor="#FE86DC" Text="Turkmenistan" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Tuvalu" MapColor="#5A380B" Text="Tuvalu" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Uganda" MapColor="#B6E93A" Text="Uganda" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Ukraine" MapColor="#8C50B6" Text="Ukraine" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="United Arab Emirates" MapColor="#E802E5" Text="United Arab Emirates" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Uruguay" MapColor="#BE6961" Text="Uruguay" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Uzbekistan" MapColor="#1A1B90" Text="Uzbekistan" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Vanuatu" MapColor="#76CCBF" Text="Vanuatu" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Venezuela" MapColor="#4C333C" Text="Venezuela" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Vietnam" MapColor="#A8E56B" Text="Vietnam" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Yemen" MapColor="#04979A" Text="Yemen" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Zambia" MapColor="#DAFE16" Text="Zambia" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+		<Country Name="Zimbabwe" MapColor="#36AF45" Text="Zimbabwe" Lang="com.haltroy.english" Format="DMY" Locale="en_US" />
+   </Countries>
+   </root>

@@ -20,6 +20,7 @@ namespace Yorot
         /// <param name="main"><see cref="YorotMain"/> of this manager.</param>
         public YorotManager(string configFile,YorotMain main)
         {
+            Output.WriteLine("[" + this.GetType().Name + "] Starting Init...", LogLevel.Info);
             if (main is null) { throw new ArgumentNullException("main"); } Main = main;
             if (!string.IsNullOrWhiteSpace(configFile))
             {
@@ -66,6 +67,7 @@ namespace Yorot
             {
                 Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, configuration file location was empty.", LogLevel.Warning);
             }
+            Output.WriteLine("[" + this.GetType().Name + "] Init done.", LogLevel.Info);
         }
         /// <summary>
         /// Location of the configuration file of this manager on disk.

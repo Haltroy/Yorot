@@ -9,7 +9,7 @@ namespace Yorot
     /// Main class for Yorot. 
     /// <para></para>Suggestion: Create a new instance of this class in your project's one of the public static classes for easy access and avoid duplicates. See Yorot-Win32 project for simple implementation.
     /// </summary>
-    public class YorotMain
+    public abstract class YorotMain
     {
         /// <summary>
         /// Creates a new Yorot Main.
@@ -91,13 +91,23 @@ namespace Yorot
             if (!System.IO.Directory.Exists(AppsFolder)) { System.IO.Directory.CreateDirectory(AppsFolder); }
             if (!System.IO.Directory.Exists(ProfilesFolder)) { System.IO.Directory.CreateDirectory(ProfilesFolder); }
             if (!System.IO.Directory.Exists(WEFolder)) { System.IO.Directory.CreateDirectory(WEFolder); }
+            BeforeInit();
             AppMan = new AppManager(this);
             ThemeMan = new ThemeManager(this);
             LangMan = new YorotLangManager(this);
             Extensions = new ExtensionManager(this);
-            Profiles = new ProfileManager(this);
             WebEngineMan = new YorotWEManager(this);
+            Profiles = new ProfileManager(this);
+            AfterInit();
         }
+        /// <summary>
+        /// Event raised before launching all managers.
+        /// </summary>
+        public abstract void BeforeInit();
+        /// <summary>
+        /// Event raised after launching all managers.
+        /// </summary>
+        public abstract void AfterInit();
         /// <summary>
         /// Gets the current theme applied by user.
         /// </summary>

@@ -63,6 +63,16 @@ namespace Yorot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap addon_settings {
+            get {
+                object obj = ResourceManager.GetObject("addon-settings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap back_b {
             get {
                 object obj = ResourceManager.GetObject("back-b", resourceCulture);
@@ -123,6 +133,82 @@ namespace Yorot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap customization {
+            get {
+                object obj = ResourceManager.GetObject("customization", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap default_pofile_pic {
+            get {
+                object obj = ResourceManager.GetObject("default-pofile-pic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap download_and_history {
+            get {
+                object obj = ResourceManager.GetObject("download-and-history", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;
+        ///&lt;root&gt;
+        ///  &lt;Group Name=&quot;#YOROT-ROOT&quot;&gt;
+        ///    &lt;Name&gt;English (United Kingdom)&lt;/Name&gt;
+        ///    &lt;Author&gt;Haltroy&lt;/Author&gt;
+        ///    &lt;CodeName&gt;com.haltroy.english-gb&lt;/CodeName&gt;
+        ///    &lt;CompatibleVersion&gt;1&lt;/CompatibleVersion&gt;
+        ///    &lt;Version&gt;1&lt;/Version&gt;
+        ///    &lt;HTUPDATE&gt;&lt;/HTUPDATE&gt;
+        ///  &lt;/Group&gt;
+        ///  &lt;Group Name=&quot;Win32&quot;&gt;
+        ///    &lt;Group Name=&quot;DefaultApps&quot;&gt;
+        ///      &lt;Translation ID=&quot;Settings&quot; Text =&quot;Settings&quot; /&gt;
+        ///      &lt;Translation ID=&quot;Yopad&quot; Text =&quot;Yopad&quot; /&gt;
+        ///      &lt;Translation ID=&quot;Calendar&quot; Text =&quot;Ca [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string English_GB {
+            get {
+                return ResourceManager.GetString("English_GB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;
+        ///&lt;root&gt;
+        ///  &lt;Group Name=&quot;#YOROT-ROOT&quot;&gt;
+        ///    &lt;Name&gt;English (United States)&lt;/Name&gt;
+        ///    &lt;Author&gt;Haltroy&lt;/Author&gt;
+        ///    &lt;CodeName&gt;com.haltroy.english-gb&lt;/CodeName&gt;
+        ///    &lt;CompatibleVersion&gt;1&lt;/CompatibleVersion&gt;
+        ///    &lt;Version&gt;1&lt;/Version&gt;
+        ///    &lt;HTUPDATE&gt;&lt;/HTUPDATE&gt;
+        ///  &lt;/Group&gt;
+        ///  &lt;Group Name=&quot;Win32&quot;&gt;
+        ///    &lt;Group Name=&quot;DefaultApps&quot;&gt;
+        ///      &lt;Translation ID=&quot;Settings&quot; Text =&quot;Settings&quot; /&gt;
+        ///      &lt;Translation ID=&quot;Yopad&quot; Text =&quot;Yopad&quot; /&gt;
+        ///      &lt;Translation ID=&quot;Calendar&quot; Text =&quot;Cal [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string English_US {
+            get {
+                return ResourceManager.GetString("English_US", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fileman {
             get {
                 object obj = ResourceManager.GetObject("fileman", resourceCulture);
@@ -153,6 +239,16 @@ namespace Yorot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap general_settings {
+            get {
+                object obj = ResourceManager.GetObject("general-settings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap hamburger {
             get {
                 object obj = ResourceManager.GetObject("hamburger", resourceCulture);
@@ -167,6 +263,41 @@ namespace Yorot.Properties {
             get {
                 object obj = ResourceManager.GetObject("hamburger-w", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;head&gt;
+        ///&lt;title&gt;&lt;/title&gt;
+        ///&lt;style&gt;
+        ///.yorotMap {
+        ///height: 100%;
+        ///width: 100%;
+        ///}
+        ///svg{-ms-touch-action:none;touch-action:none}image,text,.jsvmap-zoomin,.jsvmap-zoomout{-ms-user-select:none;user-select:none}.jsvmap-container{-ms-touch-action:none;touch-action:none;position:relative;overflow:hidden;height:100%;width:100%}.jsvmap-tooltip{border-radius:3px;background-color:#373f52;font-family:sans-serif,Verdana;font-size:smaller;box-shadow:1px 2px 12px rgba(0,0,0,.2);padding:3px 5px;position:absolute;display:none; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string map {
+            get {
+                return ResourceManager.GetString("map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;root&gt;
+        ///   &lt;!-- YOROT WORLD MAP CONFIG FILE
+        ///   This file includes details of the countries as the default language, date and time format and CEF locale.
+        ///   End user cannot edit this file.
+        ///   
+        ///   NOTE: Use &quot;com.haltroy.english&quot; language if that country&apos;s default language is not added and use &quot;en_US&quot; locale if that&apos;s also
+        ///   not present..
+        ///   --&gt;
+        ///   &lt;Countries&gt;
+        ///     // TODO: Add Countrly-specific color to map and here. Also add locales.
+        ///     &lt;Country Name=&quot;US&quot; MapColor=&quot;#05F245&quot; Text=&quot;United States&quot; L [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string MapConfig {
+            get {
+                return ResourceManager.GetString("MapConfig", resourceCulture);
             }
         }
         
@@ -196,6 +327,16 @@ namespace Yorot.Properties {
         internal static System.Drawing.Bitmap profiles {
             get {
                 object obj = ResourceManager.GetObject("profiles", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap security_settings {
+            get {
+                object obj = ResourceManager.GetObject("security-settings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -247,6 +388,30 @@ namespace Yorot.Properties {
             get {
                 object obj = ResourceManager.GetObject("trash-w", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;
+        ///&lt;root&gt;
+        ///  &lt;Group Name=&quot;#YOROT-ROOT&quot;&gt;
+        ///    &lt;Name&gt;Türkçe&lt;/Name&gt;
+        ///    &lt;Author&gt;Haltroy&lt;/Author&gt;
+        ///    &lt;CodeName&gt;com.haltroy.turkish&lt;/CodeName&gt;
+        ///    &lt;CompatibleVersion&gt;1&lt;/CompatibleVersion&gt;
+        ///    &lt;Version&gt;1&lt;/Version&gt;
+        ///    &lt;HTUPDATE&gt;&lt;/HTUPDATE&gt;
+        ///  &lt;/Group&gt;
+        ///  &lt;Group Name=&quot;Win32&quot;&gt;
+        ///    &lt;Group Name=&quot;DefaultApps&quot;&gt;
+        ///      &lt;Translation ID=&quot;Settings&quot; Text =&quot;Ayarlar&quot; /&gt;
+        ///      &lt;Translation ID=&quot;Yopad&quot; Text =&quot;Yopad&quot; /&gt;
+        ///      &lt;Translation ID=&quot;Calendar&quot; Text =&quot;Takvim&quot; /&gt;
+        ///      &lt;Trans [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Turkish {
+            get {
+                return ResourceManager.GetString("Turkish", resourceCulture);
             }
         }
         
@@ -307,6 +472,22 @@ namespace Yorot.Properties {
             get {
                 object obj = ResourceManager.GetObject("Yorot", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;head&gt;
+        ///&lt;title&gt;[WIP] §PAGETITLE§&lt;/title&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///&lt;h1&gt;§PAGETITLE§&lt;/h1&gt;
+        ///&lt;a&gt;TODO: Embed and add all required legal information as a expandable item list.&lt;a&gt;
+        ///&lt;h2 href=&quot;https://www.flaticon.com/authors/freepik&quot;&gt;§FREEPIK§&lt;/h2&gt;
+        ///&lt;/body&gt;.
+        /// </summary>
+        internal static string yorot_licenses {
+            get {
+                return ResourceManager.GetString("yorot_licenses", resourceCulture);
             }
         }
         

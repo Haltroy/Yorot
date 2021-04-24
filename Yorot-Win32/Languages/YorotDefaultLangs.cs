@@ -11,24 +11,45 @@ namespace Yorot
     public static class YorotDefaultLangs
     {
         /// <summary>
+        /// Generates the default languages.
+        /// </summary>
+        /// <param name="langLoc">Location of the language folder.</param>
+        public static void GenLangs(string langLoc)
+        {
+            if (!langLoc.EndsWith("\\")) { langLoc += "\\"; }
+            var d = YorotDefaultLanguages.DefaultLangList;
+            for (int i = 0; i < d.Length; i++)
+            {
+                string l = d[i];
+                string _l = langLoc + l + ".ylf";
+                if (!System.IO.File.Exists(_l))
+                {
+                    HTAlt.Tools.WriteFile(_l, GetDefaultLang(l), Encoding.Unicode);
+                }
+            }
+        }
+        /// <summary>
+        /// An array of languages that are default to this Yorot flavor.
+        /// </summary>
+        /// <summary>
         /// Gets the default configuration from <paramref name="codeName"/>.
         /// </summary>
         /// <param name="codeName">Code Name of the language.</param>
         /// <returns><see cref="string"/></returns>
-        public static string GetDefaultLang(string codeName)
+        private static string GetDefaultLang(string codeName)
         {
             switch(codeName.ToLowerEnglish())
             {
                 default:
                     Output.WriteLine("[DefaultLangs] Cannot find language \"" + codeName + "\". Loaded com.haltroy.english-us.", LogLevel.Warning);
-                    return English_US;
+                    return Properties.Resources.English_US;
                 case "com.haltroy.english":
                 case "com.haltroy.english-us":
-                    return English_US;
+                    return Properties.Resources.English_US;
                 case "com.haltroy.english-gb":
-                    return English_GB;
+                    return Properties.Resources.English_GB;
                 case "com.haltroy.turkish":
-                    return Turkish;
+                    return Properties.Resources.Turkish;
                 case "com.haltroy.japanese":
                 case "com.haltroy.chinese-s":
                 case "com.haltroy.chinese-t":
@@ -54,51 +75,8 @@ namespace Yorot
                 case "com.haltroy.georgian":
                 case "com.haltroy.hebrew":
                     Output.WriteLine("[DefaultLangs] Language \"" + codeName + "\" is not implemented yet! Loaded com.haltroy.english-us.",LogLevel.Warning);
-                    return English_US;
+                    return Properties.Resources.English_US;
             }
         }
-        public static string[] DefaultLangList => new string[] 
-        {   
-            "com.haltroy.english" , 
-            "com.haltroy.english-us",
-            "com.haltroy.english-gb",
-            "com.haltroy.turkish",
-            "com.haltroy.japanese",
-            "com.haltroy.chinese-s",
-            "com.haltroy.chinese-t",
-            "com.haltroy.french",
-            "com.haltroy.german",
-            "com.haltroy.itallian",
-            "com.haltroy.russian",
-            "com.haltroy.ukranian",
-            "com.haltroy.arabic",
-            "com.haltroy.persian",
-            "com.haltroy.spanish",
-            "com.haltroy.portuguese",
-            "com.haltroy.greek",
-            "com.haltroy.latin",
-            "com.haltroy.swedish",
-            "com.haltroy.norwegian",
-            "com.haltroy.danish",
-            "com.haltroy.punjabi",
-            "com.haltroy.romanian",
-            "com.haltroy.serbian",
-            "com.haltroy.hungarian",
-            "com.haltroy.dutch",
-            "com.haltroy.georgian",
-            "com.haltroy.hebrew"
-        };
-        /// <summary>
-        /// English (United States) language configuration.
-        /// </summary>
-        public static string English_US => Properties.Resources.English_US;
-        /// <summary>
-        /// English (Great Britain) language configuration.
-        /// </summary>
-        public static string English_GB => Properties.Resources.English_GB;
-        /// <summary>
-        /// Turkish language configuration.
-        /// </summary>
-        public static string Turkish => Properties.Resources.Turkish;
     }
 }

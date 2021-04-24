@@ -131,13 +131,13 @@ namespace Yorot
                                         {
                                             if (subnode.Attributes["Name"] != null)
                                             {
-                                                if (!Profile.Manager.Main.WebEngineMan.WEExists(subnode.Attributes["Name"].Value))
+                                                if (Profile.Manager.Main.WebEngineMan.WEExists(subnode.Attributes["Name"].Value))
                                                 {
                                                     Profile.Manager.Main.WebEngineMan.Enable(subnode.Attributes["Name"].Value);
                                                 }
                                                 else
                                                 {
-                                                    Output.WriteLine("[Web Engine] Threw away \"" + subnode.OuterXml + "\". Web Engine already exists.", LogLevel.Warning);
+                                                    Output.WriteLine("[Web Engine] Threw away \"" + subnode.OuterXml + "\". Web Engine does not exists.", LogLevel.Warning);
                                                 }
                                             }
                                             else
@@ -172,7 +172,7 @@ namespace Yorot
                                             if (subnode.Attributes["Name"] != null)
                                             {
                                                 var subnodeName = subnode.Attributes["Name"].Value.InnerXmlToString();
-                                                if (!Profile.Manager.Main.Extensions.ExtExists(subnodeName))
+                                                if (Profile.Manager.Main.Extensions.ExtExists(subnodeName))
                                                 {
                                                     Profile.Manager.Main.Extensions.Enable(subnodeName);
                                                     if (subnode.Attributes["allowInIncognito"] != null)
@@ -186,7 +186,7 @@ namespace Yorot
                                                 }
                                                 else
                                                 {
-                                                    Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". Web Engine already exists.", LogLevel.Warning);
+                                                    Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". Extension does not exists.", LogLevel.Warning);
                                                 }
                                             }
                                             else
@@ -220,13 +220,13 @@ namespace Yorot
                                         {
                                             if (subnode.Attributes["Name"] != null)
                                             {
-                                                if (!Profile.Manager.Main.ThemeMan.ThemeExists(subnode.Attributes["Name"].Value))
+                                                if (Profile.Manager.Main.ThemeMan.ThemeExists(subnode.Attributes["Name"].Value))
                                                 {
                                                     Profile.Manager.Main.ThemeMan.Enable(subnode.Attributes["Name"].Value);
                                                 }
                                                 else
                                                 {
-                                                    Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". Web Engine already exists.", LogLevel.Warning);
+                                                    Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". Theme does not exists.", LogLevel.Warning);
                                                 }
                                             }
                                             else
@@ -267,13 +267,13 @@ namespace Yorot
                                         {
                                             if (subnode.Attributes["Name"] != null)
                                             {
-                                                if (!Profile.Manager.Main.LangMan.LangExists(subnode.Attributes["Name"].Value))
+                                                if (Profile.Manager.Main.LangMan.LangExists(subnode.Attributes["Name"].Value))
                                                 {
                                                     Profile.Manager.Main.LangMan.Enable(subnode.Attributes["Name"].Value);
                                                 }
                                                 else
                                                 {
-                                                    Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". Web Engine already exists.", LogLevel.Warning);
+                                                    Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". Language does not exists.", LogLevel.Warning);
                                                 }
                                             }
                                             else
@@ -314,7 +314,7 @@ namespace Yorot
                                         {
                                             if (subnode.Attributes["Name"] != null)
                                             {
-                                                if (!Profile.Manager.Main.AppMan.AppExists(subnode.Attributes["Name"].Value))
+                                                if (Profile.Manager.Main.AppMan.AppExists(subnode.Attributes["Name"].Value))
                                                 {
                                                     Profile.Manager.Main.AppMan.Enable(subnode.Attributes["Name"].Value);
                                                     if (subnode.Attributes["isPinned"] != null)
@@ -324,7 +324,7 @@ namespace Yorot
                                                 }
                                                 else
                                                 {
-                                                    Output.WriteLine("[Apps] Threw away \"" + subnode.OuterXml + "\". Web Engine already exists.", LogLevel.Warning);
+                                                    Output.WriteLine("[Apps] Threw away \"" + subnode.OuterXml + "\". App does not exists.", LogLevel.Warning);
                                                 }
                                             }
                                             else
@@ -547,7 +547,7 @@ namespace Yorot
                     x += "<Lang Name=\"" + lang.CodeName + "\" />" + Environment.NewLine;
                 }
             }
-            x += "</Langs>" + Environment.NewLine +  "<Themes Selected=\"" + CurrentTheme.CodeName + "\" >" + Environment.NewLine;
+            x += "</Langs>" + Environment.NewLine + "<Themes Selected=\"" + CurrentTheme.CodeName + "\" >" + Environment.NewLine;
             foreach (YorotTheme theme in Profile.Manager.Main.ThemeMan.Themes)
             {
                 if (theme.Enabled)
@@ -555,31 +555,36 @@ namespace Yorot
                     x += "<Theme Name=\"" + theme.CodeName + "\" />" + Environment.NewLine;
                 }
             }
-            x += "</Themes>" + Environment.NewLine + "<Extensions>" + Environment.NewLine;
-            foreach (YorotExtension ext in Profile.Manager.Main.Extensions.Extensions)
-            {
-                if (ext.Enabled)
+            x += "</Themes>" + Environment.NewLine;
+            var enabledExt = Profile.Manager.Main.Extensions.Extensions.FindAll(it => it.Enabled);
+            if (enabledExt.Count > 0) {
+                x += "<Extensions>" + Environment.NewLine;
+                foreach (YorotExtension ext in enabledExt)
                 {
                     x += "<Ext Name=\"" + ext.CodeName + "\" " + (ext.AllowInIncognito ? "allowInIncognito=\"true\" " : "") + (ext.isPinned ? "isPinned=\"true\" " : "") + "/>" + Environment.NewLine;
                 }
+                x += "</Extensions>" + Environment.NewLine;
             }
-            x += "</Extensions>" + Environment.NewLine + "<WebEngines>" + Environment.NewLine;
-            foreach (YorotWebEngine engine in Profile.Manager.Main.WebEngineMan.Engines)
-            {
-                if (engine.isEnabled)
+            var enabledWE = Profile.Manager.Main.WebEngineMan.Engines.FindAll(it => it.isEnabled);
+            if (enabledWE.Count > 0) {
+                x += "<WebEngines>" + Environment.NewLine;
+                foreach (YorotWebEngine engine in enabledWE)
                 {
                     x += "<Engine Name=\"" + engine.CodeName + "\" />" + Environment.NewLine;
                 }
+                x += "</WebEngines>" + Environment.NewLine;
             }
-            x += "</WebEngines>" + Environment.NewLine + "<Apps>" + Environment.NewLine;
-            foreach (YorotApp app in Profile.Manager.Main.AppMan.Apps)
+            var enabledApps = Profile.Manager.Main.AppMan.Apps.FindAll(it => it.isEnabled);
+            if (enabledApps.Count > 0)
             {
-                if (app.isEnabled)
+                x += "<Apps>" + Environment.NewLine;
+                foreach (YorotApp app in enabledApps)
                 {
                     x += "<App Name=\"" + app.AppCodeName + "\" " + (app.isPinned ? "isPinned=\"true\" " : "") + "/>" + Environment.NewLine;
                 }
+                x += "</Apps>" + Environment.NewLine;
             }
-            x += "</Apps>" + Environment.NewLine +"<DoNotTrack>" + (DoNotTrack ? "true" : "false") + "</DoNotTrack>" + Environment.NewLine;
+            x +="<DoNotTrack>" + (DoNotTrack ? "true" : "false") + "</DoNotTrack>" + Environment.NewLine;
             x += "<ShowFavorites>" + (FavManager.ShowFavorites ? "true" : "false") + "</ShowFavorites>" + Environment.NewLine;
             x += "<StartWithFullScreen>" + (StartWithFullScreen ? "true" : "false") + "</StartWithFullScreen>" + Environment.NewLine;
             x += "<OpenFilesAfterDownload>" + (DownloadManager.OpenFilesAfterDownload ? "true" : "false") + "</OpenFilesAfterDownload>" + Environment.NewLine;
@@ -605,10 +610,26 @@ namespace Yorot
             FavManager = new FavMan(root ? "" : Profile.UserFavorites, Profile.Manager.Main);
             HomePage = "yorot://newtab";
             // BEGIN: Search Engines
+			// TODO: ADD THESE
+			/*
+			Lycos: https://search17.lycos.com/web/?q=haltroy
+Teoma: https://www.teoma.com/web?q=haltroy
+Ciao!: https://www.ciao.co.uk/search?query=haltroy
+Ecosia: https://www.ecosia.org/search?q=haltroy
+Webcrawler: https://www.webcrawler.com/serp?q=haltroy
+Yahoo Japan: https://search.yahoo.co.jp/search?p=haltroy
+business.com: https://www.business.com/search/?q=haltroy
+Shodan: https://www.shodan.io/search?query=haltroy
+Startpage: https://www.startpage.com/do/dsearch?query=haltroy
+Wiki: https://en.wikipedia.org/w/index.php?search=haltroy
+Kiddle: https://www.kiddle.co/s.php?q=haltroy
+KidzSearch: https://search.kidzsearch.com/kzsearch.php?q=haltroy
+YouTube: https://www.youtube.com/results?search_query=haltroy
+			*/
             SearchEngines.Clear();
             SearchEngine = new YorotSearchEngine("Google", "https://www.google.com/search?q=") { comesWithYorot = true };
             SearchEngines.Add(SearchEngine);
-            SearchEngines.Add(new YorotSearchEngine("Yandex", "https://yandex.com.tr/search/?lr=103873&text=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Yandex", "https://yandex.com/search/?lr=103873&text=") { comesWithYorot = true });
             SearchEngines.Add(new YorotSearchEngine("Bing", "https://www.bing.com/search?q=") { comesWithYorot = true });
             SearchEngines.Add(new YorotSearchEngine("Yaani", "https://www.yaani.com/#q=") { comesWithYorot = true });
             SearchEngines.Add(new YorotSearchEngine("DuckDuckGo", "https://duckduckgo.com/?q=") { comesWithYorot = true });

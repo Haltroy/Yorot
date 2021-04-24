@@ -16,9 +16,10 @@ namespace Yorot.UI
             InitializeComponent();
             assocAppAndForm(YorotGlobal.Main.AppMan.FindByAppCN(appcn));
         }
-        public frmApp(YorotApp app)
+        public frmApp(YorotApp app,WinAppLayout layout = null)
         {
             InitializeComponent();
+            if (layout != null) assocLayout = layout;
             assocAppAndForm(app);
         }
         private void assocAppAndForm(YorotApp app)
@@ -35,7 +36,7 @@ namespace Yorot.UI
                         pApp.Controls.Add(appc);
                         break;
                     case "com.haltroy.settings":
-                        appc = new SystemApp.settings() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appc = new SystemApp.settings(assocLayout is null ? null : assocLayout.Args) { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
                         appContainer = appc;
                         pApp.Controls.Add(appc);
                         break;
@@ -75,7 +76,7 @@ namespace Yorot.UI
                         pApp.Controls.Add(appc);
                         break;
                     case "com.haltroy.spacepass":
-                        appc = new SystemApp.spacepass() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appc = new Yorot.UI.SystemApp.spacepass() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
                         appContainer = appc;
                         pApp.Controls.Add(appc);
                         break;

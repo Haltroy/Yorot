@@ -6,6 +6,40 @@ using System.Xml;
 
 namespace Yorot
 {
+    public static class YorotDefaultLanguages
+    {
+        public static string[] DefaultLangList => new string[]
+        {
+            "com.haltroy.english" ,
+            "com.haltroy.english-us",
+            "com.haltroy.english-gb",
+            "com.haltroy.turkish",
+            "com.haltroy.japanese",
+            "com.haltroy.chinese-s",
+            "com.haltroy.chinese-t",
+            "com.haltroy.french",
+            "com.haltroy.german",
+            "com.haltroy.itallian",
+            "com.haltroy.russian",
+            "com.haltroy.ukranian",
+            "com.haltroy.arabic",
+            "com.haltroy.persian",
+            "com.haltroy.spanish",
+            "com.haltroy.portuguese",
+            "com.haltroy.greek",
+            "com.haltroy.latin",
+            "com.haltroy.swedish",
+            "com.haltroy.norwegian",
+            "com.haltroy.danish",
+            "com.haltroy.punjabi",
+            "com.haltroy.romanian",
+            "com.haltroy.serbian",
+            "com.haltroy.hungarian",
+            "com.haltroy.dutch",
+            "com.haltroy.georgian",
+            "com.haltroy.hebrew"
+        };
+    }
     /// <summary>
     /// Yorot Language manager.
     /// </summary>
@@ -14,7 +48,7 @@ namespace Yorot
         /// <summary>
         /// Creates a new Language manager.
         /// </summary>
-        public YorotLangManager(YorotMain main) : base(main.LangConfig,main)        { for (int i = 0; i < YorotDefaultLangs.DefaultLangList.Length; i++) { Languages.Add(new YorotLanguage(YorotDefaultLangs.DefaultLangList[i], this)); }    }
+        public YorotLangManager(YorotMain main) : base(main.LangConfig,main)  { var d = YorotDefaultLanguages.DefaultLangList; for (int i = 0; i < d.Length; i++) { Languages.Add(new YorotLanguage(Main.LangFolder + d[i] + ".ylf", this) { isDefaultLang = true, Enabled = true }); }  }
 
         /// <summary>
         /// A list of loaded languages.
@@ -144,34 +178,19 @@ namespace Yorot
             if (manager is null) { throw new ArgumentNullException("manager"); } Manager = manager;
             if (!string.IsNullOrWhiteSpace(configFile))
             {
-                if (configFile.ToLowerEnglish().StartsWith("com.haltroy"))
+                if (System.IO.File.Exists(configFile))
                 {
                     AddDefaultVars();
                     LangFile = configFile;
-                    isDefaultLang = true;
                     LoadedRoot = false;
                     XmlDocument doc = new XmlDocument();
-                    var xml = YorotDefaultLangs.GetDefaultLang(configFile);
-                    doc.LoadXml(xml);
+                    doc.LoadXml(HTAlt.Tools.ReadFile(configFile, Encoding.Unicode));
                     XmlNode rootNode = Yorot.Tools.FindRoot(doc);
-                    RecursiveAdd(rootNode);
+                    RecursiveAdd(rootNode, "");
                 }
                 else
                 {
-                    if (System.IO.File.Exists(configFile))
-                    {
-                        AddDefaultVars();
-                        LangFile = configFile;
-                        LoadedRoot = false;
-                        XmlDocument doc = new XmlDocument();
-                        doc.LoadXml(HTAlt.Tools.ReadFile(configFile, Encoding.Unicode));
-                        XmlNode rootNode = Yorot.Tools.FindRoot(doc);
-                        RecursiveAdd(rootNode);
-                    }
-                    else
-                    {
-                        throw new ArgumentException("File \"" + configFile + "\" does not exists.");
-                    }
+                    throw new ArgumentException("File \"" + configFile + "\" does not exists.");
                 }
             }else
             {
@@ -245,7 +264,7 @@ namespace Yorot
         /// </summary>
         public int Version { get; set; }
         /// <summary>
-        /// Fşnds Language Item from ID.
+        /// Finds Language Item from ID.
         /// </summary>
         /// <param name="ID">ID of translation.</param>
         /// <returns><see cref="string"/></returns>
@@ -285,7 +304,7 @@ namespace Yorot
         /// Recursively adds items to system.
         /// </summary>
         /// <param name="rootNode">Root Node</param>
-        private void RecursiveAdd(XmlNode rootNode)
+        private void RecursiveAdd(XmlNode rootNode, string groupID)
         {
             for (int i = 0; i < rootNode.ChildNodes.Count; i++)
             {
@@ -302,7 +321,8 @@ namespace Yorot
                                 }
                                 else
                                 {
-                                    LangVars.Add(new YorotLangVar(node.Attributes["ID"].Value.InnerXmlToString(), node.Attributes["Text"].Value.InnerXmlToString()));
+
+                                    LangVars.Add(new YorotLangVar((string.IsNullOrWhiteSpace(groupID) ? "" : groupID + ".") + node.Attributes["ID"].Value.InnerXmlToString(), node.Attributes["Text"].Value.InnerXmlToString()));
                                 }
                             }
                             else
@@ -323,7 +343,7 @@ namespace Yorot
                                 }
                                 else
                                 {
-                                    LangItems.Add(new YorotLangItem() { ID = id, Text = text });
+                                    LangItems.Add(new YorotLangItem() { ID = (string.IsNullOrWhiteSpace(groupID) ? "" : groupID + ".") + id, Text = text });
                                 }
                             }
                             else
@@ -416,12 +436,12 @@ namespace Yorot
                                     }
                                 }else
                                 {
-                                    RecursiveAdd(node);
+                                    RecursiveAdd(node, (string.IsNullOrWhiteSpace(groupID) ? "" : groupID + ".") + node.Attributes["Name"].Value.InnerXmlToString());
                                 }
                             }
                             else
                             {
-                                RecursiveAdd(node);
+                                RecursiveAdd(node, string.IsNullOrWhiteSpace(groupID) ? "" : groupID);
                             }
                             break;
                         }

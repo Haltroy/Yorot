@@ -6,14 +6,6 @@ namespace Yorot
 {
     public static class YorotTools
     {
-        public static string FromThemeFolder(this string x)
-        {
-            return x.Replace("[THEMES]", YorotGlobal.Main.ThemesFolder);
-        }
-        public static string ToThemeFolder(this string x)
-        {
-            return x.Replace(YorotGlobal.Main.ThemesFolder, "[THEMES]");
-        }
         public static System.Drawing.Image GetAppIcon(YorotApp app)
         {
             if (app.isSystemApp)

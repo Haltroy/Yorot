@@ -114,6 +114,11 @@ namespace Yorot
     public class YorotExtension
     {
         /// <summary>
+        /// Determines if this extension comes with this Yorot flavor.
+        /// </summary>
+        public bool isSystemExt;
+
+        /// <summary>
         /// Creates a new yorot Extension.
         /// </summary>
         /// <param name="manifestFile">Location of the manifest file for this extension on drive.</param>

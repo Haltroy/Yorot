@@ -13,6 +13,7 @@ namespace Yorot
         #region Constructor
 
         bool isCarbonCopy = true;
+        bool loadedAppList = false;
 
         public frmMain() : this(false) { }
         public frmMain(bool isMainSession)
@@ -20,22 +21,24 @@ namespace Yorot
             InitializeComponent();
             pAppDrawer.Width = panelMinSize;
             isCarbonCopy = !isMainSession;
-            YorotGlobal.Y1.MainForms.Add(this);
-            if (!isCarbonCopy) { RefreshAppList(true); }  else
+            YorotGlobal.Main.MainForms.Add(this);
+            LoadTheme(true);
+            loadPinnedApps(true);
+            if (!isCarbonCopy) { RefreshAppList(true); loadedAppList = true; }
+            else
             {
+                loadedAppList = false;
                 label2.Visible = true;
                 label2.Enabled = true;
                 htButton1.Visible = true;
                 htButton1.Enabled = true;
             }
-            LoadTheme(true);
-            loadPinnedApps(true);
+            LoadLang(true);
         }
         private List<YorotApp> loadedApps;
-        private List<YorotApp> getPinnedApps() => YorotGlobal.Main.AppMan.Apps.FindAll(it => it.isPinned);
         private void loadPinnedApps(bool force = false)
         {
-            var l = getPinnedApps();
+            var l = YorotGlobal.Main.AppMan.Apps.FindAll(it => it.isPinned);
             List<YorotApp> _n;
             if (force || loadedApps != l)
             {
@@ -71,13 +74,26 @@ namespace Yorot
                 }
             }
         }
-
+        private string UnpinAppText = "Unpin this app";
+        private string PinAppText = "Pin this app";
+        private ListViewItem calc_app;
+        private ListViewItem cal_app;
+        private ListViewItem col_app;
+        private ListViewItem con_app;
+        private ListViewItem file_app;
+        private ListViewItem note_app;
+        private ListViewItem set_app;
+        private ListViewItem sp_app;
+        private ListViewItem yorot_app;
+        private ListViewItem st_app;
+        private ListViewItem yopad_app;
         private void frmMain_Load(object sender, EventArgs e)
         {
             
         }
         int appListUpdate = 0;
         private string loadedTheme = string.Empty;
+        private string loadedLang = string.Empty;
         private void tmrAppSync_Tick(object sender, EventArgs e)
         {
             if (appListUpdate != YorotGlobal.Main.AppMan.UpdateCount)
@@ -91,6 +107,38 @@ namespace Yorot
             }
             LoadTheme();
             loadPinnedApps();
+            
+        }
+        private void LoadLang(bool force = false)
+        {
+            var l = YorotGlobal.Main.CurrentLanguage;
+            if (force || loadedLang != l.CodeName)
+            {
+                loadedLang = l.CodeName;
+                label2.Text = l.GetItemText("Win32.MainForm.NotLoadedApps");
+                htButton1.Text = l.GetItemText("Win32.MainForm.LoadAppButton");
+                PinAppText = l.GetItemText("Win32.MainForm.PinApp");
+                UnpinAppText = l.GetItemText("Win32.MainForm.UnpinApp");
+                openANewSessionToolStripMenuItem.Text = l.GetItemText("Win32.MainForm.OpenNewSession");
+                closeAllSessionsToolStripMenuItem.Text = l.GetItemText("Win32.MainForm.CloseAllSessions");
+                appSettingsToolStripMenuItem.Text = l.GetItemText("Win32.MainForm.AppSettings");
+                reloadToolStripMenuItem.Text = l.GetItemText("Win32.MainForm.AppListReload");
+                settingsToolStripMenuItem.Text = l.GetItemText("Win32.MainForm.ListSettings");
+                if (loadedAppList)
+                {
+                    yopad_app.Text = l.GetItemText("Win32.DefaultApps.Yopad");
+                    set_app.Text = l.GetItemText("Win32.DefaultApps.Settings");
+                    calc_app.Text = l.GetItemText("Win32.DefaultApps.Calculator");
+                    cal_app.Text = l.GetItemText("Win32.DefaultApps.Calendar");
+                    col_app.Text = l.GetItemText("Win32.DefaultApps.ColMan");
+                    con_app.Text = l.GetItemText("Win32.DefaultApps.Console");
+                    file_app.Text = l.GetItemText("Win32.DefaultApps.FileMan");
+                    note_app.Text = l.GetItemText("Win32.DefaultApps.Notepad");
+                    sp_app.Text = l.GetItemText("Win32.DefaultApps.SpacePass");
+                    st_app.Text = l.GetItemText("Win32.DefaultApps.Store");
+                    yorot_app.Text = YorotGlobal.Main.Name;
+                }
+            }
         }
         private void LoadTheme(bool force = false)
         {
@@ -133,28 +181,46 @@ namespace Yorot
             if (clearCurrent)
             {
                 lvApps.Items.Clear();
-
-                ListViewItem yorotApp = null;
                 foreach (YorotApp kapp in YorotGlobal.Main.AppMan.Apps)
                 {
-                    if (kapp.AppCodeName != "com.yorot.oobe")
+                    ilAppMan.Images.Add(Tools.GenerateAppIcon(YorotTools.GetAppIcon(kapp), "#808080".HexToColor()));
+                    ListViewItem item = new ListViewItem()
                     {
-                        ilAppMan.Images.Add(Tools.GenerateAppIcon(YorotTools.GetAppIcon(kapp), "#808080".HexToColor()));
-                        ListViewItem item = new ListViewItem()
-                        {
-                            Text = kapp.AppName,
-                            ToolTipText = kapp.AppCodeName,
-                            ImageIndex = ilAppMan.Images.Count - 1,
-                            Tag = kapp,
-                        };
-                        if (kapp.AppCodeName == "com.haltroy.yorot") { yorotApp = item; }
-                        else
-                        {
+                        Text = kapp.AppName,
+                        ToolTipText = kapp.AppCodeName,
+                        ImageIndex = ilAppMan.Images.Count - 1,
+                        Tag = kapp,
+                    };
+                    switch (kapp.AppCodeName.ToLowerEnglish())
+                    {
+                        case "com.haltroy.yorot":
+                            yorot_app = item; break;
+                        case "com.haltroy.spacepass":
+                            sp_app = item; lvApps.Items.Add(item); break;
+                        case "com.haltroy.settings":
+                            set_app = item; lvApps.Items.Add(item); break;
+                        case "com.haltroy.store":
+                            st_app = item; lvApps.Items.Add(item); break;
+                        case "com.haltroy.console":
+                            con_app = item; lvApps.Items.Add(item); break;
+                        case "com.haltroy.calc":
+                            calc_app = item; lvApps.Items.Add(item); break;
+                        case "com.haltroy.calendar":
+                            cal_app = item; lvApps.Items.Add(item); break;
+                        case "com.haltroy.notepad":
+                            note_app = item; lvApps.Items.Add(item); break;
+                        case "com.haltroy.colman":
+                            col_app = item; lvApps.Items.Add(item); break;
+                        case "com.haltroy.fileman":
+                            file_app = item; lvApps.Items.Add(item); break;
+                        case "com.haltroy.yopad":
+                            yopad_app = item; lvApps.Items.Add(item); break;
+                        default:
                             lvApps.Items.Add(item);
-                        }
+                            break;
                     }
                 }
-                lvApps.Items.Insert(0, yorotApp);
+                lvApps.Items.Insert(0, yorot_app);
             }else
             {
                 foreach(YorotApp yapp in YorotGlobal.Main.AppMan.Apps)
@@ -437,8 +503,7 @@ namespace Yorot
                     }
                     else
                     {
-                        UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(app) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
-                        showApp(fapp);
+                        showApp(app);
                     }
                 }
                 foreach(Control x in flpFavApps.Controls)
@@ -447,51 +512,51 @@ namespace Yorot
                 }
             }
         }
-        private void showApp(UI.frmApp app,YAMItem sender = null)
+        private void showApp(YorotApp app,YAMItem sender = null)
         {
+            TabPage tp = new TabPage() { Text = app.AppName };
+            WinAppLayout layout = new WinAppLayout()
+            {
+                AssocTab = tp,
+            };
+            if (app.AppCodeName == "com.haltroy.settings")
+            {
+                layout.Args = string.IsNullOrWhiteSpace(settingsArgs) ? layout.Args : settingsArgs.Split(' ');
+                settingsArgs = string.Empty;
+            }
+            UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(app,layout) { assocLayout = layout, assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+            layout.AssocForm = fapp;
             if (sender == null)
             {
-                TabPage tp = new TabPage() { Text = app.assocApp.AppName };
-                WinAppLayout layout = new WinAppLayout()
-                {
-                    AssocForm = app,
-                    AssocTab = tp,
-                };
-                app.assocApp.Layouts.Add(layout);
-                app.assocLayout = layout;
-                tp.Controls.Add(app);
+                fapp.assocApp.Layouts.Add(layout);
+                fapp.assocLayout = layout;
+                tp.Controls.Add(fapp);
                 tcAppMan.TabPages.Add(tp);
                 allowSwitch = true;
                 tcAppMan.SelectedTab = tp;
-                if (app.assocApp.AppCodeName != "com.haltroy.settings")
+                if (fapp.assocApp.AppCodeName != "com.haltroy.settings")
                 {
-                    YAMItem pbIcon = new YAMItem() { Size = new Size(38, 38), Margin = new Padding(3), Visible = true, AssocApp = app.assocApp, AssocFrmMain = this };
+                    YAMItem pbIcon = new YAMItem() { Size = new Size(38, 38), Margin = new Padding(3), Visible = true, AssocApp = fapp.assocApp, AssocFrmMain = this };
                     pbIcon.MouseClick += pbIcon_MouseClick;
                     layout.AssocItem = pbIcon;
                     flpFavApps.Controls.Add(pbIcon); pbIcon.Refresh();
                 }
             }else
             {
-                TabPage tp = new TabPage() { Text = app.assocApp.AppName };
-                WinAppLayout layout = new WinAppLayout()
-                {
-                    AssocForm = app,
-                    AssocTab = tp,
-                };
-                app.assocApp.Layouts.Add(layout);
-                app.assocLayout = layout;
-                tp.Controls.Add(app);
+                fapp.assocApp.Layouts.Add(layout);
+                fapp.assocLayout = layout;
+                tp.Controls.Add(fapp);
                 tcAppMan.TabPages.Add(tp);
                 allowSwitch = true;
                 tcAppMan.SelectedTab = tp;
                 layout.AssocItem = sender;
-                if (app.assocLayout.AssocItem.InvokeRequired) 
-                { app.assocLayout.AssocItem.Invoke(new Action(() => app.assocLayout.AssocItem.Refresh())); } else { app.assocLayout.AssocItem.Refresh(); }
+                if (fapp.assocLayout.AssocItem.InvokeRequired) 
+                { fapp.assocLayout.AssocItem.Invoke(new Action(() => fapp.assocLayout.AssocItem.Refresh())); } else { fapp.assocLayout.AssocItem.Refresh(); }
             }
-            if (app.freeMode)
+            if (fapp.freeMode)
             {
-                app.Show();
-                app.BringToFront();
+                fapp.Show();
+                fapp.BringToFront();
             }
             else
             {
@@ -500,7 +565,7 @@ namespace Yorot
                     AnimateTo(AnimateDirection.RightMost);
                 }
                 allowSwitch = true;
-                tcAppMan.SelectedTab = app.assocLayout.AssocTab;
+                tcAppMan.SelectedTab = fapp.assocLayout.AssocTab;
             }
         }
         private void pbIcon_MouseClick(object sender, MouseEventArgs e)
@@ -510,8 +575,7 @@ namespace Yorot
             {
                 if (pbIcon.CurrentStatus == YAMItem.AppStatuses.Pinned) // Launch app
                 {
-                    UI.frmApp fapp  = new UI.frmApp(pbIcon.AssocApp) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
-                    showApp(fapp,pbIcon);
+                    showApp(pbIcon.AssocApp, pbIcon);
                 }
                 else
                 {
@@ -548,7 +612,9 @@ namespace Yorot
             label2.Enabled = false;
             htButton1.Visible = false;
             htButton1.Enabled = false;
+            loadedAppList = true;
             RefreshAppList(true);
+            LoadLang(true);
         }
 
         private void lvApps_MouseClick(object sender, MouseEventArgs e)
@@ -634,6 +700,7 @@ namespace Yorot
                             {
                                 pinToAppBarToolStripMenuItem.Visible = true;
                                 pinToAppBarToolStripMenuItem.Enabled = true;
+                                pinToAppBarToolStripMenuItem.Text = app.isPinned ? UnpinAppText : PinAppText;
                             }
                             appSettingsToolStripMenuItem.Visible = true;
                             tsAppSep2.Visible = true;
@@ -646,6 +713,7 @@ namespace Yorot
                         closeAllSessionsToolStripMenuItem.Visible = false;
                         pinToAppBarToolStripMenuItem.Visible = true;
                         appSettingsToolStripMenuItem.Visible = true;
+                        pinToAppBarToolStripMenuItem.Text = PinAppText;
                         tsAppSep2.Visible = true;
                         pinToAppBarToolStripMenuItem.Enabled = true;
                         appSettingsToolStripMenuItem.Enabled = true;
@@ -654,11 +722,13 @@ namespace Yorot
                     break;
                 case 2:
                     openANewSessionToolStripMenuItem.Visible = true;
+                    pinToAppBarToolStripMenuItem.Text = PinAppText;
                     if (rcSender is YAMItem)
                     {
                         var hasSession = (rcSender as YAMItem).CurrentStatus != YAMItem.AppStatuses.Pinned;
                         closeAllSessionsToolStripMenuItem.Visible = hasSession;
                         closeAllSessionsToolStripMenuItem.Enabled = hasSession;
+                        pinToAppBarToolStripMenuItem.Text = (rcSender as YAMItem).AssocApp.isPinned ? UnpinAppText : PinAppText;
                     }
                     else
                     {
@@ -725,7 +795,7 @@ namespace Yorot
             {
                 if (isCarbonCopy)
                 {
-                    YorotGlobal.Y1.MainForm.Invoke(new Action(() => { YorotGlobal.Y1.MainForm.pbSettings_MouseClick(this, e); YorotGlobal.Y1.MainForm.BringToFront(); }));
+                    YorotGlobal.Main.MainForm.Invoke(new Action(() => { YorotGlobal.Main.MainForm.settingsArgs = settingsArgs; YorotGlobal.Main.MainForm.pbSettings_MouseClick(this, e); YorotGlobal.Main.MainForm.BringToFront(); }));
                 }
                 else
                 {
@@ -751,8 +821,7 @@ namespace Yorot
                     }
                     else
                     {
-                        UI.frmApp fapp = new UI.frmApp(settingApp) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
-                        showApp(fapp);
+                        showApp(settingApp);
                     }
                 }
             }else if (e.Button == MouseButtons.Right)
@@ -795,14 +864,10 @@ namespace Yorot
             else
             {
                 if (rcType == 1) {
-                    var app =  (rcSender as ListViewItem).Tag as YorotApp;
-                    UI.frmApp fapp = new UI.frmApp(app) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
-                    showApp(fapp);
+                    showApp((rcSender as ListViewItem).Tag as YorotApp);
                 }else
                 {
-                    var app = (rcSender as YAMItem).AssocApp;
-                    UI.frmApp fapp = new UI.frmApp(app) { assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
-                    showApp(fapp, (rcSender as YAMItem));
+                    showApp((rcSender as YAMItem).AssocApp, (rcSender as YAMItem));
                 }
             }
         }
@@ -853,6 +918,20 @@ namespace Yorot
                 {
                     flpFavApps.Controls.Remove(cntrl);
                     loadedApps.Remove(app);
+                }else
+                {
+                    loadedApps.Add(app);
+                    YAMItem item = new YAMItem()
+                    {
+                        Size = new Size(38, 38),
+                        Margin = new Padding(3),
+                        Visible = true,
+                        AssocApp = app,
+                        AssocFrmMain = this,
+                    };
+                    item.MouseClick += pbIcon_MouseClick;
+                    flpFavApps.Controls.Add(item);
+                    flpFavApps.Refresh();
                 }
             }
         }
@@ -860,22 +939,25 @@ namespace Yorot
         private void appSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var app = rcType == 4 ? YorotGlobal.Main.AppMan.FindByAppCN("com.haltroy.settings") : (rcType == 1 ? (rcSender as ListViewItem).Tag as YorotApp : (rcSender as YAMItem).AssocApp);
-            // TODO: Open settings for this app.
+            settingsArgs = "Apps:" + app.AppCodeName;
+            pbSettings_MouseClick(settingsToolStripMenuItem, new MouseEventArgs(MouseButtons.Left, 1, MousePosition.X, MousePosition.Y, 0));
         }
 
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RefreshAppList(false);
         }
-
+        private string settingsArgs = string.Empty;
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (rcType == 0)
             {
-                // TODO: Open Apps Menu Settings
+                settingsArgs = "Apps:Menu";
+                pbSettings_MouseClick(settingsToolStripMenuItem, new MouseEventArgs(MouseButtons.Left, 1, MousePosition.X, MousePosition.Y, 0));
             }
             else
             {
+                settingsArgs = "";
                 pbSettings_MouseClick(settingsToolStripMenuItem, new MouseEventArgs(MouseButtons.Left, 1, MousePosition.X, MousePosition.Y, 0));
             }
         }
@@ -914,7 +996,7 @@ namespace Yorot
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (YorotGlobal.Y1.MainForms.Count == 1)
+            if (YorotGlobal.Main.MainForms.Count == 1)
             {
                 YorotGlobal.Main.Shutdown();
             }

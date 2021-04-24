@@ -18,6 +18,7 @@ namespace Yorot
         public AppManager(YorotMain main) : base(main.AppsConfig,main)
         {
             Apps.Add(DefaultApps.Calculator.CreateCarbonCopy());
+            Apps.Add(DefaultApps.Calendar.CreateCarbonCopy());
             Apps.Add(DefaultApps.Collections.CreateCarbonCopy());
             Apps.Add(DefaultApps.Console.CreateCarbonCopy());
             Apps.Add(DefaultApps.DumbBattlePassThing.CreateCarbonCopy());
@@ -372,7 +373,7 @@ namespace Yorot
         public static YorotApp Yopad => new YorotApp()
         {
             AppName = "Yopad",
-            AppCodeName = "com.haltroy.packdist",
+            AppCodeName = "com.haltroy.yopad",
             AppIcon = "yopad.png",
             isLocal = true,
             HTUPDATE = null,
@@ -614,13 +615,7 @@ namespace Yorot
         /// <summary>
         /// Returns app size in bytes.
         /// </summary>+
-        public long AppSize
-        {
-            get
-            {
-                return (Manager.Main.AppsFolder + AppCodeName).GetDirectorySize();
-            }
-        }
+        public long AppSize => (AppOrigin == YorotAppOrigin.Embedded && isSystemApp) ? 0 : (Manager.Main.AppsFolder + AppCodeName).GetDirectorySize();
         /// <summary>
         /// Gets size of app.
         /// </summary>
@@ -669,6 +664,15 @@ namespace Yorot
                 isLocal = isLocal,
                 HTUPDATE = HTUPDATE,
                 AppName = AppName,
+                AppOrigin = AppOrigin,
+                AppOriginInfo = AppOriginInfo,
+                Author = Author,
+                isEnabled = isEnabled,
+                isPinned = isPinned,
+                MultipleSession = MultipleSession,
+                StartFile = StartFile,
+                Version = Version,
+                VersionNo = VersionNo,
             };
         }
         /// <summary>
