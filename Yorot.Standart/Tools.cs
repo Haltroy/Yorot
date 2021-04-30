@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Yorot
 {
@@ -35,6 +32,7 @@ namespace Yorot
             }
             return bm;
         }
+
         /// <summary>
         /// Uploads a file to server
         /// </summary>
@@ -44,8 +42,8 @@ namespace Yorot
         /// <param name="password">FTP Password</param>
         public static void UploadFileToFtp(string url, string filePath, string username, string password)
         {
-            var fileName = System.IO.Path.GetFileName(filePath);
-            var request = (System.Net.FtpWebRequest)System.Net.WebRequest.Create(url + fileName);
+            string fileName = System.IO.Path.GetFileName(filePath);
+            System.Net.FtpWebRequest request = (System.Net.FtpWebRequest)System.Net.WebRequest.Create(url + fileName);
 
             request.Method = System.Net.WebRequestMethods.Ftp.UploadFile;
             request.Credentials = new System.Net.NetworkCredential(username, password);
@@ -53,19 +51,20 @@ namespace Yorot
             request.UseBinary = true;
             request.KeepAlive = false;
 
-            using (var fileStream = System.IO.File.OpenRead(filePath))
+            using (System.IO.FileStream fileStream = System.IO.File.OpenRead(filePath))
             {
-                using (var requestStream = request.GetRequestStream())
+                using (System.IO.Stream requestStream = request.GetRequestStream())
                 {
                     fileStream.CopyTo(requestStream);
                     requestStream.Close();
                 }
             }
 
-            var response = (System.Net.FtpWebResponse)request.GetResponse();
+            System.Net.FtpWebResponse response = (System.Net.FtpWebResponse)request.GetResponse();
             Console.WriteLine("Upload done: {0}", response.StatusDescription);
             response.Close();
         }
+
         /// <summary>
         /// Finds the root node of <paramref name="doc"/>.
         /// </summary>
@@ -82,7 +81,7 @@ namespace Yorot
             {
                 for (int i = 0; i < doc.ChildNodes.Count; i++)
                 {
-                    var node = doc.ChildNodes[i];
+                    System.Xml.XmlNode node = doc.ChildNodes[i];
                     if (node.Name.ToLowerEnglish() == "root")
                     {
                         found = node;
@@ -91,6 +90,7 @@ namespace Yorot
             }
             return found;
         }
+
         /// <summary>
         /// Turns all characters to lowercase, using en-US culture information to avoid language-specific ToLower() errors such as:
         /// <para>Turkish: I &lt;-&gt; ı , İ &lt;-&gt; i</para>
@@ -107,6 +107,7 @@ namespace Yorot
             // Bu da küçük bir "rant" olsun. Hem ToLowerInvariant() bir boka yaramıyor.
             return s.ToLower(new System.Globalization.CultureInfo("en-US", false));
         }
+
         /// <summary>
         /// Finds the root node of <paramref name="doc"/>.
         /// </summary>
@@ -116,6 +117,7 @@ namespace Yorot
         {
             return FindRoot(doc.DocumentElement);
         }
+
         /// <summary>
         /// Converts <see cref="XmlNode.InnerXml"/> to formatted <seealso cref="string"/>.
         /// </summary>
@@ -125,6 +127,7 @@ namespace Yorot
         {
             return innerxml.Replace("&amp;", "&").Replace("&quot;", "\"").Replace("&apos;", "'").Replace("&lt;", "<").Replace("&gt;", ">");
         }
+
         /// <summary>
         /// Converts <paramref name="s"/> to <see cref="System.Xml"/> supported format.
         /// </summary>
@@ -134,13 +137,14 @@ namespace Yorot
         {
             return s.Replace("&", "&amp;").Replace("\"", "&quot;").Replace("'", "&apos;").Replace("<", "&lt;").Replace(">", "&gt;");
         }
+
         /// <summary>
         /// Shortens the path.
         /// </summary>
         /// <param name="path">Path</param>
         /// <param name="main"><see cref="YorotMain"/></param>
         /// <returns><see cref="string"/></returns>
-        public static string ShortenPath(this string path,YorotMain main)
+        public static string ShortenPath(this string path, YorotMain main)
         {
             return path.Replace(main.ProfilesFolder, "[PROFILES]")
                 .Replace(main.WEFolder, "[WEBENG]")
@@ -151,8 +155,9 @@ namespace Yorot
                 .Replace(main.Profiles.Current.CacheLoc, "[USERCACHE]")
                 .Replace(main.LogFolder, "[LOGS]")
                 .Replace(main.Profiles.Current.Path, "[USER]")
-                .Replace(main.AppPath,"[APPPATH]");
+                .Replace(main.AppPath, "[APPPATH]");
         }
+
         /// <summary>
         /// Unshortens the path.
         /// </summary>
@@ -168,9 +173,9 @@ namespace Yorot
                 .Replace("[USERAPPS]", main.AppsFolder)
                 .Replace("[USERTHEME]", main.ThemesFolder)
                 .Replace("[USERCACHE]", main.Profiles.Current.CacheLoc)
-                .Replace("[LOGS]",main.LogFolder)
-                .Replace("[USER]",main.Profiles.Current.Path)
-                .Replace("[APPPATH]",main.AppPath);
+                .Replace("[LOGS]", main.LogFolder)
+                .Replace("[USER]", main.Profiles.Current.Path)
+                .Replace("[APPPATH]", main.AppPath);
         }
     }
 }

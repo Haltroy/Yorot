@@ -21,18 +21,22 @@ namespace Yorot
         /// Determines the <see cref="Encoding"/> of Wolves.
         /// </summary>
         public Encoding DefaultEncoding { get; set; } = Encoding.Unicode;
+
         /// <summary>
         /// Determines the timeout between each search.
         /// </summary>
         public int Timeout { get; set; } = 5000;
+
         /// <summary>
         /// Logs "Working" message when working.
         /// </summary>
         public bool LogWork { get; set; } = false;
+
         /// <summary>
         /// List of fetched wolves.
         /// </summary>
         public List<string> Wolves { get; set; } = new List<string>();
+
         public void SendWolf(string message, string id = "")
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -42,7 +46,9 @@ namespace Yorot
             Output.WriteLine("<WOLFHOOK> Created message=\"" + message + "\" from ID=\"" + id + "\" without error(s).", LogLevel.Info);
             message.WriteToFile(WhFolder + id + ".wh", DefaultEncoding);
         }
+
         private bool StopTask { get; set; } = false;
+
         /// <summary>
         /// Starts searching.
         /// </summary>
@@ -50,8 +56,8 @@ namespace Yorot
         {
             StopTask = false;
             Task.Run(() => SearchForWolves());
-
         }
+
         /// <summary>
         /// Stops before starting a new search in next search.
         /// </summary>
@@ -59,6 +65,7 @@ namespace Yorot
         {
             StopTask = true;
         }
+
         private async void SearchForWolves()
         {
             if (StopTask)

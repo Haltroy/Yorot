@@ -1,7 +1,6 @@
 ﻿using HTAlt;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Xml;
 
 namespace Yorot
@@ -15,13 +14,14 @@ namespace Yorot
         /// Creates a new History manager.
         /// </summary>
         /// <param name="configFile">Location of configuration file on drive.</param>
-        public HistoryManager(string configFile,YorotMain main) : base(configFile,main)
-        {}
+        public HistoryManager(string configFile, YorotMain main) : base(configFile, main)
+        { }
 
         /// <summary>
         /// YorotSites of this manager.
         /// </summary>
         public List<YorotSite> Sites { get; set; } = new List<YorotSite>();
+
         /// <summary>
         /// Exports current status to  XML format. Used by Save() command.
         /// </summary>
@@ -36,17 +36,18 @@ namespace Yorot
                 "<History>" + Environment.NewLine;
             for (int i = 0; i < Sites.Count; i++)
             {
-                var site = Sites[i];
+                YorotSite site = Sites[i];
                 x += "<Site Name=\"" + site.Name.ToXML() + "\" Url=\"" + site.Url.ToXML() + "\" Date=\"" + site.Date.ToString("dd-MM-yyyy HH-mm-ss") + "\" />" + Environment.NewLine;
             }
             return (x + "</History>" + Environment.NewLine + "</root>").BeautifyXML();
         }
+
         public override void ExtractXml(XmlNode rootNode)
         {
             List<string> appliedSettings = new List<string>();
             for (int i = 0; i < rootNode.ChildNodes.Count; i++)
             {
-                var node = rootNode.ChildNodes[i];
+                XmlNode node = rootNode.ChildNodes[i];
                 switch (node.Name.ToLowerEnglish())
                 {
                     case "history":
@@ -58,7 +59,7 @@ namespace Yorot
                         appliedSettings.Add(node.Name);
                         for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                         {
-                            var subnode = node.ChildNodes[ı];
+                            XmlNode subnode = node.ChildNodes[ı];
                             if (subnode.Name.ToLowerEnglish() == "site")
                             {
                                 if (subnode.Attributes["Name"] != null && subnode.Attributes["Url"] != null && subnode.Attributes["Date"] != null)
@@ -81,6 +82,7 @@ namespace Yorot
                             }
                         }
                         break;
+
                     default:
                         if (!node.OuterXml.StartsWith("<!--"))
                         {

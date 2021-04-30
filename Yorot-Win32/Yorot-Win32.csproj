@@ -280,8 +280,6 @@
     <None Include="Resources\YorotDark.png" />
     <None Include="Resources\YorotShadow.png" />
     <None Include="Resources\YorotDeepBlue.png" />
-    <None Include="Resources\wmap-backend.png" />
-    <None Include="Resources\wmap-front.png" />
     <None Include="Resources\profiles.png" />
     <None Include="Resources\update_and_about.png" />
     <None Include="Resources\back-b.png" />
@@ -295,8 +293,8 @@
     <None Include="Resources\general-settings.png" />
     <None Include="Resources\security-settings.png" />
     <None Include="Resources\yorot-licenses.html" />
-    <None Include="Resources\map.html" />
     <None Include="MapConfig.xml" />
+    <None Include="Resources\map.html" />
     <Content Include="Yorot.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -11,16 +11,18 @@ namespace Yorot
         /// Creates a new Web Engine Manager.
         /// </summary>
         /// <param name="main"><see cref="YorotMain"/></param>
-        public YorotWEManager(YorotMain main) : base(main.WEConfig, main){}
+        public YorotWEManager(YorotMain main) : base(main.WEConfig, main) { }
+
         /// <summary>
         /// A list of loaded web engines.
         /// </summary>
         public List<YorotWebEngine> Engines { get; set; } = new List<YorotWebEngine>();
+
         public override void ExtractXml(XmlNode rootNode)
         {
             for (int i = 0; i < rootNode.ChildNodes.Count; i++)
             {
-                var node = rootNode.ChildNodes[i];
+                XmlNode node = rootNode.ChildNodes[i];
                 if (node.Name.ToLowerEnglish() == "we")
                 {
                     if (node.Attributes["CodeName"] != null)
@@ -60,26 +62,29 @@ namespace Yorot
                        "-->" + Environment.NewLine;
             for (int i = 0; i < Engines.Count; i++)
             {
-                var we = Engines[i];
+                YorotWebEngine we = Engines[i];
                 x += "<WE CodeName=\"" + we.CodeName.ToXML() + "\" />" + Environment.NewLine;
             }
             return (x + "</root>").BeautifyXML();
         }
+
         /// <summary>
         /// Enables a web engine.
         /// </summary>
         /// <param name="value">CodeName of the engine.</param>
         public void Enable(string value)
         {
-            var l = Engines.FindAll(i => i.CodeName == value);
+            List<YorotWebEngine> l = Engines.FindAll(i => i.CodeName == value);
             if (l.Count > 0)
             {
                 l[0].isEnabled = true;
-            }else
+            }
+            else
             {
                 throw new ArgumentException("Cannot find a web engine with code name \"" + value + "\".");
             }
         }
+
         /// <summary>
         /// Checks if an engine exists or not.
         /// </summary>
@@ -88,6 +93,7 @@ namespace Yorot
         {
             return Engines.FindAll(i => i.CodeName == value).Count > 0;
         }
+
         /// <summary>
         /// Gets web engine by code name.
         /// </summary>
@@ -95,7 +101,7 @@ namespace Yorot
         /// <returns><see cref="YorotWebEngine"/></returns>
         public YorotWebEngine GetWEByCN(string codeName)
         {
-            var l = Engines.FindAll(i => i.CodeName == codeName);
+            List<YorotWebEngine> l = Engines.FindAll(i => i.CodeName == codeName);
             if (l.Count > 0)
             {
                 return l[0];
@@ -106,6 +112,7 @@ namespace Yorot
             }
         }
     }
+
     /// <summary>
     /// Yorot Web Engine
     /// </summary>
@@ -115,9 +122,10 @@ namespace Yorot
         /// Creates a new <see cref="YorotWebEngine"/>.
         /// </summary>
         /// <param name="configFile">Location of configuration file for this engine.</param>
-        public YorotWebEngine(string configFile,YorotWEManager manager)
+        public YorotWebEngine(string configFile, YorotWEManager manager)
         {
-            if (manager is null) { throw new ArgumentNullException("\"manager\" cannot be null."); } Manager = manager;
+            if (manager is null) { throw new ArgumentNullException("\"manager\" cannot be null."); }
+            Manager = manager;
             if (!string.IsNullOrWhiteSpace(configFile))
             {
                 if (System.IO.File.Exists(configFile))
@@ -128,9 +136,9 @@ namespace Yorot
                     doc.LoadXml(HTAlt.Tools.ReadFile(configFile, System.Text.Encoding.Unicode));
                     XmlNode rootNode = Yorot.Tools.FindRoot(doc);
                     List<string> appliedC = new List<string>();
-                    for(int i = 0; i < rootNode.ChildNodes.Count;i++)
+                    for (int i = 0; i < rootNode.ChildNodes.Count; i++)
                     {
-                        var node = rootNode.ChildNodes[i];
+                        XmlNode node = rootNode.ChildNodes[i];
                         string name = node.Name.ToLowerEnglish();
                         switch (name)
                         {
@@ -143,6 +151,7 @@ namespace Yorot
                                 appliedC.Add(name);
                                 HTUPDATE = node.InnerXml.InnerXmlToString();
                                 break;
+
                             case "version":
                                 if (appliedC.Contains(name))
                                 {
@@ -152,6 +161,7 @@ namespace Yorot
                                 appliedC.Add(name);
                                 Version = int.Parse(node.InnerXml.InnerXmlToString());
                                 break;
+
                             case "name":
                                 if (appliedC.Contains(name))
                                 {
@@ -161,6 +171,7 @@ namespace Yorot
                                 appliedC.Add(name);
                                 Name = node.InnerXml.InnerXmlToString();
                                 break;
+
                             case "codename":
                                 if (appliedC.Contains(name))
                                 {
@@ -170,6 +181,7 @@ namespace Yorot
                                 appliedC.Add(name);
                                 CodeName = node.InnerXml.InnerXmlToString();
                                 break;
+
                             case "desc":
                                 if (appliedC.Contains(name))
                                 {
@@ -179,6 +191,7 @@ namespace Yorot
                                 appliedC.Add(name);
                                 Desc = node.InnerXml.InnerXmlToString();
                                 break;
+
                             case "iconloc":
                                 if (appliedC.Contains(name))
                                 {
@@ -188,6 +201,7 @@ namespace Yorot
                                 appliedC.Add(name);
                                 IconLoc = node.InnerXml.InnerXmlToString().GetPath(Manager.Main);
                                 break;
+
                             default:
                                 if (!node.OuterXml.StartsWith("<!--"))
                                 {
@@ -196,55 +210,68 @@ namespace Yorot
                                 break;
                         }
                     }
-                }else
+                }
+                else
                 {
                     throw new System.IO.FileNotFoundException("The config file \"" + configFile + "\" does not exists.");
                 }
-            }else
+            }
+            else
             {
                 throw new ArgumentException("\"configFile\" cannot be empty.");
             }
         }
+
         /// <summary>
         /// Location of the engine folder in drive.
         /// </summary>
         public string EngineLoc { get; set; }
+
         /// <summary>
         /// Manager of this web engine.
         /// </summary>
         public YorotWEManager Manager { get; set; }
+
         /// <summary>
         /// HTUPDATE address of this engine.
         /// </summary>
         public string HTUPDATE { get; set; }
+
         /// <summary>
         /// Determines if this engine is enabled or not.
         /// </summary>
         public bool isEnabled { get; set; }
+
         /// <summary>
         /// Current version of this engine.
         /// </summary>
         public int Version { get; set; }
+
         /// <summary>
         /// Name of this engine.
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// Codename of the engine.
         /// </summary>
         public string CodeName { get; set; }
+
         /// <summary>
         /// Description of this engine.
         /// </summary>
         public string Desc { get; set; }
+
         /// <summary>
         /// Location of this engine's logo on local drive.
         /// </summary>
         public string IconLoc { get; set; }
+
         /// <summary>
         /// Gets the engine's logo.
         /// </summary>
         public System.Drawing.Image Icon => HTAlt.Tools.ReadFile(IconLoc, System.Drawing.Imaging.ImageFormat.Png);
+
         /// <summary>
         /// Configuration file of this engine.
         /// </summary>

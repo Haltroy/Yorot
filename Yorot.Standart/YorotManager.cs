@@ -1,6 +1,5 @@
 ﻿using HTAlt;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
@@ -18,10 +17,11 @@ namespace Yorot
         /// </summary>
         /// <param name="configFile">Location of the configuration file of this manager on disk.</param>
         /// <param name="main"><see cref="YorotMain"/> of this manager.</param>
-        public YorotManager(string configFile,YorotMain main)
+        public YorotManager(string configFile, YorotMain main)
         {
-            Output.WriteLine("[" + this.GetType().Name + "] Starting Init...", LogLevel.Info);
-            if (main is null) { throw new ArgumentNullException("main"); } Main = main;
+            Output.WriteLine("[" + GetType().Name + "] Starting Init...", LogLevel.Info);
+            if (main is null) { throw new ArgumentNullException("main"); }
+            Main = main;
             if (!string.IsNullOrWhiteSpace(configFile))
             {
                 ConfigFile = configFile;
@@ -41,43 +41,46 @@ namespace Yorot
                             }
                             catch (XmlException xe)
                             {
-                                Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, configuration file has XML error(s): " + xe.Message, LogLevel.Warning);
+                                Output.WriteLine("[" + GetType().Name + "] Loaded defaults, configuration file has XML error(s): " + xe.Message, LogLevel.Warning);
                             }
                             catch (Exception e)
                             {
-                                Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, exception caught: " + e.Message, LogLevel.Warning);
+                                Output.WriteLine("[" + GetType().Name + "] Loaded defaults, exception caught: " + e.Message, LogLevel.Warning);
                             }
                         }
                         else
                         {
-                            Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, configuration file was empty.", LogLevel.Warning);
+                            Output.WriteLine("[" + GetType().Name + "] Loaded defaults, configuration file was empty.", LogLevel.Warning);
                         }
                     }
                     catch (Exception ex)
                     {
-                        Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, exception caught: " + ex.Message, LogLevel.Warning);
+                        Output.WriteLine("[" + GetType().Name + "] Loaded defaults, exception caught: " + ex.Message, LogLevel.Warning);
                     }
                 }
                 else
                 {
-                    Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, configuration file does not exists.", LogLevel.Warning);
+                    Output.WriteLine("[" + GetType().Name + "] Loaded defaults, configuration file does not exists.", LogLevel.Warning);
                 }
             }
             else
             {
-                Output.WriteLine("[" + this.GetType().Name + "] Loaded defaults, configuration file location was empty.", LogLevel.Warning);
+                Output.WriteLine("[" + GetType().Name + "] Loaded defaults, configuration file location was empty.", LogLevel.Warning);
             }
-            Output.WriteLine("[" + this.GetType().Name + "] Init done.", LogLevel.Info);
+            Output.WriteLine("[" + GetType().Name + "] Init done.", LogLevel.Info);
         }
+
         /// <summary>
         /// Location of the configuration file of this manager on disk.
         /// </summary>
         public string ConfigFile { get; set; }
+
         /// <summary>
         /// Retrieves current configuration as XML.
         /// </summary>
         /// <returns><see cref="string"/></returns>
         public abstract string ToXml();
+
         /// <summary>
         /// Same as <see cref="ToXml"/>
         /// </summary>
@@ -86,10 +89,15 @@ namespace Yorot
         {
             return ToXml();
         }
+
         /// <summary>
         /// Saves current configuration to disk.
         /// </summary>
-        public void Save() => HTAlt.Tools.WriteFile(ConfigFile, ToXml(), Encoding.Unicode);
+        public void Save()
+        {
+            HTAlt.Tools.WriteFile(ConfigFile, ToXml(), Encoding.Unicode);
+        }
+
         /// <summary>
         /// Extracts configuration from XML root node.
         /// <para></para>
@@ -97,6 +105,7 @@ namespace Yorot
         /// </summary>
         /// <param name="rootNode">Root node</param>
         public abstract void ExtractXml(XmlNode rootNode);
+
         /// <summary>
         /// Gets <see cref="YorotMain"/> associated with this manager.
         /// </summary>

@@ -2,11 +2,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-    <RuntimeIdentifiers>debian-x64;debian-x86;debian-arm;debian-arm64;arch-x64;alpine-arm;alpine-arm64;alpine-x64;centos-arm64;centos-x64;fedora-arm64;fedora-x64;freebsd-x64;gentoo-x64;illumos-x64;openindiana-x64;opensuse-x64;osx-arm64;osx-x64;rhel-x64;rhel-arm64;sles-x64;smartos-x64;solaris-x64;ubuntu-arm;ubuntu-arm64;ubuntu-x64;ubuntu-x86;unix-arm;unix-arm64;unix-x64;unix-x86;win-arm64;win-x64;win-arm;win-x86;</RuntimeIdentifiers>
+    <RuntimeIdentifiers>debian-x64;debian-arm;debian-arm64;arch-x64;alpine-arm;alpine-arm64;alpine-x64;centos-arm64;centos-x64;fedora-arm64;fedora-x64;gentoo-x64;opensuse-x64;osx-x64;rhel-x64;rhel-arm64;sles-x64;ubuntu-arm;ubuntu-arm64;ubuntu-x64;win-arm64;win-x64;win-arm;win-x86;</RuntimeIdentifiers>
+    <!-- <PublishSingleFile>true</PublishSingleFile> -->
     <!-- 
     This list contains support for these operating systems:
     *******************************************
-    * Debian (ARM, ARM64, x64, x86)
+    * Debian (ARM, ARM64, x64, !x86!)
     * Arch Linux (x64 only)
     * Alpine Linux (ARM, ARM64, x64, x86)
     * CentOS (ARM64, x64)
@@ -16,19 +17,20 @@
     * illumos (x64 only)
     * OpenIndiana (x64 only)
     * OpenSUSE (x64 only)
-    * OSX (ARM64, x64)
+    * OSX (!ARM64!, x64)
     * Red Hat Linux Enterprise (ARM64, x64)
     * SLES (x64 only)
     * SmartOS (x64 only)
     * Solaris (x64 only)
-    * Ubuntu (ARM, ARM64, x64, x86)
+    * Ubuntu (ARM, ARM64, x64, !x86!)
     * Unix (ARM, ARM64, x86, x64)
     * Windows (ARM, ARM64, x86, x64)
-
+   
     -->
     <Nullable>enable</Nullable>
 	<PublishTrimmed>true</PublishTrimmed>
-    <PublishReadyToRun>true</PublishReadyToRun>
+    <!-- Enable this on windows -->
+    <PublishReadyToRun>false</PublishReadyToRun>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.2" />

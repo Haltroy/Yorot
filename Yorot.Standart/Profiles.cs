@@ -1,7 +1,6 @@
 ﻿using HTAlt;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Xml;
 
 namespace Yorot
@@ -15,14 +14,15 @@ namespace Yorot
         /// Creates a new Profile Manager.
         /// </summary>
         /// <param name="main"><see cref="YorotMain"/></param>
-        public ProfileManager(YorotMain main) : base(main.ProfileConfig,main) 
-        { 
-            Profiles.Add(DefaultProfiles.Root(this).CreateCarbonCopy()); 
+        public ProfileManager(YorotMain main) : base(main.ProfileConfig, main)
+        {
+            Profiles.Add(DefaultProfiles.Root(this).CreateCarbonCopy());
             if (Current is null)
             {
                 Current = Profiles.FindAll(it => it.Name == "root")[0];
             }
         }
+
         /// <summary>
         /// A list of loaded profiles.
         /// </summary>
@@ -40,7 +40,7 @@ namespace Yorot
                 "<Profiles>" + Environment.NewLine;
             for (int i = 0; i < Profiles.Count; i++)
             {
-                var user = Profiles[i];
+                YorotProfile user = Profiles[i];
                 if (user.Name != "root")
                 {
                     x += "<Profile Name=\"" + user.Name.ToXML() + "\" Text=\"" + user.Text + "\" />" + Environment.NewLine;
@@ -51,49 +51,51 @@ namespace Yorot
 
         public override void ExtractXml(XmlNode rootNode)
         {
-            for(int i = 0; i < rootNode.ChildNodes.Count;i++)
+            for (int i = 0; i < rootNode.ChildNodes.Count; i++)
             {
-                var node = rootNode.ChildNodes[i];
+                XmlNode node = rootNode.ChildNodes[i];
                 bool loadedCurrent = false;
                 bool loadedProf = false;
-                switch(node.Name.ToLowerEnglish())
+                switch (node.Name.ToLowerEnglish())
                 {
                     case "current":
                         if (loadedCurrent)
                         {
-                            Output.WriteLine("[Profiles] Threw away \"" + node.OuterXml + "\" because configuration is already loaded.",LogLevel.Warning);
+                            Output.WriteLine("[Profiles] Threw away \"" + node.OuterXml + "\" because configuration is already loaded.", LogLevel.Warning);
                             break;
                         }
                         loadedCurrent = true;
                         if (node.Attributes["Name"] == null) { throw new XmlException("Current profile node does not have \"Name\" attribute."); }
-                        var currentName = node.Attributes["Name"].Value.InnerXmlToString();
+                        string currentName = node.Attributes["Name"].Value.InnerXmlToString();
                         if (Profiles.FindAll(it => it.Name == currentName).Count > 0)
                         {
                             Current = Profiles.FindAll(it => it.Name == currentName)[0];
-                        }else
+                        }
+                        else
                         {
                             if (node.Attributes["Text"] == null) { throw new XmlException("Current profile node does not have \"Text\" attribute."); }
-                            var currentText = node.Attributes["Text"].Value.InnerXmlToString();
+                            string currentText = node.Attributes["Text"].Value.InnerXmlToString();
                             Current = new YorotProfile(currentName, currentText, this);
                             Profiles.Add(Current);
                         }
                         break;
+
                     case "profiles":
                         if (loadedProf)
                         {
                             Output.WriteLine("[Profiles] Threw away \"" + node.OuterXml + "\" because configuration is already loaded.", LogLevel.Warning);
                             break;
                         }
-                        for(int ı = 0; ı < node.ChildNodes.Count; ı++)
+                        for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                         {
-                            var subnode = node.ChildNodes[ı];
-                            switch(subnode.Name.ToLowerEnglish())
+                            XmlNode subnode = node.ChildNodes[ı];
+                            switch (subnode.Name.ToLowerEnglish())
                             {
                                 case "profile":
                                     if (subnode.Attributes["Name"] != null && subnode.Attributes["Text"] != null)
                                     {
-                                        var name = subnode.Attributes["Name"].Value.InnerXmlToString();
-                                        var text = subnode.Attributes["Text"].Value.InnerXmlToString();
+                                        string name = subnode.Attributes["Name"].Value.InnerXmlToString();
+                                        string text = subnode.Attributes["Text"].Value.InnerXmlToString();
                                         if (Profiles.FindAll(it => it.Name == name).Count > 0)
                                         {
                                             Output.WriteLine("[Profiles] Threw away \"" + subnode.OuterXml + "\", profile already loaded.", LogLevel.Warning);
@@ -102,11 +104,13 @@ namespace Yorot
                                         {
                                             Profiles.Add(new YorotProfile(name, text, this));
                                         }
-                                    }else
+                                    }
+                                    else
                                     {
                                         Output.WriteLine("[Profiles] Threw away \"" + subnode.OuterXml + "\" because configuration is missing at least one attribute.", LogLevel.Warning);
                                     }
                                     break;
+
                                 default:
                                     if (!subnode.OuterXml.StartsWith("<!--")) { Output.WriteLine("[Profiles] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning); }
                                     break;
@@ -114,17 +118,20 @@ namespace Yorot
                         }
                         loadedProf = true;
                         break;
+
                     default:
                         if (!node.OuterXml.StartsWith("<!--")) { Output.WriteLine("[Profiles] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning); }
                         break;
                 }
             }
         }
+
         /// <summary>
         /// The current profile.
         /// </summary>
         public YorotProfile Current { get; set; }
     }
+
     /// <summary>
     /// A static class containing the default profiles.
     /// </summary>
@@ -135,16 +142,20 @@ namespace Yorot
         /// </summary>
         /// <param name="man">Manager</param>
         /// <returns><see cref="YorotProfile"/></returns>
-        public static YorotProfile Root(ProfileManager man) => new YorotProfile("root", "Root", man)
+        public static YorotProfile Root(ProfileManager man)
         {
-            Path = "",
-            CacheLoc = "",
-            UserSettings = "",
-            UserDownloads = "",
-            UserHistory = "",
-            UserFavorites = "",
-        };
+            return new YorotProfile("root", "Root", man)
+            {
+                Path = "",
+                CacheLoc = "",
+                UserSettings = "",
+                UserDownloads = "",
+                UserHistory = "",
+                UserFavorites = "",
+            };
+        }
     }
+
     /// <summary>
     /// Class for handling Yorot profiles.
     /// </summary>
@@ -158,6 +169,7 @@ namespace Yorot
         {
             Manager = manager ?? throw new ArgumentNullException(nameof(manager));
         }
+
         /// <summary>
         /// Creates and inits a profile.
         /// </summary>
@@ -166,9 +178,11 @@ namespace Yorot
         /// <param name="manager">Manager of this profile.</param>
         public YorotProfile(string name, string text, ProfileManager manager) : this(manager)
         {
-            if (string.IsNullOrWhiteSpace(name)) { throw new ArgumentNullException(nameof(name)); } Name = name;
-            if (string.IsNullOrWhiteSpace(text)) { throw new ArgumentNullException(nameof(text)); } Text = text;
-            var isroot = name == "root";
+            if (string.IsNullOrWhiteSpace(name)) { throw new ArgumentNullException(nameof(name)); }
+            Name = name;
+            if (string.IsNullOrWhiteSpace(text)) { throw new ArgumentNullException(nameof(text)); }
+            Text = text;
+            bool isroot = name == "root";
             Path = isroot ? "" : Manager.Main.ProfilesFolder + Name + "\\";
             CacheLoc = isroot ? "" : Path + "cache\\";
             if (!isroot && !System.IO.Directory.Exists(CacheLoc)) { System.IO.Directory.CreateDirectory(CacheLoc); }
@@ -183,6 +197,7 @@ namespace Yorot
             }
             Settings = new Settings(this);
         }
+
         /// <summary>
         /// Creates a carbon copy of this profile.
         /// </summary>
@@ -203,46 +218,57 @@ namespace Yorot
                 UserSettings = UserSettings,
             };
         }
+
         /// <summary>
         /// Name fo the profile, used as the folder name of the profile.
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// Display name of the profile. This text will be displayed as the name instead.
         /// </summary>
         public string Text { get; set; }
+
         /// <summary>
         /// Full path of the profile directory.
         /// </summary>
         public string Path { get; set; }
+
         /// <summary>
         /// Settings of this profile.
         /// </summary>
         public Settings Settings { get; set; }
+
         /// <summary>
         /// Profile picture fo this profile.
         /// </summary>
         public System.Drawing.Image Picture { get => HTAlt.Tools.ReadFile(Path + "picture.png", System.Drawing.Imaging.ImageFormat.Png); set => HTAlt.Tools.WriteFile(Path + "picture.png", value, System.Drawing.Imaging.ImageFormat.Png); }
+
         /// <summary>
         /// Manager of this profile.
         /// </summary>
         public ProfileManager Manager { get; set; }
+
         /// <summary>
         /// User Cache location.
         /// </summary>
         public string CacheLoc { get; set; }
+
         /// <summary>
         /// User settings location.
         /// </summary>
         public string UserSettings { get; set; }
+
         /// <summary>
         /// History Manager configuration file location.
         /// </summary>
         public string UserHistory { get; set; }
+
         /// <summary>
         /// Favorites Manager configuration file location.
         /// </summary>
         public string UserFavorites { get; set; }
+
         /// <summary>
         /// Downloads Manager configuration file location.
         /// </summary>

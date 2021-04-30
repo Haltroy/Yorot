@@ -438,26 +438,6 @@ namespace Yorot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap wmap_backend {
-            get {
-                object obj = ResourceManager.GetObject("wmap-backend", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap wmap_front {
-            get {
-                object obj = ResourceManager.GetObject("wmap-front", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap yopad {
             get {
                 object obj = ResourceManager.GetObject("yopad", resourceCulture);

@@ -912,7 +912,7 @@ namespace Yorot.UI.SystemApp
             System.Windows.Forms.Label lbRunOnIncognitoInfo = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbRunOnIncognito = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsRunOnIncognito = new HTAlt.WinForms.HTSwitch();
-            lbContainerTitle.Text = app.AppName;
+            lbContainerTitle.Text = site.Name;
             // 
             // pbAppIcon
             // 
@@ -920,7 +920,7 @@ namespace Yorot.UI.SystemApp
             pbAppIcon.Name = "pbAppIcon_" + randomAppID;
             pbAppIcon.Size = new System.Drawing.Size(64, 64);
             pbAppIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            pbAppIcon.Image = YorotTools.GetAppIcon(app);
+            //pbAppIcon.Image = YorotTools.GetSiteIcon(site);
             pbAppIcon.TabStop = false;
             // 
             // lbAppName
@@ -929,7 +929,7 @@ namespace Yorot.UI.SystemApp
             lbAppName.Font = new System.Drawing.Font("Ubuntu", 15F);
             lbAppName.Location = new System.Drawing.Point(95, 18);
             lbAppName.Name = "lbAppName_" + randomAppID;
-            lbAppName.Text = app.AppName;
+            lbAppName.Text = site.Name;
             // 
             // lbAppCName
             // 
@@ -937,23 +937,7 @@ namespace Yorot.UI.SystemApp
             lbAppCName.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbAppCName.Location = new System.Drawing.Point(95, lbAppName.Location.Y + lbAppName.Height + 2);
             lbAppCName.Name = "lbAppCName_" + randomAppID;
-            lbAppCName.Text = app.AppCodeName;
-            // 
-            // lbAppVer
-            // 
-            lbAppVer.AutoSize = true;
-            lbAppVer.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbAppVer.Location = new System.Drawing.Point(lbAppName.Location.X + lbAppName.Width, 13);
-            lbAppVer.Name = "lbAppVer_" + randomAppID;
-            lbAppVer.Text = "Version " + app.Version + " [" + app.VersionNo + "]";
-            // 
-            // lbAppAuthor
-            // 
-            lbAppAuthor.AutoSize = true;
-            lbAppAuthor.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbAppAuthor.Location = new System.Drawing.Point(95, lbAppCName.Location.Y + lbAppCName.Height + 2);
-            lbAppAuthor.Name = "lbAppAuthor_" + randomAppID;
-            lbAppAuthor.Text = app.Author;
+            lbAppCName.Text = site.Url;
             // 
             // btAppReset
             // 
@@ -969,8 +953,7 @@ namespace Yorot.UI.SystemApp
             btAppReset.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
             btAppReset.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             btAppReset.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
-            btAppReset.Text = app.isSystemApp ? "Cannot reset system apps" : "Reset";
-            btAppReset.Enabled = !app.isSystemApp;
+            btAppReset.Text = "Reset all to default";
             // 
             // btAppUninstall
             // 
@@ -987,8 +970,7 @@ namespace Yorot.UI.SystemApp
             btAppUninstall.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
             btAppUninstall.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
             btAppUninstall.TabIndex = 5;
-            btAppUninstall.Text = app.isSystemApp ? "Cannot uninstall system apps" : "Uninstall";
-            btAppUninstall.Enabled = !app.isSystemApp;
+            btAppUninstall.Text = "Remove";
             // 
             // lbSizeOnDisk
             // 
