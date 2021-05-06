@@ -172,6 +172,16 @@ namespace Yorot
                                 Name = node.InnerXml.InnerXmlToString();
                                 break;
 
+                            case "author":
+                                if (appliedC.Contains(name))
+                                {
+                                    HTAlt.Output.WriteLine("[YorotWebEngine] Threw away \"" + node.OuterXml + "\", configuration already applied.");
+                                    break;
+                                }
+                                appliedC.Add(name);
+                                Author = node.InnerXml.InnerXmlToString();
+                                break;
+
                             case "codename":
                                 if (appliedC.Contains(name))
                                 {
@@ -248,6 +258,11 @@ namespace Yorot
         public int Version { get; set; }
 
         /// <summary>
+        /// Creator of this web engine.
+        /// </summary>
+        public string Author { get; set; }
+
+        /// <summary>
         /// Name of this engine.
         /// </summary>
         public string Name { get; set; }
@@ -276,5 +291,41 @@ namespace Yorot
         /// Configuration file of this engine.
         /// </summary>
         public string ConfigFile { get; set; }
+
+        /// <summary>
+        /// Returns web engine size in bytes.
+        /// </summary>+
+        public long WESize => (Manager.Main.WEFolder + CodeName).GetDirectorySize();
+
+        /// <summary>
+        /// Gets size of this web engine.
+        /// </summary>
+        /// <param name="bytes">Translation of word "bytes".</param>
+        /// <returns><see cref="string"/></returns>
+        public string GetWESizeInfo(string bytes)
+        {
+            long size = WESize;
+            if (size > 1099511627776F) //TiB
+            {
+                return (size / 1099511627776F) + " TiB (" + size + " " + bytes + ")";
+            }
+            else if (size > 1073741824F) //GiB
+            {
+                return (size / 1073741824F) + " GiB (" + size + " " + bytes + ")";
+            }
+            else if (size > 1048576F) //MiB
+            {
+                return (size / 1048576F) + " MiB (" + size + " " + bytes + ")";
+            }
+            else if (size > 1024F) // KiB
+            {
+                return (size / 1024F) + " KiB (" + size + " " + bytes + ")";
+            }
+            else
+            {
+                return size + " " + bytes;
+            }
+        }
+
     }
 }

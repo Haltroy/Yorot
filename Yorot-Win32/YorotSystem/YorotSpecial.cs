@@ -5,7 +5,7 @@ namespace Yorot
 {
     public class YorotSpecial : YorotMain
     {
-        public YorotSpecial(string appPath, string name, string codename, string version, int verno, bool isIncognito = false) : base(appPath, name, codename, version, verno, isIncognito)
+        public YorotSpecial(string appPath, string name, string codename, string version, int verno, bool isIncognito = false) : base(appPath, name, codename, version, verno, "Yorot-Win32", isIncognito)
         {
 
         }

@@ -29,13 +29,13 @@
     -->
     <Nullable>enable</Nullable>
 	<PublishTrimmed>true</PublishTrimmed>
-    <!-- Enable this on windows -->
+    <!-- Enable this on Windows -->
     <PublishReadyToRun>false</PublishReadyToRun>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.2" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.2" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.2" />
+    <PackageReference Include="Avalonia" Version="0.10.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.3" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Yorot.Standart\Yorot.Standart.csproj" />

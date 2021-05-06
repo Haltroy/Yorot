@@ -14,7 +14,7 @@ namespace Yorot
         /// Generates the default languages.
         /// </summary>
         /// <param name="langLoc">Location of the language folder.</param>
-        public static void GenLangs(string langLoc)
+        public static void GenLangs(string langLoc,bool force = false)
         {
             if (!langLoc.EndsWith("\\")) { langLoc += "\\"; }
             var d = YorotDefaultLanguages.DefaultLangList;
@@ -22,7 +22,7 @@ namespace Yorot
             {
                 string l = d[i];
                 string _l = langLoc + l + ".ylf";
-                if (!System.IO.File.Exists(_l))
+                if (force || !System.IO.File.Exists(_l))
                 {
                     HTAlt.Tools.WriteFile(_l, GetDefaultLang(l), Encoding.Unicode);
                 }

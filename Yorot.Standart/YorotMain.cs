@@ -19,7 +19,7 @@ namespace Yorot
         /// <param name="version">Version of the Yorot or the flavor.</param>
         /// <param name="name">Name of the Yorot or the flavor.</param>
         /// <param name="verno">Version number of the Yorot or the flavor.</param>
-        public YorotMain(string appPath, string name, string codename, string version, int verno, bool isIncognito = false)
+        public YorotMain(string appPath, string name, string codename, string version, int verno, string branch, bool isIncognito = false)
         {
             if (string.IsNullOrWhiteSpace(name)) { throw new ArgumentException("\"name\" caanot be empty."); }
             Name = name;
@@ -27,6 +27,8 @@ namespace Yorot
             CodeName = codename;
             if (string.IsNullOrWhiteSpace(version)) { throw new ArgumentException("\"version\" caanot be empty."); }
             VersionText = version;
+            if (string.IsNullOrWhiteSpace(branch)) { throw new ArgumentException("\"branch\" caanot be empty."); }
+            YorotBranch = branch;
             if (verno <= 0) { throw new ArgumentException("\"verno\" must be bigger than zero."); }
             Version = verno;
             if (string.IsNullOrWhiteSpace(appPath)) { throw new ArgumentNullException("\"appPath\" cannot be empty."); };
@@ -103,6 +105,10 @@ namespace Yorot
             Profiles = new ProfileManager(this);
             AfterInit();
         }
+        /// <summary>
+        /// Current Bracnh of Yorot. (ex. Yorot-Win32, Yorot-Avalonia)
+        /// </summary>
+        public string YorotBranch { get; set; }
 
         /// <summary>
         /// Event raised before launching all managers.

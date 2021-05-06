@@ -40,11 +40,6 @@ namespace Yorot
         Deny,
 
         /// <summary>
-        /// Permission denied for one time only. Will reset to <see cref="None"/> on close.
-        /// </summary>
-        DenyOneTime,
-
-        /// <summary>
         /// Permission allowed forever.
         /// </summary>
         Allow,
