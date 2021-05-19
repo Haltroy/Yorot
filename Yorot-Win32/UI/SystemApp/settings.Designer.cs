@@ -205,11 +205,6 @@ namespace Yorot.UI.SystemApp
             this.lbWE = new System.Windows.Forms.Label();
             this.tpHistory = new System.Windows.Forms.TabPage();
             this.pHistory = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btHistoryClear = new System.Windows.Forms.Button();
             this.lbHistory = new System.Windows.Forms.Label();
             this.tpSync = new System.Windows.Forms.TabPage();
@@ -251,8 +246,6 @@ namespace Yorot.UI.SystemApp
             this.tpWE.SuspendLayout();
             this.tpHistory.SuspendLayout();
             this.pHistory.SuspendLayout();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tpSync.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -2549,70 +2542,10 @@ namespace Yorot.UI.SystemApp
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pHistory.AutoScroll = true;
-            this.pHistory.Controls.Add(this.panel7);
             this.pHistory.Location = new System.Drawing.Point(17, 47);
             this.pHistory.Name = "pHistory";
             this.pHistory.Size = new System.Drawing.Size(485, 568);
             this.pHistory.TabIndex = 217;
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.textBox2);
-            this.panel7.Controls.Add(this.pictureBox1);
-            this.panel7.Controls.Add(this.label3);
-            this.panel7.Controls.Add(this.textBox1);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 0);
-            this.panel7.Margin = new System.Windows.Forms.Padding(10);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(485, 106);
-            this.panel7.TabIndex = 5;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Ubuntu", 10F);
-            this.textBox2.Location = new System.Drawing.Point(73, 62);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(400, 16);
-            this.textBox2.TabIndex = 199;
-            this.textBox2.Text = "Home page:";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(17, 32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Ubuntu", 12F);
-            this.label3.Location = new System.Drawing.Point(457, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(18, 20);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "X";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Ubuntu", 12F);
-            this.textBox1.Location = new System.Drawing.Point(73, 37);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(400, 19);
-            this.textBox1.TabIndex = 199;
-            this.textBox1.Text = "Home page:";
             // 
             // btHistoryClear
             // 
@@ -2745,9 +2678,7 @@ namespace Yorot.UI.SystemApp
             this.tpHistory.ResumeLayout(false);
             this.tpHistory.PerformLayout();
             this.pHistory.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+
             this.tpSync.ResumeLayout(false);
             this.tpSync.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -2937,10 +2868,5 @@ namespace Yorot.UI.SystemApp
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Panel pLogs;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
     }
 }

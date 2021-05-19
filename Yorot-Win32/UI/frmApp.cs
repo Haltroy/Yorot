@@ -66,7 +66,7 @@ namespace Yorot.UI
                         pApp.Controls.Add(appc);
                         break;
                     case "com.haltroy.fileman":
-                        appc = new SystemApp.fileman() { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
+                        appc = new SystemApp.fileman(assocLayout is null ? null : assocLayout.Args) { TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None, };
                         appContainer = appc;
                         pApp.Controls.Add(appc);
                         break;
@@ -107,7 +107,7 @@ namespace Yorot.UI
             TabControl tcappman = assocLayout.AssocTab.Parent as TabControl;
             if (tcappman.SelectedTab == assocLayout.AssocTab)
             {
-                assocForm.loadMainTab();
+                assocForm.switchTabGoBack();
             }
             if (tcappman.InvokeRequired)
             {
@@ -138,7 +138,7 @@ namespace Yorot.UI
                         pappdrawer.Controls.Remove(assocLayout.AssocItem);
                     }
                 }
-                else if (assocApp.AppCodeName != "com.haltroy.settings" && hasMoreSessions) // Redraw it cuzz its updated.
+                else if (assocApp.AppCodeName != "com.haltroy.settings" && hasMoreSessions)
                 {
                     if (assocLayout.AssocItem.InvokeRequired) { assocLayout.AssocItem.Invoke(new Action(() => assocLayout.AssocItem.Invalidate())); } else { assocLayout.AssocItem.Invalidate(); }
                 }
@@ -153,7 +153,7 @@ namespace Yorot.UI
                 Hide();
                 TopMost = false;
                 btMaximize.Visible = true;
-                assocForm.loadMainTab();
+                assocForm.switchTabGoBack();
                 btMaximize.Enabled = true;
                 btMinimize.Visible = true;
                 btMinimize.Enabled = true;
@@ -176,7 +176,7 @@ namespace Yorot.UI
                 fmSize = Size;
                 TopMost = false;
                 TopLevel = false;
-                assocForm.loadSpecificTab(assocLayout.AssocTab);
+                assocForm.switchTab(assocLayout.AssocTab);
                 btMaximize.Visible = false;
                 btMaximize.Enabled = false;
                 btMinimize.Visible = false;

@@ -75,7 +75,7 @@ namespace Yorot
                         {
                             if (node.Attributes["Text"] == null) { throw new XmlException("Current profile node does not have \"Text\" attribute."); }
                             string currentText = node.Attributes["Text"].Value.InnerXmlToString();
-                            Current = new YorotProfile(currentName, currentText, this);
+                            Current = new YorotProfile(currentName, currentText, this, true);
                             Profiles.Add(Current);
                         }
                         break;
@@ -145,14 +145,7 @@ namespace Yorot
         public static YorotProfile Root(ProfileManager man)
         {
             return new YorotProfile("root", "Root", man)
-            {
-                Path = "",
-                CacheLoc = "",
-                UserSettings = "",
-                UserDownloads = "",
-                UserHistory = "",
-                UserFavorites = "",
-            };
+            { };
         }
     }
 
@@ -176,26 +169,30 @@ namespace Yorot
         /// <param name="name">Name of this profile, used for directory name.</param>
         /// <param name="text">Display text of this user.</param>
         /// <param name="manager">Manager of this profile.</param>
-        public YorotProfile(string name, string text, ProfileManager manager) : this(manager)
+        /// <param name="isCurrent">Determines if this profile is the current profile.</param>
+        public YorotProfile(string name, string text, ProfileManager manager, bool isCurrent = true) : this(manager)
         {
             if (string.IsNullOrWhiteSpace(name)) { throw new ArgumentNullException(nameof(name)); }
             Name = name;
             if (string.IsNullOrWhiteSpace(text)) { throw new ArgumentNullException(nameof(text)); }
             Text = text;
             bool isroot = name == "root";
-            Path = isroot ? "" : Manager.Main.ProfilesFolder + Name + "\\";
+            Path = Manager.Main.ProfilesFolder + Name + "\\";
             CacheLoc = isroot ? "" : Path + "cache\\";
             if (!isroot && !System.IO.Directory.Exists(CacheLoc)) { System.IO.Directory.CreateDirectory(CacheLoc); }
-            UserSettings = isroot ? "" : Path + "settings.ycf";
-            UserHistory = isroot ? "" : Path + "history.ycf";
-            UserFavorites = isroot ? "" : Path + "favorites.ycf";
-            UserDownloads = isroot ? "" : Path + "downloads.ycf";
-            if (!isroot && !System.IO.Directory.Exists(Path))
+            UserSettings = Path + "settings.ycf";
+            UserHistory = Path + "history.ycf";
+            UserFavorites = Path + "favorites.ycf";
+            UserDownloads = Path + "downloads.ycf";
+            if (!System.IO.Directory.Exists(Path))
             {
                 System.IO.Directory.CreateDirectory(Path);
-                Output.WriteLine("[Profile:\"" + name + "\"] Profile directory does not exists. Created directory.");
+                Output.WriteLine("[Profile:\"" + name + "\"] Profile directory does not exists. Created directory.", LogLevel.Info);
             }
-            Settings = new Settings(this);
+            if (isCurrent)
+            {
+                Settings = new Settings(this);
+            }
         }
 
         /// <summary>

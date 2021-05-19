@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
 
 namespace Yorot
 {
@@ -176,6 +178,33 @@ namespace Yorot
                 .Replace("[LOGS]", main.LogFolder)
                 .Replace("[USER]", main.Profiles.Current.Path)
                 .Replace("[APPPATH]", main.AppPath);
+        }
+
+        /// <summary>
+        /// Gets the <paramref name="site"/> icon. Can return null.
+        /// </summary>
+        /// <param name="site"><see cref="YorotSite"/></param>
+        /// <param name="main"><see cref="YorotMain"/></param>
+        /// <returns><see cref="Image"/></returns>
+        public static Icon GetSiteIcon(YorotSite site, YorotMain main)
+        {
+            return File.Exists(main.AppPath + "\\favicons\\" + HTAlt.Tools.GetBaseURL(site.Url) + ".ico")
+? new Icon(main.AppPath + "\\favicons\\" + HTAlt.Tools.GetBaseURL(site.Url) + ".ico")
+: null;
+        }
+
+        /// <summary>
+        /// Sets the <paramref name="site"/> image.
+        /// </summary>
+        /// <param name="site"><see cref="YorotSite"/></param>
+        /// <param name="image">Favicon</param>
+        /// <param name="main"><see cref="YorotMain"/></param>
+        public static void SetSiteIcon(YorotSite site, Icon image, YorotMain main)
+        {
+            using (FileStream fs = new FileStream(main.AppPath + "\\favicons\\" + HTAlt.Tools.GetBaseURL(site.Url) + ".ico", FileMode.Create))
+            {
+                image.Save(fs);
+            }
         }
     }
 }

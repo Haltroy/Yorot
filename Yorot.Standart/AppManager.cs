@@ -576,6 +576,11 @@ namespace Yorot
             }
         }
 
+        public void Reset()
+        {
+            // TODO: Reset App
+        }
+
         /// <summary>
         /// Determines if this application had error(s) while loading.
         /// </summary>

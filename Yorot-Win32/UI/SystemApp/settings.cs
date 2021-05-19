@@ -34,6 +34,7 @@ namespace Yorot.UI.SystemApp
             ApplyLanguage(true);
             ApplyTheme(true);
             genLogEntries(true);
+            genHistoryEntry(new YorotSite() { Name = "Test", Date = DateTime.Now, Url = "https://haltroy.com" });
             if (args != null)
             {
                 if (args.Length > 0)
@@ -391,8 +392,10 @@ namespace Yorot.UI.SystemApp
                 case 8:
                     tabControl1.SelectedTab = tp1Container;
                     ApplyTheme(true);
+                    ApplyLanguage(true);
                     break;
             }
+            btContainerBack.Tag = null;
         }
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
@@ -409,71 +412,72 @@ namespace Yorot.UI.SystemApp
 
         #region Generate Tabs
 
-        private YorotWebEngine loadedWE;
-        private Label lbWEVer;
-        private HTButton lbWEReset;
-        private HTButton lbWEUninst;
-        private Label lbWESize;
-        private Label lbWEDesc;
-        private Label lbWEEnabled;
-        private Label lbWEEnabledInfo;
-        private Label lbWERunInc;
-        private Label lbWERunIncInfo;
-
         private void resetTab()
         {
             pContainer.Controls.Clear();
-            loadedWE = null;
-            lbWEVer = null;
-            lbWEReset = null;
-            lbWEUninst = null;
-            lbWESize = null;
-            lbWEDesc = null;
-            lbWEEnabled = null;
-            lbWEEnabledInfo = null;
-            lbWERunInc = null;
-            lbWERunIncInfo = null;
 
+        }
+
+        private string GetAppOrigin(YorotApp app)
+        {
+            string x = string.Empty;
+            switch (app.AppOrigin)
+            {
+                case YorotAppOrigin.Other:
+                    x = OriginOther + Environment.NewLine;
+                    break;
+                case YorotAppOrigin.Yopad:
+                    x = OriginYopad + Environment.NewLine;
+                    break;
+                case YorotAppOrigin.Store:
+                    x = OriginStore + Environment.NewLine;
+                    break;
+                case YorotAppOrigin.Embedded:
+                    x = OriginEmbedded + Environment.NewLine;
+                    break;
+                case YorotAppOrigin.Unknown:
+                    x = OriginUnknown + Environment.NewLine;
+                    break;
+            }
+            return x + app.AppOriginInfo;
         }
         private void GenerateAppTab(ListViewItem item)
         {
             YorotApp app = item.Tag as YorotApp;
-            string randomAppID = HTAlt.Tools.GenerateRandomText(17);
-            // TODO: Add all language specific ones to lists.
             System.Windows.Forms.PictureBox pbAppIcon = new System.Windows.Forms.PictureBox();
             System.Windows.Forms.Label lbAppCName = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbAppVer = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbVer = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbAppAuthor = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbAppName = new System.Windows.Forms.Label();
-            HTAlt.WinForms.HTButton btAppReset = new HTAlt.WinForms.HTButton();
-            HTAlt.WinForms.HTButton btAppUninstall = new HTAlt.WinForms.HTButton();
+            HTAlt.WinForms.HTButton btReset = new HTAlt.WinForms.HTButton();
+            HTAlt.WinForms.HTButton btUninst = new HTAlt.WinForms.HTButton();
             System.Windows.Forms.Label lbSizeOnDisk = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsNotifications = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbNotifications = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbNotif = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbEnabled = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbEnabledInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbPrioritize = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbPrior = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsPrioritize = new HTAlt.WinForms.HTSwitch();
             HTAlt.WinForms.HTSwitch hsEnabled = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbRunOnStartup = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbRunStart = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsRunOnStartup = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbNotificationsInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbNotifInfo = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbNotifListener = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsNotifListener = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbPrioritieInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbPriorInfo = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbNotifListenerInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbRunOnStartupInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbRunStartInfo = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbOrigin = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbAppOrigin = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbRunOnIncognitoInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbRunOnIncognito = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbIncInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbAllowIncognito = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsRunOnIncognito = new HTAlt.WinForms.HTSwitch();
             lbContainerTitle.Text = item.Text;
             //
             // pbAppIcon
             //
             pbAppIcon.Location = new System.Drawing.Point(18, 18);
-            pbAppIcon.Name = "pbAppIcon_" + randomAppID;
+            pbAppIcon.Name = "pbAppIcon";
             pbAppIcon.Size = new System.Drawing.Size(64, 64);
             pbAppIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pbAppIcon.Image = YorotTools.GetAppIcon(app);
@@ -483,24 +487,24 @@ namespace Yorot.UI.SystemApp
             //
             lbAppName.Font = new System.Drawing.Font("Ubuntu", 15F);
             lbAppName.Location = new System.Drawing.Point(95, 18);
-            lbAppName.Name = "lbAppName_" + randomAppID;
+            lbAppName.Name = "lbAppName";
             lbAppName.Text = item.Text;
             lbAppName.AutoSize = true;
             //
-            // lbAppVer
+            // lbVer
             //
-            lbAppVer.AutoSize = true;
-            lbAppVer.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbAppVer.Name = "lbAppVer_" + randomAppID;
-            lbAppVer.Text = "Version " + app.Version + " [" + app.VersionNo + "]";
-            lbAppVer.Location = new System.Drawing.Point(lbAppName.Location.X, lbAppName.Location.Y + lbAppName.Height + 2);
+            lbVer.AutoSize = true;
+            lbVer.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbVer.Name = "lbVer";
+            lbVer.Text = Version.Replace("[V]", app.Version + " [" + app.VersionNo + "]");
+            lbVer.Location = new System.Drawing.Point(lbAppName.Location.X, lbAppName.Location.Y + lbAppName.Height + 2);
             //
             // lbAppCName
             //
             lbAppCName.AutoSize = true;
             lbAppCName.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbAppCName.Location = new System.Drawing.Point(lbAppName.Location.X, lbAppVer.Location.Y + lbAppVer.Height + 2);
-            lbAppCName.Name = "lbAppCName_" + randomAppID;
+            lbAppCName.Location = new System.Drawing.Point(lbAppName.Location.X, lbVer.Location.Y + lbVer.Height + 2);
+            lbAppCName.Name = "lbAppCName";
             lbAppCName.Text = app.AppCodeName;
             //
             // lbAppAuthor
@@ -508,57 +512,79 @@ namespace Yorot.UI.SystemApp
             lbAppAuthor.AutoSize = true;
             lbAppAuthor.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbAppAuthor.Location = new System.Drawing.Point(95, lbAppCName.Location.Y + lbAppCName.Height + 2);
-            lbAppAuthor.Name = "lbAppAuthor_" + randomAppID;
+            lbAppAuthor.Name = "lbAppAuthor";
             lbAppAuthor.Text = app.Author;
             //
-            // btAppReset
+            // btReset
             //
-            btAppReset.AutoColor = true;
-            btAppReset.ButtonImage = null;
-            btAppReset.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
-            btAppReset.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
-            btAppReset.DrawImage = false;
-            btAppReset.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
-            btAppReset.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            btAppReset.Location = new System.Drawing.Point(18, lbAppAuthor.Location.Y + lbAppAuthor.Height + 5);
-            btAppReset.Name = "btAppReset_" + randomAppID;
-            btAppReset.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
-            btAppReset.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
-            btAppReset.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
-            btAppReset.Text = app.isSystemApp ? "Cannot reset system apps" : "Reset";
-            btAppReset.Enabled = !app.isSystemApp;
+            btReset.AutoColor = true;
+            btReset.ButtonImage = null;
+            btReset.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            btReset.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            btReset.DrawImage = false;
+            btReset.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
+            btReset.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
+            btReset.Location = new System.Drawing.Point(18, lbAppAuthor.Location.Y + lbAppAuthor.Height + 5);
+            btReset.Name = "btReset";
+            btReset.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            btReset.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
+            btReset.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
+            btReset.Text = app.isSystemApp ? "Cannot reset system apps" : "Reset";
+            btReset.Enabled = !app.isSystemApp;
+            btReset.Tag = app;
+            btReset.Click += new EventHandler((sender, e) => 
+            {
+                HTMsgBox mesaj = new HTMsgBox(app.AppName, AppResetMessage, new HTDialogBoxContext(MessageBoxButtons.YesNo)) { BackColor = BackColor, Yes = Yes, No = No, AutoForeColor = true, };
+                DialogResult res = mesaj.ShowDialog();
+                if (res == DialogResult.Yes)
+                {
+                    app.Reset();
+
+                }
+            });
             //
-            // btAppUninstall
+            // btUninst
             //
-            btAppUninstall.AutoColor = true;
-            btAppUninstall.ButtonImage = null;
-            btAppUninstall.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
-            btAppUninstall.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
-            btAppUninstall.DrawImage = false;
-            btAppUninstall.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
-            btAppUninstall.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            btAppUninstall.Location = new System.Drawing.Point(18, btAppReset.Location.Y + btAppReset.Height + 5);
-            btAppUninstall.Name = "btAppUninstall_" + randomAppID;
-            btAppUninstall.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
-            btAppUninstall.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
-            btAppUninstall.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
-            btAppUninstall.TabIndex = 5;
-            btAppUninstall.Text = app.isSystemApp ? "Cannot uninstall system apps" : "Uninstall";
-            btAppUninstall.Enabled = !app.isSystemApp;
+            btUninst.AutoColor = true;
+            btUninst.ButtonImage = null;
+            btUninst.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            btUninst.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            btUninst.DrawImage = false;
+            btUninst.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
+            btUninst.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
+            btUninst.Location = new System.Drawing.Point(18, btReset.Location.Y + btReset.Height + 5);
+            btUninst.Name = "btUninst";
+            btUninst.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
+            btUninst.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
+            btUninst.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            btUninst.Tag = app;
+            btUninst.Text = app.isSystemApp ? "Cannot uninstall system apps" : "Uninstall";
+            btUninst.Enabled = !app.isSystemApp;
+            btUninst.Click += new EventHandler((sender, e) => {
+                HTMsgBox mesaj = new HTMsgBox(app.AppName, AppUninstMessage, new HTDialogBoxContext(MessageBoxButtons.YesNo)) { BackColor = BackColor, Yes = Yes, No = No, AutoForeColor = true,  };
+                DialogResult res = mesaj.ShowDialog();
+                if (res == DialogResult.Yes)
+                {
+                    YorotGlobal.Main.AppMan.Apps.Remove(app);
+                    btContainerBack_Click(this, new EventArgs());
+                    RefreshAppList(true);
+                    YorotGlobal.Main.MainForm.RefreshAppList(true);
+                }
+            });
             //
             // lbSizeOnDisk
             //
             lbSizeOnDisk.AutoSize = true;
             lbSizeOnDisk.Font = new System.Drawing.Font("Ubuntu", 12F);
-            lbSizeOnDisk.Location = new System.Drawing.Point(18, btAppUninstall.Location.Y + btAppReset.Height + 5);
-            lbSizeOnDisk.Name = "lbSizeOnDisk_" + randomAppID;
+            lbSizeOnDisk.Location = new System.Drawing.Point(18, btUninst.Location.Y + btReset.Height + 5);
+            lbSizeOnDisk.Name = "lbSizeOnDisk";
             lbSizeOnDisk.Text = "Size on disk: " + app.GetAppSizeInfo(SizeInfoBytes);
             //
             // lbOrigin
             //
             lbOrigin.Font = new System.Drawing.Font("Ubuntu", 12F);
             lbOrigin.Location = new System.Drawing.Point(18, lbSizeOnDisk.Location.Y + lbSizeOnDisk.Height + 5);
-            lbOrigin.Name = "lbOrigin_" + randomAppID;
+            lbOrigin.Name = "lbOrigin";
             lbOrigin.AutoSize = true;
             lbOrigin.Text = "Origin: ";
             //
@@ -566,14 +592,14 @@ namespace Yorot.UI.SystemApp
             //
             lbAppOrigin.Font = new System.Drawing.Font("Ubuntu", 12F);
             lbAppOrigin.Location = new System.Drawing.Point(lbOrigin.Location.X + lbOrigin.Width, lbOrigin.Location.Y);
-            lbAppOrigin.Name = "lbAppOrigin_" + randomAppID;
+            lbAppOrigin.Name = "lbAppOrigin";
             lbAppOrigin.Size = new System.Drawing.Size(pContainer.Width - (36 + lbOrigin.Width), lbOrigin.Height * 4);
-            lbAppOrigin.Text = app.AppOrigin.ToString() + Environment.NewLine + app.AppOriginInfo;
+            lbAppOrigin.Text = GetAppOrigin(app);
             //
             // hsEnabled
             //
             hsEnabled.Location = new System.Drawing.Point(18, lbAppOrigin.Location.Y + lbAppOrigin.Height + 20);
-            hsEnabled.Name = "hsEnabled_" + randomAppID;
+            hsEnabled.Name = "hsEnabled";
             hsEnabled.Size = new System.Drawing.Size(50, 19);
             hsEnabled.Checked = app.isEnabled;
             hsEnabled.Enabled = !app.isSystemApp;
@@ -583,66 +609,66 @@ namespace Yorot.UI.SystemApp
             lbEnabled.AutoSize = true;
             lbEnabled.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbEnabled.Location = new System.Drawing.Point(hsEnabled.Location.X + hsEnabled.Width + 5, hsEnabled.Location.Y - 2);
-            lbEnabled.Name = "lbEnabled_" + randomAppID;
+            lbEnabled.Name = "lbEnabled";
             lbEnabled.Text = "Enabled";
             //
             // lbEnabledInfo
             //
             lbEnabledInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
             lbEnabledInfo.Location = new System.Drawing.Point(lbEnabled.Location.X, lbEnabled.Location.Y + lbEnabled.Height + 5);
-            lbEnabledInfo.Name = "lbEnabledInfo_" + randomAppID;
+            lbEnabledInfo.Name = "lbEnabledInfo";
             lbEnabledInfo.AutoSize = true;
             lbEnabledInfo.Text = app.isSystemApp ? "System apps cannot be disabled. " : "Determines if this app can be loaded or not.";
             //
             // hsNotifications
             //
             hsNotifications.Location = new System.Drawing.Point(18, lbEnabledInfo.Location.Y + lbEnabledInfo.Height + 20);
-            hsNotifications.Name = "hsNotifications_" + randomAppID;
+            hsNotifications.Name = "hsNotifications";
             hsNotifications.Size = new System.Drawing.Size(50, 19);
             //
-            // lbNotifications
+            // lbNotifi
             //
-            lbNotifications.AutoSize = true;
-            lbNotifications.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbNotifications.Location = new System.Drawing.Point(hsNotifications.Location.X + hsNotifications.Width + 5, hsNotifications.Location.Y - 2);
-            lbNotifications.Name = "lbNotifications_" + randomAppID;
-            lbNotifications.AutoSize = true;
-            lbNotifications.Text = "Notifications";
+            lbNotif.AutoSize = true;
+            lbNotif.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbNotif.Location = new System.Drawing.Point(hsNotifications.Location.X + hsNotifications.Width + 5, hsNotifications.Location.Y - 2);
+            lbNotif.Name = "lbNotif";
+            lbNotif.AutoSize = true;
+            lbNotif.Text = "Notifications";
             //
-            // lbNotificationsInfo
+            // lbNotifInfo
             //
-            lbNotificationsInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
-            lbNotificationsInfo.Location = new System.Drawing.Point(lbNotifications.Location.X, lbNotifications.Location.Y + lbNotifications.Height + 5);
-            lbNotificationsInfo.Name = "lbNotificationsInfo_" + randomAppID;
-            lbNotificationsInfo.AutoSize = true;
-            lbNotificationsInfo.Text = "Allows this app to show notifications";
+            lbNotifInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbNotifInfo.Location = new System.Drawing.Point(lbNotif.Location.X, lbNotif.Location.Y + lbNotif.Height + 5);
+            lbNotifInfo.Name = "lbNotifInfo";
+            lbNotifInfo.AutoSize = true;
+            lbNotifInfo.Text = "Allows this app to show notifications";
             //
             // hsPrioritize
             //
-            hsPrioritize.Location = new System.Drawing.Point(lbNotificationsInfo.Location.X, lbNotificationsInfo.Location.Y + lbNotificationsInfo.Height + 20);
-            hsPrioritize.Name = "hsPrioritize_" + randomAppID;
+            hsPrioritize.Location = new System.Drawing.Point(lbNotifInfo.Location.X, lbNotifInfo.Location.Y + lbNotifInfo.Height + 20);
+            hsPrioritize.Name = "hsPrioritize";
             hsPrioritize.Size = new System.Drawing.Size(50, 19);
             //
-            // lbPrioritize
+            // lbPrior
             //
-            lbPrioritize.AutoSize = true;
-            lbPrioritize.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbPrioritize.Location = new System.Drawing.Point(hsPrioritize.Location.X + hsPrioritize.Width, hsPrioritize.Location.Y - 2);
-            lbPrioritize.Name = "lbPrioritize_" + randomAppID;
-            lbPrioritize.Text = "Prioritize";
+            lbPrior.AutoSize = true;
+            lbPrior.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbPrior.Location = new System.Drawing.Point(hsPrioritize.Location.X + hsPrioritize.Width, hsPrioritize.Location.Y - 2);
+            lbPrior.Name = "lbPrior";
+            lbPrior.Text = "Prioritize";
             //
-            // lbPrioritieInfo
+            // lbPriorInfo
             //
-            lbPrioritieInfo.AutoSize = true;
-            lbPrioritieInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
-            lbPrioritieInfo.Location = new System.Drawing.Point(lbPrioritize.Location.X, lbPrioritize.Location.Y + lbPrioritize.Height + 5);
-            lbPrioritieInfo.Name = "lbPrioritieInfo_" + randomAppID;
-            lbPrioritieInfo.Text = "Prioritizes this app\'s notification from other notifications.";
+            lbPriorInfo.AutoSize = true;
+            lbPriorInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbPriorInfo.Location = new System.Drawing.Point(lbPrior.Location.X, lbPrior.Location.Y + lbPrior.Height + 5);
+            lbPriorInfo.Name = "lbPriorInfo";
+            lbPriorInfo.Text = "Prioritizes this app\'s notification from other notifications.";
             //
             // hsNotifListener
             //
-            hsNotifListener.Location = new System.Drawing.Point(hsPrioritize.Location.X, lbPrioritieInfo.Location.Y + lbPrioritieInfo.Height + 20);
-            hsNotifListener.Name = "hsNotifListener_" + randomAppID;
+            hsNotifListener.Location = new System.Drawing.Point(hsPrioritize.Location.X, lbPriorInfo.Location.Y + lbPriorInfo.Height + 20);
+            hsNotifListener.Name = "hsNotifListener";
             hsNotifListener.Size = new System.Drawing.Size(50, 19);
             //
             // lbNotifListener
@@ -650,60 +676,60 @@ namespace Yorot.UI.SystemApp
             lbNotifListener.AutoSize = true;
             lbNotifListener.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbNotifListener.Location = new System.Drawing.Point(hsNotifListener.Location.X + hsNotifListener.Width, hsNotifListener.Location.Y - 2);
-            lbNotifListener.Name = "lbNotifListener_" + randomAppID;
+            lbNotifListener.Name = "lbNotifListener";
             lbNotifListener.Text = "Run notification listener at background";
             //
             // lbNotifListenerInfo
             //
             lbNotifListenerInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
             lbNotifListenerInfo.Location = new System.Drawing.Point(lbNotifListener.Location.X, lbNotifListener.Location.Y + lbNotifListener.Height + 5);
-            lbNotifListenerInfo.Name = "lbNotifListenerInfo_" + randomAppID;
+            lbNotifListenerInfo.Name = "lbNotifListenerInfo";
             lbNotifListenerInfo.AutoSize = true;
             lbNotifListenerInfo.Text = "Allows Yorot to run a background service for retrieving new notifications.";
             //
             // hsRunOnStartup
             //
             hsRunOnStartup.Location = new System.Drawing.Point(hsEnabled.Location.X, lbNotifListenerInfo.Location.Y + lbNotifListenerInfo.Height + 20);
-            hsRunOnStartup.Name = "hsRunOnStartup_" + randomAppID;
+            hsRunOnStartup.Name = "hsRunOnStartup";
             hsRunOnStartup.Size = new System.Drawing.Size(50, 19);
             //
-            // lbRunOnStartup
+            // lbRunStart
             //
-            lbRunOnStartup.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbRunOnStartup.Location = new System.Drawing.Point(hsRunOnStartup.Location.X + hsRunOnStartup.Width, hsRunOnStartup.Location.Y - 2);
-            lbRunOnStartup.Name = "lbRunOnStartup_" + randomAppID;
-            lbRunOnStartup.AutoSize = true;
-            lbRunOnStartup.Text = "Run on startup";
+            lbRunStart.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbRunStart.Location = new System.Drawing.Point(hsRunOnStartup.Location.X + hsRunOnStartup.Width, hsRunOnStartup.Location.Y - 2);
+            lbRunStart.Name = "lbRunStart";
+            lbRunStart.AutoSize = true;
+            lbRunStart.Text = "Run on startup";
             //
-            // lbRunOnStartupInfo
+            // lbRunStartInfo
             //
-            lbRunOnStartupInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
-            lbRunOnStartupInfo.Location = new System.Drawing.Point(lbRunOnStartup.Location.X, lbRunOnStartup.Location.Y + lbRunOnStartup.Height + 5);
-            lbRunOnStartupInfo.Name = "lbRunOnStartupInfo_" + randomAppID;
-            lbRunOnStartupInfo.AutoSize = true;
-            lbRunOnStartupInfo.Text = "Starts application on Yorot startup.";
+            lbRunStartInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbRunStartInfo.Location = new System.Drawing.Point(lbRunStart.Location.X, lbRunStart.Location.Y + lbRunStart.Height + 5);
+            lbRunStartInfo.Name = "lbRunStartInfo";
+            lbRunStartInfo.AutoSize = true;
+            lbRunStartInfo.Text = "Starts application on Yorot startup.";
             //
             // hsRunOnIncognito
             //
-            hsRunOnIncognito.Location = new System.Drawing.Point(hsEnabled.Location.X, lbRunOnStartupInfo.Location.Y + lbRunOnStartupInfo.Height + 20);
-            hsRunOnIncognito.Name = "hsRunOnIncognito_" + randomAppID;
+            hsRunOnIncognito.Location = new System.Drawing.Point(hsEnabled.Location.X, lbRunStartInfo.Location.Y + lbRunStartInfo.Height + 20);
+            hsRunOnIncognito.Name = "hsRunOnIncognito";
             hsRunOnIncognito.Size = new System.Drawing.Size(50, 19);
             //
-            // lbRunOnIncognito
+            // lbAllowIncognito
             //
-            lbRunOnIncognito.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbRunOnIncognito.Location = new System.Drawing.Point(hsRunOnIncognito.Location.X + hsRunOnIncognito.Width, hsRunOnIncognito.Location.Y - 2);
-            lbRunOnIncognito.Name = "lbRunOnIncognito_" + randomAppID;
-            lbRunOnIncognito.AutoSize = true;
-            lbRunOnIncognito.Text = "Run on Incognito mode";
+            lbAllowIncognito.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbAllowIncognito.Location = new System.Drawing.Point(hsRunOnIncognito.Location.X + hsRunOnIncognito.Width, hsRunOnIncognito.Location.Y - 2);
+            lbAllowIncognito.Name = "lbAllowIncognito";
+            lbAllowIncognito.AutoSize = true;
+            lbAllowIncognito.Text = "Run on Incognito mode";
             //
-            // lbRunOnIncognitoInfo
+            // lbIncInfo
             //
-            lbRunOnIncognitoInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
-            lbRunOnIncognitoInfo.Location = new System.Drawing.Point(lbRunOnIncognito.Location.X, lbRunOnIncognito.Location.Y + lbRunOnIncognito.Height + 5);
-            lbRunOnIncognitoInfo.Name = "lbRunOnIncognitoInfo_" + randomAppID;
-            lbRunOnIncognitoInfo.AutoSize = true;
-            lbRunOnIncognitoInfo.Text = "Allows this app to run on Incognito mode.";
+            lbIncInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbIncInfo.Location = new System.Drawing.Point(lbAllowIncognito.Location.X, lbAllowIncognito.Location.Y + lbAllowIncognito.Height + 5);
+            lbIncInfo.Name = "lbIncInfo";
+            lbIncInfo.AutoSize = true;
+            lbIncInfo.Text = "Allows this app to run on Incognito mode.";
 
             btContainerBack.Tag = (sbyte)5;
 
@@ -717,67 +743,71 @@ namespace Yorot.UI.SystemApp
             pContainer.Controls.Add(hsEnabled);
             pContainer.Controls.Add(hsNotifications);
             pContainer.Controls.Add(lbNotifListener);
-            pContainer.Controls.Add(lbRunOnIncognito);
-            pContainer.Controls.Add(lbRunOnStartup);
-            pContainer.Controls.Add(lbPrioritize);
+            pContainer.Controls.Add(lbAllowIncognito);
+            pContainer.Controls.Add(lbRunStart);
+            pContainer.Controls.Add(lbPrior);
             pContainer.Controls.Add(lbEnabled);
             pContainer.Controls.Add(lbEnabledInfo);
-            pContainer.Controls.Add(lbRunOnIncognitoInfo);
-            pContainer.Controls.Add(lbNotifications);
-            pContainer.Controls.Add(lbRunOnStartupInfo);
+            pContainer.Controls.Add(lbIncInfo);
+            pContainer.Controls.Add(lbNotif);
+            pContainer.Controls.Add(lbRunStartInfo);
             pContainer.Controls.Add(lbNotifListenerInfo);
-            pContainer.Controls.Add(lbPrioritieInfo);
-            pContainer.Controls.Add(lbNotificationsInfo);
+            pContainer.Controls.Add(lbPriorInfo);
+            pContainer.Controls.Add(lbNotifInfo);
             pContainer.Controls.Add(lbAppOrigin);
             pContainer.Controls.Add(lbOrigin);
             pContainer.Controls.Add(lbSizeOnDisk);
-            pContainer.Controls.Add(btAppUninstall);
-            pContainer.Controls.Add(btAppReset);
+            pContainer.Controls.Add(btUninst);
+            pContainer.Controls.Add(btReset);
             pContainer.Controls.Add(pbAppIcon);
             pContainer.Controls.Add(lbAppCName);
-            pContainer.Controls.Add(lbAppVer);
+            pContainer.Controls.Add(lbVer);
             pContainer.Controls.Add(lbAppAuthor);
             pContainer.Controls.Add(lbAppName);
+
+            System.Collections.IList list = pContainer.Controls;
+            for (int i = 0; i < list.Count; i++)
+            {
+                ((Control)list[i]).Tag = app;
+            }
         }
 
         private void GenerateExtTab(YorotExtension ext)
         {
-            string randomAppID = HTAlt.Tools.GenerateRandomText(17);
-            // TODO: Add all language specific ones to lists.
             System.Windows.Forms.PictureBox pbAppIcon = new System.Windows.Forms.PictureBox();
             System.Windows.Forms.Label lbAppCName = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbAppVer = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbVer = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbAppAuthor = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbAppName = new System.Windows.Forms.Label();
-            HTAlt.WinForms.HTButton btAppReset = new HTAlt.WinForms.HTButton();
-            HTAlt.WinForms.HTButton btAppUninstall = new HTAlt.WinForms.HTButton();
+            HTAlt.WinForms.HTButton btReset = new HTAlt.WinForms.HTButton();
+            HTAlt.WinForms.HTButton btUninst = new HTAlt.WinForms.HTButton();
             System.Windows.Forms.Label lbSizeOnDisk = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsNotifications = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbNotifications = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbMenuOptions = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbEnabled = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbEnabledInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbPrioritize = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbPrior = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsPrioritize = new HTAlt.WinForms.HTSwitch();
             HTAlt.WinForms.HTSwitch hsEnabled = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbRunOnStartup = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbRunStart = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsRunOnStartup = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbNotificationsInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbNotifListener = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbMenuOptionsiInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbMenuOptionsListener = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsNotifListener = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbPrioritieInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbNotifListenerInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbRunOnStartupInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbPriorInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbMenuOptionsListenerInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbRunStartInfo = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbOrigin = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbAppOrigin = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbRunOnIncognitoInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbRunOnIncognito = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbIncInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbAllowIncognito = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsRunOnIncognito = new HTAlt.WinForms.HTSwitch();
             lbContainerTitle.Text = ext.Name;
             //
             // pbAppIcon
             //
             pbAppIcon.Location = new System.Drawing.Point(18, 18);
-            pbAppIcon.Name = "pbExtIcon_" + randomAppID;
+            pbAppIcon.Name = "pbExtIcon";
             pbAppIcon.Size = new System.Drawing.Size(64, 64);
             pbAppIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pbAppIcon.Image = Properties.Resources.addon_settings;
@@ -788,23 +818,23 @@ namespace Yorot.UI.SystemApp
             lbAppName.AutoSize = true;
             lbAppName.Font = new System.Drawing.Font("Ubuntu", 15F);
             lbAppName.Location = new System.Drawing.Point(95, 18);
-            lbAppName.Name = "lbExtName_" + randomAppID;
+            lbAppName.Name = "lbExtName";
             lbAppName.Text = ext.Name;
             //
-            // lbAppVer
+            // lbVer
             //
-            lbAppVer.AutoSize = true;
-            lbAppVer.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbAppVer.Location = new System.Drawing.Point(lbAppName.Location.X, lbAppName.Location.Y + lbAppName.Height);
-            lbAppVer.Name = "lbextVer_" + randomAppID;
-            lbAppVer.Text = "Version " + ext.Version;
+            lbVer.AutoSize = true;
+            lbVer.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbVer.Location = new System.Drawing.Point(lbAppName.Location.X, lbAppName.Location.Y + lbAppName.Height);
+            lbVer.Name = "lbextVer";
+            lbVer.Text = "Version " + ext.Version;
             //
             // lbAppCName
             //
             lbAppCName.AutoSize = true;
             lbAppCName.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbAppCName.Location = new System.Drawing.Point(lbAppVer.Location.X, lbAppVer.Location.Y + lbAppVer.Height + 2);
-            lbAppCName.Name = "lbExtCName_" + randomAppID;
+            lbAppCName.Location = new System.Drawing.Point(lbVer.Location.X, lbVer.Location.Y + lbVer.Height + 2);
+            lbAppCName.Name = "lbExtCName";
             lbAppCName.Text = ext.CodeName;
             //
             // lbAppAuthor
@@ -812,31 +842,31 @@ namespace Yorot.UI.SystemApp
             lbAppAuthor.AutoSize = true;
             lbAppAuthor.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbAppAuthor.Location = new System.Drawing.Point(95, lbAppCName.Location.Y + lbAppCName.Height + 2);
-            lbAppAuthor.Name = "lbExtAuthor_" + randomAppID;
+            lbAppAuthor.Name = "lbExtAuthor";
             lbAppAuthor.Text = ext.Author;
             //
-            // btAppUninstall
+            // btUninst
             //
-            btAppUninstall.AutoColor = true;
-            btAppUninstall.ButtonImage = null;
-            btAppUninstall.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
-            btAppUninstall.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
-            btAppUninstall.DrawImage = false;
-            btAppUninstall.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
-            btAppUninstall.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            btAppUninstall.Location = new System.Drawing.Point(18, lbAppAuthor.Location.Y + lbAppAuthor.Height + 5);
-            btAppUninstall.Name = "btAppUninstall_" + randomAppID;
-            btAppUninstall.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
-            btAppUninstall.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
-            btAppUninstall.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
-            btAppUninstall.TabIndex = 5;
-            btAppUninstall.Text = ext.isSystemExt ? "Cannot uninstall system extensions" : "Uninstall";
-            btAppUninstall.Enabled = !ext.isSystemExt;
+            btUninst.AutoColor = true;
+            btUninst.ButtonImage = null;
+            btUninst.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            btUninst.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            btUninst.DrawImage = false;
+            btUninst.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
+            btUninst.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
+            btUninst.Location = new System.Drawing.Point(18, lbAppAuthor.Location.Y + lbAppAuthor.Height + 5);
+            btUninst.Name = "btUninst";
+            btUninst.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
+            btUninst.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
+            btUninst.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            btUninst.Tag = ext;
+            btUninst.Text = ext.isSystemExt ? "Cannot uninstall system extensions" : "Uninstall";
+            btUninst.Enabled = !ext.isSystemExt;
             //
             // hsEnabled
             //
-            hsEnabled.Location = new System.Drawing.Point(18, btAppUninstall.Location.Y + btAppReset.Height + 5);
-            hsEnabled.Name = "hsEnabled_" + randomAppID;
+            hsEnabled.Location = new System.Drawing.Point(18, btUninst.Location.Y + btReset.Height + 5);
+            hsEnabled.Name = "hsEnabled";
             hsEnabled.Size = new System.Drawing.Size(50, 19);
             hsEnabled.Checked = ext.Enabled;
             hsEnabled.Enabled = !ext.isSystemExt;
@@ -846,84 +876,84 @@ namespace Yorot.UI.SystemApp
             lbEnabled.AutoSize = true;
             lbEnabled.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbEnabled.Location = new System.Drawing.Point(hsEnabled.Location.X + hsEnabled.Width + 5, hsEnabled.Location.Y - 2);
-            lbEnabled.Name = "lbEnabled_" + randomAppID;
+            lbEnabled.Name = "lbEnabled";
             lbEnabled.Text = "Enabled";
             //
             // lbEnabledInfo
             //
             lbEnabledInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
             lbEnabledInfo.Location = new System.Drawing.Point(lbEnabled.Location.X, lbEnabled.Location.Y + lbEnabled.Height + 5);
-            lbEnabledInfo.Name = "lbEnabledInfo_" + randomAppID;
+            lbEnabledInfo.Name = "lbEnabledInfo";
             lbEnabledInfo.AutoSize = true;
             lbEnabledInfo.Text = ext.isSystemExt ? "System extensions cannot be disabled. " : "Determines if this extension can be loaded or not.";
             //
             // hsNotifications
             //
             hsNotifications.Location = new System.Drawing.Point(18, lbEnabledInfo.Location.Y + lbEnabledInfo.Height + 20);
-            hsNotifications.Name = "hsNotifications_" + randomAppID;
+            hsNotifications.Name = "hsNotifications";
             hsNotifications.Size = new System.Drawing.Size(50, 19);
             hsNotifications.Checked = true;
             //
-            // lbNotifications
+            // lbMenuOptions
             //
-            lbNotifications.AutoSize = true;
-            lbNotifications.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbNotifications.Location = new System.Drawing.Point(hsNotifications.Location.X + hsNotifications.Width + 5, hsNotifications.Location.Y - 2);
-            lbNotifications.Name = "lbNotifications_" + randomAppID;
-            lbNotifications.AutoSize = true;
-            lbNotifications.Text = "Show menu options";
+            lbMenuOptions.AutoSize = true;
+            lbMenuOptions.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbMenuOptions.Location = new System.Drawing.Point(hsNotifications.Location.X + hsNotifications.Width + 5, hsNotifications.Location.Y - 2);
+            lbMenuOptions.Name = "lbMenuOptions";
+            lbMenuOptions.AutoSize = true;
+            lbMenuOptions.Text = "Show menu options";
             //
-            // lbNotificationsInfo
+            // lbMenuOptionsInfo
             //
-            lbNotificationsInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
-            lbNotificationsInfo.Location = new System.Drawing.Point(lbNotifications.Location.X, lbNotifications.Location.Y + lbNotifications.Height + 5);
-            lbNotificationsInfo.Name = "lbNotificationsInfo_" + randomAppID;
-            lbNotificationsInfo.AutoSize = true;
-            lbNotificationsInfo.Text = "Allows this extension to show up in menus such as the right-click menu.";
+            lbMenuOptionsiInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbMenuOptionsiInfo.Location = new System.Drawing.Point(lbMenuOptions.Location.X, lbMenuOptions.Location.Y + lbMenuOptions.Height + 5);
+            lbMenuOptionsiInfo.Name = "lbMenuOptionsInfo";
+            lbMenuOptionsiInfo.AutoSize = true;
+            lbMenuOptionsiInfo.Text = "Allows this extension to show up in menus such as the right-click menu.";
             //
             // hsRunOnStartup
             //
-            hsRunOnStartup.Location = new System.Drawing.Point(lbNotificationsInfo.Location.X, lbNotificationsInfo.Location.Y + lbNotificationsInfo.Height + 20);
-            hsRunOnStartup.Name = "hsRunOnStartup_" + randomAppID;
+            hsRunOnStartup.Location = new System.Drawing.Point(lbMenuOptionsiInfo.Location.X, lbMenuOptionsiInfo.Location.Y + lbMenuOptionsiInfo.Height + 20);
+            hsRunOnStartup.Name = "hsRunOnStartup";
             hsRunOnStartup.Size = new System.Drawing.Size(50, 19);
             //
-            // lbRunOnStartup
+            // lbRunStart
             //
-            lbRunOnStartup.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbRunOnStartup.Location = new System.Drawing.Point(hsRunOnStartup.Location.X + hsRunOnStartup.Width, hsRunOnStartup.Location.Y - 2);
-            lbRunOnStartup.Name = "lbRunOnStartup_" + randomAppID;
-            lbRunOnStartup.AutoSize = true;
-            lbRunOnStartup.Text = "Run on startup";
+            lbRunStart.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbRunStart.Location = new System.Drawing.Point(hsRunOnStartup.Location.X + hsRunOnStartup.Width, hsRunOnStartup.Location.Y - 2);
+            lbRunStart.Name = "lbRunStart";
+            lbRunStart.AutoSize = true;
+            lbRunStart.Text = "Run on startup";
             //
-            // lbRunOnStartupInfo
+            // lbRunStartInfo
             //
-            lbRunOnStartupInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
-            lbRunOnStartupInfo.Location = new System.Drawing.Point(lbRunOnStartup.Location.X, lbRunOnStartup.Location.Y + lbRunOnStartup.Height + 5);
-            lbRunOnStartupInfo.Name = "lbRunOnStartupInfo_" + randomAppID;
-            lbRunOnStartupInfo.AutoSize = true;
-            lbRunOnStartupInfo.Text = "Starts extension on Yorot startup.";
+            lbRunStartInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbRunStartInfo.Location = new System.Drawing.Point(lbRunStart.Location.X, lbRunStart.Location.Y + lbRunStart.Height + 5);
+            lbRunStartInfo.Name = "lbRunStartInfo";
+            lbRunStartInfo.AutoSize = true;
+            lbRunStartInfo.Text = "Starts extension on Yorot startup.";
             //
             // hsRunOnIncognito
             //
-            hsRunOnIncognito.Location = new System.Drawing.Point(hsEnabled.Location.X, lbRunOnStartupInfo.Location.Y + lbRunOnStartupInfo.Height + 20);
-            hsRunOnIncognito.Name = "hsRunOnIncognito_" + randomAppID;
+            hsRunOnIncognito.Location = new System.Drawing.Point(hsEnabled.Location.X, lbRunStartInfo.Location.Y + lbRunStartInfo.Height + 20);
+            hsRunOnIncognito.Name = "hsRunOnIncognito";
             hsRunOnIncognito.Size = new System.Drawing.Size(50, 19);
             //
-            // lbRunOnIncognito
+            // lbAllowIncognito
             //
-            lbRunOnIncognito.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbRunOnIncognito.Location = new System.Drawing.Point(hsRunOnIncognito.Location.X + hsRunOnIncognito.Width, hsRunOnIncognito.Location.Y - 2);
-            lbRunOnIncognito.Name = "lbRunOnIncognito_" + randomAppID;
-            lbRunOnIncognito.AutoSize = true;
-            lbRunOnIncognito.Text = "Run on Incognito mode";
+            lbAllowIncognito.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbAllowIncognito.Location = new System.Drawing.Point(hsRunOnIncognito.Location.X + hsRunOnIncognito.Width, hsRunOnIncognito.Location.Y - 2);
+            lbAllowIncognito.Name = "lbAllowIncognito";
+            lbAllowIncognito.AutoSize = true;
+            lbAllowIncognito.Text = "Run on Incognito mode";
             //
-            // lbRunOnIncognitoInfo
+            // lbIncInfo
             //
-            lbRunOnIncognitoInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
-            lbRunOnIncognitoInfo.Location = new System.Drawing.Point(lbRunOnIncognito.Location.X, lbRunOnIncognito.Location.Y + lbRunOnIncognito.Height + 5);
-            lbRunOnIncognitoInfo.Name = "lbRunOnIncognitoInfo_" + randomAppID;
-            lbRunOnIncognitoInfo.AutoSize = true;
-            lbRunOnIncognitoInfo.Text = "Allows this extension to run on Incognito mode.";
+            lbIncInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbIncInfo.Location = new System.Drawing.Point(lbAllowIncognito.Location.X, lbAllowIncognito.Location.Y + lbAllowIncognito.Height + 5);
+            lbIncInfo.Name = "lbIncInfo";
+            lbIncInfo.AutoSize = true;
+            lbIncInfo.Text = "Allows this extension to run on Incognito mode.";
 
             btContainerBack.Tag = (sbyte)5;
 
@@ -936,61 +966,65 @@ namespace Yorot.UI.SystemApp
             pContainer.Controls.Add(hsPrioritize);
             pContainer.Controls.Add(hsEnabled);
             pContainer.Controls.Add(hsNotifications);
-            pContainer.Controls.Add(lbNotifListener);
-            pContainer.Controls.Add(lbRunOnIncognito);
-            pContainer.Controls.Add(lbRunOnStartup);
-            pContainer.Controls.Add(lbPrioritize);
+            pContainer.Controls.Add(lbMenuOptionsListener);
+            pContainer.Controls.Add(lbAllowIncognito);
+            pContainer.Controls.Add(lbRunStart);
+            pContainer.Controls.Add(lbPrior);
             pContainer.Controls.Add(lbEnabled);
             pContainer.Controls.Add(lbEnabledInfo);
-            pContainer.Controls.Add(lbRunOnIncognitoInfo);
-            pContainer.Controls.Add(lbNotifications);
-            pContainer.Controls.Add(lbRunOnStartupInfo);
-            pContainer.Controls.Add(lbNotifListenerInfo);
-            pContainer.Controls.Add(lbPrioritieInfo);
-            pContainer.Controls.Add(lbNotificationsInfo);
+            pContainer.Controls.Add(lbIncInfo);
+            pContainer.Controls.Add(lbMenuOptions);
+            pContainer.Controls.Add(lbRunStartInfo);
+            pContainer.Controls.Add(lbMenuOptionsListenerInfo);
+            pContainer.Controls.Add(lbPriorInfo);
+            pContainer.Controls.Add(lbMenuOptionsiInfo);
             pContainer.Controls.Add(lbAppOrigin);
             pContainer.Controls.Add(lbOrigin);
             pContainer.Controls.Add(lbSizeOnDisk);
-            pContainer.Controls.Add(btAppUninstall);
-            pContainer.Controls.Add(btAppReset);
+            pContainer.Controls.Add(btUninst);
+            pContainer.Controls.Add(btReset);
             pContainer.Controls.Add(pbAppIcon);
             pContainer.Controls.Add(lbAppCName);
-            pContainer.Controls.Add(lbAppVer);
+            pContainer.Controls.Add(lbVer);
             pContainer.Controls.Add(lbAppAuthor);
             pContainer.Controls.Add(lbAppName);
+
+            System.Collections.IList list = pContainer.Controls;
+            for (int i = 0; i < list.Count; i++)
+            {
+                ((Control)list[i]).Tag = ext;
+            }
         }
 
         private void GenerateSiteTab(YorotSite site)
         {
-            string randomAppID = HTAlt.Tools.GenerateRandomText(17);
-            // TODO: Add all language specific ones to lists.
             System.Windows.Forms.PictureBox pbSiteIcon = new System.Windows.Forms.PictureBox();
             System.Windows.Forms.Label lbAppCName = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbAppVer = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbVer = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbAppAuthor = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbAppName = new System.Windows.Forms.Label();
-            HTAlt.WinForms.HTButton btAppReset = new HTAlt.WinForms.HTButton();
-            HTAlt.WinForms.HTButton btAppUninstall = new HTAlt.WinForms.HTButton();
+            HTAlt.WinForms.HTButton btReset = new HTAlt.WinForms.HTButton();
+            HTAlt.WinForms.HTButton btUninst = new HTAlt.WinForms.HTButton();
             System.Windows.Forms.Label lbSizeOnDisk = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsNotifications = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbNotifications = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbNotif = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbEnabled = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbEnabledInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbPrioritize = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbPrior = new System.Windows.Forms.Label();
             ComboBox cbPriority = new ComboBox();
             HTAlt.WinForms.HTSwitch hsEnabled = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbRunOnStartup = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbAllowCamera = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsRunOnStartup = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbNotificationsInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbNotifInfo = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbNotifListener = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsNotifListener = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbPrioritieInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbPriorInfo = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbNotifListenerInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbRunOnStartupInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbAllowCamInfo = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbOrigin = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbAppOrigin = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbRunOnIncognitoInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbRunOnIncognito = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbAllowMicInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbAllowMic = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsRunOnIncognito = new HTAlt.WinForms.HTSwitch();
             System.Windows.Forms.Label lbAllowWEInfo = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbAllowWE = new System.Windows.Forms.Label();
@@ -1000,7 +1034,7 @@ namespace Yorot.UI.SystemApp
             // pbAppIcon
             //
             pbSiteIcon.Location = new System.Drawing.Point(18, 18);
-            pbSiteIcon.Name = "pbAppIcon_" + randomAppID;
+            pbSiteIcon.Name = "pbAppIcon";
             pbSiteIcon.Size = new System.Drawing.Size(64, 64);
             pbSiteIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             //pbAppIcon.Image = YorotTools.GetSiteIcon(site);
@@ -1010,7 +1044,7 @@ namespace Yorot.UI.SystemApp
             lbAppName.AutoSize = true;
             lbAppName.Font = new System.Drawing.Font("Ubuntu", 15F);
             lbAppName.Location = new System.Drawing.Point(95, 18);
-            lbAppName.Name = "lbAppName_" + randomAppID;
+            lbAppName.Name = "lbAppName";
             lbAppName.Text = site.Name;
             //
             // lbAppCName
@@ -1018,46 +1052,48 @@ namespace Yorot.UI.SystemApp
             lbAppCName.AutoSize = true;
             lbAppCName.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbAppCName.Location = new System.Drawing.Point(95, lbAppName.Location.Y + lbAppName.Height + 2);
-            lbAppCName.Name = "lbAppCName_" + randomAppID;
+            lbAppCName.Name = "lbAppCName";
             lbAppCName.Text = site.Url;
             //
-            // btAppReset
+            // btReset
             //
-            btAppReset.AutoColor = true;
-            btAppReset.ButtonImage = null;
-            btAppReset.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
-            btAppReset.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
-            btAppReset.DrawImage = false;
-            btAppReset.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
-            btAppReset.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            btAppReset.Location = new System.Drawing.Point(18, pbSiteIcon.Location.Y + pbSiteIcon.Height + 5);
-            btAppReset.Name = "btAppReset_" + randomAppID;
-            btAppReset.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
-            btAppReset.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
-            btAppReset.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
-            btAppReset.Text = "Reset all to default";
+            btReset.AutoColor = true;
+            btReset.ButtonImage = null;
+            btReset.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            btReset.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            btReset.DrawImage = false;
+            btReset.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
+            btReset.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
+            btReset.Location = new System.Drawing.Point(18, pbSiteIcon.Location.Y + pbSiteIcon.Height + 5);
+            btReset.Name = "btReset";
+            btReset.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            btReset.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
+            btReset.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
+            btReset.Text = "Reset all to default";
+            btReset.Tag = site;
             //
-            // btAppUninstall
+            // btUninst
             //
-            btAppUninstall.AutoColor = true;
-            btAppUninstall.ButtonImage = null;
-            btAppUninstall.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
-            btAppUninstall.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
-            btAppUninstall.DrawImage = false;
-            btAppUninstall.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
-            btAppUninstall.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            btAppUninstall.Location = new System.Drawing.Point(18, btAppReset.Location.Y + btAppReset.Height + 5);
-            btAppUninstall.Name = "btAppUninstall_" + randomAppID;
-            btAppUninstall.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
-            btAppUninstall.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
-            btAppUninstall.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
-            btAppUninstall.TabIndex = 5;
-            btAppUninstall.Text = "Remove";
+            btUninst.AutoColor = true;
+            btUninst.ButtonImage = null;
+            btUninst.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            btUninst.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            btUninst.DrawImage = false;
+            btUninst.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
+            btUninst.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
+            btUninst.Location = new System.Drawing.Point(18, btReset.Location.Y + btReset.Height + 5);
+            btUninst.Name = "btUninst";
+            btUninst.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
+            btUninst.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
+            btUninst.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            btUninst.TabIndex = 5;
+            btUninst.Text = "Remove";
+            btUninst.Tag = site;
             //
             // hsEnabled
             //
             hsEnabled.Location = new System.Drawing.Point();
-            hsEnabled.Name = "hsEnabled_" + randomAppID;
+            hsEnabled.Name = "hsEnabled";
             hsEnabled.Size = new System.Drawing.Size(50, 19);
             hsEnabled.Checked = site.Permissions.allowYS.Allowance == YorotPermissionMode.Allow;
             //
@@ -1066,53 +1102,53 @@ namespace Yorot.UI.SystemApp
             lbEnabled.AutoSize = true;
             lbEnabled.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbEnabled.Location = new System.Drawing.Point(hsEnabled.Location.X + hsEnabled.Width + 5, hsEnabled.Location.Y - 2);
-            lbEnabled.Name = "lbEnabled_" + randomAppID;
+            lbEnabled.Name = "lbEnabled";
             lbEnabled.Text = "Allow access to Yorot Special";
             //
             // lbEnabledInfo
             //
             lbEnabledInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
             lbEnabledInfo.Location = new System.Drawing.Point(lbEnabled.Location.X, lbEnabled.Location.Y + lbEnabled.Height + 5);
-            lbEnabledInfo.Name = "lbEnabledInfo_" + randomAppID;
+            lbEnabledInfo.Name = "lbEnabledInfo";
             lbEnabledInfo.AutoSize = true;
             lbEnabledInfo.Text = "Determines if this site can access to Yorot Specials such as theme or hardware information.";
             //
             // hsNotifications
             //
             hsNotifications.Location = new System.Drawing.Point(18, lbEnabledInfo.Location.Y + lbEnabledInfo.Height + 20);
-            hsNotifications.Name = "hsNotifications_" + randomAppID;
+            hsNotifications.Name = "hsNotifications";
             hsNotifications.Size = new System.Drawing.Size(50, 19);
             hsNotifications.Checked = site.Permissions.allowNotif.Allowance == YorotPermissionMode.Allow;
             //
-            // lbNotifications
+            // lbNotifi
             //
-            lbNotifications.AutoSize = true;
-            lbNotifications.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbNotifications.Location = new System.Drawing.Point(hsNotifications.Location.X + hsNotifications.Width + 5, hsNotifications.Location.Y - 2);
-            lbNotifications.Name = "lbNotifications_" + randomAppID;
-            lbNotifications.AutoSize = true;
-            lbNotifications.Text = "Notifications";
+            lbNotif.AutoSize = true;
+            lbNotif.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbNotif.Location = new System.Drawing.Point(hsNotifications.Location.X + hsNotifications.Width + 5, hsNotifications.Location.Y - 2);
+            lbNotif.Name = "lbNotif";
+            lbNotif.AutoSize = true;
+            lbNotif.Text = "Notifications";
             //
-            // lbNotificationsInfo
+            // lbNotifInfo
             //
-            lbNotificationsInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
-            lbNotificationsInfo.Location = new System.Drawing.Point(lbNotifications.Location.X, lbNotifications.Location.Y + lbNotifications.Height + 5);
-            lbNotificationsInfo.Name = "lbNotificationsInfo_" + randomAppID;
-            lbNotificationsInfo.AutoSize = true;
-            lbNotificationsInfo.Text = "Allows this site to show notifications";
+            lbNotifInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbNotifInfo.Location = new System.Drawing.Point(lbNotif.Location.X, lbNotif.Location.Y + lbNotif.Height + 5);
+            lbNotifInfo.Name = "lbNotifInfo";
+            lbNotifInfo.AutoSize = true;
+            lbNotifInfo.Text = "Allows this site to show notifications";
             //
-            // lbPrioritize
+            // lbPrior
             //
-            lbPrioritize.AutoSize = true;
-            lbPrioritize.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbPrioritize.Location = new System.Drawing.Point(lbNotificationsInfo.Location.X, lbNotificationsInfo.Location.Y + lbNotificationsInfo.Height + 5);
-            lbPrioritize.Name = "lbPrioritize_" + randomAppID;
-            lbPrioritize.Text = "Prioritize";
+            lbPrior.AutoSize = true;
+            lbPrior.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbPrior.Location = new System.Drawing.Point(lbNotifInfo.Location.X, lbNotifInfo.Location.Y + lbNotifInfo.Height + 5);
+            lbPrior.Name = "lbPrior";
+            lbPrior.Text = "Prioritize";
             //
             // cbPriority
             //
-            cbPriority.Location = new System.Drawing.Point(lbPrioritize.Location.X + lbPrioritize.Width, lbPrioritize.Location.Y - 2);
-            cbPriority.Name = "cbPriority_" + randomAppID;
+            cbPriority.Location = new System.Drawing.Point(lbPrior.Location.X + lbPrior.Width, lbPrior.Location.Y - 2);
+            cbPriority.Name = "cbPriority";
             cbPriority.Size = new System.Drawing.Size(100, 19);
             cbPriority.DropDownStyle = ComboBoxStyle.DropDownList;
             cbPriority.Items.Add("Low");
@@ -1120,18 +1156,18 @@ namespace Yorot.UI.SystemApp
             cbPriority.Items.Add("High");
             cbPriority.SelectedIndex = site.Permissions.notifPriority + 1;
             //
-            // lbPrioritieInfo
+            // lbPriorInfo
             //
-            lbPrioritieInfo.AutoSize = true;
-            lbPrioritieInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
-            lbPrioritieInfo.Location = new System.Drawing.Point(lbPrioritize.Location.X, lbPrioritize.Location.Y + lbPrioritize.Height + 5);
-            lbPrioritieInfo.Name = "lbPrioritieInfo_" + randomAppID;
-            lbPrioritieInfo.Text = "Prioritizes this site\'s notification from other notifications.";
+            lbPriorInfo.AutoSize = true;
+            lbPriorInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbPriorInfo.Location = new System.Drawing.Point(lbPrior.Location.X, lbPrior.Location.Y + lbPrior.Height + 5);
+            lbPriorInfo.Name = "lbPriorInfo";
+            lbPriorInfo.Text = "Prioritizes this site\'s notification from other notifications.";
             //
             // hsNotifListener
             //
-            hsNotifListener.Location = new System.Drawing.Point(lbPrioritize.Location.X, lbPrioritieInfo.Location.Y + lbPrioritieInfo.Height + 20);
-            hsNotifListener.Name = "hsNotifListener_" + randomAppID;
+            hsNotifListener.Location = new System.Drawing.Point(lbPrior.Location.X, lbPriorInfo.Location.Y + lbPriorInfo.Height + 20);
+            hsNotifListener.Name = "hsNotifListener";
             hsNotifListener.Size = new System.Drawing.Size(50, 19);
             hsNotifListener.Checked = site.Permissions.startNotifOnBoot;
             //
@@ -1140,67 +1176,67 @@ namespace Yorot.UI.SystemApp
             lbNotifListener.AutoSize = true;
             lbNotifListener.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbNotifListener.Location = new System.Drawing.Point(hsNotifListener.Location.X + hsNotifListener.Width, hsNotifListener.Location.Y - 2);
-            lbNotifListener.Name = "lbNotifListener_" + randomAppID;
+            lbNotifListener.Name = "lbNotifListener";
             lbNotifListener.Text = "Run notification listener at background";
             //
             // lbNotifListenerInfo
             //
             lbNotifListenerInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
             lbNotifListenerInfo.Location = new System.Drawing.Point(lbNotifListener.Location.X, lbNotifListener.Location.Y + lbNotifListener.Height + 5);
-            lbNotifListenerInfo.Name = "lbNotifListenerInfo_" + randomAppID;
+            lbNotifListenerInfo.Name = "lbNotifListenerInfo";
             lbNotifListenerInfo.AutoSize = true;
             lbNotifListenerInfo.Text = "Allows Yorot to run a background service for retrieving new notifications for this site.";
             //
             // hsRunOnStartup
             //
             hsRunOnStartup.Location = new System.Drawing.Point(hsEnabled.Location.X, lbNotifListenerInfo.Location.Y + lbNotifListenerInfo.Height + 20);
-            hsRunOnStartup.Name = "hsRunOnStartup_" + randomAppID;
+            hsRunOnStartup.Name = "hsRunOnStartup";
             hsRunOnStartup.Size = new System.Drawing.Size(50, 19);
             hsRunOnStartup.Checked = site.Permissions.allowCam.Allowance == YorotPermissionMode.Allow;
             //
-            // lbRunOnStartup
+            // lbAllowCamera
             //
-            lbRunOnStartup.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbRunOnStartup.Location = new System.Drawing.Point(hsRunOnStartup.Location.X + hsRunOnStartup.Width, hsRunOnStartup.Location.Y - 2);
-            lbRunOnStartup.Name = "lbRunOnStartup_" + randomAppID;
-            lbRunOnStartup.AutoSize = true;
-            lbRunOnStartup.Text = "Allow Camera Access";
+            lbAllowCamera.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbAllowCamera.Location = new System.Drawing.Point(hsRunOnStartup.Location.X + hsRunOnStartup.Width, hsRunOnStartup.Location.Y - 2);
+            lbAllowCamera.Name = "lbAllowCamera";
+            lbAllowCamera.AutoSize = true;
+            lbAllowCamera.Text = "Allow Camera Access";
             //
-            // lbRunOnStartupInfo
+            // lbAllowCamInfo
             //
-            lbRunOnStartupInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
-            lbRunOnStartupInfo.Location = new System.Drawing.Point(lbRunOnStartup.Location.X, lbRunOnStartup.Location.Y + lbRunOnStartup.Height + 5);
-            lbRunOnStartupInfo.Name = "lbRunOnStartupInfo_" + randomAppID;
-            lbRunOnStartupInfo.AutoSize = true;
-            lbRunOnStartupInfo.Text = "Allows this site to access cameras.";
+            lbAllowCamInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbAllowCamInfo.Location = new System.Drawing.Point(lbAllowCamera.Location.X, lbAllowCamera.Location.Y + lbAllowCamera.Height + 5);
+            lbAllowCamInfo.Name = "lbAllowCamInfo";
+            lbAllowCamInfo.AutoSize = true;
+            lbAllowCamInfo.Text = "Allows this site to access cameras.";
             //
             // hsRunOnIncognito
             //
-            hsRunOnIncognito.Location = new System.Drawing.Point(hsEnabled.Location.X, lbRunOnStartupInfo.Location.Y + lbRunOnStartupInfo.Height + 20);
-            hsRunOnIncognito.Name = "hsRunOnIncognito_" + randomAppID;
+            hsRunOnIncognito.Location = new System.Drawing.Point(hsEnabled.Location.X, lbAllowCamInfo.Location.Y + lbAllowCamInfo.Height + 20);
+            hsRunOnIncognito.Name = "hsRunOnIncognito";
             hsRunOnIncognito.Size = new System.Drawing.Size(50, 19);
             hsRunOnIncognito.Checked = site.Permissions.allowMic.Allowance == YorotPermissionMode.Allow;
             //
-            // lbRunOnIncognito
+            // lbAllowMic
             //
-            lbRunOnIncognito.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbRunOnIncognito.Location = new System.Drawing.Point(hsRunOnIncognito.Location.X + hsRunOnIncognito.Width, hsRunOnIncognito.Location.Y - 2);
-            lbRunOnIncognito.Name = "lbRunOnIncognito_" + randomAppID;
-            lbRunOnIncognito.AutoSize = true;
-            lbRunOnIncognito.Text = "Allow Microphone Access";
+            lbAllowMic.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbAllowMic.Location = new System.Drawing.Point(hsRunOnIncognito.Location.X + hsRunOnIncognito.Width, hsRunOnIncognito.Location.Y - 2);
+            lbAllowMic.Name = "lbAllowMic";
+            lbAllowMic.AutoSize = true;
+            lbAllowMic.Text = "Allow Microphone Access";
             //
-            // lbRunOnIncognitoInfo
+            // lbAllowMicInfo
             //
-            lbRunOnIncognitoInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
-            lbRunOnIncognitoInfo.Location = new System.Drawing.Point(lbRunOnIncognito.Location.X, lbRunOnIncognito.Location.Y + lbRunOnIncognito.Height + 5);
-            lbRunOnIncognitoInfo.Name = "lbRunOnIncognitoInfo_" + randomAppID;
-            lbRunOnIncognitoInfo.AutoSize = true;
-            lbRunOnIncognitoInfo.Text = "Allows this site to access microphones.";
+            lbAllowMicInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbAllowMicInfo.Location = new System.Drawing.Point(lbAllowMic.Location.X, lbAllowMic.Location.Y + lbAllowMic.Height + 5);
+            lbAllowMicInfo.Name = "lbAllowMicInfo";
+            lbAllowMicInfo.AutoSize = true;
+            lbAllowMicInfo.Text = "Allows this site to access microphones.";
             //
             // hsAllowWE
             //
-            hsAllowWE.Location = new System.Drawing.Point(hsEnabled.Location.X, lbRunOnIncognitoInfo.Location.Y + lbRunOnIncognitoInfo.Height + 20);
-            hsAllowWE.Name = "hsRunOnIncognito_" + randomAppID;
+            hsAllowWE.Location = new System.Drawing.Point(hsEnabled.Location.X, lbAllowMicInfo.Location.Y + lbAllowMicInfo.Height + 20);
+            hsAllowWE.Name = "hsRunOnIncognito";
             hsAllowWE.Size = new System.Drawing.Size(50, 19);
             hsAllowWE.Checked = site.Permissions.allowWE.Allowance == YorotPermissionMode.Allow;
             //
@@ -1208,15 +1244,15 @@ namespace Yorot.UI.SystemApp
             //
             lbAllowWE.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbAllowWE.Location = new System.Drawing.Point(hsAllowWE.Location.X + hsAllowWE.Width, hsAllowWE.Location.Y - 2);
-            lbAllowWE.Name = "lbRunOnIncognito_" + randomAppID;
+            lbAllowWE.Name = "lbAllowWE";
             lbAllowWE.AutoSize = true;
             lbAllowWE.Text = "Allow Web Engines";
             //
-            // lbAllwoWEInfo
+            // lbAllowWEInfo
             //
             lbAllowWEInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
             lbAllowWEInfo.Location = new System.Drawing.Point(lbAllowWE.Location.X, lbAllowWE.Location.Y + lbAllowWE.Height + 5);
-            lbAllowWEInfo.Name = "lbRunOnIncognitoInfo_" + randomAppID;
+            lbAllowWEInfo.Name = "lbAllowWEInfo";
             lbAllowWEInfo.AutoSize = true;
             lbAllowWEInfo.Text = "Allows this site to access web engines.";
 
@@ -1232,66 +1268,58 @@ namespace Yorot.UI.SystemApp
             pContainer.Controls.Add(hsEnabled);
             pContainer.Controls.Add(hsNotifications);
             pContainer.Controls.Add(lbNotifListener);
-            pContainer.Controls.Add(lbRunOnIncognito);
-            pContainer.Controls.Add(lbRunOnStartup);
-            pContainer.Controls.Add(lbPrioritize);
+            pContainer.Controls.Add(lbAllowMic);
+            pContainer.Controls.Add(lbAllowCamera);
+            pContainer.Controls.Add(lbPrior);
             pContainer.Controls.Add(lbEnabled);
             pContainer.Controls.Add(lbEnabledInfo);
-            pContainer.Controls.Add(lbRunOnIncognitoInfo);
-            pContainer.Controls.Add(lbNotifications);
-            pContainer.Controls.Add(lbRunOnStartupInfo);
+            pContainer.Controls.Add(lbAllowMicInfo);
+            pContainer.Controls.Add(lbNotif);
+            pContainer.Controls.Add(lbAllowCamInfo);
             pContainer.Controls.Add(lbNotifListenerInfo);
-            pContainer.Controls.Add(lbPrioritieInfo);
-            pContainer.Controls.Add(lbNotificationsInfo);
+            pContainer.Controls.Add(lbPriorInfo);
+            pContainer.Controls.Add(lbNotifInfo);
             pContainer.Controls.Add(lbAppOrigin);
             pContainer.Controls.Add(lbOrigin);
             pContainer.Controls.Add(lbSizeOnDisk);
-            pContainer.Controls.Add(btAppUninstall);
-            pContainer.Controls.Add(btAppReset);
+            pContainer.Controls.Add(btUninst);
+            pContainer.Controls.Add(btReset);
             pContainer.Controls.Add(pbSiteIcon);
             pContainer.Controls.Add(lbAppCName);
-            pContainer.Controls.Add(lbAppVer);
+            pContainer.Controls.Add(lbVer);
             pContainer.Controls.Add(lbAppAuthor);
             pContainer.Controls.Add(lbAppName);
+
+            System.Collections.IList list = pContainer.Controls;
+            for (int i = 0; i < list.Count; i++)
+            {
+                ((Control)list[i]).Tag = site;
+            }
         }
         private void GenerateWETab(YorotWebEngine we)
         {
-            string randomAppID = HTAlt.Tools.GenerateRandomText(17);
-            // TODO: Add all language specific ones to lists.
             System.Windows.Forms.PictureBox pbAppIcon = new System.Windows.Forms.PictureBox();
             System.Windows.Forms.Label lbAppCName = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbAppVer = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbVer = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbAppAuthor = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbAppName = new System.Windows.Forms.Label();
-            HTAlt.WinForms.HTButton btAppReset = new HTAlt.WinForms.HTButton();
-            HTAlt.WinForms.HTButton btAppUninstall = new HTAlt.WinForms.HTButton();
+            HTAlt.WinForms.HTButton btReset = new HTAlt.WinForms.HTButton();
+            HTAlt.WinForms.HTButton btUninst = new HTAlt.WinForms.HTButton();
             System.Windows.Forms.Label lbSizeOnDisk = new System.Windows.Forms.Label();
-            HTAlt.WinForms.HTSwitch hsNotifications = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbNotifications = new System.Windows.Forms.Label();
             System.Windows.Forms.Label lbEnabled = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbEnabledInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbPrioritize = new System.Windows.Forms.Label();
-            HTAlt.WinForms.HTSwitch hsPrioritize = new HTAlt.WinForms.HTSwitch();
+            System.Windows.Forms.Label lbWEEnabledInfo = new System.Windows.Forms.Label();
             HTAlt.WinForms.HTSwitch hsEnabled = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbRunOnStartup = new System.Windows.Forms.Label();
-            HTAlt.WinForms.HTSwitch hsRunOnStartup = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbNotificationsInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbNotifListener = new System.Windows.Forms.Label();
-            HTAlt.WinForms.HTSwitch hsNotifListener = new HTAlt.WinForms.HTSwitch();
-            System.Windows.Forms.Label lbPrioritieInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbNotifListenerInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbRunOnStartupInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbOrigin = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbAppOrigin = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbRunOnIncognitoInfo = new System.Windows.Forms.Label();
-            System.Windows.Forms.Label lbRunOnIncognito = new System.Windows.Forms.Label();
-            HTAlt.WinForms.HTSwitch hsRunOnIncognito = new HTAlt.WinForms.HTSwitch();
+            System.Windows.Forms.Label lbWEDesc = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbWEDescInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbWEAllowIncognitoInfo = new System.Windows.Forms.Label();
+            System.Windows.Forms.Label lbWEAllowIncognito = new System.Windows.Forms.Label();
+            HTAlt.WinForms.HTSwitch hsWEAllowIncognito = new HTAlt.WinForms.HTSwitch();
             lbContainerTitle.Text = we.Name;
             //
             // pbAppIcon
             //
             pbAppIcon.Location = new System.Drawing.Point(18, 18);
-            pbAppIcon.Name = "pbAppIcon_" + randomAppID;
+            pbAppIcon.Name = "pbAppIcon";
             pbAppIcon.Size = new System.Drawing.Size(64, 64);
             pbAppIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             //pbAppIcon.Image = YorotTools.GetWEIcon(we);
@@ -1302,24 +1330,24 @@ namespace Yorot.UI.SystemApp
             lbAppName.AutoSize = true;
             lbAppName.Font = new System.Drawing.Font("Ubuntu", 15F);
             lbAppName.Location = new System.Drawing.Point(95, 18);
-            lbAppName.Name = "lbAppName_" + randomAppID;
+            lbAppName.Name = "lbAppName";
             lbAppName.Text = we.Name;
             //
-            // lbAppVer
+            // lbVer
             //
-            lbAppVer.AutoSize = true;
-            lbAppVer.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbAppVer.Location = new System.Drawing.Point(lbAppName.Location.X, lbAppName.Location.Y + lbAppName.Height + 2);
-            lbAppVer.Name = "lbAppVer_" + randomAppID;
-            lbAppVer.Text = Version.Replace("[V]", "" + we.Version);
-            lbWEVer = lbAppVer;
+            lbVer.AutoSize = true;
+            lbVer.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbVer.Location = new System.Drawing.Point(lbAppName.Location.X, lbAppName.Location.Y + lbAppName.Height + 2);
+            lbVer.Name = "lbVer";
+            lbVer.Text = Version.Replace("[V]", "" + we.Version);
+            lbVer.Tag = we;
             //
             // lbAppCName
             //
             lbAppCName.AutoSize = true;
             lbAppCName.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbAppCName.Location = new System.Drawing.Point(lbAppName.Location.X, lbAppVer.Location.Y + lbAppVer.Height + 2);
-            lbAppCName.Name = "lbAppCName_" + randomAppID;
+            lbAppCName.Location = new System.Drawing.Point(lbAppName.Location.X, lbVer.Location.Y + lbVer.Height + 2);
+            lbAppCName.Name = "lbAppCName";
             lbAppCName.Text = we.CodeName;
             //
             // lbAppAuthor
@@ -1327,74 +1355,72 @@ namespace Yorot.UI.SystemApp
             lbAppAuthor.AutoSize = true;
             lbAppAuthor.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbAppAuthor.Location = new System.Drawing.Point(95, lbAppCName.Location.Y + lbAppCName.Height + 2);
-            lbAppAuthor.Name = "lbAppAuthor_" + randomAppID;
+            lbAppAuthor.Name = "lbAppAuthor";
             lbAppAuthor.Text = we.Author;
             //
-            // btAppReset
+            // btReset
             //
-            btAppReset.AutoColor = true;
-            btAppReset.ButtonImage = null;
-            btAppReset.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
-            btAppReset.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
-            btAppReset.DrawImage = false;
-            btAppReset.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
-            btAppReset.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            btAppReset.Location = new System.Drawing.Point(18, lbAppAuthor.Location.Y + lbAppAuthor.Height + 5);
-            btAppReset.Name = "btAppReset_" + randomAppID;
-            btAppReset.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
-            btAppReset.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
-            btAppReset.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
-            btAppReset.Text = Reset;
-            lbWEReset = btAppReset;
+            btReset.AutoColor = true;
+            btReset.ButtonImage = null;
+            btReset.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            btReset.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            btReset.DrawImage = false;
+            btReset.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
+            btReset.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
+            btReset.Location = new System.Drawing.Point(18, lbAppAuthor.Location.Y + lbAppAuthor.Height + 5);
+            btReset.Name = "btReset";
+            btReset.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            btReset.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
+            btReset.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
+            btReset.Text = Reset;
+            btReset.Tag = we;
             //
-            // btAppUninstall
+            // btUninst
             //
-            btAppUninstall.AutoColor = true;
-            btAppUninstall.ButtonImage = null;
-            btAppUninstall.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
-            btAppUninstall.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
-            btAppUninstall.DrawImage = false;
-            btAppUninstall.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
-            btAppUninstall.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
-            btAppUninstall.Location = new System.Drawing.Point(18, btAppReset.Location.Y + btAppReset.Height + 5);
-            btAppUninstall.Name = "btAppUninstall_" + randomAppID;
-            btAppUninstall.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
-            btAppUninstall.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
-            btAppUninstall.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
-            btAppUninstall.TabIndex = 5;
-            btAppUninstall.Text = Uninstall;
-            lbWEUninst = btAppUninstall;
+            btUninst.AutoColor = true;
+            btUninst.ButtonImage = null;
+            btUninst.ButtonShape = HTAlt.WinForms.HTButton.ButtonShapes.Rectangle;
+            btUninst.ClickColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            btUninst.DrawImage = false;
+            btUninst.HoverColor = System.Drawing.Color.FromArgb(200, 200, 200);
+            btUninst.ImageSizeMode = HTAlt.WinForms.HTButton.ButtonImageSizeMode.None;
+            btUninst.Location = new System.Drawing.Point(18, btReset.Location.Y + btReset.Height + 5);
+            btUninst.Name = "btUninst";
+            btUninst.NormalColor = System.Drawing.Color.FromArgb(220, 220, 220);
+            btUninst.Size = new System.Drawing.Size(pContainer.Width - 36, 23);
+            btUninst.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+            btUninst.Tag = we;
+            btUninst.Text = Uninstall;
             //
             // lbSizeOnDisk
             //
             lbSizeOnDisk.AutoSize = true;
             lbSizeOnDisk.Font = new System.Drawing.Font("Ubuntu", 12F);
-            lbSizeOnDisk.Location = new System.Drawing.Point(18, btAppUninstall.Location.Y + btAppReset.Height + 5);
-            lbSizeOnDisk.Name = "lbSizeOnDisk_" + randomAppID;
-            lbSizeOnDisk.Text = WESizeOnDisk.Replace("[S]", we.GetWESizeInfo(SizeInfoBytes));
-            lbWESize = lbSizeOnDisk;
+            lbSizeOnDisk.Location = new System.Drawing.Point(18, btUninst.Location.Y + btReset.Height + 5);
+            lbSizeOnDisk.Name = "lbSizeOnDisk";
+            lbSizeOnDisk.Text = SizeOnDisk.Replace("[S]", we.GetWESizeInfo(SizeInfoBytes));
+            lbSizeOnDisk.Tag = we;
             //
-            // lbOrigin
+            // lbWEDesc
             //
-            lbOrigin.Font = new System.Drawing.Font("Ubuntu", 12F);
-            lbOrigin.Location = new System.Drawing.Point(18, lbSizeOnDisk.Location.Y + lbSizeOnDisk.Height + 5);
-            lbOrigin.Name = "lbOrigin_" + randomAppID;
-            lbOrigin.AutoSize = true;
-            lbOrigin.Text = WEDesc;
-            lbWEDesc = lbOrigin;
+            lbWEDesc.Font = new System.Drawing.Font("Ubuntu", 12F);
+            lbWEDesc.Location = new System.Drawing.Point(18, lbSizeOnDisk.Location.Y + lbSizeOnDisk.Height + 5);
+            lbWEDesc.Name = "lbWEDesc";
+            lbWEDesc.AutoSize = true;
+            lbWEDesc.Text = WEDesc;
             //
-            // lbAppOrigin
+            // lbWEDescInfo
             //
-            lbAppOrigin.Font = new System.Drawing.Font("Ubuntu", 12F);
-            lbAppOrigin.Location = new System.Drawing.Point(lbOrigin.Location.X + lbOrigin.Width, lbOrigin.Location.Y);
-            lbAppOrigin.Name = "lbAppOrigin_" + randomAppID;
-            lbAppOrigin.Size = new System.Drawing.Size(pContainer.Width - (36 + lbOrigin.Width), lbOrigin.Height * 4);
-            lbAppOrigin.Text = we.Desc;
+            lbWEDescInfo.Font = new System.Drawing.Font("Ubuntu", 12F);
+            lbWEDescInfo.Location = new System.Drawing.Point(lbWEDesc.Location.X + lbWEDesc.Width, lbWEDesc.Location.Y);
+            lbWEDescInfo.Name = "lbWEDescInfo";
+            lbWEDescInfo.Size = new System.Drawing.Size(pContainer.Width - (36 + lbWEDesc.Width), lbWEDesc.Height * 4);
+            lbWEDescInfo.Text = we.Desc;
             //
             // hsEnabled
             //
-            hsEnabled.Location = new System.Drawing.Point(18, lbAppOrigin.Location.Y + lbAppOrigin.Height + 20);
-            hsEnabled.Name = "hsEnabled_" + randomAppID;
+            hsEnabled.Location = new System.Drawing.Point(18, lbWEDescInfo.Location.Y + lbWEDescInfo.Height + 20);
+            hsEnabled.Name = "hsEnabled";
             hsEnabled.Size = new System.Drawing.Size(50, 19);
             hsEnabled.Checked = we.isEnabled;
             //
@@ -1403,78 +1429,66 @@ namespace Yorot.UI.SystemApp
             lbEnabled.AutoSize = true;
             lbEnabled.Font = new System.Drawing.Font("Ubuntu", 12.5F);
             lbEnabled.Location = new System.Drawing.Point(hsEnabled.Location.X + hsEnabled.Width + 5, hsEnabled.Location.Y - 2);
-            lbEnabled.Name = "lbEnabled_" + randomAppID;
+            lbEnabled.Name = "lbEnabled";
             lbEnabled.Text = AppEnabled;
-            lbWEEnabled = lbEnabled;
+            lbEnabled.Tag = we;
             //
-            // lbEnabledInfo
+            // lbWEEnabledInfo
             //
-            lbEnabledInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
-            lbEnabledInfo.Location = new System.Drawing.Point(lbEnabled.Location.X, lbEnabled.Location.Y + lbEnabled.Height + 5);
-            lbEnabledInfo.Name = "lbEnabledInfo_" + randomAppID;
-            lbEnabledInfo.AutoSize = true;
-            lbEnabledInfo.Text = WEEnabledInfo;
-            lbWEEnabledInfo = lbEnabledInfo;
+            lbWEEnabledInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbWEEnabledInfo.Location = new System.Drawing.Point(lbEnabled.Location.X, lbEnabled.Location.Y + lbEnabled.Height + 5);
+            lbWEEnabledInfo.Name = "lbWEEnabledInfo";
+            lbWEEnabledInfo.AutoSize = true;
+            lbWEEnabledInfo.Text = WEEnabledInfo;
             //
             // hsRunOnIncognito
             //
-            hsRunOnIncognito.Location = new System.Drawing.Point(hsEnabled.Location.X, lbEnabledInfo.Location.Y + lbEnabledInfo.Height + 20);
-            hsRunOnIncognito.Name = "hsRunOnIncognito_" + randomAppID;
-            hsRunOnIncognito.Size = new System.Drawing.Size(50, 19);
+            hsWEAllowIncognito.Location = new System.Drawing.Point(hsEnabled.Location.X, lbWEEnabledInfo.Location.Y + lbWEEnabledInfo.Height + 20);
+            hsWEAllowIncognito.Name = "hsWEAllowIncognito";
+            hsWEAllowIncognito.Size = new System.Drawing.Size(50, 19);
             //
-            // lbRunOnIncognito
+            // lbAllowIncognito
             //
-            lbRunOnIncognito.Font = new System.Drawing.Font("Ubuntu", 12.5F);
-            lbRunOnIncognito.Location = new System.Drawing.Point(hsRunOnIncognito.Location.X + hsRunOnIncognito.Width, hsRunOnIncognito.Location.Y - 2);
-            lbRunOnIncognito.Name = "lbRunOnIncognito_" + randomAppID;
-            lbRunOnIncognito.AutoSize = true;
-            lbRunOnIncognito.Text = RunInc;
-            lbWERunInc = lbRunOnIncognito;
+            lbWEAllowIncognito.Font = new System.Drawing.Font("Ubuntu", 12.5F);
+            lbWEAllowIncognito.Location = new System.Drawing.Point(hsWEAllowIncognito.Location.X + hsWEAllowIncognito.Width, hsWEAllowIncognito.Location.Y - 2);
+            lbWEAllowIncognito.Name = "lbWEAllowIncognito";
+            lbWEAllowIncognito.AutoSize = true;
+            lbWEAllowIncognito.Text = RunInc;
             //
-            // lbRunOnIncognitoInfo
+            // lbIncInfo
             //
-            lbRunOnIncognitoInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
-            lbRunOnIncognitoInfo.Location = new System.Drawing.Point(lbRunOnIncognito.Location.X, lbRunOnIncognito.Location.Y + lbRunOnIncognito.Height + 5);
-            lbRunOnIncognitoInfo.Name = "lbRunOnIncognitoInfo_" + randomAppID;
-            lbRunOnIncognitoInfo.AutoSize = true;
-            lbRunOnIncognitoInfo.Text = WERunIncInfo;
-            lbWERunIncInfo = lbRunOnIncognitoInfo;
+            lbWEAllowIncognitoInfo.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbWEAllowIncognitoInfo.Location = new System.Drawing.Point(lbWEAllowIncognito.Location.X, lbWEAllowIncognito.Location.Y + lbWEAllowIncognito.Height + 5);
+            lbWEAllowIncognitoInfo.Name = "lbWEAllowIncognitoInfo";
+            lbWEAllowIncognitoInfo.AutoSize = true;
+            lbWEAllowIncognitoInfo.Text = WERunIncInfo;
 
             btContainerBack.Tag = (sbyte)5;
             //
             // tpAppPage
             //
-            pContainer.Controls.Add(hsRunOnIncognito);
-            pContainer.Controls.Add(hsRunOnStartup);
-            pContainer.Controls.Add(hsNotifListener);
-            pContainer.Controls.Add(hsPrioritize);
+            pContainer.Controls.Add(hsWEAllowIncognito);
             pContainer.Controls.Add(hsEnabled);
-            pContainer.Controls.Add(hsNotifications);
-            pContainer.Controls.Add(lbNotifListener);
-            pContainer.Controls.Add(lbRunOnIncognito);
-            pContainer.Controls.Add(lbRunOnStartup);
-            pContainer.Controls.Add(lbPrioritize);
+            pContainer.Controls.Add(lbWEAllowIncognito);
             pContainer.Controls.Add(lbEnabled);
-            pContainer.Controls.Add(lbEnabledInfo);
-            pContainer.Controls.Add(lbRunOnIncognitoInfo);
-            pContainer.Controls.Add(lbNotifications);
-            pContainer.Controls.Add(lbRunOnStartupInfo);
-            pContainer.Controls.Add(lbNotifListenerInfo);
-            pContainer.Controls.Add(lbPrioritieInfo);
-            pContainer.Controls.Add(lbNotificationsInfo);
-            pContainer.Controls.Add(lbAppOrigin);
-            pContainer.Controls.Add(lbOrigin);
+            pContainer.Controls.Add(lbWEEnabledInfo);
+            pContainer.Controls.Add(lbWEAllowIncognitoInfo);
+            pContainer.Controls.Add(lbWEDescInfo);
+            pContainer.Controls.Add(lbWEDesc);
             pContainer.Controls.Add(lbSizeOnDisk);
-            pContainer.Controls.Add(btAppUninstall);
-            pContainer.Controls.Add(btAppReset);
+            pContainer.Controls.Add(btUninst);
+            pContainer.Controls.Add(btReset);
             pContainer.Controls.Add(pbAppIcon);
             pContainer.Controls.Add(lbAppCName);
-            pContainer.Controls.Add(lbAppVer);
+            pContainer.Controls.Add(lbVer);
             pContainer.Controls.Add(lbAppAuthor);
             pContainer.Controls.Add(lbAppName);
-            loadedWE = we;
 
-
+            System.Collections.IList list = pContainer.Controls;
+            for (int i = 0; i < list.Count; i++)
+            {
+                ((Control)list[i]).Tag = we;
+            }
         }
 
         #endregion Generate Tabs
@@ -1627,14 +1641,20 @@ namespace Yorot.UI.SystemApp
 
         #region Translate
 
-        public string WESizeOnDisk = "Size on disk:[S]";
+        public string SizeOnDisk = "Size on disk: [S]";
         public string WEDesc = "Description:";
         public string AppEnabled = "Enabled";
         public string WEEnabledInfo = "Determines if this web engine can be loaded or not.";
         public string RunInc = "Allow on Incognito mode";
         public string WERunIncInfo = "Allows this web engine to load on Incognito mode.";
         public string Uninstall = "Uninstall";
+        public string Remove = "Remove";
+        public string CannotUninstallApp = "Cannot uninstall system apps";
+        public string CannotUninstallExt = "Cannot uninstall system extensions";
         public string Reset = "Reset";
+        public string CannotResetApp = "Cannot reset system apps";
+        public string CannotResetExt = "Cannot reset system extensions";
+        public string ResetToDefault = "Reset all to default";
         public string Version = "Version [V]";
         public string SizeInfoBytes = "bytes";
         public string Clear = "Clear";
@@ -1645,6 +1665,72 @@ namespace Yorot.UI.SystemApp
         public string SearchWE = "Search a web engine..";
         public string LogInfo = "[I] information(s).[NEWLINE][W] warning(s).[NEWLINE][E] error(s).[NEWLINE][C] critical failure(s).";
         public string OpenInFiles = "Open in Files...";
+
+        string OriginOther = "Other";
+        string OriginYopad = "Yopad";
+        string OriginStore = "Store";
+        string OriginEmbedded = "Embedded";
+        string OriginUnknown = "Unknown";
+
+        private string ExtRunIncInfo = "Determines if this extension can be loaded in Incognito mode.";
+        private string AppRunIncInfo = "Determines if this application can be loaded in Incognito mode.";
+        private string Notif = "Notifications";
+        private string SiteNotifInfo = "Determines if this site can send notifications.";
+        private string AppNotifInfo = "Determines if this app can send notifications.";
+        private string ExtNotifInfo = "Determines if this extension can send notifications.";
+        private string Prior = "Prioritize";
+        private string Origin = "Origin:";
+        private string SitePriorInfo = "Determines the priority of this site.";
+        private string AppPriorInfo = "Determines the priority of this app.";
+        private string ShowMenu = "Show menu options";
+        private string ShowMenuInfo = "Allows this extension to show up in menus such as the right-click menu.";
+        private string NotifListener = "Run Notification Listener";
+        private string SiteNotifListenerInfo = "Determines if Yorot should run a background service to receive notifications from this site.";
+        private string AppNotifListenerInfo = "Determines if Yorot should run a background service to receive notifications from this app.";
+        private string RunStart = "Run on Startup";
+        private string ExtRunStartInfo = "Determines if Yorot should run this extension from startup.";
+        private string AppRunStartInfo = "Determines if Yorot should run this app from startup.";
+        private string AllowCamera = "Allow Camera Access";
+        private string AllowCamInfo = "Determines if this site can access camera.";
+        private string AllowMic = "Allow Microphone Access";
+        private string AllowMicInfo = "Determines if this site can access microphone.";
+        private string AllowWE = "Allow Web Engine Access";
+        private string AllowWEInfo = "Determines if this site can access web engines.";
+
+        private string CannotDisableApp = "System apps cannot be disabled.";
+        private string EnableInfoApp = "Determines if this app can be loaded or not.";
+        private string EnableInfoExt = "Determines if this extension can be loaded or not.";
+        private string CannotDisableExt = "System extensions cannot be disabled.";
+
+        private string Yes = "Yes";
+        private string No = "No";
+
+        private string AppResetMessage = "Do you really want to reset this app?" + Environment.NewLine + "(All data will be lost on this app).";
+        private string AppUninstMessage = "Do you really want to uninstall this app?" + Environment.NewLine + "(All data will be lost on this app).";
+
+        #region Month and Day
+        public string Sunday = "Sunday";
+        public string Monday = "Monday";
+        public string Tuesday = "Tuesday";
+        public string Wednesday = "Wednesday";
+        public string Thursday = "Thursday";
+        public string Friday = "Friday";
+        public string Saturday = "Saturday";
+        public string Month1 = "January";
+        public string Month2 = "February";
+        public string Month3 = "March";
+        public string Month4 = "April";
+        public string Month5 = "May";
+        public string Month6 = "June";
+        public string Month7 = "July";
+        public string Month8 = "August";
+        public string Month9 = "September";
+        public string Month10 = "October";
+        public string Month11 = "November";
+        public string Month12 = "December";
+        public string[] monthNames() => new string[] { Month1, Month2, Month3, Month4, Month5, Month6, Month7,Month8, Month9, Month10, Month11, Month12 };
+        public string[] dayNames() => new string[] { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday,Saturday };
+        #endregion Month and Day
 
         #endregion Translate
 
@@ -1658,13 +1744,85 @@ namespace Yorot.UI.SystemApp
                 YorotLanguage l = YorotGlobal.Main.CurrentLanguage;
                 Text = l.GetItemText("Win32.DefaultApps.Settings");
                 lbHomeHello.Text = l.GetItemText("Win32.Settings.HelloUser").Replace("[USERNAME]", YorotGlobal.Main.Profiles.Current.Text);
+                Sunday = l.GetItemText("Win32.DateTime.Sunday");
+                Monday = l.GetItemText("Win32.DateTime.Monday");
+                Tuesday = l.GetItemText("Win32.DateTime.Tuesday");
+                Wednesday = l.GetItemText("Win32.DateTime.Wednesday");
+                Thursday = l.GetItemText("Win32.DateTime.Thursday");
+                Friday = l.GetItemText("Win32.DateTime.Friday");
+                Saturday = l.GetItemText("Win32.DateTime.Saturday");
+                Month1 = l.GetItemText("Win32.DateTime.Month1");
+                Month2 = l.GetItemText("Win32.DateTime.Month2");
+                Month3 = l.GetItemText("Win32.DateTime.Month3");
+                Month4 = l.GetItemText("Win32.DateTime.Month4");
+                Month5 = l.GetItemText("Win32.DateTime.Month5");
+                Month6 = l.GetItemText("Win32.DateTime.Month6");
+                Month7 = l.GetItemText("Win32.DateTime.Month7");
+                Month8 = l.GetItemText("Win32.DateTime.Month8");
+                Month9 = l.GetItemText("Win32.DateTime.Month9");
+                Month10 = l.GetItemText("Win32.DateTime.Month10");
+                Month11 = l.GetItemText("Win32.DateTime.Month11");
+                Month12 = l.GetItemText("Win32.DateTime.Month12");
+                Yes = l.GetItemText("Win32.DialogBox.Yes");
+                No = l.GetItemText("Win32.DialogBox.No");
+                AppUninstMessage = l.GetItemText("Win32.Settings.AppUninstMessage").Replace("[NEWLINE]", Environment.NewLine);
+                AppResetMessage = l.GetItemText("Win32.Settings.AppResetMessage").Replace("[NEWLINE]", Environment.NewLine);
                 llChangeUserName.Text = l.GetItemText("Win32.Settings.Change");
+                SizeOnDisk = l.GetItemText("Win32.Settings.SizeOnDisk");
+                WEDesc = l.GetItemText("Win32.Settings.WEDesc");
+                AppEnabled = l.GetItemText("Win32.Settings.AppEnabled");
+                WEEnabledInfo = l.GetItemText("Win32.Settings.WEEnabledInfo");
+                RunInc = l.GetItemText("Win32.Settings.RunInc");
+                WERunIncInfo = l.GetItemText("Win32.Settings.WERunIncInfo");
+                Uninstall = l.GetItemText("Win32.Settings.Uninstall");
+                Remove = l.GetItemText("Win32.Settings.Remove");
+                CannotUninstallApp = l.GetItemText("Win32.Settings.CannotUninstallApp");
+                CannotUninstallExt = l.GetItemText("Win32.Settings.CannotUninstallExt");
+                Reset = l.GetItemText("Win32.Settings.Reset");
+                CannotDisableApp = l.GetItemText("Win32.Settings.CannotDisableApp");
+                EnableInfoApp = l.GetItemText("Win32.Settings.EnableInfoApp");
+                EnableInfoExt = l.GetItemText("Win32.Settings.EnableInfoExt");
+                CannotDisableExt = l.GetItemText("Win32.Settings.CannotDisableExt");
+                CannotResetApp = l.GetItemText("Win32.Settings.CannotResetApp");
+                CannotResetExt = l.GetItemText("Win32.Settings.CannotResetExt ");
+                ResetToDefault = l.GetItemText("Win32.Settings.ResetToDefault");
+                Version = l.GetItemText("Win32.Settings.Version");
+                ExtRunIncInfo = l.GetItemText("Win32.Settings.ExtRunIncInfo");
+                AppRunIncInfo = l.GetItemText("Win32.Settings.AppRunIncInfo");
+                Notif = l.GetItemText("Win32.Settings.Notif");
+                SiteNotifInfo = l.GetItemText("Win32.Settings.SiteNotifInfo");
+                OriginOther = l.GetItemText("Win32.Settings.OriginOther");
+                OriginYopad = l.GetItemText("Win32.Settings.OriginYopad");
+                OriginStore = l.GetItemText("Win32.Settings.OriginStore");
+                OriginEmbedded = l.GetItemText("Win32.Settings.OriginEmbedded");
+                OriginUnknown = l.GetItemText("Win32.Settings.OriginUnknown");
+                AppNotifInfo = l.GetItemText("Win32.Settings.AppNotifInfo");
+                ExtNotifInfo = l.GetItemText("Win32.Settings.ExtNotifInfo");
+                Prior = l.GetItemText("Win32.Settings.Prior");
+                Origin = l.GetItemText("Win32.Settings.Origin");
+                SitePriorInfo = l.GetItemText("Win32.Settings.SitePriorInfo");
+                AppPriorInfo = l.GetItemText("Win32.Settings.AppPriorInfo");
+                NotifListener = l.GetItemText("Win32.Settings.NotifListener");
+                SiteNotifListenerInfo = l.GetItemText("Win32.Settings.SiteNotifListenerInfo");
+                AppNotifListenerInfo = l.GetItemText("Win32.Settings.AppNotifListenerInfo");
+                RunStart = l.GetItemText("Win32.Settings.RunStart");
+                ExtRunStartInfo = l.GetItemText("Win32.Settings.ExtRunStartInfo");
+                AppRunStartInfo = l.GetItemText("Win32.Settings.AppRunStartInfo");
+                AllowCamera = l.GetItemText("Win32.Settings.AllowCamera");
+                AllowCamInfo = l.GetItemText("Win32.Settings.AllowCamInfo");
+                AllowMic = l.GetItemText("Win32.Settings.AllowMic");
+                AllowMicInfo = l.GetItemText("Win32.Settings.AllowMicInfo");
+                AllowWE = l.GetItemText("Win32.Settings.AllowWE");
+                AllowWEInfo = l.GetItemText("Win32.Settings.AllowWEInfo");
+                ShowMenu = l.GetItemText("Win32.Settings.ShowMenu");
+                ShowMenuInfo = l.GetItemText("Win32.Settings.ShowMenuInfo");
                 SearchApp = l.GetItemText("Win32.Settings.AppsSearch");
                 SearchExt = l.GetItemText("Win32.Settings.ExtSearch");
                 SearchWE = l.GetItemText("Win32.Settings.WESearch");
                 SearchSite = l.GetItemText("Win32.Settings.SiteSearch");
                 SizeInfoBytes = l.GetItemText("Win32.Settings.Bytes");
                 RemoveSelected = l.GetItemText("Win32.Settings.RemSelected");
+                btContainerBack.Text = l.GetItemText("Win32.Settings.Back");
                 LogInfo = l.GetItemText("Win32.Settings.LogsInfo");
                 OpenInFiles = l.GetItemText("Win32.Settings.OpenInFiles");
                 Clear = l.GetItemText("Win32.Settings.Clear");
@@ -1757,11 +1915,11 @@ namespace Yorot.UI.SystemApp
                 btHistoryClear.Text = HistorySelected != null ? RemoveSelected : Clear;
                 btDownloadsClear.Text = DownloadsSelected != null ? RemoveSelected : Clear;
                 btLogsClear.Text = LogsSelected != null ? RemoveSelected : Clear;
-                for (int i = 0; i < logOIFLile.Count;i++)
+                for (int i = 0; i < logOIFLile.Count; i++)
                 {
                     logOIFLile[i].Text = OpenInFiles;
                 }
-                for(int i =0; i < logInfoLabels.Count;i++)
+                for (int i = 0; i < logInfoLabels.Count; i++)
                 {
                     var logInfo = logInfoLabels[i].Tag as int[];
                     logInfoLabels[i].Text = LogInfo.Replace("[W]", "" + logInfo[0]).Replace("[E]", "" + logInfo[1]).Replace("[C]", "" + logInfo[2]).Replace("[I]", "" + logInfo[3]).Replace("[NEWLINE]", Environment.NewLine);
@@ -1780,18 +1938,245 @@ namespace Yorot.UI.SystemApp
                     st_app.Text = l.GetItemText("Win32.DefaultApps.Store");
                     yorot_app.Text = YorotGlobal.Main.Name;
                 }
-                if (loadedWE != null)
-                {
-                    lbWEVer.Text = Version.Replace("[V]", "" + loadedWE.Version);
-                    lbWEReset.Text = Reset;
-                    lbWEUninst.Text = Uninstall;
-                    lbWESize.Text = WESizeOnDisk.Replace("[S]", loadedWE.GetWESizeInfo(SizeInfoBytes));
-                    lbWEDesc.Text = WEDesc;
-                    lbWEEnabled.Text = AppEnabled;
-                    lbWEEnabledInfo.Text = WEEnabledInfo;
-                    lbWERunInc.Text = RunInc;
-                    lbWERunIncInfo.Text = WERunIncInfo;
+                // TODO:
+                /*
 
+
+            lbLogDescEx.Name = "lbLogDescEx";
+lbLogDescEx.Tag = logInfo; (int[])
+lbLogDescEx.Text = LogInfo.Replace("[W]", "" + logInfo[0]).Replace("[E]", "" + logInfo[1]).Replace("[C]", "" + logInfo[2]).Replace("[I]", "" + logInfo[3]).Replace("[NEWLINE]",Environment.NewLine);
+
+btLogOpenEx.Name = "btLogOpenEx";
+btLogOpenEx.Tag = logLoc; (string)
+btLogOpenEx.Text = OpenInFiles;
+
+lbHistoryExDate.Name = "lbHistoryExDate";
+lbHistoryExDate.Tag = site.Date; (DateTime)
+lbHistoryExDate.Text = YorotGlobal.Main.CurrentSettings.DateFormat.GetLongName(site.Date, monthNames(), dayNames());
+
+
+
+
+
+
+
+ */
+
+                if (btContainerBack.Tag != null)
+                {
+                    System.Collections.IList list = pContainer.Controls;
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        Control c = (Control)list[i];
+                        switch (c)
+                        {
+                            case Label _:
+                                Label label = c as Label;
+                                switch(label.Name)
+                                {
+                                    case "lbVer":
+                                        switch(label.Tag)
+                                        {
+                                            case YorotWebEngine _:
+                                                label.Text = Version.Replace("[V]", "" + (label.Tag as YorotWebEngine).Version);
+                                                break;
+                                            case YorotExtension _:
+                                                label.Text = Version.Replace("[V]", "" + (label.Tag as YorotExtension).Version);
+                                                break;
+                                            case YorotApp _:
+                                                label.Text = Version.Replace("[V]", (label.Tag as YorotApp).Version + " [" + (label.Tag as YorotApp).VersionNo + "]");
+                                                break;
+                                        }
+                                        break;
+                                    case "lbSizeOnDisk":
+                                        switch (label.Tag)
+                                        {
+                                            case YorotWebEngine _:
+                                                label.Text = SizeOnDisk.Replace("[S]", (label.Tag as YorotWebEngine).GetWESizeInfo(SizeInfoBytes));
+                                                break;
+                                            case YorotExtension _:
+                                                label.Text = SizeOnDisk.Replace("[S]", (label.Tag as YorotExtension).GetSizeOnDisk(SizeInfoBytes));
+                                                break;
+                                            case YorotApp _:
+                                                label.Text = SizeOnDisk.Replace("[S]", (label.Tag as YorotApp).GetAppSizeInfo(SizeInfoBytes));
+                                                break;
+                                        }
+                                        break;
+                                    case "lbEnabledInfo":
+                                        switch (label.Tag)
+                                        {
+                                            case YorotWebEngine _:
+                                                label.Text = WEEnabledInfo;
+                                                break;
+                                            case YorotExtension _:
+                                                label.Text = (label.Tag as YorotExtension).isSystemExt ? CannotDisableExt : EnableInfoExt;
+                                                break;
+                                            case YorotApp _:
+                                                label.Text = (label.Tag as YorotApp).isSystemApp ? CannotDisableApp : EnableInfoApp;
+                                                break;
+                                        }
+                                        break;
+                                    case "lbOrigin":
+                                        label.Text = Origin;
+                                        break;
+                                    case "lbOriginInfo":
+                                        label.Text = GetAppOrigin(label.Tag as YorotApp);
+                                        break;
+                                    case "lbWEDesc":
+                                        label.Text = WEDesc;
+                                        break;
+                                    case "lbEnabled":
+                                        label.Text = AppEnabled;
+                                        break;
+
+                                    case "lbAllowIncognito":
+                                        label.Text = RunInc;
+                                        break;
+                                    case "lbIncInfo":
+                                        switch (label.Tag)
+                                        {
+                                            case YorotWebEngine _:
+                                                label.Text = WERunIncInfo;
+                                                break;
+                                            case YorotExtension _:
+                                                label.Text = ExtRunIncInfo;
+                                                break;
+                                            case YorotApp _:
+                                                label.Text = AppRunIncInfo;
+                                                break;
+                                        }
+                                        break;
+                                    case "lbNotif":
+                                        label.Text = Notif;
+                                        break;
+                                    case "lbNotifInfo":
+                                        switch(label.Tag)
+                                        {
+                                            case YorotSite _:
+                                                label.Text = SiteNotifInfo;
+                                                break;
+                                            case YorotApp _:
+                                                label.Text = AppNotifInfo;
+                                                break;
+                                            case YorotExtension _:
+                                                label.Text = ExtNotifInfo;
+                                                break;
+                                        }
+                                        break;
+                                    case "lbPrior":
+                                        label.Text = Prior;
+                                        break;
+                                    case "lbPriorInfo":
+                                        switch (label.Tag)
+                                        {
+                                            case YorotSite _:
+                                                label.Text = SitePriorInfo;
+                                                break;
+                                            case YorotApp _:
+                                                label.Text = AppPriorInfo;
+                                                break;
+                                        }
+                                        break;
+                                    case "lbNotifListener":
+                                        label.Text = NotifListener;
+                                        break;
+
+                                    case "lbNotifListenerInfo":
+                                        switch(label.Tag)
+                                        {
+                                            case YorotSite _:
+                                                label.Text = SiteNotifListenerInfo;
+                                                break;
+                                            case YorotApp _:
+                                                label.Text = AppNotifListenerInfo;
+                                                break;
+                                        }
+                                        break;
+
+                                    case "lbShowMenu":
+                                        label.Text = ShowMenu;
+                                        break;
+
+                                    case "lbShowMenuInfo":
+                                        label.Text = ShowMenuInfo;
+                                        break;
+
+                                    case "lbRunStart":
+                                        label.Text = RunStart;
+                                        break;
+
+                                    case "lbRunStartInfo":
+                                        label.Text = label.Tag is YorotExtension ? ExtRunStartInfo : AppRunStartInfo;
+                                        break;
+
+                                    case "lbAllowCamera":
+                                        label.Text = AllowCamera;
+                                        break;
+
+                                    case "lbAllowCamInfo":
+                                        label.Text = AllowCamInfo;
+                                        break;
+
+                                    case "lbAllowMic":
+                                        label.Text = AllowMic;
+                                        break;
+
+                                    case "lbALlowMicInfo":
+                                        label.Text = AllowMicInfo;
+                                        break;
+
+                                    case "lbAllowWE":
+                                        label.Text = AllowWE;
+                                        break;
+
+                                    case "lbAllowWEInfo":
+                                        label.Text = AllowWEInfo;
+                                        break;
+
+                                }
+                                break;
+                            case HTButton _:
+                                HTButton htbutton = c as HTButton;
+                                switch (htbutton.Name)
+                                {
+                                    case "btReset":
+                                        switch (htbutton.Tag)
+                                        {
+                                            case YorotApp _:
+                                                htbutton.Text = ((YorotApp)htbutton.Tag).isSystemApp ? CannotResetApp : Reset;
+                                                break;
+                                            case YorotWebEngine _:
+                                                htbutton.Text = Reset;
+                                                break;
+                                            case YorotSite _:
+                                                htbutton.Text = ResetToDefault;
+                                                break;
+                                            case YorotExtension _:
+                                                htbutton.Text = ((YorotExtension)htbutton.Tag).isSystemExt ? CannotResetExt : Reset;
+                                                break;
+                                        }
+                                        break;
+                                    case "btUninst":
+                                        switch (htbutton.Tag)
+                                        {
+                                            case YorotApp _:
+                                                htbutton.Text = ((YorotApp)htbutton.Tag).isSystemApp ? CannotUninstallApp : Uninstall;
+                                                break;
+                                            case YorotWebEngine _:
+                                                htbutton.Text = Uninstall;
+                                                break;
+                                            case YorotSite _:
+                                                htbutton.Text = Remove;
+                                                break;
+                                            case YorotExtension _:
+                                                htbutton.Text = ((YorotExtension)htbutton.Tag).isSystemExt ? CannotUninstallExt : Uninstall;
+                                                break;
+                                        }
+                                        break;
+                                }
+                                break;
+                        }
+                    }
                 }
             }
         }
@@ -2347,6 +2732,99 @@ namespace Yorot.UI.SystemApp
         }
 
         private List<Panel> HistorySelected = new List<Panel>();
+
+        private void genHistoryEntry(YorotSite site)
+        {
+            System.Windows.Forms.Panel pHistoryEx = new System.Windows.Forms.Panel();
+            System.Windows.Forms.TextBox lbHistoryExUrl = new System.Windows.Forms.TextBox();
+            System.Windows.Forms.PictureBox pbHistoryExIcon = new System.Windows.Forms.PictureBox();
+            System.Windows.Forms.Label lbHistoryExClose = new System.Windows.Forms.Label();
+            System.Windows.Forms.TextBox lbHistoryExTitle = new System.Windows.Forms.TextBox();
+            System.Windows.Forms.TextBox lbHistoryExDate = new System.Windows.Forms.TextBox();
+
+            pHistoryEx.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(pbHistoryExIcon)).BeginInit();
+
+            // 
+            // lbHistoryExClose
+            // 
+            lbHistoryExClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            lbHistoryExClose.AutoSize = true;
+            lbHistoryExClose.Font = new System.Drawing.Font("Ubuntu", 12F);
+            lbHistoryExClose.Location = new System.Drawing.Point(pHistory.Width - 25, 5);
+            lbHistoryExClose.Name = "lbHistoryExClose";
+            lbHistoryExClose.Text = "X";
+
+            // 
+            // pbHistoryExIcon
+            // 
+            pbHistoryExIcon.Location = new System.Drawing.Point(15, lbHistoryExClose.Location.Y + lbHistoryExClose.Height + 5);
+            pbHistoryExIcon.Name = "pbHistoryExIcon";
+            pbHistoryExIcon.Size = new System.Drawing.Size(64,64);
+            pbHistoryExIcon.SizeMode = PictureBoxSizeMode.Zoom;
+            Icon siteIcon = Yorot.Tools.GetSiteIcon(site, YorotGlobal.Main);
+            pbHistoryExIcon.Image = siteIcon != null ? siteIcon.ToBitmap() : Properties.Resources.Yorot; //TODO: Change Yorot logo to default No-Icon logo.
+
+            // 
+            // lbHistoryExTitle
+            // 
+            lbHistoryExTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            lbHistoryExTitle.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            lbHistoryExTitle.Font = new System.Drawing.Font("Ubuntu", 12F);
+            lbHistoryExTitle.Location = new System.Drawing.Point(pbHistoryExIcon.Location.X + pbHistoryExIcon.Width + 5, lbHistoryExClose.Location.Y + lbHistoryExClose.Height + 5);
+            lbHistoryExTitle.Name = "lbHistoryExTitle";
+            lbHistoryExTitle.ReadOnly = true;
+            lbHistoryExTitle.Size = new System.Drawing.Size(pHistory.Width - (pbHistoryExIcon.Location.X + pbHistoryExIcon.Width + 15), 19);
+            lbHistoryExTitle.Text = site.Name;
+
+            // 
+            // lbHistoryExDate
+            // 
+            lbHistoryExDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            lbHistoryExDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            lbHistoryExDate.Font = new System.Drawing.Font("Ubuntu", 11F);
+            lbHistoryExDate.Location = new System.Drawing.Point(lbHistoryExTitle.Location.X, lbHistoryExTitle.Location.Y + lbHistoryExTitle.Height + 5);
+            lbHistoryExDate.Name = "lbHistoryExDate";
+            lbHistoryExDate.ReadOnly = true;
+            lbHistoryExDate.Size = new System.Drawing.Size(lbHistoryExTitle.Width, 17);
+            lbHistoryExDate.Tag = site.Date;
+            lbHistoryExDate.Text = YorotGlobal.Main.CurrentSettings.DateFormat.GetLongName(site.Date, monthNames(), dayNames());
+
+            // 
+            // lbHistoryExUrl
+            // 
+            lbHistoryExUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            lbHistoryExUrl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            lbHistoryExUrl.Font = new System.Drawing.Font("Ubuntu", 10F);
+            lbHistoryExUrl.Location = new System.Drawing.Point(lbHistoryExTitle.Location.X, lbHistoryExDate.Location.Y + lbHistoryExDate.Height + 5);
+            lbHistoryExUrl.Name = "lbHistoryExUrl";
+            lbHistoryExUrl.ReadOnly = true;
+            lbHistoryExUrl.Size = new System.Drawing.Size(lbHistoryExTitle.Width, 16);
+            lbHistoryExUrl.Text = site.Url;
+            
+            // 
+            // pHistoryEx
+            // 
+            pHistoryEx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pHistoryEx.Controls.Add(lbHistoryExDate);
+            pHistoryEx.Controls.Add(lbHistoryExUrl);
+            pHistoryEx.Controls.Add(pbHistoryExIcon);
+            pHistoryEx.Controls.Add(lbHistoryExClose);
+            pHistoryEx.Controls.Add(lbHistoryExTitle);
+            pHistoryEx.Dock = System.Windows.Forms.DockStyle.Top;
+            pHistoryEx.Location = new System.Drawing.Point(0, 0);
+            pHistoryEx.Margin = new System.Windows.Forms.Padding(10);
+            pHistoryEx.Name = "pHistoryEx";
+            pHistoryEx.Height = 105;
+            pHistory.Controls.Add(pHistoryEx);
+            pHistoryEx.ResumeLayout(false);
+            pHistoryEx.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(pbHistoryExIcon)).EndInit();
+        }
+
         private List<Panel> DownloadsSelected = new List<Panel>();
 
         #region Logs
@@ -2354,6 +2832,7 @@ namespace Yorot.UI.SystemApp
         private List<TextBox> logInfoLabels = new List<TextBox>();
         private List<Panel> LogsSelected = new List<Panel>();
         private List<string> syncedLogs = new List<string>();
+
         private void genLogEntries(bool force = false)
         {
             var list = new List<string>();
@@ -2375,7 +2854,7 @@ namespace Yorot.UI.SystemApp
         }
         private int[] getLogInfo(string logLoc)
         {
-            string logFile = HTAlt.Tools.ReadFile(logLoc, System.Text.Encoding.Unicode);
+            string logFile = HTAlt.Tools.ReadFile(logLoc, System.Text.Encoding.UTF8);
             string[] lines = logFile.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
             int w = 0;
             int e = 0;
@@ -2383,18 +2862,18 @@ namespace Yorot.UI.SystemApp
             int ı = 0;
             for(int i = 0; i < lines.Length;i++)
             {
-                if (lines[i].StartsWith(" [W]"))
+                if (lines[i].ToLowerEnglish().StartsWith(" [w]"))
                 {
                     w++;
-                }else if (lines[i].StartsWith(" [E]"))
+                }else if (lines[i].ToLowerEnglish().StartsWith(" [e]"))
                 {
                     e++;
                 }
-                else if (lines[i].StartsWith(" [C]"))
+                else if (lines[i].ToLowerEnglish().StartsWith(" [c]"))
                 {
-                    c++;
+                    c++; //lmao
                 }
-                else if (lines[i].StartsWith(" [I]"))
+                else if (lines[i].ToLowerEnglish().StartsWith(" [i]"))
                 {
                     ı++;
                 }
@@ -2505,6 +2984,7 @@ namespace Yorot.UI.SystemApp
             lbLogDescEx.Name = "lbLogDescEx";
             lbLogDescEx.ReadOnly = true;
             lbLogDescEx.Size = new System.Drawing.Size(lbLogTitleEx.Width, 65);
+            lbLogDescEx.Tag = logInfo;
             lbLogDescEx.Text = LogInfo.Replace("[W]", "" + logInfo[0]).Replace("[E]", "" + logInfo[1]).Replace("[C]", "" + logInfo[2]).Replace("[I]", "" + logInfo[3]).Replace("[NEWLINE]",Environment.NewLine);
             logInfoLabels.Add(lbLogDescEx);
             // 
@@ -2520,6 +3000,10 @@ namespace Yorot.UI.SystemApp
             btLogOpenEx.Size = new System.Drawing.Size(lbLogDescEx.Width, 23);
             btLogOpenEx.Tag = logLoc;
             btLogOpenEx.Text = OpenInFiles;
+            btLogOpenEx.Click += new EventHandler((sender, e) => 
+            {
+                YorotGlobal.Main.MainForm.LaunchApp(YorotGlobal.Main.AppMan.FindByAppCN("com.haltroy.fileman"), new string[] { logLoc });
+            });
             logOIFLile.Add(btLogOpenEx);
             
             pLogs.Controls.Add(pLogEx);

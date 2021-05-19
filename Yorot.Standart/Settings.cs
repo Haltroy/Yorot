@@ -477,6 +477,30 @@ namespace Yorot
                                     NotifPlaySound = node.InnerXml.InnerXmlToString() == "true";
                                     break;
 
+                                case "datetime":
+                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                                    {
+                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                        break;
+                                    }
+                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+                                    switch (node.InnerXml.InnerXmlToString())
+                                    {
+                                        default:
+                                        case "DMY":
+                                            DateFormat = YorotDateAndTime.DMY;
+                                            break;
+
+                                        case "YMD":
+                                            DateFormat = YorotDateAndTime.YMD;
+                                            break;
+
+                                        case "MDY":
+                                            DateFormat = YorotDateAndTime.MDY;
+                                            break;
+                                    }
+                                    break;
+
                                 case "notifusedefault":
                                     if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
                                     {
@@ -630,6 +654,7 @@ namespace Yorot
             x += "<NotifSilent>" + (NotifSilent ? "true" : "false") + "</NotifSilent>" + Environment.NewLine;
             x += "<DownloadFolder>" + DownloadManager.DownloadFolder.ToXML() + "</DownloadFolder>" + Environment.NewLine;
             x += "<NotifSoundLoc>" + NotifSoundLoc.ToXML() + "</NotifSoundLoc>" + Environment.NewLine;
+            x += "<DateTime>" + DateFormat.Name + "</DateTime>" + Environment.NewLine;
             return (x + Environment.NewLine + "</root>").BeautifyXML();
         }
 
@@ -639,30 +664,15 @@ namespace Yorot
         /// <param name="profileName">This arguyment is for detecting both incognito and root user.</param>
         public void LoadDefaults(bool root)
         {
-            DownloadManager = new DownloadManager(root ? "" : Profile.UserDownloads, Profile.Manager.Main);
-            HistoryManager = new HistoryManager(root ? "" : Profile.UserHistory, Profile.Manager.Main);
-            FavManager = new FavMan(root ? "" : Profile.UserFavorites, Profile.Manager.Main);
+            DownloadManager = new DownloadManager(Profile.UserDownloads, Profile.Manager.Main);
+            HistoryManager = new HistoryManager(Profile.UserHistory, Profile.Manager.Main);
+            FavManager = new FavMan(Profile.UserFavorites, Profile.Manager.Main);
             HomePage = "yorot://newtab";
             // BEGIN: Search Engines
-            // TODO: ADD THESE
-            /*
-			Lycos: https://search17.lycos.com/web/?q=haltroy
-Teoma: https://www.teoma.com/web?q=haltroy
-Ciao!: https://www.ciao.co.uk/search?query=haltroy
-Ecosia: https://www.ecosia.org/search?q=haltroy
-Webcrawler: https://www.webcrawler.com/serp?q=haltroy
-Yahoo Japan: https://search.yahoo.co.jp/search?p=haltroy
-business.com: https://www.business.com/search/?q=haltroy
-Shodan: https://www.shodan.io/search?query=haltroy
-Startpage: https://www.startpage.com/do/dsearch?query=haltroy
-Wiki: https://en.wikipedia.org/w/index.php?search=haltroy
-Kiddle: https://www.kiddle.co/s.php?q=haltroy
-KidzSearch: https://search.kidzsearch.com/kzsearch.php?q=haltroy
-YouTube: https://www.youtube.com/results?search_query=haltroy
-			*/
             SearchEngines.Clear();
             SearchEngine = new YorotSearchEngine("Google", "https://www.google.com/search?q=") { comesWithYorot = true };
             SearchEngines.Add(SearchEngine);
+            SearchEngines.Add(new YorotSearchEngine("Yandex", "https://yandex.com/search/?lr=103873&text=") { comesWithYorot = true });
             SearchEngines.Add(new YorotSearchEngine("Yandex", "https://yandex.com/search/?lr=103873&text=") { comesWithYorot = true });
             SearchEngines.Add(new YorotSearchEngine("Bing", "https://www.bing.com/search?q=") { comesWithYorot = true });
             SearchEngines.Add(new YorotSearchEngine("Yaani", "https://www.yaani.com/#q=") { comesWithYorot = true });
@@ -679,9 +689,22 @@ YouTube: https://www.youtube.com/results?search_query=haltroy
             SearchEngines.Add(new YorotSearchEngine("Naver", "https://search.naver.com/search.naver?query=") { comesWithYorot = true });
             SearchEngines.Add(new YorotSearchEngine("Sogou", "https://www.sogou.com/web?query=") { comesWithYorot = true });
             SearchEngines.Add(new YorotSearchEngine("Gigablast", "https://www.gigablast.com/search?q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Lycos", "https://search17.lycos.com/web/?q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Teoma", "https://www.teoma.com/web?q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Ciao!", "https://www.ciao.co.uk/search?query=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Ecosia", "https://www.ecosia.org/search?q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Webcrawler", "https://www.webcrawler.com/serp?q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Yahoo Japan", "https://search.yahoo.co.jp/search?p=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("business.com", "https://www.business.com/search/?q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Shodan", "https://www.shodan.io/search?query=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Startpage", "https://www.startpage.com/do/dsearch?query=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Wikipedia", "https://en.wikipedia.org/w/index.php?search=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("Kiddle", "https://www.kiddle.co/s.php?q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("KidzSearch", "https://search.kidzsearch.com/kzsearch.php?q=") { comesWithYorot = true });
+            SearchEngines.Add(new YorotSearchEngine("YouTube", "https://www.youtube.com/results?search_query=") { comesWithYorot = true });
             // END: Search Engines
-            CurrentLanguage = Profile.Manager.Main.LangMan.GetLangByCN("com.haltroy.english-us");
-            CurrentTheme = Profile.Manager.Main.ThemeMan.GetThemeByCN("com.haltroy.yorotlight");
+            CurrentLanguage = Profile.Manager.Main.LangMan.Languages[0];
+            CurrentTheme = Profile.Manager.Main.ThemeMan.Themes[0];
             RestoreOldSessions = false;
             RememberLastProxy = false;
             DoNotTrack = false;
@@ -758,6 +781,11 @@ YouTube: https://www.youtube.com/results?search_query=haltroy
         /// A list of search engines.
         /// </summary>
         public List<YorotSearchEngine> SearchEngines { get; set; } = new List<YorotSearchEngine>();
+
+        /// <summary>
+        /// Determines the date and time format.
+        /// </summary>
+        public YorotDateAndTime DateFormat { get; set; } = YorotDateAndTime.DMY;
 
         /// <summary>
         /// Determines if old sessions should resotre on startup.

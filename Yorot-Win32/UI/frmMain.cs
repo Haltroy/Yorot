@@ -175,7 +175,7 @@ namespace Yorot
                 cmsApp.ForeColor = theme.ForeColor;
             }
         }
-        private void RefreshAppList(bool clearCurrent = false)
+        public void RefreshAppList(bool clearCurrent = false)
         {
             appListUpdate = YorotGlobal.Main.AppMan.UpdateCount;
             if (clearCurrent)
@@ -427,37 +427,58 @@ namespace Yorot
 
         #endregion Animator
 
-        public void loadMainTab()
-        {
-            if(tcAppMan.InvokeRequired)
-            {
-                tcAppMan.Invoke(new Action(() => { allowSwitch = true; tcAppMan.SelectedTab = tabPage1; }));
-            }else
-            {
-                allowSwitch = true; 
-                tcAppMan.SelectedTab = tabPage1;
-            }
-        }
-
-        public void loadSpecificTab(TabPage tp)
-        {
-            if (tcAppMan.InvokeRequired)
-            {
-                tcAppMan.Invoke(new Action(() => { allowSwitch = true; tcAppMan.SelectedTab = tp; }));
-            }
-            else
-            {
-                allowSwitch = true;
-                tcAppMan.SelectedTab = tp;
-            }
-        }
-
         bool allowSwitch = false;
         private void tcAppMan_Selecting(object sender, TabControlCancelEventArgs e)
         {
             if (allowSwitch) { allowSwitch = false; } else { e.Cancel = true; }
         }
-
+        List<TabPage> tabHistory = new List<TabPage>();
+        public void switchTab(TabPage tp)
+        {
+            if (tcAppMan.SelectedTab == tp) return;
+            if (tcAppMan.SelectedTab != null) tabHistory.Add(tcAppMan.SelectedTab);
+            allowSwitch = true;
+            if (!tcAppMan.TabPages.Contains(tp)) tcAppMan.TabPages.Add(tp);
+            tcAppMan.SelectedTab = tp;
+        }
+        public void switchTabGoBack()
+        {
+            allowSwitch = true;
+            tcAppMan.SelectedTab = tabHistory[tabHistory.Count - 1];
+            tabHistory.RemoveAt(tabHistory.Count - 1);
+        }
+        public void LaunchApp(YorotApp app, string[] args = null)
+        {
+            if (app.Layouts.Count > 0)
+            {
+                var layout = app.Layouts[0] as WinAppLayout;
+                if (layout.AssocForm.freeMode)
+                {
+                    layout.AssocForm.Show();
+                    layout.AssocForm.BringToFront();
+                }
+                else
+                {
+                    TabControl tabc = layout.AssocTab.Parent as TabControl;
+                    var frm = tabc.FindForm() as frmMain;
+                    if (frm.InvokeRequired)
+                    {
+                        Invoke(new Action(() =>
+                        {
+                            frm.switchTab(layout.AssocTab);
+                        }));
+                    }
+                    else
+                    {
+                        frm.switchTab(layout.AssocTab);
+                    }
+                }
+            }
+            else
+            {
+                showApp(app,args);
+            }
+        }
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
             if (lvApps.SelectedItems.Count > 0)
@@ -474,37 +495,7 @@ namespace Yorot
                 }
                 else
                 {
-                    if (app.Layouts.Count > 0)
-                    {
-                        var layout = app.Layouts[0] as WinAppLayout;
-                        if (layout.AssocForm.freeMode)
-                        {
-                            layout.AssocForm.Show();
-                            layout.AssocForm.BringToFront();
-                        }
-                        else
-                        {
-                            TabControl tabc = layout.AssocTab.Parent as TabControl;
-                            var frm = tabc.FindForm() as frmMain;
-                            if (frm.InvokeRequired)
-                            {
-                                Invoke(new Action(() => 
-                                {
-                                    frm.allowSwitch = true;
-                                    tabc.SelectedTab = layout.AssocTab; 
-                                }));
-                            }
-                            else
-                            {
-                                frm.allowSwitch = true;
-                                tabc.SelectedTab = layout.AssocTab;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        showApp(app);
-                    }
+                    LaunchApp(app);
                 }
                 foreach(Control x in flpFavApps.Controls)
                 {
@@ -512,7 +503,7 @@ namespace Yorot
                 }
             }
         }
-        private void showApp(YorotApp app,YAMItem sender = null)
+        private void showApp(YorotApp app, string[] args = null, YAMItem sender = null)
         {
             TabPage tp = new TabPage() { Text = app.AppName };
             WinAppLayout layout = new WinAppLayout()
@@ -523,17 +514,18 @@ namespace Yorot
             {
                 layout.Args = string.IsNullOrWhiteSpace(settingsArgs) ? layout.Args : settingsArgs.Split(' ');
                 settingsArgs = string.Empty;
+            }else
+            {
+                layout.Args = args;
             }
-            UI.frmApp fapp /* pls dont laught at this we are not 4th graders */ = new UI.frmApp(app,layout) { assocLayout = layout, assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
+            UI.frmApp fapp = new UI.frmApp(app,layout) { assocLayout = layout, assocForm = this, TopLevel = false, Visible = true, Dock = DockStyle.Fill, FormBorderStyle = FormBorderStyle.None };
             layout.AssocForm = fapp;
             if (sender == null)
             {
                 fapp.assocApp.Layouts.Add(layout);
                 fapp.assocLayout = layout;
                 tp.Controls.Add(fapp);
-                tcAppMan.TabPages.Add(tp);
-                allowSwitch = true;
-                tcAppMan.SelectedTab = tp;
+                switchTab(tp);
                 if (fapp.assocApp.AppCodeName != "com.haltroy.settings")
                 {
                     YAMItem pbIcon = new YAMItem() { Size = new Size(38, 38), Margin = new Padding(3), Visible = true, AssocApp = fapp.assocApp, AssocFrmMain = this };
@@ -546,9 +538,7 @@ namespace Yorot
                 fapp.assocApp.Layouts.Add(layout);
                 fapp.assocLayout = layout;
                 tp.Controls.Add(fapp);
-                tcAppMan.TabPages.Add(tp);
-                allowSwitch = true;
-                tcAppMan.SelectedTab = tp;
+                switchTab(tp);
                 layout.AssocItem = sender;
                 if (fapp.assocLayout.AssocItem.InvokeRequired) 
                 { fapp.assocLayout.AssocItem.Invoke(new Action(() => fapp.assocLayout.AssocItem.Refresh())); } else { fapp.assocLayout.AssocItem.Refresh(); }
@@ -564,8 +554,7 @@ namespace Yorot
                 {
                     AnimateTo(AnimateDirection.RightMost);
                 }
-                allowSwitch = true;
-                tcAppMan.SelectedTab = fapp.assocLayout.AssocTab;
+                switchTab(fapp.assocLayout.AssocTab);
             }
         }
         private void pbIcon_MouseClick(object sender, MouseEventArgs e)
@@ -575,7 +564,7 @@ namespace Yorot
             {
                 if (pbIcon.CurrentStatus == YAMItem.AppStatuses.Pinned) // Launch app
                 {
-                    showApp(pbIcon.AssocApp, pbIcon);
+                    showApp(pbIcon.AssocApp,null, pbIcon);
                 }
                 else
                 {
@@ -808,15 +797,14 @@ namespace Yorot
                     {
                         var layout = settingApp.Layouts[0] as WinAppLayout;
                         TabControl tabc = layout.AssocTab.Parent as TabControl;
-                        if (tabc.InvokeRequired)
+                        frmMain form = tabc.Parent.Parent as frmMain;
+                        if (form.InvokeRequired)
                         {
-                            allowSwitch = true;
-                            Invoke(new Action(() => tabc.SelectedTab = layout.AssocTab));
+                            form.Invoke(new Action(() => form.switchTab(layout.AssocTab)));
                         }
                         else
                         {
-                            allowSwitch = true;
-                            tabc.SelectedTab = layout.AssocTab;
+                            form.switchTab(layout.AssocTab);
                         }
                     }
                     else
@@ -842,8 +830,7 @@ namespace Yorot
                 }
                 else
                 {
-                    allowSwitch = true;
-                    tcAppMan.SelectedTab = tabPage1;
+                    switchTab(tabPage1);
                 }
             }
             else if (e.Button == MouseButtons.Right)
@@ -867,7 +854,7 @@ namespace Yorot
                     showApp((rcSender as ListViewItem).Tag as YorotApp);
                 }else
                 {
-                    showApp((rcSender as YAMItem).AssocApp, (rcSender as YAMItem));
+                    showApp((rcSender as YAMItem).AssocApp,null, (rcSender as YAMItem));
                 }
             }
         }
@@ -1001,5 +988,7 @@ namespace Yorot
                 YorotGlobal.Main.Shutdown();
             }
         }
+
+        
     }
 }

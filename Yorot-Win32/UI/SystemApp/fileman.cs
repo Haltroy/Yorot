@@ -12,10 +12,17 @@ namespace Yorot.UI.SystemApp
 {
     public partial class fileman : Form
     {
-        public fileman()
+        public fileman(string[] args)
         {
             InitializeComponent();
             Icon = HTAlt.Tools.IconFromImage(Properties.Resources.fileman);
+            if(args != null)
+            {
+                for(int i = 0; i < args.Length;i++)
+                {
+                    Console.WriteLine("[" + i + "] " + args[i]);
+                }
+            }
         }
     }
 }

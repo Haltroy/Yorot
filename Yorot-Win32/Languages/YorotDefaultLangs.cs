@@ -22,7 +22,8 @@ namespace Yorot
             {
                 string l = d[i];
                 string _l = langLoc + l + ".ylf";
-                if (force || !System.IO.File.Exists(_l))
+
+                if (force || YorotGlobal.isPreOut || !System.IO.File.Exists(_l))
                 {
                     HTAlt.Tools.WriteFile(_l, GetDefaultLang(l), Encoding.Unicode);
                 }

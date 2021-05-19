@@ -63,7 +63,7 @@ namespace Yorot
         /// <returns><see cref="YorotLanguage"/></returns>
         public YorotLanguage GetLangByCN(string codeName)
         {
-            List<YorotLanguage> l = Languages.FindAll(i => i.CodeName == codeName);
+            List<YorotLanguage> l = Languages.FindAll(i => i.CodeName.ToLowerEnglish() == codeName.ToLowerEnglish());
             if (l.Count > 0)
             {
                 return l[0];

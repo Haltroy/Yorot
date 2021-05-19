@@ -18,8 +18,10 @@ namespace Yorot
         /// <param name="isIncognito"><see cref="true"/> to start Yorot in incognito mode, otherwise <seealso cref="false"/>.</param>
         /// <param name="version">Version of the Yorot or the flavor.</param>
         /// <param name="name">Name of the Yorot or the flavor.</param>
+        /// <param name="branch">Name of the branch app.</param>
+        /// <param name="devMode">Enables Developer mode.</param>
         /// <param name="verno">Version number of the Yorot or the flavor.</param>
-        public YorotMain(string appPath, string name, string codename, string version, int verno, string branch, bool isIncognito = false)
+        public YorotMain(string appPath, string name, string codename, string version, int verno, string branch, bool devMode = false, bool isIncognito = false)
         {
             if (string.IsNullOrWhiteSpace(name)) { throw new ArgumentException("\"name\" caanot be empty."); }
             Name = name;
@@ -36,6 +38,7 @@ namespace Yorot
             if (!appPath.HasWriteAccess()) { throw new System.IO.FileLoadException("Cannot access to path \"" + appPath + "\"."); }
             Incognito = isIncognito;
             AppPath = appPath;
+            DevMode = devMode;
             LangConfig = AppPath + @"lang.ycf";
             LangFolder = AppPath + @"lang\";
             ExtFolder = AppPath + @"ext\";
@@ -105,10 +108,16 @@ namespace Yorot
             Profiles = new ProfileManager(this);
             AfterInit();
         }
+
         /// <summary>
         /// Current Bracnh of Yorot. (ex. Yorot-Win32, Yorot-Avalonia)
         /// </summary>
         public string YorotBranch { get; set; }
+
+        /// <summary>
+        /// Determines if this app is in Development Mode.
+        /// </summary>
+        public bool DevMode { get; set; }
 
         /// <summary>
         /// Event raised before launching all managers.

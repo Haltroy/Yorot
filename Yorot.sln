@@ -270,4 +270,7 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {02B1BCF6-A6B8-49E2-B338-70028C854DC5}
 	EndGlobalSection
+	GlobalSection(AvalonStudioProperties) = preSolution
+		StartupItem = {52B4012C-BF4C-413B-A92B-252AC659E581}
+	EndGlobalSection
 EndGlobal

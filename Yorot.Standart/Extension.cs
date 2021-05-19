@@ -122,7 +122,7 @@ namespace Yorot
         /// <summary>
         /// Determines if this extension comes with this Yorot flavor.
         /// </summary>
-        public bool isSystemExt;
+        public bool isSystemExt { get; set; } = false;
 
         /// <summary>
         /// Creates a new yorot Extension.
@@ -510,6 +510,41 @@ namespace Yorot
         /// Determine sif this extension is allowed in Incognito mode.
         /// </summary>
         public bool AllowInIncognito { get; set; }
+
+        /// <summary>
+        /// Returns extension size in bytes.
+        /// </summary>+
+        public long ExtSize => (Manager.Main.AppsFolder + CodeName).GetDirectorySize();
+
+        /// <summary>
+        /// Gets size of extension.
+        /// </summary>
+        /// <param name="bytes">Translation of word "bytes".</param>
+        /// <returns><see cref="string"/></returns>
+        public string GetSizeOnDisk(string bytes)
+        {
+            long size = ExtSize;
+            if (size > 1099511627776F) //TiB
+            {
+                return (size / 1099511627776F) + " TiB (" + size + " " + bytes + ")";
+            }
+            else if (size > 1073741824F) //GiB
+            {
+                return (size / 1073741824F) + " GiB (" + size + " " + bytes + ")";
+            }
+            else if (size > 1048576F) //MiB
+            {
+                return (size / 1048576F) + " MiB (" + size + " " + bytes + ")";
+            }
+            else if (size > 1024F) // KiB
+            {
+                return (size / 1024F) + " KiB (" + size + " " + bytes + ")";
+            }
+            else
+            {
+                return size + " " + bytes;
+            }
+        }
     }
 
     /// <summary>
