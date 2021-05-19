@@ -14,14 +14,13 @@ No images are available.
 ## Features:
  - Built in Apps. 
  - UI language, apps, theme and extension system (supports proxies).
+ - Profiles
 
 ### Features that I'm aiming to add:
- - HTML5, CSS3, JS, HTML5 Video (except `H.264` and many non-free codecs), WebGL 3D, etc. supported. 
+ - HTML5, CSS3, JS, HTML5 Video (except `H.264` and many non-free codecs), WebGL 3D, etc. 
  - Tabbed, built-in search bar that auto-detects URLs.
  - Celebrates your birthday.
  - Developer tools, View Source, Page screen-shot, Print, Keyboard Shortcuts, Save page & Zoom in page
-
- - Profiles
  - Web apps & support for web engines. 
  - Notifications
  - Download manager
