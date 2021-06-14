@@ -1,4 +1,4 @@
-## ⚠ In case of website beign down, please check my [Instagram](https://instagram.com/haltroy_). ⚠
+## ⚠ In case of website beign down, please check my [Instagram](https://instagram.com/haltroy_) or [Discord Server](https://discord.gg/DjZQEvZ8n5). ⚠
 
 <p align="center" style="text-align: center;">
   <img width="128" height="128" src="https://github.com/Haltroy/Yorot/raw/main/Yorot-Win32/Resources/Yorot.png" />
