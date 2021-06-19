@@ -142,7 +142,7 @@ namespace Yorot
                             {
                                 if (subnode.Attributes["CodeName"] != null)
                                 {
-                                    string s = subnode.Attributes["CodeName"].Value.InnerXmlToString();
+                                    string s = subnode.Attributes["CodeName"].Value.XmlToString();
                                     YorotLanguage lang = new YorotLanguage(s.StartsWith("com.haltroy") ? s : Main.LangFolder + s + ".ylf", this);
                                     Languages.Add(lang);
                                 }
@@ -153,7 +153,7 @@ namespace Yorot
                             }
                             else
                             {
-                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                if (!subnode.IsComment())
                                 {
                                     Output.WriteLine("[LangMan] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                 }
@@ -162,7 +162,7 @@ namespace Yorot
                         break;
 
                     default:
-                        if (!node.OuterXml.StartsWith("<!--"))
+                        if (!node.IsComment())
                         {
                             Output.WriteLine("[LangMan] Threw away \"" + node.OuterXml + "\". Invalid configurtion.", LogLevel.Warning);
                         }
@@ -195,7 +195,7 @@ namespace Yorot
                     LoadedRoot = false;
                     XmlDocument doc = new XmlDocument();
                     doc.LoadXml(HTAlt.Tools.ReadFile(configFile, Encoding.Unicode));
-                    XmlNode rootNode = Yorot.Tools.FindRoot(doc);
+                    XmlNode rootNode = HTAlt.Tools.FindRoot(doc);
                     RecursiveAdd(rootNode, "");
                 }
                 else
@@ -347,7 +347,7 @@ namespace Yorot
                                 }
                                 else
                                 {
-                                    LangVars.Add(new YorotLangVar((string.IsNullOrWhiteSpace(groupID) ? "" : groupID + ".") + node.Attributes["ID"].Value.InnerXmlToString(), node.Attributes["Text"].Value.InnerXmlToString()));
+                                    LangVars.Add(new YorotLangVar((string.IsNullOrWhiteSpace(groupID) ? "" : groupID + ".") + node.Attributes["ID"].Value.XmlToString(), node.Attributes["Text"].Value.XmlToString()));
                                 }
                             }
                             else
@@ -358,8 +358,8 @@ namespace Yorot
                         }
                     case "translation":
                         {
-                            string id = node.Attributes["ID"] != null ? node.Attributes["ID"].Value.InnerXmlToString() : HTAlt.Tools.GenerateRandomText(12);
-                            string text = node.Attributes["Text"] != null ? node.Attributes["Text"].Value.InnerXmlToString() : id;
+                            string id = node.Attributes["ID"] != null ? node.Attributes["ID"].Value.XmlToString() : HTAlt.Tools.GenerateRandomText(12);
+                            string text = node.Attributes["Text"] != null ? node.Attributes["Text"].Value.XmlToString() : id;
                             if (!string.IsNullOrWhiteSpace(id) && !string.IsNullOrWhiteSpace(text))
                             {
                                 if (LangItems.FindAll(it => it.ID == id && it.Text == text).Count > 0)
@@ -390,70 +390,44 @@ namespace Yorot
                                         {
                                             XmlNode subnode = node.ChildNodes[ı];
                                             List<string> appliedSettings = new List<string>();
+                                            if (appliedSettings.Contains(subnode.Name.ToLowerEnglish()))
+                                            {
+                                                Output.WriteLine("[LangManager] Threw away \"" + node.OuterXml + "\", #YOROT-ROOT configuration already loaded.", LogLevel.Warning);
+                                                break;
+                                            }
+                                            appliedSettings.Add(subnode.Name);
                                             switch (subnode.Name.ToLowerEnglish())
                                             {
                                                 case "name":
-                                                    if (appliedSettings.FindAll(it => it == subnode.Name).Count > 0)
-                                                    {
-                                                        Output.WriteLine("[LangManager] Threw away \"" + node.OuterXml + "\", #YOROT-ROOT configuration already loaded.", LogLevel.Warning);
-                                                        break;
-                                                    }
-                                                    appliedSettings.Add(subnode.Name);
-                                                    Name = subnode.InnerXml.InnerXmlToString();
+
+                                                    Name = subnode.InnerXml.XmlToString();
                                                     break;
 
                                                 case "author":
-                                                    if (appliedSettings.FindAll(it => it == subnode.Name).Count > 0)
-                                                    {
-                                                        Output.WriteLine("[LangManager] Threw away \"" + node.OuterXml + "\", #YOROT-ROOT configuration already loaded.", LogLevel.Warning);
-                                                        break;
-                                                    }
-                                                    appliedSettings.Add(subnode.Name);
-                                                    Author = subnode.InnerXml.InnerXmlToString();
+                                                    Author = subnode.InnerXml.XmlToString();
                                                     break;
 
                                                 case "htupdate":
-                                                    if (appliedSettings.FindAll(it => it == subnode.Name).Count > 0)
-                                                    {
-                                                        Output.WriteLine("[LangManager] Threw away \"" + node.OuterXml + "\", #YOROT-ROOT configuration already loaded.", LogLevel.Warning);
-                                                        break;
-                                                    }
-                                                    appliedSettings.Add(subnode.Name);
-                                                    HTUPDATE = subnode.InnerXml.InnerXmlToString();
+
+                                                    HTUPDATE = subnode.InnerXml.XmlToString();
+                                                    Manager.Main.Yopad.RegisterHTU(HTUPDATE, this);
                                                     break;
 
                                                 case "codename":
-                                                    if (appliedSettings.FindAll(it => it == subnode.Name).Count > 0)
-                                                    {
-                                                        Output.WriteLine("[LangManager] Threw away \"" + node.OuterXml + "\", #YOROT-ROOT configuration already loaded.", LogLevel.Warning);
-                                                        break;
-                                                    }
-                                                    appliedSettings.Add(subnode.Name);
-                                                    CodeName = subnode.InnerXml.InnerXmlToString();
+                                                    CodeName = subnode.InnerXml.XmlToString();
                                                     break;
 
                                                 case "compatibleversion":
-                                                    if (appliedSettings.FindAll(it => it == subnode.Name).Count > 0)
-                                                    {
-                                                        Output.WriteLine("[LangManager] Threw away \"" + node.OuterXml + "\", #YOROT-ROOT configuration already loaded.", LogLevel.Warning);
-                                                        break;
-                                                    }
-                                                    appliedSettings.Add(subnode.Name);
-                                                    CompatibleVer = int.Parse(subnode.InnerXml.InnerXmlToString());
+                                                    CompatibleVer = int.Parse(subnode.InnerXml.XmlToString());
                                                     break;
 
                                                 case "version":
-                                                    if (appliedSettings.FindAll(it => it == subnode.Name).Count > 0)
-                                                    {
-                                                        Output.WriteLine("[LangManager] Threw away \"" + node.OuterXml + "\", #YOROT-ROOT configuration already loaded.", LogLevel.Warning);
-                                                        break;
-                                                    }
-                                                    appliedSettings.Add(subnode.Name);
-                                                    Version = int.Parse(subnode.InnerXml.InnerXmlToString());
+
+                                                    Version = int.Parse(subnode.InnerXml.XmlToString());
                                                     break;
 
                                                 default:
-                                                    if (!subnode.OuterXml.StartsWith("<!--"))
+                                                    if (!subnode.IsComment())
                                                     {
                                                         Output.WriteLine("[LangManager] Threw away \"" + node.OuterXml + "\", unsupported format for #YOROT-ROOT.", LogLevel.Warning);
                                                     }
@@ -468,7 +442,7 @@ namespace Yorot
                                 }
                                 else
                                 {
-                                    RecursiveAdd(node, (string.IsNullOrWhiteSpace(groupID) ? "" : groupID + ".") + node.Attributes["Name"].Value.InnerXmlToString());
+                                    RecursiveAdd(node, (string.IsNullOrWhiteSpace(groupID) ? "" : groupID + ".") + node.Attributes["Name"].Value.XmlToString());
                                 }
                             }
                             else

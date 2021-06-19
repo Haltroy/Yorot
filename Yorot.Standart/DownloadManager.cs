@@ -60,15 +60,15 @@ namespace Yorot
             for (int ı = 0; ı < rootNode.ChildNodes.Count; ı++)
             {
                 XmlNode node = rootNode.ChildNodes[ı];
+                if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                {
+                    Output.WriteLine("[DownloadManager] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
+                    break;
+                }
+                appliedSettings.Add(node.Name);
                 switch (node.Name)
                 {
                     case "Downloads":
-                        if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                        {
-                            Output.WriteLine("[DownloadManager] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                            break;
-                        }
-                        appliedSettings.Add(node.Name);
                         for (int i = 0; i < node.ChildNodes.Count; i++)
                         {
                             XmlNode subnode = node.ChildNodes[i];
@@ -76,20 +76,21 @@ namespace Yorot
                             {
                                 YorotSite download = new YorotSite
                                 {
-                                    Name = subnode.Attributes["Name"].Value.InnerXmlToString(),
-                                    Url = subnode.Attributes["Url"].Value.InnerXmlToString(),
-                                    Status = (YorotSiteStatus)int.Parse(subnode.Attributes["Status"].Value)
+                                    Name = subnode.Attributes["Name"].Value.XmlToString(),
+                                    Url = subnode.Attributes["Url"].Value.XmlToString(),
+                                    Status = (YorotSiteStatus)int.Parse(subnode.Attributes["Status"].Value),
+                                    Manager = this,
                                 };
-                                if (subnode.Attributes["Error"] != null) { download.ErrorCode = subnode.Attributes["Error"].Value.InnerXmlToString(); }
-                                if (subnode.Attributes["Location"] != null) { download.FilePath = subnode.Attributes["Location"].Value.InnerXmlToString(); }
-                                if (subnode.Attributes["Date"] != null) { download.Date = DateTime.ParseExact(subnode.Attributes["Date"].Value.InnerXmlToString(), "dd-MM-yyyy HH-mm-ss", null); }
+                                if (subnode.Attributes["Error"] != null) { download.ErrorCode = subnode.Attributes["Error"].Value.XmlToString(); }
+                                if (subnode.Attributes["Location"] != null) { download.FilePath = subnode.Attributes["Location"].Value.XmlToString(); }
+                                if (subnode.Attributes["Date"] != null) { download.Date = DateTime.ParseExact(subnode.Attributes["Date"].Value.XmlToString(), "dd-MM-yyyy HH-mm-ss", null); }
                                 Downloads.Add(download);
                             }
                         }
                         break;
 
                     default:
-                        if (!node.OuterXml.StartsWith("<!--"))
+                        if (!node.IsComment())
                         {
                             Output.WriteLine("[DownloadManager] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning);
                         }

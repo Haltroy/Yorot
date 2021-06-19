@@ -173,6 +173,9 @@ namespace YorotInstaller
             this.btClose = new System.Windows.Forms.Button();
             this.btSendFeedback = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -188,6 +191,7 @@ namespace YorotInstaller
             this.pChangeVer.SuspendLayout();
             this.tpDone.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -291,8 +295,8 @@ namespace YorotInstaller
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tpStart);
             this.tabControl1.Controls.Add(this.tpFirst);
-            this.tabControl1.Controls.Add(this.tpProgress);
             this.tabControl1.Controls.Add(this.tpModify);
+            this.tabControl1.Controls.Add(this.tpProgress);
             this.tabControl1.Controls.Add(this.tpDone);
             this.tabControl1.Location = new System.Drawing.Point(-5, 40);
             this.tabControl1.Name = "tabControl1";
@@ -314,8 +318,7 @@ namespace YorotInstaller
             // 
             // tpFirst
             // 
-            this.tpFirst.Controls.Add(this.btInstall);
-            this.tpFirst.Controls.Add(this.lbReady);
+            this.tpFirst.Controls.Add(this.flowLayoutPanel2);
             this.tpFirst.Location = new System.Drawing.Point(4, 22);
             this.tpFirst.Name = "tpFirst";
             this.tpFirst.Padding = new System.Windows.Forms.Padding(3);
@@ -327,12 +330,12 @@ namespace YorotInstaller
             // btInstall
             // 
             this.btInstall.AutoSize = true;
-            this.btInstall.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btInstall.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btInstall.FlatAppearance.BorderSize = 0;
             this.btInstall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btInstall.Location = new System.Drawing.Point(17, 40);
+            this.btInstall.Location = new System.Drawing.Point(3, 23);
             this.btInstall.Name = "btInstall";
-            this.btInstall.Size = new System.Drawing.Size(44, 23);
+            this.btInstall.Size = new System.Drawing.Size(331, 23);
             this.btInstall.TabIndex = 1;
             this.btInstall.Text = "Install";
             this.btInstall.UseVisualStyleBackColor = true;
@@ -342,11 +345,11 @@ namespace YorotInstaller
             // 
             this.lbReady.AutoSize = true;
             this.lbReady.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lbReady.Location = new System.Drawing.Point(13, 17);
+            this.lbReady.Location = new System.Drawing.Point(3, 0);
             this.lbReady.Name = "lbReady";
-            this.lbReady.Size = new System.Drawing.Size(147, 20);
+            this.lbReady.Size = new System.Drawing.Size(331, 20);
             this.lbReady.TabIndex = 0;
-            this.lbReady.Text = "Your Yorot is ready.";
+            this.lbReady.Text = "Welcome to the friendly galaxy of the Internet.";
             // 
             // tpProgress
             // 
@@ -703,7 +706,7 @@ namespace YorotInstaller
             this.lbDoneDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.lbDoneDesc.Location = new System.Drawing.Point(13, 4);
             this.lbDoneDesc.Name = "lbDoneDesc";
-            this.lbDoneDesc.Size = new System.Drawing.Size(147, 20);
+            this.lbDoneDesc.Size = new System.Drawing.Size(148, 20);
             this.lbDoneDesc.TabIndex = 1;
             this.lbDoneDesc.Text = "Your Yorot is ready.";
             this.lbDoneDesc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -750,6 +753,46 @@ namespace YorotInstaller
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // button1
+            // 
+            this.button1.AutoSize = true;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(3, 52);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(331, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Modify";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btInstall_Click);
+            // 
+            // button2
+            // 
+            this.button2.AutoSize = true;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(3, 81);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(331, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Uninstall";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.btInstall_Click);
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.lbReady);
+            this.flowLayoutPanel2.Controls.Add(this.btInstall);
+            this.flowLayoutPanel2.Controls.Add(this.button1);
+            this.flowLayoutPanel2.Controls.Add(this.button2);
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(117, 246);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(341, 141);
+            this.flowLayoutPanel2.TabIndex = 2;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -773,7 +816,6 @@ namespace YorotInstaller
             this.tabControl1.ResumeLayout(false);
             this.tpStart.ResumeLayout(false);
             this.tpFirst.ResumeLayout(false);
-            this.tpFirst.PerformLayout();
             this.tpProgress.ResumeLayout(false);
             this.tpProgress.PerformLayout();
             this.pInstall.ResumeLayout(false);
@@ -788,6 +830,8 @@ namespace YorotInstaller
             this.tpDone.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -841,5 +885,8 @@ namespace YorotInstaller
         private Label lbInstallCount;
         private Label lbDownloadCount;
         private Timer timer1;
+        private FlowLayoutPanel flowLayoutPanel2;
+        private Button button1;
+        private Button button2;
     }
 }

@@ -82,11 +82,11 @@ namespace Yorot
                             switch (subnode.Name)
                             {
                                 case "Theme":
-                                    Themes.Add(new YorotTheme(subnode.InnerXml.InnerXmlToString().ShortenPath(Main)));
+                                    Themes.Add(new YorotTheme(subnode.InnerXml.XmlToString().ShortenPath(Main)));
                                     break;
 
                                 default:
-                                    if (!subnode.OuterXml.StartsWith("<!--"))
+                                    if (!subnode.IsComment())
                                     {
                                         Output.WriteLine("[ThemeMan] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                     }
@@ -96,7 +96,7 @@ namespace Yorot
                         break;
 
                     default:
-                        if (!node.OuterXml.StartsWith("<!--"))
+                        if (!node.IsComment())
                         {
                             Output.WriteLine("[ThemeMan] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning);
                         }
@@ -289,116 +289,63 @@ namespace Yorot
                     string xml = HTAlt.Tools.ReadFile(fileLoc, Encoding.Unicode);
                     XmlDocument doc = new XmlDocument();
                     doc.LoadXml(xml);
-                    XmlNode rootNode = Yorot.Tools.FindRoot(doc);
+                    XmlNode rootNode = HTAlt.Tools.FindRoot(doc);
                     List<string> applied = new List<string>();
                     for (int i = 0; i < rootNode.ChildNodes.Count; i++)
                     {
                         XmlNode node = rootNode.ChildNodes[i];
                         string nodeName = node.Name.ToLowerEnglish();
+                        if (applied.Contains(nodeName))
+                        {
+                            Output.WriteLine("[Theme:\"" + Config + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
+                            break;
+                        }
+                        applied.Add(nodeName);
                         switch (nodeName)
                         {
                             case "name":
-                                if (applied.Contains(nodeName))
-                                {
-                                    Output.WriteLine("[Theme:\"" + Config + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                    break;
-                                }
-                                applied.Add(nodeName);
-                                Name = node.InnerXml.InnerXmlToString();
+                                Name = node.InnerXml.XmlToString();
                                 break;
 
                             case "author":
-                                if (applied.Contains(nodeName))
-                                {
-                                    Output.WriteLine("[Theme:\"" + Config + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                    break;
-                                }
-                                applied.Add(nodeName);
-                                Author = node.InnerXml.InnerXmlToString();
+                                Author = node.InnerXml.XmlToString();
                                 break;
 
                             case "codename":
-                                if (applied.Contains(nodeName))
-                                {
-                                    Output.WriteLine("[Theme:\"" + Config + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                    break;
-                                }
-                                applied.Add(nodeName);
-                                CodeName = node.InnerXml.InnerXmlToString();
+                                CodeName = node.InnerXml.XmlToString();
                                 break;
 
                             case "htupdate":
-                                if (applied.Contains(nodeName))
-                                {
-                                    Output.WriteLine("[Theme:\"" + Config + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                    break;
-                                }
-                                applied.Add(nodeName);
-                                HTUPDATE = node.InnerXml.InnerXmlToString();
+                                HTUPDATE = node.InnerXml.XmlToString();
+                                Manager.Main.Yopad.RegisterHTU(HTUPDATE, this);
                                 break;
 
                             case "version":
-                                if (applied.Contains(nodeName))
-                                {
-                                    Output.WriteLine("[Theme:\"" + Config + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                    break;
-                                }
-                                applied.Add(nodeName);
-                                Version = int.Parse(node.InnerXml.InnerXmlToString());
+                                Version = int.Parse(node.InnerXml.XmlToString());
                                 break;
 
                             case "thumbnail":
-                                if (applied.Contains(nodeName))
-                                {
-                                    Output.WriteLine("[Theme:\"" + Config + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                    break;
-                                }
-                                applied.Add(nodeName);
-                                ThumbLoc = node.InnerXml.InnerXmlToString();
+                                ThumbLoc = node.InnerXml.XmlToString();
                                 break;
 
                             case "backcolor":
-                                if (applied.Contains(nodeName))
-                                {
-                                    Output.WriteLine("[Theme:\"" + Config + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                    break;
-                                }
-                                applied.Add(nodeName);
-                                BackColor = node.InnerXml.InnerXmlToString().HexToColor();
+                                BackColor = node.InnerXml.XmlToString().HexToColor();
                                 break;
 
                             case "forecolor":
-                                if (applied.Contains(nodeName))
-                                {
-                                    Output.WriteLine("[Theme:\"" + Config + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                    break;
-                                }
-                                applied.Add(nodeName);
-                                ForeColor = node.InnerXml.InnerXmlToString().ToLowerEnglish() == "auto" ? HTAlt.Tools.AutoWhiteBlack(BackColor) : node.InnerXml.InnerXmlToString().HexToColor();
+                                ForeColor = node.InnerXml.XmlToString().ToLowerEnglish() == "auto" ? HTAlt.Tools.AutoWhiteBlack(BackColor) : node.InnerXml.XmlToString().HexToColor();
                                 break;
 
                             case "overlaycolor":
-                                if (applied.Contains(nodeName))
-                                {
-                                    Output.WriteLine("[Theme:\"" + Config + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                    break;
-                                }
-                                applied.Add(nodeName);
-                                OverlayColor = node.InnerXml.InnerXmlToString().HexToColor();
+                                OverlayColor = node.InnerXml.XmlToString().HexToColor();
                                 break;
 
                             case "artcolor":
-                                if (applied.Contains(nodeName))
-                                {
-                                    Output.WriteLine("[Theme:\"" + Config + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                    break;
-                                }
-                                applied.Add(nodeName);
-                                ArtColor = node.InnerXml.InnerXmlToString().HexToColor();
+                                ArtColor = node.InnerXml.XmlToString().HexToColor();
                                 break;
 
                             default:
-                                if (!node.OuterXml.StartsWith("<!--"))
+                                if (!node.IsComment())
                                 {
                                     Output.WriteLine("[Theme:\"" + Config + "\"] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning);
                                 }

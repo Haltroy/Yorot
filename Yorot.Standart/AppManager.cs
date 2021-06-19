@@ -128,7 +128,7 @@ namespace Yorot
                             }
                             else
                             {
-                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                if (!subnode.IsComment())
                                 {
                                     Output.WriteLine("[AppMan] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                 }
@@ -137,7 +137,7 @@ namespace Yorot
                         break;
 
                     default:
-                        if (!node.OuterXml.StartsWith("<!--"))
+                        if (!node.IsComment())
                         {
                             Output.WriteLine("[AppMan] Threw away \"" + node.OuterXml + "\". Invalid configurtion.", LogLevel.Warning);
                         }
@@ -442,6 +442,7 @@ namespace Yorot
         {
             AppCodeName = appCodeName;
             Manager = manager;
+            Permissions = new YorotAppPermissions(this);
             string configFile = Manager.Main.AppsFolder + appCodeName + "\\app.ycf";
             if (!string.IsNullOrWhiteSpace(configFile))
             {
@@ -451,101 +452,58 @@ namespace Yorot
                     {
                         XmlDocument doc = new XmlDocument();
                         doc.LoadXml(HTAlt.Tools.ReadFile(configFile, System.Text.Encoding.Unicode));
-                        XmlNode rootNode = Yorot.Tools.FindRoot(doc.DocumentElement);
+                        XmlNode rootNode = HTAlt.Tools.FindRoot(doc.DocumentElement);
                         List<string> appliedSettings = new List<string>();
                         for (int i = 0; i < rootNode.ChildNodes.Count; i++)
                         {
                             XmlNode node = rootNode.ChildNodes[i];
-                            switch (node.Name)
+                            if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
                             {
-                                case "AppIcon":
-                                    if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                                    {
-                                        Output.WriteLine("[YorotApp] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name);
+                                Output.WriteLine("[YorotApp] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
+                                break;
+                            }
+                            appliedSettings.Add(node.Name.ToLowerEnglish());
+                            switch (node.Name.ToLowerEnglish())
+                            {
+                                case "appicon":
+                                    AppIcon = node.InnerXml.XmlToString();
                                     break;
 
-                                case "Author":
-                                    if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                                    {
-                                        Output.WriteLine("[YorotApp] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name);
+                                case "author":
+                                    Author = node.InnerXml.XmlToString();
                                     break;
 
-                                case "Version":
-                                    if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                                    {
-                                        Output.WriteLine("[YorotApp] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name);
+                                case "version":
+                                    Version = node.InnerXml.XmlToString();
                                     break;
 
-                                case "VersionNo":
-                                    if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                                    {
-                                        Output.WriteLine("[YorotApp] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name);
+                                case "versionno":
+                                    VersionNo = int.Parse(node.InnerXml.XmlToString());
                                     break;
 
-                                case "HTUPDATE":
-                                    if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                                    {
-                                        Output.WriteLine("[YorotApp] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name);
+                                case "htupdate":
+                                    HTUPDATE = node.InnerXml.XmlToString();
+                                    Manager.Main.Yopad.RegisterHTU(HTUPDATE, this);
                                     break;
 
-                                case "StartFile":
-                                    if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                                    {
-                                        Output.WriteLine("[YorotApp] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name);
+                                case "startfile":
+                                    StartFile = node.InnerXml.XmlToString();
                                     break;
 
-                                case "AppCodeName":
-                                    if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                                    {
-                                        Output.WriteLine("[YorotApp] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name);
+                                case "appcodename":
+                                    AppCodeName = node.InnerXml.XmlToString();
                                     break;
 
-                                case "isLocal":
-                                    if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                                    {
-                                        Output.WriteLine("[YorotApp] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name);
+                                case "islocal":
+                                    isLocal = node.InnerXml.XmlToString() == "true";
                                     break;
 
-                                case "AppName":
-                                    if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                                    {
-                                        Output.WriteLine("[YorotApp] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name);
+                                case "appname":
+                                    AppName = node.InnerXml.XmlToString();
                                     break;
 
-                                case "MultipleSession":
-                                    if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                                    {
-                                        Output.WriteLine("[YorotApp] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name);
+                                case "multiplesession":
+                                    MultipleSession = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 default:
@@ -589,7 +547,7 @@ namespace Yorot
         /// <summary>
         /// Creates new <see cref="YorotApp"/>.
         /// </summary>
-        public YorotApp() { }
+        public YorotApp() { Permissions = new YorotAppPermissions(this); }
 
         /// <summary>
         /// gets the main manager of this app.
@@ -745,6 +703,8 @@ namespace Yorot
         /// Determines if the application is enabled.
         /// </summary>
         public bool isEnabled { get; set; } = false;
+
+        public YorotAppPermissions Permissions { get; set; }
     }
 
     public abstract class YorotAppLayout
@@ -796,5 +756,78 @@ namespace Yorot
         /// No information given about this app origin.
         /// </summary>
         Unknown,
+    }
+
+    /// <summary>
+    /// Permissions of a generic <see cref="YorotApp"/>.
+    /// </summary>
+    public class YorotAppPermissions
+    {
+        /// <summary>
+        /// Creates a new <see cref="YorotAppPermissions"/> with default values.
+        /// </summary>
+        /// <param name="app"><see cref="YorotApp"/></param>
+        public YorotAppPermissions(YorotApp app) : this(app, YorotPermissionMode.None, YorotPermissionMode.None, YorotPermissionMode.None, 0, false) { }
+
+        /// <summary>
+        /// Creates a new <see cref="YorotappPermissions"/> with custom values.
+        /// </summary>
+        /// <param name="app"><see cref="YorotApp"/></param>
+        /// <param name="runInc">Determines if this app can be launched in Incognito mode.</param>
+        /// <param name="runStart">Determines if this app will be launched on start.</param>
+        /// <param name="allowNotif">Determines if this app can send notifications.</param>
+        /// <param name="notifPriority">Determines the priority of the notifications coming from this webapp.
+        /// <para></para>
+        /// -1 = Prioritize others
+        /// <para></para>
+        /// 0 = Normal
+        /// <para></para>
+        /// 1 = Prioritize this</param>
+        /// <param name="startNotifOnBoot">Dertermines if Yorot should start notification listener on start for this app.</param>
+        public YorotAppPermissions(YorotApp app, YorotPermissionMode runInc, YorotPermissionMode runStart, YorotPermissionMode allowNotif, int notifPriority, bool startNotifOnBoot)
+        {
+            App = app;
+            this.runInc = new YorotPermission("runInc", app, app.Manager.Main, runInc);
+            this.runStart = new YorotPermission("runStart", app, app.Manager.Main, runStart);
+            this.allowNotif = new YorotPermission("allowNotif", app, app.Manager.Main, allowNotif);
+            this.notifPriority = notifPriority;
+            this.startNotifOnBoot = startNotifOnBoot;
+        }
+
+        /// <summary>
+        /// The app of these permissions.
+        /// </summary>
+        public YorotApp App { get; set; }
+
+        /// <summary>
+        /// Determines if this app can be launched in Incognito mode.
+        /// </summary>
+        public YorotPermission runInc { get; set; }
+
+        /// <summary>
+        /// Determines if this app will be launched on start.
+        /// </summary>
+        public YorotPermission runStart { get; set; }
+
+        /// <summary>
+        /// Determines if this app can send notifications.
+        /// </summary>
+        public YorotPermission allowNotif { get; set; }
+
+        /// <summary>
+        /// Determines the priority of the notifications coming from this webapp.
+        /// <para></para>
+        /// -1 = Prioritize others
+        /// <para></para>
+        /// 0 = Normal
+        /// <para></para>
+        /// 1 = Prioritize this
+        /// </summary>
+        public int notifPriority { get; set; } = 0;
+
+        /// <summary>
+        /// Dertermines if Yorot should start notification listener on start for this app.
+        /// </summary>
+        public bool startNotifOnBoot { get; set; } = false;
     }
 }

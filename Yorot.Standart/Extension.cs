@@ -29,7 +29,7 @@ namespace Yorot
                     {
                         try
                         {
-                            YorotExtension ext = new YorotExtension(node.Attributes["CodeName"].Value.InnerXmlToString(), this);
+                            YorotExtension ext = new YorotExtension(node.Attributes["CodeName"].Value.XmlToString(), this);
                             Extensions.Add(ext);
                         }
                         catch (Exception e)
@@ -44,7 +44,7 @@ namespace Yorot
                 }
                 else
                 {
-                    if (!node.OuterXml.StartsWith("<!--"))
+                    if (!node.IsComment())
                     {
                         Output.WriteLine("[ExtMan] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning);
                     }
@@ -134,6 +134,7 @@ namespace Yorot
             {
                 throw new ArgumentNullException("extman");
             }
+            Permissions = new YorotExtPermissions(this);
             Manager = extman;
             if (!string.IsNullOrWhiteSpace(codeName))
             {
@@ -144,109 +145,66 @@ namespace Yorot
                     XmlDocument doc = new XmlDocument();
                     doc.LoadXml(HTAlt.Tools.ReadFile(ManifestFile, System.Text.Encoding.Unicode));
                     List<string> appliedConfig = new List<string>();
-                    XmlNode rootNode = Yorot.Tools.FindRoot(doc.DocumentElement);
+                    XmlNode rootNode = HTAlt.Tools.FindRoot(doc.DocumentElement);
                     for (int i = 0; i < rootNode.ChildNodes.Count; i++)
                     {
                         XmlNode node = rootNode.ChildNodes[i];
                         string nodeName = node.Name.ToLowerEnglish();
+                        if (appliedConfig.Contains(nodeName))
+                        {
+                            Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.");
+                            break;
+                        }
+                        appliedConfig.Add(nodeName);
                         switch (nodeName)
                         {
+                            case "htupdate":
+                                HTU_Url = node.InnerXml.XmlToString();
+                                Manager.Main.Yopad.RegisterHTU(HTU_Url, this);
+                                break;
+
                             case "name":
-                                if (appliedConfig.FindAll(it => it == nodeName).Count > 0)
-                                {
-                                    Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedConfig.Add(nodeName);
-                                Name = node.InnerXml.InnerXmlToString();
+                                Name = node.InnerXml.XmlToString();
                                 break;
 
                             case "author":
-                                if (appliedConfig.FindAll(it => it == nodeName).Count > 0)
-                                {
-                                    Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedConfig.Add(nodeName);
-                                Author = node.InnerXml.InnerXmlToString();
+                                Author = node.InnerXml.XmlToString();
                                 break;
 
                             case "version":
-                                if (appliedConfig.FindAll(it => it == nodeName).Count > 0)
-                                {
-                                    Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedConfig.Add(nodeName);
-                                Version = int.Parse(node.InnerXml.InnerXmlToString());
+                                Version = int.Parse(node.InnerXml.XmlToString());
                                 break;
 
                             case "icon":
-                                if (appliedConfig.FindAll(it => it == nodeName).Count > 0)
-                                {
-                                    Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedConfig.Add(nodeName);
-                                Icon = node.InnerXml.InnerXmlToString();
+                                Icon = node.InnerXml.XmlToString();
                                 break;
 
                             case "size":
-                                if (appliedConfig.FindAll(it => it == nodeName).Count > 0)
-                                {
-                                    Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedConfig.Add(nodeName);
-                                string innertext = node.InnerXml.InnerXmlToString();
+                                string innertext = node.InnerXml.XmlToString();
                                 string w = innertext.Substring(0, innertext.IndexOf(';'));
                                 string h = innertext.Substring(innertext.IndexOf(';'), innertext.Length - innertext.IndexOf(';'));
                                 Size = new System.Drawing.Size(int.Parse(w), int.Parse(h));
                                 break;
 
                             case "popup":
-                                if (appliedConfig.FindAll(it => it == nodeName).Count > 0)
-                                {
-                                    Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedConfig.Add(nodeName);
-                                Popup = node.InnerXml.InnerXmlToString();
+                                Popup = node.InnerXml.XmlToString();
                                 break;
 
                             case "startup":
-                                if (appliedConfig.FindAll(it => it == nodeName).Count > 0)
-                                {
-                                    Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedConfig.Add(nodeName);
-                                Startup = node.InnerXml.InnerXmlToString();
+                                Startup = node.InnerXml.XmlToString();
                                 break;
 
                             case "background":
-                                if (appliedConfig.FindAll(it => it == nodeName).Count > 0)
-                                {
-                                    Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedConfig.Add(nodeName);
-                                Background = node.InnerXml.InnerXmlToString();
+                                Background = node.InnerXml.XmlToString();
                                 break;
 
                             case "files":
-                                if (appliedConfig.FindAll(it => it == nodeName).Count > 0)
-                                {
-                                    Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedConfig.Add(nodeName);
                                 for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                                 {
                                     XmlNode subnode = node.ChildNodes[ı];
                                     if (subnode.Name.ToLowerEnglish() == "file")
                                     {
-                                        Files.Add(subnode.InnerXml.InnerXmlToString());
+                                        Files.Add(subnode.InnerXml.XmlToString());
                                     }
                                     else
                                     {
@@ -256,12 +214,6 @@ namespace Yorot
                                 break;
 
                             case "settings":
-                                if (appliedConfig.FindAll(it => it == nodeName).Count > 0)
-                                {
-                                    Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedConfig.Add(nodeName);
                                 for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                                 {
                                     XmlNode subnode = node.ChildNodes[ı];
@@ -274,7 +226,7 @@ namespace Yorot
                                                 break;
                                             }
                                             appliedConfig.Add(subnode.Name);
-                                            Settings.autoLoad = subnode.InnerXml.InnerXmlToString() == "true";
+                                            Settings.autoLoad = subnode.InnerXml.XmlToString() == "true";
                                             break;
 
                                         case "showPopupMenu":
@@ -284,7 +236,7 @@ namespace Yorot
                                                 break;
                                             }
                                             appliedConfig.Add(subnode.Name);
-                                            Settings.showPopupMenu = subnode.InnerXml.InnerXmlToString() == "true";
+                                            Settings.showPopupMenu = subnode.InnerXml.XmlToString() == "true";
                                             break;
 
                                         case "hasProxy":
@@ -294,21 +246,11 @@ namespace Yorot
                                                 break;
                                             }
                                             appliedConfig.Add(subnode.Name);
-                                            Settings.hasProxy = subnode.InnerXml.InnerXmlToString() == "true";
-                                            break;
-
-                                        case "useHTUpdate":
-                                            if (appliedConfig.FindAll(it => it == subnode.Name).Count > 0)
-                                            {
-                                                Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + subnode.OuterXml + "\", configuration already applied.");
-                                                break;
-                                            }
-                                            appliedConfig.Add(subnode.Name);
-                                            Settings.useHTUpdate = subnode.InnerXml.InnerXmlToString() == "true";
+                                            Settings.hasProxy = subnode.InnerXml.XmlToString() == "true";
                                             break;
 
                                         default:
-                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            if (!subnode.IsComment())
                                             {
                                                 Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + subnode.OuterXml + "\", unsupported.");
                                             }
@@ -318,18 +260,12 @@ namespace Yorot
                                 break;
 
                             case "pagelist":
-                                if (appliedConfig.FindAll(it => it == nodeName).Count > 0)
-                                {
-                                    Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedConfig.Add(nodeName);
                                 for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                                 {
                                     XmlNode subnode = node.ChildNodes[ı];
                                     if (subnode.Name.ToLowerEnglish() == "page")
                                     {
-                                        PageList.Add(subnode.InnerXml.InnerXmlToString());
+                                        PageList.Add(subnode.InnerXml.XmlToString());
                                     }
                                     else
                                     {
@@ -339,12 +275,6 @@ namespace Yorot
                                 break;
 
                             case "rcoptions":
-                                if (appliedConfig.FindAll(it => it == nodeName).Count > 0)
-                                {
-                                    Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedConfig.Add(nodeName);
                                 for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                                 {
                                     XmlNode subnode = node.ChildNodes[ı];
@@ -354,8 +284,8 @@ namespace Yorot
                                         {
                                             YorotExtensionRCOption rcoption = new YorotExtensionRCOption()
                                             {
-                                                Script = subnode.Attributes["Script"].Value.InnerXmlToString(),
-                                                Text = subnode.InnerXml.InnerXmlToString(),
+                                                Script = subnode.Attributes["Script"].Value.XmlToString(),
+                                                Text = subnode.InnerXml.XmlToString(),
                                             };
                                             switch (subnode.Attributes["Type"].Value.ToLowerEnglish())
                                             {
@@ -389,7 +319,7 @@ namespace Yorot
                                             }
                                             if (subnode.Attributes["Icon"] != null)
                                             {
-                                                rcoption.Icon = subnode.Attributes["Icon"].Value.InnerXmlToString().GetPath(Manager.Main);
+                                                rcoption.Icon = subnode.Attributes["Icon"].Value.XmlToString().GetPath(Manager.Main);
                                             }
                                             RCOptions.Add(rcoption);
                                         }
@@ -402,7 +332,7 @@ namespace Yorot
                                 break;
 
                             default:
-                                if (!node.OuterXml.StartsWith("<!--"))
+                                if (!node.IsComment())
                                 {
                                     Output.WriteLine("[Extension:\"" + CodeName + "\"] Threw away \"" + node.OuterXml + "\", unsupported.");
                                 }
@@ -445,6 +375,11 @@ namespace Yorot
         /// Display name of the extension.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// HTUPDATE URL of this extension.
+        /// </summary>
+        public string HTU_Url { get; set; }
 
         /// <summary>
         /// Author of the extension.
@@ -545,6 +480,11 @@ namespace Yorot
                 return size + " " + bytes;
             }
         }
+
+        /// <summary>
+        /// PErmissions of this extension.
+        /// </summary>
+        public YorotExtPermissions Permissions { get; set; }
     }
 
     /// <summary>
@@ -628,10 +568,59 @@ namespace Yorot
         /// <see cref="true"/> if Extension has Proxy manipulations.
         /// </summary>
         public bool hasProxy { get; set; } = false;
+    }
+
+    /// <summary>
+    /// Permissions of a generic <see cref="YorotApp"/>.
+    /// </summary>
+    public class YorotExtPermissions
+    {
+        /// <summary>
+        /// Creates a new <see cref="YorotExtPermissions"/> with default values.
+        /// </summary>
+        /// <param name="app"><see cref="YorotExtension"/></param>
+        public YorotExtPermissions(YorotExtension ext) : this(ext, YorotPermissionMode.None, YorotPermissionMode.None, YorotPermissionMode.None, YorotPermissionMode.None) { }
 
         /// <summary>
-        /// <see cref="true"/> if this extension can be auto-updated.
+        /// Creates a new <see cref="YorotExtPermissions"/> with custom values.
         /// </summary>
-        public bool useHTUpdate { get; set; } = false;
+        /// <param name="ext"><see cref="YorotExtension"/></param>
+        /// <param name="runInc">Determines if this app can be launched in Incognito mode.</param>
+        /// <param name="runStart">Determines if this app will be launched on start.</param>
+        /// <param name="allowNotif">Determines if this app can send notifications.</param>
+        /// <param name="menuOptions">Determines if this extension can show menu options.</param>
+        public YorotExtPermissions(YorotExtension ext, YorotPermissionMode runInc, YorotPermissionMode runStart, YorotPermissionMode allowNotif, YorotPermissionMode menuOptions)
+        {
+            Extension = ext;
+            this.runInc = new YorotPermission("runInc", ext, ext.Manager.Main, runInc);
+            this.runStart = new YorotPermission("runStart", ext, ext.Manager.Main, runStart);
+            this.allowNotif = new YorotPermission("allowNotif", ext, ext.Manager.Main, allowNotif);
+            this.menuOptions = new YorotPermission("menuOptions", ext, ext.Manager.Main, menuOptions);
+        }
+
+        /// <summary>
+        /// The extension of these permissions.
+        /// </summary>
+        public YorotExtension Extension { get; set; }
+
+        /// <summary>
+        /// Determines if this app can be launched in Incognito mode.
+        /// </summary>
+        public YorotPermission runInc { get; set; }
+
+        /// <summary>
+        /// Determines if this app will be launched on start.
+        /// </summary>
+        public YorotPermission runStart { get; set; }
+
+        /// <summary>
+        /// Determines if this app can send notifications.
+        /// </summary>
+        public YorotPermission allowNotif { get; set; }
+
+        /// <summary>
+        /// Determines if this extension can show menu options.
+        /// </summary>
+        public YorotPermission menuOptions { get; set; }
     }
 }

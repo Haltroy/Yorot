@@ -66,7 +66,7 @@ namespace Yorot
                         }
                         loadedCurrent = true;
                         if (node.Attributes["Name"] == null) { throw new XmlException("Current profile node does not have \"Name\" attribute."); }
-                        string currentName = node.Attributes["Name"].Value.InnerXmlToString();
+                        string currentName = node.Attributes["Name"].Value.XmlToString();
                         if (Profiles.FindAll(it => it.Name == currentName).Count > 0)
                         {
                             Current = Profiles.FindAll(it => it.Name == currentName)[0];
@@ -74,7 +74,7 @@ namespace Yorot
                         else
                         {
                             if (node.Attributes["Text"] == null) { throw new XmlException("Current profile node does not have \"Text\" attribute."); }
-                            string currentText = node.Attributes["Text"].Value.InnerXmlToString();
+                            string currentText = node.Attributes["Text"].Value.XmlToString();
                             Current = new YorotProfile(currentName, currentText, this, true);
                             Profiles.Add(Current);
                         }
@@ -94,8 +94,8 @@ namespace Yorot
                                 case "profile":
                                     if (subnode.Attributes["Name"] != null && subnode.Attributes["Text"] != null)
                                     {
-                                        string name = subnode.Attributes["Name"].Value.InnerXmlToString();
-                                        string text = subnode.Attributes["Text"].Value.InnerXmlToString();
+                                        string name = subnode.Attributes["Name"].Value.XmlToString();
+                                        string text = subnode.Attributes["Text"].Value.XmlToString();
                                         if (Profiles.FindAll(it => it.Name == name).Count > 0)
                                         {
                                             Output.WriteLine("[Profiles] Threw away \"" + subnode.OuterXml + "\", profile already loaded.", LogLevel.Warning);
@@ -112,7 +112,7 @@ namespace Yorot
                                     break;
 
                                 default:
-                                    if (!subnode.OuterXml.StartsWith("<!--")) { Output.WriteLine("[Profiles] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning); }
+                                    if (!subnode.IsComment()) { Output.WriteLine("[Profiles] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning); }
                                     break;
                             }
                         }
@@ -120,7 +120,7 @@ namespace Yorot
                         break;
 
                     default:
-                        if (!node.OuterXml.StartsWith("<!--")) { Output.WriteLine("[Profiles] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning); }
+                        if (!node.IsComment()) { Output.WriteLine("[Profiles] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning); }
                         break;
                 }
             }
@@ -179,6 +179,7 @@ namespace Yorot
             bool isroot = name == "root";
             Path = Manager.Main.ProfilesFolder + Name + "\\";
             CacheLoc = isroot ? "" : Path + "cache\\";
+            LocalLoc = Path + "local\\";
             if (!isroot && !System.IO.Directory.Exists(CacheLoc)) { System.IO.Directory.CreateDirectory(CacheLoc); }
             UserSettings = Path + "settings.ycf";
             UserHistory = Path + "history.ycf";
@@ -250,6 +251,11 @@ namespace Yorot
         /// User Cache location.
         /// </summary>
         public string CacheLoc { get; set; }
+
+        /// <summary>
+        /// Add-on main local file folder.
+        /// </summary>
+        public string LocalLoc { get; set; }
 
         /// <summary>
         /// User settings location.

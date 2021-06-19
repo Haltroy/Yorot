@@ -1,13 +1,27 @@
-﻿using System;
-using System.Xml;
-
-namespace Yorot
+﻿namespace Yorot
 {
     /// <summary>
     /// Yorot Permission item
     /// </summary>
     public class YorotPermission
     {
+        private YorotPermissionMode allowance = YorotPermissionMode.None;
+
+        /// <summary>
+        /// Creates anew <see cref="YorotPermission"/>.
+        /// </summary>
+        /// <param name="id">ID of the permission.</param>
+        /// <param name="requestor">The <see cref="object"/> that requested the permission.</param>
+        /// <param name="main"><see cref="YorotMain"/></param>
+        /// <param name="allowance">Permission mode.</param>
+        public YorotPermission(string id, object requestor, YorotMain main, YorotPermissionMode allowance = YorotPermissionMode.None)
+        {
+            ID = id;
+            Requestor = requestor;
+            Main = main;
+            Allowance = allowance;
+        }
+
         /// <summary>
         /// Id or internal name of this permission item.
         /// </summary>
@@ -19,9 +33,18 @@ namespace Yorot
         public object Requestor { get; set; }
 
         /// <summary>
+        /// Main of this permmission.
+        /// </summary>
+        public YorotMain Main { get; set; }
+
+        /// <summary>
         /// Value of this permission item.
         /// </summary>
-        public YorotPermissionMode Allowance { get; set; } = YorotPermissionMode.None;
+        public YorotPermissionMode Allowance
+        {
+            get => allowance;
+            set => allowance = Main.OnPermissionRequest(this, value);
+        }
     }
 
     /// <summary>
@@ -48,22 +71,5 @@ namespace Yorot
         /// Permission allowed for one time only. Will reset to <see cref="None"/> on close.
         /// </summary>
         AllowOneTime
-    }
-
-    public class YorotPermissionControl : YorotManager
-    {
-        public YorotPermissionControl(string configFile, YorotMain main) : base(configFile, main)
-        {
-        }
-
-        public override void ExtractXml(XmlNode rootNode)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string ToXml()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

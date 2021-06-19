@@ -84,15 +84,15 @@ namespace Yorot
             for (int ı = 0; ı < rootNode.ChildNodes.Count; ı++)
             {
                 XmlNode node = rootNode.ChildNodes[ı];
+                if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                {
+                    Output.WriteLine("[FavMan] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
+                    break;
+                }
+                appliedSettings.Add(node.Name);
                 switch (node.Name.ToLowerEnglish())
                 {
                     case "favorites":
-                        if (appliedSettings.FindAll(it => it == node.Name).Count > 0)
-                        {
-                            Output.WriteLine("[FavMan] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                            break;
-                        }
-                        appliedSettings.Add(node.Name);
                         for (int i = 0; i < node.ChildNodes.Count; i++)
                         {
                             XmlNode subnode = node.ChildNodes[i];
@@ -107,14 +107,14 @@ namespace Yorot
                                     break;
 
                                 default:
-                                    if (!subnode.OuterXml.StartsWith("<!--")) { Output.WriteLine("[FavMan] Threw away \"" + subnode.OuterXml + "\", unsupported."); }
+                                    if (!subnode.IsComment()) { Output.WriteLine("[FavMan] Threw away \"" + subnode.OuterXml + "\", unsupported."); }
                                     break;
                             }
                         }
                         break;
 
                     default:
-                        if (!node.OuterXml.StartsWith("<!--"))
+                        if (!node.IsComment())
                         {
                             Output.WriteLine("[FavMan] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning);
                         }
@@ -138,7 +138,7 @@ namespace Yorot
             // NAME
             if (node.Attributes["Name"] != null)
             {
-                Name = node.Attributes["Name"].Value.InnerXmlToString();
+                Name = node.Attributes["Name"].Value.XmlToString();
             }
             else
             {
@@ -147,7 +147,7 @@ namespace Yorot
             // TEXT
             if (node.Attributes["Text"] != null)
             {
-                Text = node.Attributes["Text"].Value.InnerXmlToString();
+                Text = node.Attributes["Text"].Value.XmlToString();
             }
             else
             {
@@ -156,7 +156,7 @@ namespace Yorot
             // ICON
             if (node.Attributes["Icon"] != null)
             {
-                Name = node.Attributes["Icon"].Value.InnerXmlToString();
+                Name = node.Attributes["Icon"].Value.XmlToString();
             }
             else
             {
@@ -176,7 +176,7 @@ namespace Yorot
                         break;
 
                     default:
-                        if (!subnode.OuterXml.StartsWith("<!--")) { Output.WriteLine("[FavMan] Threw away \"" + subnode.OuterXml + "\", unsupported.", LogLevel.Warning); }
+                        if (!subnode.IsComment()) { Output.WriteLine("[FavMan] Threw away \"" + subnode.OuterXml + "\", unsupported.", LogLevel.Warning); }
                         break;
                 }
             }
@@ -341,7 +341,7 @@ namespace Yorot
             // NAME
             if (node.Attributes["Name"] != null)
             {
-                Name = node.Attributes["Name"].Value.InnerXmlToString();
+                Name = node.Attributes["Name"].Value.XmlToString();
             }
             else
             {
@@ -350,7 +350,7 @@ namespace Yorot
             // TEXT
             if (node.Attributes["Text"] != null)
             {
-                Text = node.Attributes["Text"].Value.InnerXmlToString();
+                Text = node.Attributes["Text"].Value.XmlToString();
             }
             else
             {
@@ -359,7 +359,7 @@ namespace Yorot
             // ICON
             if (node.Attributes["Icon"] != null)
             {
-                Name = node.Attributes["Icon"].Value.InnerXmlToString();
+                Name = node.Attributes["Icon"].Value.XmlToString();
             }
             else
             {
@@ -367,7 +367,7 @@ namespace Yorot
             }
             if (node.Attributes["Url"] != null)
             {
-                Url = node.Attributes["Url"].Value.InnerXmlToString();
+                Url = node.Attributes["Url"].Value.XmlToString();
             }
             else
             {

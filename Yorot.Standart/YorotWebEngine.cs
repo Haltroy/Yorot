@@ -29,7 +29,7 @@ namespace Yorot
                     {
                         try
                         {
-                            YorotWebEngine engine = new YorotWebEngine(Main.WEFolder + node.Attributes["CodeName"].Value + "\\engine.ycf".InnerXmlToString(), this);
+                            YorotWebEngine engine = new YorotWebEngine(Main.WEFolder + node.Attributes["CodeName"].Value + "\\engine.ycf".XmlToString(), this);
                             Engines.Add(engine);
                         }
                         catch (Exception e)
@@ -44,7 +44,7 @@ namespace Yorot
                 }
                 else
                 {
-                    if (!node.OuterXml.StartsWith("<!--"))
+                    if (!node.IsComment())
                     {
                         Output.WriteLine("[WEMan] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning);
                     }
@@ -134,86 +134,52 @@ namespace Yorot
                     EngineLoc = System.IO.Path.Combine(new System.IO.FileInfo(configFile).Directory.FullName, System.IO.Path.GetFileNameWithoutExtension(configFile) + "\\");
                     XmlDocument doc = new XmlDocument();
                     doc.LoadXml(HTAlt.Tools.ReadFile(configFile, System.Text.Encoding.Unicode));
-                    XmlNode rootNode = Yorot.Tools.FindRoot(doc);
+                    XmlNode rootNode = HTAlt.Tools.FindRoot(doc);
                     List<string> appliedC = new List<string>();
                     for (int i = 0; i < rootNode.ChildNodes.Count; i++)
                     {
                         XmlNode node = rootNode.ChildNodes[i];
                         string name = node.Name.ToLowerEnglish();
+                        if (appliedC.Contains(name))
+                        {
+                            HTAlt.Output.WriteLine("[YorotWebEngine] Threw away \"" + node.OuterXml + "\", configuration already applied.");
+                            break;
+                        }
+                        appliedC.Add(name);
                         switch (name)
                         {
-                            case "htupdate":
-                                if (appliedC.Contains(name))
-                                {
-                                    HTAlt.Output.WriteLine("[YorotWebEngine] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedC.Add(name);
-                                HTUPDATE = node.InnerXml.InnerXmlToString();
+                            case "name":
+                                Name = node.InnerXml.XmlToString();
                                 break;
 
                             case "version":
-                                if (appliedC.Contains(name))
-                                {
-                                    HTAlt.Output.WriteLine("[YorotWebEngine] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedC.Add(name);
-                                Version = int.Parse(node.InnerXml.InnerXmlToString());
+                                Version = int.Parse(node.InnerXml.XmlToString());
                                 break;
 
-                            case "name":
-                                if (appliedC.Contains(name))
-                                {
-                                    HTAlt.Output.WriteLine("[YorotWebEngine] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedC.Add(name);
-                                Name = node.InnerXml.InnerXmlToString();
+                            case "htupdate":
+
+                                HTU_Url = node.InnerXml.XmlToString();
+                                Manager.Main.Yopad.RegisterHTU(HTU_Url, this);
                                 break;
 
                             case "author":
-                                if (appliedC.Contains(name))
-                                {
-                                    HTAlt.Output.WriteLine("[YorotWebEngine] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedC.Add(name);
-                                Author = node.InnerXml.InnerXmlToString();
+                                Author = node.InnerXml.XmlToString();
                                 break;
 
                             case "codename":
-                                if (appliedC.Contains(name))
-                                {
-                                    HTAlt.Output.WriteLine("[YorotWebEngine] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedC.Add(name);
-                                CodeName = node.InnerXml.InnerXmlToString();
+                                CodeName = node.InnerXml.XmlToString();
                                 break;
 
                             case "desc":
-                                if (appliedC.Contains(name))
-                                {
-                                    HTAlt.Output.WriteLine("[YorotWebEngine] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedC.Add(name);
-                                Desc = node.InnerXml.InnerXmlToString();
+                                Desc = node.InnerXml.XmlToString();
                                 break;
 
                             case "iconloc":
-                                if (appliedC.Contains(name))
-                                {
-                                    HTAlt.Output.WriteLine("[YorotWebEngine] Threw away \"" + node.OuterXml + "\", configuration already applied.");
-                                    break;
-                                }
-                                appliedC.Add(name);
-                                IconLoc = node.InnerXml.InnerXmlToString().GetPath(Manager.Main);
+                                IconLoc = node.InnerXml.XmlToString().GetPath(Manager.Main);
                                 break;
 
                             default:
-                                if (!node.OuterXml.StartsWith("<!--"))
+                                if (!node.IsComment())
                                 {
                                     HTAlt.Output.WriteLine("[YorotWebEngine] Threw away \"" + node.OuterXml + "\", unsupported.");
                                 }
@@ -245,7 +211,12 @@ namespace Yorot
         /// <summary>
         /// HTUPDATE address of this engine.
         /// </summary>
-        public string HTUPDATE { get; set; }
+        public string HTU_Url { get; set; }
+
+        /// <summary>
+        /// HTUPDATE of this engine.
+        /// </summary>
+        public HTUPDATE HTUPDATE { get; set; }
 
         /// <summary>
         /// Determines if this engine is enabled or not.

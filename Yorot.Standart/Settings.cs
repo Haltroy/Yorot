@@ -54,30 +54,25 @@ namespace Yorot
                     {
                         XmlDocument doc = new XmlDocument();
                         doc.LoadXml(HTAlt.Tools.ReadFile(fileLocation, Encoding.Unicode));
-                        XmlNode root = Yorot.Tools.FindRoot(doc);
+                        XmlNode root = HTAlt.Tools.FindRoot(doc);
                         List<string> appliedSettings = new List<string>();
                         for (int i = 0; i < root.ChildNodes.Count; i++)
                         {
                             XmlNode node = root.ChildNodes[i];
+                            if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                            {
+                                Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
+                                break;
+                            }
+                            appliedSettings.Add(node.Name.ToLowerEnglish());
                             switch (node.Name.ToLowerEnglish())
                             {
                                 case "homepage":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    HomePage = node.InnerXml.InnerXmlToString();
+                                    HomePage = node.InnerXml.XmlToString();
                                     break;
 
                                 case "searchengines":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
+
                                     for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                                     {
                                         XmlNode subnode = node.ChildNodes[ı];
@@ -91,7 +86,7 @@ namespace Yorot
                                                 }
                                                 else
                                                 {
-                                                    if (!subnode.OuterXml.StartsWith("<!--"))
+                                                    if (!subnode.IsComment())
                                                     {
                                                         Output.WriteLine("[SearchEngine] Threw away \"" + subnode.OuterXml + "\". Search Engine already exists.", LogLevel.Warning);
                                                     }
@@ -99,7 +94,7 @@ namespace Yorot
                                             }
                                             else
                                             {
-                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                if (!subnode.IsComment())
                                                 {
                                                     Output.WriteLine("[SearchEngine] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                                 }
@@ -107,7 +102,7 @@ namespace Yorot
                                         }
                                         else
                                         {
-                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            if (!subnode.IsComment())
                                             {
                                                 Output.WriteLine("[SearchEngine] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                             }
@@ -115,7 +110,7 @@ namespace Yorot
                                     }
                                     if (node.Attributes["Selected"] != null)
                                     {
-                                        SearchEngine = SearchEngines[int.Parse(node.Attributes["Selected"].Value.InnerXmlToString())];
+                                        SearchEngine = SearchEngines[int.Parse(node.Attributes["Selected"].Value.XmlToString())];
                                     }
                                     else
                                     {
@@ -124,12 +119,6 @@ namespace Yorot
                                     break;
 
                                 case "webengines":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
                                     for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                                     {
                                         XmlNode subnode = node.ChildNodes[ı];
@@ -148,7 +137,7 @@ namespace Yorot
                                             }
                                             else
                                             {
-                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                if (!subnode.IsComment())
                                                 {
                                                     Output.WriteLine("[Web Engine] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                                 }
@@ -156,7 +145,7 @@ namespace Yorot
                                         }
                                         else
                                         {
-                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            if (!subnode.IsComment())
                                             {
                                                 Output.WriteLine("[Web Engine] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                             }
@@ -165,12 +154,6 @@ namespace Yorot
                                     break;
 
                                 case "extensions":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
                                     for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                                     {
                                         XmlNode subnode = node.ChildNodes[ı];
@@ -178,7 +161,7 @@ namespace Yorot
                                         {
                                             if (subnode.Attributes["Name"] != null)
                                             {
-                                                string subnodeName = subnode.Attributes["Name"].Value.InnerXmlToString();
+                                                string subnodeName = subnode.Attributes["Name"].Value.XmlToString();
                                                 if (Profile.Manager.Main.Extensions.ExtExists(subnodeName))
                                                 {
                                                     Profile.Manager.Main.Extensions.Enable(subnodeName);
@@ -198,7 +181,7 @@ namespace Yorot
                                             }
                                             else
                                             {
-                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                if (!subnode.IsComment())
                                                 {
                                                     Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                                 }
@@ -206,7 +189,7 @@ namespace Yorot
                                         }
                                         else
                                         {
-                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            if (!subnode.IsComment())
                                             {
                                                 Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                             }
@@ -215,12 +198,6 @@ namespace Yorot
                                     break;
 
                                 case "themes":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
                                     for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                                     {
                                         XmlNode subnode = node.ChildNodes[ı];
@@ -239,7 +216,7 @@ namespace Yorot
                                             }
                                             else
                                             {
-                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                if (!subnode.IsComment())
                                                 {
                                                     Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                                 }
@@ -247,7 +224,7 @@ namespace Yorot
                                         }
                                         else
                                         {
-                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            if (!subnode.IsComment())
                                             {
                                                 Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                             }
@@ -255,7 +232,7 @@ namespace Yorot
                                     }
                                     if (node.Attributes["Selected"] != null)
                                     {
-                                        CurrentTheme = Profile.Manager.Main.ThemeMan.GetThemeByCN(node.Attributes["Selected"].Value.InnerXmlToString());
+                                        CurrentTheme = Profile.Manager.Main.ThemeMan.GetThemeByCN(node.Attributes["Selected"].Value.XmlToString());
                                     }
                                     else
                                     {
@@ -264,12 +241,6 @@ namespace Yorot
                                     break;
 
                                 case "langs":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
                                     for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                                     {
                                         XmlNode subnode = node.ChildNodes[ı];
@@ -288,7 +259,7 @@ namespace Yorot
                                             }
                                             else
                                             {
-                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                if (!subnode.IsComment())
                                                 {
                                                     Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                                 }
@@ -296,7 +267,7 @@ namespace Yorot
                                         }
                                         else
                                         {
-                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            if (!subnode.IsComment())
                                             {
                                                 Output.WriteLine("[Extensions] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                             }
@@ -304,7 +275,7 @@ namespace Yorot
                                     }
                                     if (node.Attributes["Selected"] != null)
                                     {
-                                        CurrentLanguage = Profile.Manager.Main.LangMan.GetLangByCN(node.Attributes["Selected"].Value.InnerXmlToString());
+                                        CurrentLanguage = Profile.Manager.Main.LangMan.GetLangByCN(node.Attributes["Selected"].Value.XmlToString());
                                     }
                                     else
                                     {
@@ -313,12 +284,6 @@ namespace Yorot
                                     break;
 
                                 case "apps":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
                                     for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                                     {
                                         XmlNode subnode = node.ChildNodes[ı];
@@ -341,7 +306,7 @@ namespace Yorot
                                             }
                                             else
                                             {
-                                                if (!subnode.OuterXml.StartsWith("<!--"))
+                                                if (!subnode.IsComment())
                                                 {
                                                     Output.WriteLine("[Apps] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                                 }
@@ -349,7 +314,7 @@ namespace Yorot
                                         }
                                         else
                                         {
-                                            if (!subnode.OuterXml.StartsWith("<!--"))
+                                            if (!subnode.IsComment())
                                             {
                                                 Output.WriteLine("[Apps] Threw away \"" + subnode.OuterXml + "\". unsupported.", LogLevel.Warning);
                                             }
@@ -358,133 +323,55 @@ namespace Yorot
                                     break;
 
                                 case "restoreoldsessions":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    RestoreOldSessions = node.InnerXml.InnerXmlToString() == "true";
+                                    RestoreOldSessions = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 case "rememberlastproxy":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    RememberLastProxy = node.InnerXml.InnerXmlToString() == "true";
+                                    RememberLastProxy = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 case "donottrack":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    DoNotTrack = node.InnerXml.InnerXmlToString() == "true";
+                                    DoNotTrack = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 case "showfavorites":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    FavManager.ShowFavorites = node.InnerXml.InnerXmlToString() == "true";
+                                    FavManager.ShowFavorites = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 case "startwithfullscreen":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    StartWithFullScreen = node.InnerXml.InnerXmlToString() == "true";
+                                    StartWithFullScreen = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 case "openfilesafterdownload":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    DownloadManager.OpenFilesAfterDownload = node.InnerXml.InnerXmlToString() == "true";
+                                    DownloadManager.OpenFilesAfterDownload = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 case "autodownload":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    DownloadManager.AutoDownload = node.InnerXml.InnerXmlToString() == "true";
+                                    DownloadManager.AutoDownload = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 case "downloadfolder":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    DownloadManager.DownloadFolder = node.InnerXml.InnerXmlToString();
+                                    DownloadManager.DownloadFolder = node.InnerXml.XmlToString();
                                     break;
 
                                 case "alwayscheckdefaultbrowser":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    AlwaysCheckDefaultBrowser = node.InnerXml.InnerXmlToString() == "true";
+                                    AlwaysCheckDefaultBrowser = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 case "startonboot":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    StartOnBoot = node.InnerXml.InnerXmlToString() == "true";
+                                    StartOnBoot = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 case "startinsystemtray":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    StartInSystemTray = node.InnerXml.InnerXmlToString() == "true";
+                                    StartInSystemTray = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 case "notifplaysound":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    NotifPlaySound = node.InnerXml.InnerXmlToString() == "true";
+                                    NotifPlaySound = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 case "datetime":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    switch (node.InnerXml.InnerXmlToString())
+                                    switch (node.InnerXml.XmlToString())
                                     {
                                         default:
                                         case "DMY":
@@ -502,37 +389,19 @@ namespace Yorot
                                     break;
 
                                 case "notifusedefault":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    NotifUseDefault = node.InnerXml.InnerXmlToString() == "true";
+                                    NotifUseDefault = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 case "notifsoundloc":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    NotifSoundLoc = node.InnerXml.InnerXmlToString();
+                                    NotifSoundLoc = node.InnerXml.XmlToString();
                                     break;
 
                                 case "notifsilent":
-                                    if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
-                                    {
-                                        Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\". Setting already applied.", LogLevel.Warning);
-                                        break;
-                                    }
-                                    appliedSettings.Add(node.Name.ToLowerEnglish());
-                                    NotifSilent = node.InnerXml.InnerXmlToString() == "true";
+                                    NotifSilent = node.InnerXml.XmlToString() == "true";
                                     break;
 
                                 default:
-                                    if (!node.OuterXml.StartsWith("<!--"))
+                                    if (!node.IsComment())
                                     {
                                         Output.WriteLine("[Settings] Threw away \"" + node.OuterXml + "\", unsupported.", LogLevel.Warning);
                                     }

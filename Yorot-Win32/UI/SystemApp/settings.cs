@@ -34,7 +34,7 @@ namespace Yorot.UI.SystemApp
             ApplyLanguage(true);
             ApplyTheme(true);
             genLogEntries(true);
-            genHistoryEntry(new YorotSite() { Name = "Test", Date = DateTime.Now, Url = "https://haltroy.com" });
+            RefreshSettings(true);
             if (args != null)
             {
                 if (args.Length > 0)
@@ -209,6 +209,9 @@ namespace Yorot.UI.SystemApp
             ApplyTheme();
             ApplyLanguage();
             genLogEntries();
+            RefreshSettings();
+            RefreshAppList();
+            // TODO: Load WE; Sites, History, Downloads, Profiles
         }
 
         private ListViewItem FindLVI(ListView lv, string codeName)
@@ -418,6 +421,21 @@ namespace Yorot.UI.SystemApp
 
         }
 
+        public void RefreshSettings(bool force = false)
+        {
+            if (force)
+            {
+                tbHomepage.Text = YorotGlobal.Main.CurrentSettings.HomePage;
+                rbNewTab.Checked = YorotGlobal.Main.CurrentSettings.HomePage.ToLowerEnglish().StartsWith("yorot://newtab");
+                if (RefreshTabSettings != null)
+                {
+                    Invoke(RefreshTabSettings);
+                }
+            }
+        }
+
+        public Action RefreshTabSettings;
+
         private string GetAppOrigin(YorotApp app)
         {
             string x = string.Empty;
@@ -537,8 +555,9 @@ namespace Yorot.UI.SystemApp
                 HTMsgBox mesaj = new HTMsgBox(app.AppName, AppResetMessage, new HTDialogBoxContext(MessageBoxButtons.YesNo)) { BackColor = BackColor, Yes = Yes, No = No, AutoForeColor = true, };
                 DialogResult res = mesaj.ShowDialog();
                 if (res == DialogResult.Yes)
-                {
+                {                     
                     app.Reset();
+                    lbSizeOnDisk.Text = SizeOnDisk.Replace("[S]", app.GetAppSizeInfo(SizeInfoBytes));
 
                 }
             });
@@ -578,7 +597,7 @@ namespace Yorot.UI.SystemApp
             lbSizeOnDisk.Font = new System.Drawing.Font("Ubuntu", 12F);
             lbSizeOnDisk.Location = new System.Drawing.Point(18, btUninst.Location.Y + btReset.Height + 5);
             lbSizeOnDisk.Name = "lbSizeOnDisk";
-            lbSizeOnDisk.Text = "Size on disk: " + app.GetAppSizeInfo(SizeInfoBytes);
+            lbSizeOnDisk.Text = SizeOnDisk.Replace("[S]", app.GetAppSizeInfo(SizeInfoBytes));
             //
             // lbOrigin
             //
@@ -603,6 +622,10 @@ namespace Yorot.UI.SystemApp
             hsEnabled.Size = new System.Drawing.Size(50, 19);
             hsEnabled.Checked = app.isEnabled;
             hsEnabled.Enabled = !app.isSystemApp;
+            hsEnabled.CheckedChanged += new HTAlt.WinForms.HTSwitch.CheckedChangedDelegate((sender, e) =>
+            {
+                app.isEnabled = hsEnabled.Checked;
+            });
             //
             // lbEnabled
             //
@@ -625,6 +648,15 @@ namespace Yorot.UI.SystemApp
             hsNotifications.Location = new System.Drawing.Point(18, lbEnabledInfo.Location.Y + lbEnabledInfo.Height + 20);
             hsNotifications.Name = "hsNotifications";
             hsNotifications.Size = new System.Drawing.Size(50, 19);
+            hsNotifications.Checked = app.Permissions.allowNotif.Allowance == YorotPermissionMode.Allow;
+            hsPrioritize.Enabled = hsNotifications.Checked;
+            hsNotifListener.Enabled = hsNotifications.Checked;
+            hsNotifications.CheckedChanged += new HTAlt.WinForms.HTSwitch.CheckedChangedDelegate((sender, e) =>
+            {
+                app.Permissions.allowNotif.Allowance = hsNotifications.Checked ? YorotPermissionMode.Allow : YorotPermissionMode.Deny;
+                hsPrioritize.Enabled = hsNotifications.Checked;
+                hsNotifListener.Enabled = hsNotifications.Checked;
+            });
             //
             // lbNotifi
             //
@@ -648,6 +680,11 @@ namespace Yorot.UI.SystemApp
             hsPrioritize.Location = new System.Drawing.Point(lbNotifInfo.Location.X, lbNotifInfo.Location.Y + lbNotifInfo.Height + 20);
             hsPrioritize.Name = "hsPrioritize";
             hsPrioritize.Size = new System.Drawing.Size(50, 19);
+            hsPrioritize.Checked = app.Permissions.notifPriority == 1;
+            hsPrioritize.CheckedChanged += new HTAlt.WinForms.HTSwitch.CheckedChangedDelegate((sender, e) =>
+            {
+                app.Permissions.notifPriority = hsPrioritize.Checked ? 1 : 0;
+            });
             //
             // lbPrior
             //
@@ -670,6 +707,11 @@ namespace Yorot.UI.SystemApp
             hsNotifListener.Location = new System.Drawing.Point(hsPrioritize.Location.X, lbPriorInfo.Location.Y + lbPriorInfo.Height + 20);
             hsNotifListener.Name = "hsNotifListener";
             hsNotifListener.Size = new System.Drawing.Size(50, 19);
+            hsNotifListener.Checked = app.Permissions.startNotifOnBoot;
+            hsNotifListener.CheckedChanged += new HTAlt.WinForms.HTSwitch.CheckedChangedDelegate((sender, e) =>
+            {
+                app.Permissions.startNotifOnBoot = hsNotifListener.Checked;
+            });
             //
             // lbNotifListener
             //
@@ -692,6 +734,12 @@ namespace Yorot.UI.SystemApp
             hsRunOnStartup.Location = new System.Drawing.Point(hsEnabled.Location.X, lbNotifListenerInfo.Location.Y + lbNotifListenerInfo.Height + 20);
             hsRunOnStartup.Name = "hsRunOnStartup";
             hsRunOnStartup.Size = new System.Drawing.Size(50, 19);
+            hsRunOnStartup.Checked = app.Permissions.runStart.Allowance == YorotPermissionMode.Allow;
+            hsRunOnStartup.CheckedChanged += new HTAlt.WinForms.HTSwitch.CheckedChangedDelegate((sender, e) =>
+            {
+                app.Permissions.runStart.Allowance = hsRunOnStartup.Checked ? YorotPermissionMode.Allow : YorotPermissionMode.Deny;
+            });
+            //
             //
             // lbRunStart
             //
@@ -714,6 +762,11 @@ namespace Yorot.UI.SystemApp
             hsRunOnIncognito.Location = new System.Drawing.Point(hsEnabled.Location.X, lbRunStartInfo.Location.Y + lbRunStartInfo.Height + 20);
             hsRunOnIncognito.Name = "hsRunOnIncognito";
             hsRunOnIncognito.Size = new System.Drawing.Size(50, 19);
+            hsRunOnIncognito.Checked = app.Permissions.runInc.Allowance == YorotPermissionMode.Allow;
+            hsRunOnIncognito.CheckedChanged += new HTAlt.WinForms.HTSwitch.CheckedChangedDelegate((sender, e) =>
+            {
+                app.Permissions.runInc.Allowance = hsRunOnIncognito.Checked ? YorotPermissionMode.Allow : YorotPermissionMode.Deny;
+            });
             //
             // lbAllowIncognito
             //
@@ -770,6 +823,20 @@ namespace Yorot.UI.SystemApp
             {
                 ((Control)list[i]).Tag = app;
             }
+
+            RefreshTabSettings = new Action(() => 
+            {
+                hsRunOnIncognito.Checked = app.Permissions.runInc.Allowance == YorotPermissionMode.Allow;
+                hsRunOnStartup.Checked = app.Permissions.runStart.Allowance == YorotPermissionMode.Allow;
+                hsNotifListener.Checked = app.Permissions.startNotifOnBoot;
+                hsPrioritize.Checked = app.Permissions.notifPriority == 1;
+                hsNotifications.Checked = app.Permissions.allowNotif.Allowance == YorotPermissionMode.Allow;
+                hsPrioritize.Enabled = hsNotifications.Checked;
+                hsNotifListener.Enabled = hsNotifications.Checked;
+                hsEnabled.Checked = app.isEnabled;
+                lbSizeOnDisk.Text = SizeOnDisk.Replace("[S]", app.GetAppSizeInfo(SizeInfoBytes));
+                lbAppOrigin.Text = GetAppOrigin(app);
+            });
         }
 
         private void GenerateExtTab(YorotExtension ext)
@@ -870,6 +937,7 @@ namespace Yorot.UI.SystemApp
             hsEnabled.Size = new System.Drawing.Size(50, 19);
             hsEnabled.Checked = ext.Enabled;
             hsEnabled.Enabled = !ext.isSystemExt;
+            hsEnabled.CheckedChanged += new HTAlt.WinForms.HTSwitch.CheckedChangedDelegate((sender, e) => { ext.Enabled = hsEnabled.Checked; });
             //
             // lbEnabled
             //
@@ -893,6 +961,7 @@ namespace Yorot.UI.SystemApp
             hsNotifications.Name = "hsNotifications";
             hsNotifications.Size = new System.Drawing.Size(50, 19);
             hsNotifications.Checked = true;
+            hsNotifications.CheckedChanged += new HTAlt.WinForms.HTSwitch.CheckedChangedDelegate((sender, e) => { ext.Permissions.allowNotif.Allowance = hsNotifications.Checked ? YorotPermissionMode.Allow : YorotPermissionMode.Deny; });
             //
             // lbMenuOptions
             //

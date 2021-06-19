@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HTAlt.Standart" Version="0.1.6.4" />
+    <PackageReference Include="HTAlt.Standart" Version="0.1.7" />
   </ItemGroup>
 
 </Project>

@@ -79,11 +79,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HTAlt WinForms, Version=0.1.6.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HTAlt.WinForms.0.1.6.4\lib\net461\HTAlt WinForms.dll</HintPath>
-    </Reference>
     <Reference Include="HTAlt.Standart, Version=0.1.6.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HTAlt.Standart.0.1.6.4\lib\netstandard2.0\HTAlt.Standart.dll</HintPath>
+      <HintPath>..\packages\HTAlt.Standart.0.1.7\lib\netstandard2.0\HTAlt.Standart.dll</HintPath>
+    </Reference>
+    <Reference Include="HTAlt.WinForms, Version=0.1.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HTAlt.WinForms.0.1.7\lib\net461\HTAlt.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

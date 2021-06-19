@@ -8,6 +8,11 @@ namespace Yorot
     public class YorotSite
     {
         /// <summary>
+        /// Manager of this site.
+        /// </summary>
+        public YorotManager Manager { get; set; }
+
+        /// <summary>
         /// Name of the site.
         /// </summary>
         public string Name { get; set; }
@@ -61,7 +66,7 @@ namespace Yorot
         /// <param name="allowMic">Determines if the microphone can be used by this site.</param>
         /// <param name="allowCam">Determines if the camera can be used by this site.</param>
         /// <param name="allowNotif">Determines if this site can send notifications.</param>
-        /// <param name="notifPriority">Determines the priority of the notifications comşng from this website.
+        /// <param name="notifPriority">Determines the priority of the notifications coming from this website.
         /// <para></para>
         /// -1 = Prioritize others
         /// <para></para>
@@ -74,13 +79,13 @@ namespace Yorot
         public YorotSitePermissions(YorotSite site, YorotPermissionMode allowMic, YorotPermissionMode allowCam, YorotPermissionMode allowNotif, int notifPriority, bool startNotifOnBoot, YorotPermissionMode allowWE, YorotPermissionMode allowYS)
         {
             Site = site;
-            this.allowMic = new YorotPermission() { Allowance = allowMic, ID = "allowMic", Requestor = site };
-            this.allowCam = new YorotPermission() { Allowance = allowCam, ID = "allowCam", Requestor = site };
-            this.allowNotif = new YorotPermission() { Allowance = allowNotif, ID = "allowNotif", Requestor = site };
+            this.allowMic = new YorotPermission("allowMic", site, site.Manager.Main, allowMic);
+            this.allowCam = new YorotPermission("allowCam", site, site.Manager.Main, allowCam);
+            this.allowNotif = new YorotPermission("allowNotif", site, site.Manager.Main, allowNotif);
             this.notifPriority = notifPriority;
             this.startNotifOnBoot = startNotifOnBoot;
-            this.allowWE = new YorotPermission() { Allowance = allowWE, ID = "allowWE", Requestor = site };
-            this.allowYS = new YorotPermission() { Allowance = allowYS, ID = "allowYS", Requestor = site };
+            this.allowWE = new YorotPermission("allowWE", site, site.Manager.Main, allowWE);
+            this.allowYS = new YorotPermission("allowYS", site, site.Manager.Main, allowYS);
         }
 
         /// <summary>
@@ -104,7 +109,7 @@ namespace Yorot
         public YorotPermission allowNotif { get; set; }
 
         /// <summary>
-        /// Determines the priority of the notifications comşng from this website.
+        /// Determines the priority of the notifications coming from this website.
         /// <para></para>
         /// -1 = Prioritize others
         /// <para></para>

@@ -36,6 +36,37 @@ namespace Yorot
         }
 
         /// <summary>
+        /// Determines if we passed a date.
+        /// </summary>
+        /// <param name="date"><see cref="DateTime"/></param>
+        /// <returns><see cref="bool"/></returns>
+        public static bool HasExpired(this DateTime date) => DateTime.Now.CompareTo(date.Add(new TimeSpan(2, 0, 0))) > 0;
+
+        /// <summary>
+        /// Turns <see cref="HTAlt.LogEventType"/> to <seealso cref="HTAlt.LogLevel"/>.
+        /// </summary>
+        /// <param name="e"><see cref="HTAlt.LogEventType"/></param>
+        /// <returns><see cref="HTAlt.LogLevel"/></returns>
+        public static HTAlt.LogLevel LogeEventToLogLevel(this HTAlt.LogEventType e)
+        {
+            switch (e)
+            {
+                default:
+                case HTAlt.LogEventType.Nothing:
+                    return HTAlt.LogLevel.None;
+
+                case HTAlt.LogEventType.Info:
+                    return HTAlt.LogLevel.Info;
+
+                case HTAlt.LogEventType.Warning:
+                    return HTAlt.LogLevel.Warning;
+
+                case HTAlt.LogEventType.Error:
+                    return HTAlt.LogLevel.Error;
+            }
+        }
+
+        /// <summary>
         /// Uploads a file to server
         /// </summary>
         /// <param name="url">Address of the server.</param>
@@ -65,79 +96,6 @@ namespace Yorot
             System.Net.FtpWebResponse response = (System.Net.FtpWebResponse)request.GetResponse();
             Console.WriteLine("Upload done: {0}", response.StatusDescription);
             response.Close();
-        }
-
-        /// <summary>
-        /// Finds the root node of <paramref name="doc"/>.
-        /// </summary>
-        /// <param name="doc">the <see cref="XmlNode"/> (probably <seealso cref="XmlDocument.DocumentElement"/>) to search on.</param>
-        /// <returns>a <see cref="System.Xml.XmlNode"/> which represents as the root node.</returns>
-        public static System.Xml.XmlNode FindRoot(System.Xml.XmlNode doc)
-        {
-            System.Xml.XmlNode found = null;
-            if (doc.Name.ToLowerEnglish() == "root")
-            {
-                found = doc;
-            }
-            else
-            {
-                for (int i = 0; i < doc.ChildNodes.Count; i++)
-                {
-                    System.Xml.XmlNode node = doc.ChildNodes[i];
-                    if (node.Name.ToLowerEnglish() == "root")
-                    {
-                        found = node;
-                    }
-                }
-            }
-            return found;
-        }
-
-        /// <summary>
-        /// Turns all characters to lowercase, using en-US culture information to avoid language-specific ToLower() errors such as:
-        /// <para>Turkish: I &lt;-&gt; ı , İ &lt;-&gt; i</para>
-        /// <para>English I &lt;-&gt; i</para>
-        /// </summary>
-        /// <param name="s"><see cref="string"/></param>
-        /// <returns><see cref="string"/></returns>
-        public static string ToLowerEnglish(this string s)
-        {
-            // USE TRANSLATOR
-            // MS ToLower() fonksiyonunu açıklarken biraz ters örnek kullanmış, bu da hafif kafa karışıklığı oluşturmuş olabilir.
-            // Gene de Türkçe'yi örnek olarak göstermeleri iyi olmuş. Malum İngilizce'de "İ" (Büyük i) ve "ı" (Küçük ı) yok.
-            // Daha da kafa karışsın diye üstüne "İ" yi Unicode ile yazmışlar, ilk bakışta görmek biraz zor.
-            // Bu da küçük bir "rant" olsun. Hem ToLowerInvariant() bir boka yaramıyor.
-            return s.ToLower(new System.Globalization.CultureInfo("en-US", false));
-        }
-
-        /// <summary>
-        /// Finds the root node of <paramref name="doc"/>.
-        /// </summary>
-        /// <param name="doc">The XML document.</param>
-        /// <returns>a <see cref="System.Xml.XmlNode"/> which represents as the root node.</returns>
-        public static System.Xml.XmlNode FindRoot(System.Xml.XmlDocument doc)
-        {
-            return FindRoot(doc.DocumentElement);
-        }
-
-        /// <summary>
-        /// Converts <see cref="XmlNode.InnerXml"/> to formatted <seealso cref="string"/>.
-        /// </summary>
-        /// <param name="innerxml">Inenr XML</param>
-        /// <returns>Formatted <paramref name="s"/>.</returns>
-        public static string InnerXmlToString(this string innerxml)
-        {
-            return innerxml.Replace("&amp;", "&").Replace("&quot;", "\"").Replace("&apos;", "'").Replace("&lt;", "<").Replace("&gt;", ">");
-        }
-
-        /// <summary>
-        /// Converts <paramref name="s"/> to <see cref="System.Xml"/> supported format.
-        /// </summary>
-        /// <param name="s">string</param>
-        /// <returns>Formatted <paramref name="s"/>.</returns>
-        public static string ToXML(this string s)
-        {
-            return s.Replace("&", "&amp;").Replace("\"", "&quot;").Replace("'", "&apos;").Replace("<", "&lt;").Replace(">", "&gt;");
         }
 
         /// <summary>

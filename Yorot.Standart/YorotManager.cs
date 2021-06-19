@@ -36,7 +36,7 @@ namespace Yorot
                             {
                                 XmlDocument doc = new XmlDocument();
                                 doc.LoadXml(xml);
-                                XmlNode rootNode = Yorot.Tools.FindRoot(doc);
+                                XmlNode rootNode = HTAlt.Tools.FindRoot(doc);
                                 ExtractXml(rootNode);
                             }
                             catch (XmlException xe)

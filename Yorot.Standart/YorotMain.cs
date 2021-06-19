@@ -38,7 +38,12 @@ namespace Yorot
             if (!appPath.HasWriteAccess()) { throw new System.IO.FileLoadException("Cannot access to path \"" + appPath + "\"."); }
             Incognito = isIncognito;
             AppPath = appPath;
+
+#if DEBUG
+            DevMode = true;
+#endif
             DevMode = devMode;
+
             LangConfig = AppPath + @"lang.ycf";
             LangFolder = AppPath + @"lang\";
             ExtFolder = AppPath + @"ext\";
@@ -51,8 +56,12 @@ namespace Yorot
             ProfileConfig = AppPath + @"users.ycf";
             WEConfig = AppPath + @"weng.ycf";
             WEFolder = AppPath + @"weng\";
+            EPMConfig = AppPath + @"exp.ycf";
+            EPFolder = AppPath + @"exp\";
             LogFolder = AppPath + @"logs\";
+            TempFolder = AppPath + @"temp\";
             HTAlt.Output.LogDirPath = LogFolder;
+            if (DevMode) { Output.WriteLine("[Main] Developer mode activated."); }
             Wolfhook.WhFolder = AppPath + @"wh\";
             if (!System.IO.Directory.Exists(LogFolder)) { System.IO.Directory.CreateDirectory(LogFolder); }
             if (!System.IO.Directory.Exists(Wolfhook.WhFolder)) { System.IO.Directory.CreateDirectory(Wolfhook.WhFolder); }
@@ -99,6 +108,8 @@ namespace Yorot
             if (!System.IO.Directory.Exists(AppsFolder)) { System.IO.Directory.CreateDirectory(AppsFolder); }
             if (!System.IO.Directory.Exists(ProfilesFolder)) { System.IO.Directory.CreateDirectory(ProfilesFolder); }
             if (!System.IO.Directory.Exists(WEFolder)) { System.IO.Directory.CreateDirectory(WEFolder); }
+            if (!System.IO.Directory.Exists(EPFolder)) { System.IO.Directory.CreateDirectory(EPFolder); }
+            if (!System.IO.Directory.Exists(TempFolder)) { System.IO.Directory.CreateDirectory(TempFolder); }
             BeforeInit();
             AppMan = new AppManager(this);
             ThemeMan = new ThemeManager(this);
@@ -106,6 +117,8 @@ namespace Yorot
             Extensions = new ExtensionManager(this);
             WebEngineMan = new YorotWEManager(this);
             Profiles = new ProfileManager(this);
+            ExpPackManager = new EPManager(this);
+            Yopad = new Yopad(this);
             AfterInit();
         }
 
@@ -120,6 +133,11 @@ namespace Yorot
         public bool DevMode { get; set; }
 
         /// <summary>
+        /// Event raised by permissions on a permission change.
+        /// </summary>
+        public abstract YorotPermissionMode OnPermissionRequest(YorotPermission permission, YorotPermissionMode requested);
+
+        /// <summary>
         /// Event raised before launching all managers.
         /// </summary>
         public abstract void BeforeInit();
@@ -128,6 +146,11 @@ namespace Yorot
         /// Event raised after launching all managers.
         /// </summary>
         public abstract void AfterInit();
+
+        /// <summary>
+        /// Yorot Package Distribution Service.
+        /// </summary>
+        public Yopad Yopad { get; set; }
 
         /// <summary>
         /// Gets the current theme applied by user.
@@ -178,6 +201,11 @@ namespace Yorot
         /// Web Engines Manager
         /// </summary>
         public YorotWEManager WebEngineMan { get; set; }
+
+        /// <summary>
+        /// Experience Packs Manager
+        /// </summary>
+        public EPManager ExpPackManager { get; set; }
 
         /// <summary>
         /// Wolfhook Content Delivery System
@@ -253,6 +281,16 @@ namespace Yorot
         public string ProfilesFolder { get; set; }
 
         /// <summary>
+        /// Temporary Folder
+        /// </summary>
+        public string TempFolder { get; set; }
+
+        /// <summary>
+        /// Yopad COnfig File
+        /// </summary>
+        public string YopadConfig { get; set; }
+
+        /// <summary>
         /// User profiles configuration file.
         /// </summary>
         public string ProfileConfig { get; set; }
@@ -266,6 +304,16 @@ namespace Yorot
         /// The location of the Web Engines folder on drive.
         /// </summary>
         public string WEFolder { get; set; }
+
+        /// <summary>
+        /// The location of the Exp. Packs manager configuration file on drive.
+        /// </summary>
+        public string EPMConfig { get; set; }
+
+        /// <summary>
+        /// The location of the Exp. Packs folder on drive.
+        /// </summary>
+        public string EPFolder { get; set; }
 
         /// <summary>
         /// Logs folder.

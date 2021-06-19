@@ -48,15 +48,15 @@ namespace Yorot
             for (int i = 0; i < rootNode.ChildNodes.Count; i++)
             {
                 XmlNode node = rootNode.ChildNodes[i];
+                if (appliedSettings.Contains(node.Name.ToLowerEnglish()))
+                {
+                    Output.WriteLine("[HistoryMan] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
+                    break;
+                }
+                appliedSettings.Add(node.Name.ToLowerEnglish());
                 switch (node.Name.ToLowerEnglish())
                 {
                     case "history":
-                        if (appliedSettings.Contains(node.Name))
-                        {
-                            Output.WriteLine("[HistoryMan] Threw away \"" + node.OuterXml + "\", configuration already applied.", LogLevel.Warning);
-                            break;
-                        }
-                        appliedSettings.Add(node.Name);
                         for (int ı = 0; ı < node.ChildNodes.Count; ı++)
                         {
                             XmlNode subnode = node.ChildNodes[ı];
@@ -66,9 +66,10 @@ namespace Yorot
                                 {
                                     Sites.Add(new YorotSite()
                                     {
-                                        Name = subnode.Attributes["Name"].Value.InnerXmlToString(),
-                                        Url = subnode.Attributes["Url"].Value.InnerXmlToString(),
-                                        Date = DateTime.ParseExact(subnode.Attributes["Date"].Value.InnerXmlToString(), "dd-MM-yyyy HH-mm-ss", null),
+                                        Name = subnode.Attributes["Name"].Value.XmlToString(),
+                                        Url = subnode.Attributes["Url"].Value.XmlToString(),
+                                        Date = DateTime.ParseExact(subnode.Attributes["Date"].Value.XmlToString(), "dd-MM-yyyy HH-mm-ss", null),
+                                        Manager = this,
                                     });
                                 }
                                 else
@@ -84,7 +85,7 @@ namespace Yorot
                         break;
 
                     default:
-                        if (!node.OuterXml.StartsWith("<!--"))
+                        if (!node.IsComment())
                         {
                             Output.WriteLine("[HistoryMan] Threw away \"" + node.OuterXml + "\", invalid configuration.", LogLevel.Warning);
                         }
